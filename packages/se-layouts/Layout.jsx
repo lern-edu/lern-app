@@ -2,6 +2,11 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+// Components
+import LayoutSnackbar from './components/Snackbar.jsx';
+import LayoutNavigation from './components/Navigation.jsx';
+import LayoutSafe from './components/Safe.jsx';
+
 const muiTheme = getMuiTheme({
   palette: {
     primary1Color: '#2196F3',
@@ -12,17 +17,7 @@ const muiTheme = getMuiTheme({
 });
 
 Layout = React.createClass({
-  mixins: [
-    Data,
-    Render,
-    Screen,
-  ],
-
-  propTypes: {
-    nav: React.PropTypes.bool,
-    bar: React.PropTypes.bool,
-    protect: React.PropTypes.string,
-  },
+  mixins: [Data, Render, Screen],
 
   /* Render
   */
@@ -62,3 +57,9 @@ Layout = React.createClass({
     );
   },
 });
+
+Layout.propTypes = {
+  nav: React.PropTypes.bool,
+  bar: React.PropTypes.bool,
+  protect: React.PropTypes.string,
+};

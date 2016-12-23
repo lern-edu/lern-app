@@ -43,7 +43,7 @@ TeacherQuestionCreateForm = React.createClass({
 
   handleSubmitSuccess({ _id }) {
     console.log(`Question created: ${_id}`);
-    snack('Questão criada', 'green checkmark');
+    snack('Questão criada');
     FlowRouter.go('TeacherQuestions');
   },
 

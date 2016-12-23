@@ -17,7 +17,7 @@ AdminContentToolbar = React.createClass({
           <RaisedButton
             label='Nova'
             primary={true}
-            linkButton={true}
+            
             style={{ textAlign: 'center' }}
             href={FlowRouter.path('AdminQuestionCreate', {}, {})} />
         </ToolbarGroup>

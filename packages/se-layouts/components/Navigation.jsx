@@ -139,7 +139,6 @@ LayoutNavigation = React.createClass({
               <div>
                 <RaisedButton
                   href={FlowRouter.path('PublicLogin')}
-                  linkButton={true}
                   label='Entrar'
                   primary={true}
                 />
@@ -201,7 +200,6 @@ LayoutNavigation = React.createClass({
                   color={grey300}>exit_to_app</FontIcon>
               </IconButton>
               <IconButton
-                linkButton={true}
                 href={FlowRouter.path('PublicContact')}
                 tooltip='Contato'
                 tooltipPosition='bottom-left'
@@ -220,3 +218,5 @@ LayoutNavigation = React.createClass({
     );
   },
 });
+
+export default LayoutNavigation;

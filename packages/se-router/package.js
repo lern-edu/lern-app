@@ -8,7 +8,6 @@ Package.onUse(function(api) {
 
   api.use([
     'ecmascript',
-    'react',
     'kadira:flow-router',
 
     'lsunsi:se-layouts',

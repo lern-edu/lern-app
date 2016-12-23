@@ -88,3 +88,5 @@ LayoutSafe = React.createClass({
     );
   },
 });
+
+export default LayoutSafe;

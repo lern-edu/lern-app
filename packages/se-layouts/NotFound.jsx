@@ -23,7 +23,6 @@ Layout.NotFound = React.createClass({
             <RaisedButton
               label='Voltar'
               primary={true}
-              linkButton={true}
               href={FlowRouter.path(path)}
             />
           </div>

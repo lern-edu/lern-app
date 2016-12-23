@@ -38,7 +38,7 @@ TeacherCourseShowTestsCard = React.createClass({
               href={_.get(test, 'type') === 'cognitive' ?
             FlowRouter.path('TeacherTestShowCognitive', { courseId: course._id, testId: test._id })
             : FlowRouter.path('TeacherTestShow', { courseId: course._id, testId: test._id })}
-              linkButton={true}
+              
               label='Ver'
               secondary={true} />
             </CardActions>}

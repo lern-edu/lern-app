@@ -129,7 +129,7 @@ TeacherCourseShowView = React.createClass({
         {!_.includes(['tests', 'posts', 'lectures'], active) ? undefined :
           <div {...floatingButton}>
             <FloatingActionButton
-            linkButton={true}
+            
             href={FlowRouter.path(`Teacher${_.get({
               posts: 'Post',
               lectures: 'Lecture',

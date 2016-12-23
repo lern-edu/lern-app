@@ -39,7 +39,7 @@ StudentCourseShowLecturesCard = React.createClass({
             {_.isEmpty(test) ? undefined :
               <FlatButton
               onTouchTap={this.handleAttemptTest}
-              linkButton={true}
+              
               label={_.get(test, 'name')}
               labelPosition='before'
               secondary={true} />}
