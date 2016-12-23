@@ -49,3 +49,4 @@ service-configuration@1.0.11
 standard-minifier-css
 standard-minifier-js
 shell-server
+react-meteor-data

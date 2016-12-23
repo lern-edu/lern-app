@@ -23,7 +23,6 @@ Package.onUse(function (api) {
     'mixins/Data.jsx',
     'mixins/Render.jsx',
     'mixins/Screen.jsx',
-    'mixins/Theme.jsx',
 
     'Layout.jsx',
     'NotFound.jsx',

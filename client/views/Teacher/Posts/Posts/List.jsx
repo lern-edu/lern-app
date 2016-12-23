@@ -1,6 +1,6 @@
 import React from 'react';
 import { List, ListItem, FontIcon, Styles } from 'material-ui';
-const { Colors: darkBlack } = Styles;
+import { darkBlack } from 'material-ui/styles/colors';
 
 TeacherPostsList = React.createClass({
   // Handlers

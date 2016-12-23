@@ -1,9 +1,21 @@
+import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: '#2196F3',
+    primary2Color: '#1976D2',
+    primary3Color: '#BBDEFB',
+    accent1Color: '#FFC107',
+  },
+});
+
 Layout = React.createClass({
   mixins: [
     Data,
     Render,
     Screen,
-    Theme,
   ],
 
   propTypes: {
@@ -23,28 +35,30 @@ Layout = React.createClass({
     };
 
     return (
-      <div>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
 
-        <nav>
-          {!stuff.nav ? undefined : <LayoutNavigation {...stuff}/>}
-        </nav>
+          <nav>
+            {!stuff.nav ? undefined : <LayoutNavigation {...stuff}/>}
+          </nav>
 
-        <main style={{ paddingTop: stuff.bar ? 64 : 0 }}>
-          <LayoutSafe {...stuff}>
-            {this.props.main}
-          </LayoutSafe>
-        </main>
+          <main style={{ paddingTop: stuff.bar ? 64 : 0 }}>
+            <LayoutSafe {...stuff}>
+              {this.props.main}
+            </LayoutSafe>
+          </main>
 
-        <footer style={{ marginLeft: stuff.nav &&
-            stuff.screen === 'computer' ? 256 : 0, }}>
-          <LayoutFooter />
-        </footer>
+          <footer style={{ marginLeft: stuff.nav &&
+              stuff.screen === 'computer' ? 256 : 0, }}>
+            <LayoutFooter />
+          </footer>
 
-        <aside>
-          <LayoutSnackbar />
-        </aside>
+          <aside>
+            <LayoutSnackbar />
+          </aside>
 
-      </div>
+        </div>
+      </MuiThemeProvider>
     );
   },
 });

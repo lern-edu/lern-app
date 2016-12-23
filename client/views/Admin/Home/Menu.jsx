@@ -1,3 +1,5 @@
+import React from 'react';
+
 AdminHomeMenu = React.createClass({
   classes: 'ui secondary blue two item menu',
   items: {

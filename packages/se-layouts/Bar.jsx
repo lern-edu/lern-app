@@ -1,3 +1,6 @@
+import React from 'react';
+import { AppBar } from 'material-ui';
+
 Layout.Bar = React.createClass({
   propTypes: {
     crumbs: React.PropTypes.arrayOf(
@@ -39,7 +42,7 @@ Layout.Bar = React.createClass({
     const { crumbs, title } = this.props;
 
     return (
-      <MUI.AppBar
+      <AppBar
         {...this.props}
         title={this.getTitle({ title, screen, crumbs })}
         showMenuIconButton={true}

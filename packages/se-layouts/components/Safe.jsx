@@ -1,3 +1,4 @@
+import React from 'react';
 import { FontIcon, RaisedButton, LinearProgress } from 'material-ui';
 
 LayoutSafe = React.createClass({
