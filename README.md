@@ -1,5 +1,4 @@
-![GitHub Logo](/public/images/mipmap-xxxhdpi/ic_launcher.png)
-Format: ![Alt Text](url)
+![Lern Logo](lern-app/public/images/logo/mipmap-xxxhdpi/ic_launcher.png)
 
 ![lern[1024x1024].png](https://bitbucket.org/repo/gEe6a6/images/1930763102-lern%5B1024x1024%5D.png)
 
