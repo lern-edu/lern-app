@@ -1,0 +1,3 @@
+SyncedCron.config({
+  log: false,
+});

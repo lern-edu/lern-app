@@ -1,0 +1,29 @@
+Package.describe({
+  name: 'lsunsi:se-methods',
+  version: '0.0.1',
+});
+
+Package.onUse(function (api) {
+  api.versionsFrom('1.2.1');
+
+  api.use([
+    'ecmascript',
+    'erasaur:meteor-lodash',
+
+    'lsunsi:se-fetch',
+    'lsunsi:se-check',
+  ]);
+
+  api.addFiles([
+    'helpers.js',
+
+    'server/admin.js',
+    'server/teacher.js',
+    'server/user.js',
+    'server/public.js',
+    'server/student/answer.js',
+    'server/student/attempt.js',
+    'server/student/profile.js',
+    'server/student/test.js',
+  ], 'server');
+});
