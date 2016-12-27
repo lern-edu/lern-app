@@ -28,5 +28,6 @@ Package.onUse(function (api) {
     'Bar.jsx',
   ], 'client');
 
-  api.export('Layout', 'client');
+  api.mainModule('./exporter.js', 'client');
+  api.export('Layout');
 });

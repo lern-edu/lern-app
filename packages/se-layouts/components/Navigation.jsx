@@ -1,5 +1,5 @@
 import React from 'react';
-import { LeftNav, CardMedia, ListItem } from 'material-ui';
+import { Drawer, CardMedia, ListItem } from 'material-ui';
 import { RaisedButton, IconButton, Avatar } from 'material-ui';
 import { Divider, LinearProgress, FontIcon, Styles } from 'material-ui';
 import { grey300, grey400 } from 'material-ui/styles/colors';
@@ -132,7 +132,7 @@ LayoutNavigation = React.createClass({
     const logout = () => Meteor.logout();
 
     return (
-      <LeftNav {...this.state} onRequestChange={open => this.setState({ open })}>
+      <Drawer {...this.state} onRequestChange={open => this.setState({ open })}>
 
         {!user ? (
           <div className='ui center aligned basic segment'>
@@ -215,7 +215,7 @@ LayoutNavigation = React.createClass({
           </div>
         )}
 
-      </LeftNav>
+      </Drawer>
     );
   },
 });

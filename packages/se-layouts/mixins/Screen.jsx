@@ -47,10 +47,6 @@ Screen = {
   /* Set Context
   */
 
-  childContextTypes: {
-    screen: React.PropTypes.string,
-  },
-
   getChildContext() {
     return { screen: this.state.screen };
   },

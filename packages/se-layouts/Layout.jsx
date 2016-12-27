@@ -58,8 +58,19 @@ Layout = React.createClass({
   },
 });
 
+Layout.childContextTypes = {
+  route: React.PropTypes.string.isRequired,
+  user: React.PropTypes.object,
+  logging: React.PropTypes.bool.isRequired,
+  screen: React.PropTypes.string,
+};
+
 Layout.propTypes = {
   nav: React.PropTypes.bool,
   bar: React.PropTypes.bool,
   protect: React.PropTypes.string,
+  route: React.PropTypes.string.isRequired,
+  user: React.PropTypes.object,
+  logging: React.PropTypes.bool.isRequired,
+  screen: React.PropTypes.string,
 };
