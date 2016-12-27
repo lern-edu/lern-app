@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatButton, TextField, Dialog } from 'material-ui';
+import { CircularProgress, FlatButton, TextField, Dialog } from 'material-ui';
 
 TeacherTestCreateFormQuestionsShow = React.createClass({
 
@@ -46,7 +46,7 @@ TeacherTestCreateFormQuestionsShow = React.createClass({
             </div>)
           : <div {...item2}>
               <div className='ui center aligned basic segment'>
-                <MUI.CircularProgress />
+                <CircularProgress />
               </div>
           </div>}
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Divider, AutoComplete, MenuItem, RaisedButton, Dialog, FlatButton, } from 'material-ui';
+import { CircularProgress, TextField, Divider, AutoComplete, MenuItem, RaisedButton, Dialog, FlatButton, } from 'material-ui';
 
 AdminTestCreateFormQuestions = React.createClass({
 
@@ -233,7 +233,7 @@ AdminTestCreateFormQuestions = React.createClass({
                     form={this}
                     inTest={_.includes(form.doc.questions, q._id)}/>
                 </div>
-            ) : <MUI.CircularProgress />}
+            ) : <CircularProgress />}
           </div>
 
           <div className='row'>

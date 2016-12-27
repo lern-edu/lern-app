@@ -1,3 +1,4 @@
+import React from 'react';
 const { render } = Layout.setup();
 
 FlowRouter.route('/', {

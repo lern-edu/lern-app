@@ -1,6 +1,7 @@
+import React from 'react';
 import { LeftNav, CardMedia, ListItem } from 'material-ui';
 import { RaisedButton, IconButton, Avatar } from 'material-ui';
-import { Divider, CircularProgress, FontIcon, Styles } from 'material-ui';
+import { Divider, LinearProgress, FontIcon, Styles } from 'material-ui';
 import { grey300, grey400 } from 'material-ui/styles/colors';
 
 LayoutNavigation = React.createClass({
@@ -135,7 +136,7 @@ LayoutNavigation = React.createClass({
 
         {!user ? (
           <div className='ui center aligned basic segment'>
-            {logging ? <CircularProgress/> :
+            {logging ? <div/> :
               <div>
                 <RaisedButton
                   href={FlowRouter.path('PublicLogin')}

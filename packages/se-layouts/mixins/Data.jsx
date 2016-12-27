@@ -1,20 +1,8 @@
+import { Meteor } from 'meteor/meteor';
+import React from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
+
 Data = {
-  mixins: [ReactMeteorData],
-
-  /* Reactive Data Fetching
-  */
-
-  getMeteorData() {
-    if (Meteor.userId())
-      Meteor.subscribe('UserData');
-
-    return {
-      route: FlowRouter.getRouteName(),
-      user: Meteor.user(),
-      logging: Meteor.loggingIn(),
-    };
-  },
-
   /* Set Context
   */
 
@@ -25,6 +13,19 @@ Data = {
   },
 
   getChildContext() {
-    return this.data;
+    console.log(this.props);
+    const { route, user, logging } = this.props;
+    return { route, user, logging };
   },
 };
+
+export default LayoutContainer = createContainer(({ params }) => {
+  if (Meteor.userId())
+    Meteor.subscribe('UserData');
+
+  return {
+    route: FlowRouter.getRouteName(),
+    user: Meteor.user(),
+    logging: Meteor.loggingIn(),
+  };
+}, Layout);

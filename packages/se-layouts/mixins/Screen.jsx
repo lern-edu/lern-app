@@ -1,5 +1,6 @@
-Screen = {
+import React from 'react';
 
+Screen = {
   breakpoints: [
     { label: 'mobile', width: 320 },
     { label: 'tablet', width: 768 },

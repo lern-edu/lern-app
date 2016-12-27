@@ -41,7 +41,7 @@ StudentSettingsStudy = React.createClass({
     const { focusSubjects=[], plan } = planProfile;
 
     return (
-      <Paper className='ui basic segment' style={{margin: '0px' }}>
+      <Paper className='ui basic segment' style={{ margin: '0px' }}>
         <div className='ui header'>
           Plano
         </div>

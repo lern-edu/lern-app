@@ -1,3 +1,4 @@
+import React from 'react';
 const { render } = Layout.setup({ protect: 'admin', nav: true, bar: true });
 
 const adminRoutes = FlowRouter.group({
