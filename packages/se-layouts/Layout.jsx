@@ -29,9 +29,6 @@ Layout = React.createClass({
       ...this.state,
     };
 
-    console.log(this.props);
-    console.log(this.data);
-
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
