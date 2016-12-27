@@ -43,7 +43,7 @@ Layout.Bar = React.createClass({
 
     return (
       <AppBar
-        {...this.props}
+        {..._.omit(this.props, ['crumbs'])}
         title={this.getTitle({ title, screen, crumbs })}
         showMenuIconButton={true}
         onLeftIconButtonTouchTap={window.nav}

@@ -1,16 +1,12 @@
 import React from 'react';
 import { Tabs, Tab } from 'material-ui';
 
-StudentCourseShowMenu = React.createClass({
+const StudentCourseShowMenu = React.createClass({
   //  static data
 
   tabs: {
     lectures: 'Aulas',
     tests: 'Atividades',
-
-    // grades: 'Notas',
-    // diary: 'Diário',
-    // reports: 'Relatório',
     posts: 'Blog',
   },
 
@@ -35,3 +31,5 @@ StudentCourseShowMenu = React.createClass({
     );
   },
 });
+
+export default StudentCourseShowMenu;

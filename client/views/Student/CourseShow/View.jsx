@@ -1,4 +1,6 @@
 import React from 'react';
+import StudentCourseShowMenu from './Menu.jsx';
+import StudentCourseShowInitial from './Initial.jsx';
 
 StudentCourseShowView = React.createClass({
   mixins: [ReactMeteorData],
@@ -57,24 +59,18 @@ StudentCourseShowView = React.createClass({
 
         <Layout.Bar
           title={_.get(course, 'name')}
-          crumbs={[
-            { label: 'Disciplinas', path: 'StudentCourses' },
-          ]}
-          zDepth="0"
-           />
+          crumbs={[{ label: 'Disciplinas', path: 'StudentCourses' }]} />
 
         <StudentCourseShowMenu active={active} />
 
         <div className='ui container'>
           {!_.every(ready) ? <div className='ui active loader' /> :
-            <Semantic.Transitions component='div'>
-              {{
-                lectures: <StudentCourseShowLectures {...this.data} key='lectures' />,
-                tests: <StudentCourseShowTests {...this.data} key='tests' />,
-                reports: <StudentCourseShowReports {...this.data} user={user} key='reports' />,
-                posts: <StudentCourseShowPosts {...this.data} user={user} key='posts' />,
-              }[active]}
-            </Semantic.Transitions>
+            {
+              lectures: <StudentCourseShowLectures {...this.data} key='lectures' />,
+              tests: <StudentCourseShowTests {...this.data} key='tests' />,
+              reports: <StudentCourseShowReports {...this.data} user={user} key='reports' />,
+              posts: <StudentCourseShowPosts {...this.data} user={user} key='posts' />,
+            }[active]
           }
         </div>
 

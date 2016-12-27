@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField, Dialog, FlatButton, Card, CardMedia, CardText, CardTitle } from 'material-ui';
 
-StudentCourseShowInitial = React.createClass({
+const StudentCourseShowInitial = React.createClass({
 
   // Handlers
 
@@ -64,3 +64,5 @@ StudentCourseShowInitial = React.createClass({
   },
 
 });
+
+export default StudentCourseShowInitial;

@@ -14,7 +14,7 @@ StudentCoursesGalleryCard = React.createClass({
           <CardTitle
             title={course.name} />
           <CardText>
-            <List subheader='Matérias'>
+            <List secondaryText='Matérias'>
               {_.map(course.subjects, s =>
                 <ListItem
                   key={s}
@@ -22,7 +22,7 @@ StudentCoursesGalleryCard = React.createClass({
                   primaryText={_.get(_.find(subjects, { _id: s }), 'name')} />)}
             </List>
             <Divider />
-            <List subheader='Grade de horários'>
+            <List secondaryText='Grade de horários'>
               {_.map(course.schedule, ({ day, endDate, startDate }, i) =>
                 <ListItem
                   key={`${day}-${i}`}
@@ -33,11 +33,11 @@ StudentCoursesGalleryCard = React.createClass({
                     moment(endDate).format('LT')}`} />)}
             </List>
             <Divider />
-            <List subheader={`${course.students.length} alunos`} />
+            <List secondaryText={`${course.students.length} alunos`} />
           </CardText>
           <CardActions>
             <FlatButton
-              
+
               primary={true}
               href={FlowRouter.path('StudentCourseShow', { courseId: course._id })}
               label='Entrar' />
