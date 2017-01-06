@@ -1,7 +1,6 @@
 import React from 'react';
 
 StudentCourseShowTestsCard = React.createClass({
-  mixins: [Semantic.Transition('scale')],
 
   /* Handlers
   */
@@ -38,7 +37,7 @@ StudentCourseShowTestsCard = React.createClass({
     const atts = _.filter(attempts, { test: test._id });
 
     return (
-      <div className='ui card' ref='animate'>
+      <div className='ui card'>
         <div className='content'>
           <div className='header'>{test.name}</div>
           <div className='meta'>{test.questions.length} questões</div>
@@ -63,7 +62,7 @@ StudentCourseShowTestsCard = React.createClass({
                 <div className='ui blue button'>Começar</div>
                 <Semantic.Popup parent={this} classes='ui basic blue left pointing label'>
                   {atts.length}
-                  <div className='ui popup' ref='popup'>Tentativas terminadas</div>
+                  <div className='ui popup'>Tentativas terminadas</div>
                 </Semantic.Popup>
               </Semantic.Button>,
               <Semantic.Button key='see' classes='labeled' onClick={this.handleAttempts} testId={test._id}>

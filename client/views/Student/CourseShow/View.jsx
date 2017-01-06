@@ -67,14 +67,14 @@ StudentCourseShowView = React.createClass({
 
         <div className='ui container'>
           {!_.every(ready) ? <div className='ui active loader' /> :
-            <Semantic.Transitions component='div'>
+            <div>
               {{
                 lectures: <StudentCourseShowLectures {...this.data} key='lectures' />,
                 tests: <StudentCourseShowTests {...this.data} key='tests' />,
                 reports: <StudentCourseShowReports {...this.data} user={user} key='reports' />,
                 posts: <StudentCourseShowPosts {...this.data} user={user} key='posts' />,
               }[active]}
-            </Semantic.Transitions>
+            </div>
           }
         </div>
 

@@ -1,7 +1,6 @@
 import React from 'react';
 
 StudentTestAttemptOverview = React.createClass({
-  mixins: [Semantic.Transition({ appear: 'scale', enter: 'scale' })],
 
   /* Handlers
   */
@@ -23,7 +22,7 @@ StudentTestAttemptOverview = React.createClass({
     const testLength = _.get(test, 'questions.length');
 
     return (
-      <div className='ui basic segment grid' ref='animate'>
+      <div className='ui basic segment grid'>
 
         <div className='centered center aligned ten wide column'>
 

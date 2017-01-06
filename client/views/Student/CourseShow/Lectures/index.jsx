@@ -1,7 +1,6 @@
 import React from 'react';
 
 StudentCourseShowLectures = React.createClass({
-  mixins: [Semantic.Transition('scale')],
 
   orders: {
     date: {
@@ -57,7 +56,7 @@ StudentCourseShowLectures = React.createClass({
     const groups = _.groupBy(_.sortBy(lectures, this.orders[order].sortBy), _.bind(this.orders[order].groupBy, this));
 
     return (
-      <div ref='animate'>
+      <div>
 
         <div className='ui blue text menu'>
           <div className='header item'>Ordenar</div>
@@ -74,11 +73,11 @@ StudentCourseShowLectures = React.createClass({
           <div className='ui header'>
             {this.orders[order].groupNames.call(this, k)}
           </div>,
-          <Semantic.Transitions component='div' className='ui centered grid' key={k}>
+          <div className='ui centered grid' key={k}>
             {_.map(v, lecture =>
               <StudentCourseShowLecturesCard lecture={lecture} {...this.props} key={lecture._id} />
             )}
-          </Semantic.Transitions>,
+          </div>,
         ])}
 
       </div>

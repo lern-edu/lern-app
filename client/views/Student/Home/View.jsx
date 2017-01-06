@@ -6,8 +6,8 @@ StudentHomeView = React.createClass({
   // Static data
 
   text: {
-    welcome: "Bem vindo à lern!",
-    tutorial: "Faça o tutorial para começar",
+    welcome: 'Bem vindo à lern!',
+    tutorial: 'Faça o tutorial para começar',
     steps: {
       one: {
         img: '/images/steps-teacher/1.png',
@@ -100,10 +100,10 @@ StudentHomeView = React.createClass({
     return (
       <div>
         <Layout.Bar title='Início' />
-        <Semantic.Transitions component='div'>
+        <div>
           {!_.every(ready) ? <MUI.LinearProgress /> :
             <StudentHomeOverview {...this.data} key='overview'/>}
-        </Semantic.Transitions>
+        </div>
       </div>
     );
   },

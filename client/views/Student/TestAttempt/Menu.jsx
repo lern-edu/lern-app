@@ -1,7 +1,6 @@
 import React from 'react';
 
 StudentTestAttemptMenu = React.createClass({
-  mixins: [Semantic.Transition('fly left')],
 
   /* Handlers
   */
@@ -19,7 +18,7 @@ StudentTestAttemptMenu = React.createClass({
     const { test, questions, answers, attempt } = this.props;
 
     return (
-      <div className='ui link vertical text menu' ref='animate'>
+      <div className='ui link vertical text menu'>
         <div className='header item'>Progresso</div>
 
         {_.map(test.questions, (q, i) => {

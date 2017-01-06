@@ -1,11 +1,10 @@
 import React from 'react';
 
 StudentCourseShowReports = React.createClass({
-  mixins: [Semantic.Transition('scale')],
 
   render() {
     return (
-      <div className='ui basic segment' ref='animate'>
+      <div className='ui basic segment'>
 
         <div className='ui centered grid'>
           <div className='row'>
