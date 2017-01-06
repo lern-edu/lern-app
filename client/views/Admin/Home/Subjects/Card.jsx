@@ -1,7 +1,6 @@
 import React from 'react';
 
 AdminHomeSubjectsCard = React.createClass({
-  mixins: [Semantic.Transition('scale')],
 
   /* Lifecycle
   */
@@ -37,7 +36,7 @@ AdminHomeSubjectsCard = React.createClass({
     const { newTag } = this.state;
 
     return (
-      <div className='ui card' ref='animate'>
+      <div className='ui card'>
         <div className='content'>
           <div className='header'>{subject.name}</div>
           <div className='description'>
