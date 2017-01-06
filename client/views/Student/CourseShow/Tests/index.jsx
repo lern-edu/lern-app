@@ -1,6 +1,7 @@
 import React from 'react';
 
 StudentCourseShowTests = React.createClass({
+
   categories: {
     tries: {
       name: 'Tentativas',
@@ -82,10 +83,11 @@ StudentCourseShowTests = React.createClass({
           <div className='ui header'>
             {cat.groupNames.call(this, k)}
           </div>,
-          <div>
-          {_.map(v, test =>
-            <StudentCourseShowTestsCard test={test} {...this.props} key={test._id} />
-          )}</div>,
+          <div className='ui four stackable cards' key={k}>
+            {_.map(v, test =>
+              <StudentCourseShowTestsCard test={test} {...this.props} key={test._id} />
+            )}
+          </div>,
         ])}
 
       </div>

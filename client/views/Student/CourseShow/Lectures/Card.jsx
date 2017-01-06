@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, CardHeader, CardTitle, CardText, FlatButton, } from 'material-ui';
 
 StudentCourseShowLecturesCard = React.createClass({
-  mixins: [Semantic.Transition('scale')],
 
   handleAttemptTest() {
     const { lecture, course, tags, tests, attempts } = this.props;

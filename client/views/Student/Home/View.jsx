@@ -101,10 +101,10 @@ StudentHomeView = React.createClass({
     return (
       <div>
         <Layout.Bar title='Início' />
-        <Semantic.Transitions component='div'>
-          {!_.every(ready) ? <LinearProgress /> :
+        <div>
+          {!_.every(ready) ? <MUI.LinearProgress /> :
             <StudentHomeOverview {...this.data} key='overview'/>}
-        </Semantic.Transitions>
+        </div>
       </div>
     );
   },
