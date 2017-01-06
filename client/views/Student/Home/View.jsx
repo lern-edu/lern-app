@@ -102,7 +102,7 @@ StudentHomeView = React.createClass({
       <div>
         <Layout.Bar title='Início' />
         <div>
-          {!_.every(ready) ? <MUI.LinearProgress /> :
+          {!_.every(ready) ? <LinearProgress /> :
             <StudentHomeOverview {...this.data} key='overview'/>}
         </div>
       </div>
