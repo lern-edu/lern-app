@@ -1,7 +1,6 @@
 import React from 'react';
 
 AdminHomeSubjects = React.createClass({
-  mixins: [Semantic.Transition('drop')],
 
   /* Lifecycle
   */
@@ -36,7 +35,7 @@ AdminHomeSubjects = React.createClass({
     const { ready, subjects } = this.props;
 
     return (
-      <div className='ui basic segment' ref='animate'>
+      <div className='ui basic segment'>
 
         <div className='ui basic vertical segment'>
           <div className='ui large left icon input'>
@@ -52,13 +51,13 @@ AdminHomeSubjects = React.createClass({
         </div>
 
         <div className='ui basic vertical segment'>
-          <Semantic.Transitions component='div' className='ui four cards cards'>
+          <div className='ui four cards cards'>
             {!ready.subjects || !ready.tags ? <div className='ui active inline loader' /> :
               _.map(_.sortBy(subjects, 'createdAt'), subject =>
                 <AdminHomeSubjectsCard subject={subject} {...this.props} key={subject._id} />
               )
             }
-          </Semantic.Transitions>
+          </div>
         </div>
       </div>
     );

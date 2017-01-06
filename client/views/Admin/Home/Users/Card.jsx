@@ -1,7 +1,6 @@
 import React from 'react';
 
 AdminHomeUsersCard = React.createClass({
-  mixins: [Semantic.Transition('scale')],
 
   /* Render
   */
@@ -14,7 +13,7 @@ AdminHomeUsersCard = React.createClass({
     const _courses = _.filter(courses, { author: school._id });
 
     return (
-      <div className='ui card' ref='animate'>
+      <div className='ui card'>
         <div className='content'>
           <div className='content'>{school.getName() || 'sem nome'}</div>
           <div className='meta'>{school.getEmail() || 'sem email'}</div>

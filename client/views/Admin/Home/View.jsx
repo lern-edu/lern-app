@@ -30,12 +30,10 @@ AdminHomeView = React.createClass({
 
         <AdminHomeMenu active={active} />
 
-        <Semantic.Transitions>
-          {_.get({
-            subjects: <AdminHomeSubjects {...this.data} key='subjects'/>,
-            users: <AdminHomeUsers {...this.data} key='users' />,
-          }, active)}
-        </Semantic.Transitions>
+        {_.get({
+          subjects: <AdminHomeSubjects {...this.data} key='subjects'/>,
+          users: <AdminHomeUsers {...this.data} key='users' />,
+        }, active)}
 
       </div>
 
