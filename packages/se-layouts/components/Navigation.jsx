@@ -128,11 +128,12 @@ LayoutNavigation = React.createClass({
 
   render() {
     const { user, logging, route } = this.props;
-    const { routes } = this.state;
+    const { routes, open } = this.state;
     const logout = () => Meteor.logout();
 
     return (
-      <Drawer {...this.state} onRequestChange={open => this.setState({ open })}>
+      <Drawer {..._.omit(this.state, ['open'])} open={!open ? false : true}
+        onRequestChange={open =>this.setState({ open })}>
 
         {!user ? (
           <div className='ui center aligned basic segment'>
