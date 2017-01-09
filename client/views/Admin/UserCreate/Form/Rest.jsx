@@ -1,7 +1,8 @@
 import React from 'react';
 
 AdminUserCreateFormRest = React.createClass({
-  mixins: [Semantic.Transition({ appear: 'fly left', enter: 'fly left', leave: 'fly right' })],
+
+  // Handlers
 
   handleSubmit() {
     const { form, form: { doc } } = this.props;
@@ -20,7 +21,7 @@ AdminUserCreateFormRest = React.createClass({
     const role = form.doc.get('role');
 
     return (
-      <div className='ui centered grid' ref='animate'>
+      <div className='ui centered grid'>
 
         {role === 'school' ? (
           [
@@ -81,37 +82,3 @@ AdminUserCreateFormRest = React.createClass({
     );
   },
 });
-
-// Meteor.users.FormSchema = Astro.Class({
-//   name: 'UserForm',
-//   fields: {
-//     email: {
-//       type: 'string',
-//       validator: Validators.and([Validators.required(), Validators.email()]),
-//     },
-//     role: {
-//       type: 'string',
-//       validator: Validators.OneOf(UserRoles.all('keys')),
-//     },
-//     name: {
-//       type: 'string',
-//       validator: Validators.UserName(),
-//     },
-//     schoolType: {
-//       type: 'string',
-//       validator: Validators.UserRoles({ roles: ['school'], validator: Validators.OneOf(SchoolTypes.all('keys')) }),
-//     },
-//     cnpj: {
-//       type: 'string',
-//       validator: Validators.UserRoles({ roles: ['school'], validator: Validators.cnpj() }),
-//     },
-//     cpf: {
-//       type: 'string',
-//       validator: Validators.UserRoles({ roles: ['student', 'teacher'], validator: Validators.cpf() }),
-//     },
-//     school: {
-//       type: 'string',
-//       validator: Validators.UserRoles({ roles: ['student', 'teacher'], validator: Validators.Reference() }),
-//     },
-//   },
-// });

@@ -1,7 +1,6 @@
 import React from 'react';
 
 AdminUserCreateFormBasic = React.createClass({
-  mixins: [Semantic.Transition({ appear: 'fly left', enter: 'fly left', leave: 'fly right' })],
 
   /* Render
   */
@@ -12,7 +11,7 @@ AdminUserCreateFormBasic = React.createClass({
     const done = !_.some(['email', 'name', 'role'], k => form.state.errors[k]);
 
     return (
-      <div className='ui centered grid' ref='animate'>
+      <div className='ui centered grid'>
 
         <div className='row'>
           <div className='ui left icon input'>
