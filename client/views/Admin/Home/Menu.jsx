@@ -1,14 +1,14 @@
 import React from 'react';
+import { Tabs, Tab, FontIcon } from 'material-ui';
 
 AdminHomeMenu = React.createClass({
-  classes: 'ui secondary blue two item menu',
   items: {
     subjects: {
-      icon: 'list',
+      icon: <FontIcon className='material-icons' >list</FontIcon>,
       name: 'Matérias + Tags',
     },
     users: {
-      icon: 'users',
+      icon: <FontIcon className='material-icons' >person</FontIcon>,
       name: 'Usuários',
     },
   },
@@ -16,9 +16,8 @@ AdminHomeMenu = React.createClass({
   /* Handlers
   */
 
-  handleItemClick({ value }, event) {
-    event.preventDefault();
-    FlowRouter.setQueryParams({ active: value });
+  handleItemClick({ props: { value: active } }) {
+    FlowRouter.setQueryParams({ active });
   },
 
   /* Render
@@ -28,14 +27,10 @@ AdminHomeMenu = React.createClass({
     const { active } = this.props;
 
     return (
-      <div className={this.classes}>
+      <Tabs value={active} >
         {_.map(this.items, (v, k) =>
-          <Semantic.Button tag='a' className={`item ${active === k ? 'active' : ''}`} key={k} value={k} href='#' onClick={this.handleItemClick}>
-            <i className={`${v.icon} icon`} />
-            <div className='content'>{v.name}</div>
-          </Semantic.Button>
-        )}
-      </div>
+          <Tab label={v.name} value={k} key={k} icon={v.icon} onActive={this.handleItemClick} />)}
+      </Tabs>
     );
   },
 });
