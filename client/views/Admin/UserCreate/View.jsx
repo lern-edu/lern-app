@@ -23,7 +23,7 @@ AdminUserCreateView = React.createClass({
   render() {
     return (
       <div className='ui container'>
-        <Layout.Bar title='Novo Usuário' />
+        <Layout.Bar title='Novo Usuário' crumbs={[{ label: 'Home', path: 'AdminHome' }]} />
         <AdminUserCreateForm {...this.data} />
       </div>
     );

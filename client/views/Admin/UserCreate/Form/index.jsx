@@ -35,13 +35,10 @@ AdminUserCreateForm = React.createClass({
       <div className='ui basic segment'>
 
         <AdminUserCreateFormSteps index={index} />
-
-        <Semantic.Transitions>
           {[
             <AdminUserCreateFormBasic {...this.props} form={this} key='basic'/>,
             <AdminUserCreateFormRest {...this.props} form={this} key='rest'/>,
           ][index]}
-        </Semantic.Transitions>
 
       </div>
     );
