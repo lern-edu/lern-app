@@ -150,8 +150,8 @@ retry@1.0.9
 reywood:publish-composite@1.4.2
 routepolicy@1.0.12
 rzymek:moment-locale-pt-br@2.14.1
-semantic:ui@2.2.1
-semantic:ui-data@2.2.4
+semantic:ui@2.2.6_5
+semantic:ui-data@2.2.6_4
 service-configuration@1.0.11
 session@1.1.7
 sha@1.0.9

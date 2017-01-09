@@ -7,7 +7,6 @@ Package.onUse(function (api) {
   api.versionsFrom('1.2.1');
 
   api.use([
-    'react',
     'ecmascript',
     'erasaur:meteor-lodash',
     'kadira:react-layout',
@@ -23,12 +22,12 @@ Package.onUse(function (api) {
     'mixins/Data.jsx',
     'mixins/Render.jsx',
     'mixins/Screen.jsx',
-    'mixins/Theme.jsx',
 
     'Layout.jsx',
     'NotFound.jsx',
     'Bar.jsx',
   ], 'client');
 
-  api.export('Layout', 'client');
+  api.mainModule('./exporter.js', 'client');
+  api.export('Layout');
 });

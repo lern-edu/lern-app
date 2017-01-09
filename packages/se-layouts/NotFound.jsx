@@ -1,3 +1,4 @@
+import React from 'react';
 import { FontIcon, RaisedButton } from 'material-ui';
 
 Layout.NotFound = React.createClass({
@@ -23,7 +24,6 @@ Layout.NotFound = React.createClass({
             <RaisedButton
               label='Voltar'
               primary={true}
-              linkButton={true}
               href={FlowRouter.path(path)}
             />
           </div>

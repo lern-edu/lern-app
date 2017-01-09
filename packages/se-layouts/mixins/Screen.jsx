@@ -1,5 +1,6 @@
-Screen = {
+import React from 'react';
 
+Screen = {
   breakpoints: [
     { label: 'mobile', width: 320 },
     { label: 'tablet', width: 768 },
@@ -45,10 +46,6 @@ Screen = {
 
   /* Set Context
   */
-
-  childContextTypes: {
-    screen: React.PropTypes.string,
-  },
 
   getChildContext() {
     return { screen: this.state.screen };

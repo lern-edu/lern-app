@@ -1,4 +1,5 @@
 import React from 'react';
+import { CircularProgress } from 'material-ui';
 
 StudentTestsView = React.createClass({
   mixins: [ReactMeteorData],
@@ -40,7 +41,7 @@ StudentTestsView = React.createClass({
         <div className='ui centered grid'>
 
           <div className='eight wide computer sixteen wide table column'>
-            {!_.every(ready) ? <MUI.CircularProgress /> :
+            {!_.every(ready) ? <CircularProgress /> :
               <div>
                 <StudentTestsToolbar active={active}/>
                 <StudentTestsList {...this.data} active={active}/>

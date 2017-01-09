@@ -37,7 +37,7 @@ TeacherCoursesGalleryCard = React.createClass({
           </CardText>
           <CardActions>
             <FlatButton
-              linkButton={true}
+              
               primary={true}
               href={FlowRouter.path('TeacherCourseShow', { courseId: course._id })}
               label='Entrar' />

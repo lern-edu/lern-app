@@ -1,6 +1,7 @@
-import MUI from 'material-ui';
+import React from 'react';
+import { Snackbar } from 'material-ui';
 
-LayoutSnackbar = React.createClass({
+const LayoutSnackbar = React.createClass({
 
   /* Methods
   */
@@ -60,6 +61,8 @@ LayoutSnackbar = React.createClass({
   */
 
   render() {
-    return <MUI.Snackbar {...this.state}/>;
+    return <Snackbar {...this.state}/>;
   },
 });
+
+export default LayoutSnackbar;

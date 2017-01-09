@@ -1,6 +1,7 @@
-import { LeftNav, CardMedia, ListItem } from 'material-ui';
+import React from 'react';
+import { Drawer, CardMedia, ListItem } from 'material-ui';
 import { RaisedButton, IconButton, Avatar } from 'material-ui';
-import { Divider, CircularProgress, FontIcon, Styles } from 'material-ui';
+import { Divider, LinearProgress, FontIcon, Styles } from 'material-ui';
 import { grey300, grey400 } from 'material-ui/styles/colors';
 
 LayoutNavigation = React.createClass({
@@ -131,15 +132,14 @@ LayoutNavigation = React.createClass({
     const logout = () => Meteor.logout();
 
     return (
-      <LeftNav {...this.state} onRequestChange={open => this.setState({ open })}>
+      <Drawer {...this.state} onRequestChange={open => this.setState({ open })}>
 
         {!user ? (
           <div className='ui center aligned basic segment'>
-            {logging ? <CircularProgress/> :
+            {logging ? <div/> :
               <div>
                 <RaisedButton
                   href={FlowRouter.path('PublicLogin')}
-                  linkButton={true}
                   label='Entrar'
                   primary={true}
                 />
@@ -201,7 +201,6 @@ LayoutNavigation = React.createClass({
                   color={grey300}>exit_to_app</FontIcon>
               </IconButton>
               <IconButton
-                linkButton={true}
                 href={FlowRouter.path('PublicContact')}
                 tooltip='Contato'
                 tooltipPosition='bottom-left'
@@ -216,7 +215,9 @@ LayoutNavigation = React.createClass({
           </div>
         )}
 
-      </LeftNav>
+      </Drawer>
     );
   },
 });
+
+export default LayoutNavigation;

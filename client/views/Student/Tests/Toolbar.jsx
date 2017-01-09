@@ -39,7 +39,7 @@ StudentTestsToolbar = React.createClass({
           <RaisedButton
             style={{ textAlign: 'center' }}
             href={FlowRouter.path('StudentTestCreate')}
-            linkButton={true}
+            
             label='Novo'
             primary={true}
           />

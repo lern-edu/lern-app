@@ -16,7 +16,7 @@ AdminPlansToolbar = React.createClass({
           <RaisedButton
             label='Novo'
             primary={true}
-            linkButton={true}
+            
             style={{ textAlign: 'center' }}
             href={FlowRouter.path('AdminPlanCreate')}
           />

@@ -27,7 +27,7 @@ TeacherCourseShowLecturesCard = React.createClass({
             <FlatButton
             href={FlowRouter.path('TeacherLectureAttendance',
               { lectureId: lecture._id, courseId: course._id })}
-            linkButton={true}
+            
             label='Ver'
             secondary={true} />
           </CardActions>

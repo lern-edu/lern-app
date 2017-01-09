@@ -1,5 +1,5 @@
 TagWrapper = function({ defaultTag='div', defaultClass='', ignoredProps=[], staticProps={} }) {
-  ignoredProps = _.union(['className', 'classes', 'tag'], ignoredProps);
+  ignoredProps = _.union(['className', 'classes', 'tag', 'component'], ignoredProps);
 
   return {
 

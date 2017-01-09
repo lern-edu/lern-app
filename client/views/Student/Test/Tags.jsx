@@ -11,7 +11,7 @@ StudentTestTags = React.createClass({
             key={tag._id}
             label={tag.text}
             secondary={true}
-            linkButton={true}
+            
             href={FlowRouter.path('StudentTag', { tagId: tag._id })}
           />
         )}

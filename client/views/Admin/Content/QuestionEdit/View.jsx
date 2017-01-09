@@ -1,4 +1,5 @@
 import React from 'react';
+import { CircularProgress, LinearProgress, Divider } from 'material-ui';
 
 AdminQuestionEditView = React.createClass({
   mixins: [ReactMeteorData],
@@ -75,10 +76,10 @@ AdminQuestionEditView = React.createClass({
           title='Editar questões'
           crumbs={[{ label: 'Conteúdo', path: 'AdminContent' }]} />
 
-        {!(ready.subjects || ready.tags) ? <MUI.LinearProgress/> :
+        {!(ready.subjects || ready.tags) ? <LinearProgress/> :
           <AdminQuestionEditOptions {...this.data} restore={query} />}
-          <MUI.Divider />
-        {!ready.questions ? <MUI.CircularProgress /> : [
+          <Divider />
+        {!ready.questions ? <CircularProgress /> : [
           <AdminQuestionEditQuestions {...this.data} restore={query} key='list' />,
           <PublicMiscPagination key='pages' length={questions.length}
             size={this.limit} total={questionsCount} less={() => FlowRouter.setQueryParams({ skip: skip - 1 })}

@@ -1,3 +1,4 @@
+import React from 'react';
 const { render } = Layout.setup({ protect: 'student', nav: true, bar: true });
 
 const studentRoutes = FlowRouter.group({

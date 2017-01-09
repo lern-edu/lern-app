@@ -23,7 +23,7 @@ StudentHomeOverview = React.createClass({
                    title={course.name} />
                  <CardActions>
                    <FlatButton
-                     linkButton={true}
+                     
                      primary={true}
                      href={FlowRouter.path('StudentCourseShow', { courseId: course._id })}
                      label='Entrar' />

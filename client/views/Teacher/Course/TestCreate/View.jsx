@@ -1,3 +1,5 @@
+import React from 'react';
+
 /** Test create
   * @where {client}
   * @private View only

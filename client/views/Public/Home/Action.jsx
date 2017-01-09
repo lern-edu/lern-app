@@ -23,7 +23,6 @@ PublicHomeAction = React.createClass({
             <RaisedButton
               primary={true}
               label={`Olá ${user.getName()}`}
-              linkButton={true}
               href={FlowRouter.path(user.getHomeRoute())}
               icon={
                 <FontIcon className='material-icons'>
@@ -34,7 +33,6 @@ PublicHomeAction = React.createClass({
           ) : (
             <RaisedButton primary={true}
               onClick={this.handleClick}
-              linkButton={true}
               href={FlowRouter.path('PublicLogin')}
               label={'Acessar sua conta'} />
           )

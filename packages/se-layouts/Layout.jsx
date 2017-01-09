@@ -1,16 +1,23 @@
-Layout = React.createClass({
-  mixins: [
-    Data,
-    Render,
-    Screen,
-    Theme,
-  ],
+import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-  propTypes: {
-    nav: React.PropTypes.bool,
-    bar: React.PropTypes.bool,
-    protect: React.PropTypes.string,
+// Components
+import LayoutSnackbar from './components/Snackbar.jsx';
+import LayoutNavigation from './components/Navigation.jsx';
+import LayoutSafe from './components/Safe.jsx';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: '#2196F3',
+    primary2Color: '#1976D2',
+    primary3Color: '#BBDEFB',
+    accent1Color: '#FFC107',
   },
+});
+
+Layout = React.createClass({
+  mixins: [Data, Render, Screen],
 
   /* Render
   */
@@ -23,28 +30,47 @@ Layout = React.createClass({
     };
 
     return (
-      <div>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
 
-        <nav>
-          {!stuff.nav ? undefined : <LayoutNavigation {...stuff}/>}
-        </nav>
+          <nav>
+            {!stuff.nav ? undefined : <LayoutNavigation {...stuff}/>}
+          </nav>
 
-        <main style={{ paddingTop: stuff.bar ? 64 : 0 }}>
-          <LayoutSafe {...stuff}>
-            {this.props.main}
-          </LayoutSafe>
-        </main>
+          <main style={{ paddingTop: stuff.bar ? 64 : 0 }}>
+            <LayoutSafe {...stuff}>
+              {this.props.main}
+            </LayoutSafe>
+          </main>
 
-        <footer style={{ marginLeft: stuff.nav &&
-            stuff.screen === 'computer' ? 256 : 0, }}>
-          <LayoutFooter />
-        </footer>
+          <footer style={{ marginLeft: stuff.nav &&
+              stuff.screen === 'computer' ? 256 : 0, }}>
+            <LayoutFooter />
+          </footer>
 
-        <aside>
-          <LayoutSnackbar />
-        </aside>
+          <aside>
+            <LayoutSnackbar />
+          </aside>
 
-      </div>
+        </div>
+      </MuiThemeProvider>
     );
   },
 });
+
+Layout.childContextTypes = {
+  route: React.PropTypes.string.isRequired,
+  user: React.PropTypes.object,
+  logging: React.PropTypes.bool.isRequired,
+  screen: React.PropTypes.string,
+};
+
+Layout.propTypes = {
+  nav: React.PropTypes.bool,
+  bar: React.PropTypes.bool,
+  protect: React.PropTypes.string,
+  route: React.PropTypes.string.isRequired,
+  user: React.PropTypes.object,
+  logging: React.PropTypes.bool.isRequired,
+  screen: React.PropTypes.string,
+};
