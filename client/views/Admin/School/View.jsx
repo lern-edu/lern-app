@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinearProgress, Paper, Divider } from 'material-ui';
 
 AdminSchoolView = React.createClass({
   mixins: [ReactMeteorData],
@@ -32,17 +33,15 @@ AdminSchoolView = React.createClass({
 
         <Layout.Bar
           title={_.get(course, 'name')}
-          crumbs={[
-            { label: 'Escolas', path: 'AdminPlans' },
-          ]} />
+          crumbs={[{ label: 'Escolas', path: 'AdminPlans' }]} />
 
-        <MUI.Paper>
-          {!_.every(ready) ? <MUI.LinearProgress/> : [
+        <Paper>
+          {!_.every(ready) ? <LinearProgress/> : [
             // <AdminSchoolHeader key='header' {...this.data}/>,
-            <MUI.Divider key='d0'/>,
+            <Divider key='d0'/>,
             // <AdminSchoolList key='List' {...this.data}/>,
           ]}
-        </MUI.Paper>
+        </Paper>
 
       </div>
     );

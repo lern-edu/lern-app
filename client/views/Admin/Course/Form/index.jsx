@@ -1,6 +1,6 @@
 import React from 'react';
 
-AdminCourseForm = React.createClass({
+const AdminCourseForm = React.createClass({
   mixins: [AstroForm(Courses.Schema, 'AdminCourseSave')],
 
   /* Lifecycle
@@ -55,7 +55,7 @@ AdminCourseForm = React.createClass({
         <div className='row'>
           <div className='ui input'>
             <Semantic.Input
-              value={name}
+              value={name || ''}
               type='text'
               placeholder='Nome'
               onInput={this.defaultHandler('name', { doc: true })} />
@@ -159,3 +159,5 @@ AdminCourseForm = React.createClass({
     );
   },
 });
+
+export default AdminCourseForm;
