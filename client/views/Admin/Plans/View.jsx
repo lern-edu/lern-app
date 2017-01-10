@@ -30,7 +30,7 @@ AdminPlansView = React.createClass({
     return (
       <div className='ui container'>
 
-        <Layout.Bar title='Planos' crumbs={[{ label: 'Planos', path: 'AdminPlans' }]} />
+        <Layout.Bar title='Planos' />
 
         {!_.every(ready) ? <LinearProgress/> : [
           <AdminPlansToolbar key='toolbar' {...this.data}/>,

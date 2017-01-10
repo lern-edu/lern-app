@@ -39,16 +39,13 @@ AdminPlanView = React.createClass({
 
         <Layout.Bar
           title={_.get(plan, 'name')}
-          crumbs={[
-            { label: 'Planos', path: 'AdminPlans' },
-          ]}
-        />
+          crumbs={[{ label: 'Planos', path: 'AdminPlans' }]} />
 
         <Paper>
           {!_.every(ready) ? <LinearProgress/> : [
-            <AdminPlanHeader key='header' {...this.data}/>,
+            <AdminPlanHeader key='header' {...this.data} />,
             <Divider key='d0'/>,
-            <AdminPlanSubjects key='subjects' {...this.data}/>,
+            <AdminPlanSubjects key='subjects' {...this.data} />,
           ]}
         </Paper>
 
