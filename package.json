@@ -4,7 +4,7 @@
   "description": "Lern - Solucoes Educacionais",
   "main": "init.js",
   "scripts": {
-    "start": "VELOCITY_DEBUG=1 VELOCITY_DEBUG_MIRROR=1 METEOR_PROFILE=1 meteor run --settings settings.json",
+    "start": "UNIVERSE_I18N_LOCALES=all VELOCITY_DEBUG=1 VELOCITY_DEBUG_MIRROR=1 METEOR_PROFILE=1 meteor run --settings settings.json",
     "prestart": "meteor=$(meteor --version); if [ \"$meteor\" != \"Meteor 1.4.2.3\" ]; then meteor update --release METEOR@1.4.2.3; fi;"
   },
   "repository": {
