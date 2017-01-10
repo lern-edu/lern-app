@@ -1,5 +1,10 @@
+// Libs
 import React from 'react';
 import { LinearProgress } from 'material-ui';
+
+// Views
+import AdminPlansToolbar from './Toolbar.jsx';
+import AdminPlansList from './List.jsx';
 
 AdminPlansView = React.createClass({
   mixins: [ReactMeteorData],

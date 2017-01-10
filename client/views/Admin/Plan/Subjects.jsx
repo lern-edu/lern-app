@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, ListItem, Paper } from 'material-ui';
 
-AdminPlanSubjects = React.createClass({
+const AdminPlanSubjects = React.createClass({
   render() {
     const { plan, subjects } = this.props;
     return (
@@ -26,3 +26,5 @@ AdminPlanSubjects = React.createClass({
     );
   },
 });
+
+export default AdminPlanSubjects;

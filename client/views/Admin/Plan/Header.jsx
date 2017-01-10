@@ -1,6 +1,6 @@
 import React from 'react';
 
-AdminPlanHeader = React.createClass({
+const AdminPlanHeader = React.createClass({
   render() {
     const { plan } = this.props;
 
@@ -18,3 +18,5 @@ AdminPlanHeader = React.createClass({
     );
   },
 });
+
+export default AdminPlanHeader;

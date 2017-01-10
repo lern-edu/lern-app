@@ -1,4 +1,10 @@
+// Libs
 import React from 'react';
+import { LinearProgress, Paper, Divider } from 'material-ui';
+
+// Views
+import AdminPlanSubjects from './Subjects.jsx';
+import AdminPlanHeader from './Header.jsx';
 
 AdminPlanView = React.createClass({
   mixins: [ReactMeteorData],
@@ -38,13 +44,13 @@ AdminPlanView = React.createClass({
           ]}
         />
 
-        <MUI.Paper>
-          {!_.every(ready) ? <MUI.LinearProgress/> : [
+        <Paper>
+          {!_.every(ready) ? <LinearProgress/> : [
             <AdminPlanHeader key='header' {...this.data}/>,
-            <MUI.Divider key='d0'/>,
+            <Divider key='d0'/>,
             <AdminPlanSubjects key='subjects' {...this.data}/>,
           ]}
-        </MUI.Paper>
+        </Paper>
 
       </div>
     );
