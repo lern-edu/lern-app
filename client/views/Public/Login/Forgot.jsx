@@ -1,82 +1,79 @@
 import React from 'react';
+import i18n from 'meteor/universe:i18n';
 import { Dialog, FlatButton, TextField } from 'material-ui';
 
-PublicHomeForgotPassword = React.createClass({
+const texts = {
+  forgotPasswordEmailNotFound: i18n.__('PublicLoginForgot.forgotPasswordEmailNotFound'),
+  forgotPasswordSuccess: i18n.__('PublicLoginForgot.forgotPasswordSuccess'),
+  forgotPasswordSuccess: i18n.__('PublicLoginForgot.forgotPasswordSuccess'),
+  TextFieldEmailLabel: i18n.__('PublicLoginForgot.TextFieldEmailLabel'),
+  TextFieldEmailError: i18n.__('PublicLoginForgot.TextFieldEmailError'),
+  CancelButton: i18n.__('PublicLoginForgot.CancelButton'),
+  DialogTitle: i18n.__('PublicLoginForgot.DialogTitle'),
+  SendButton: i18n.__('PublicLoginForgot.SendButton'),
+  DialogText: i18n.__('PublicLoginForgot.DialogText'),
+};
 
-  // Initial State
-
+const PublicLoginForgot = React.createClass({
   getInitialState() {
-    return { email: '', valid: true };
+    return { email: '' };
   },
-
-  // Handlers
 
   handleChange({ target: { value }, currentTarget }, id) {
     this.setState({ [currentTarget.getAttribute('data-key')]: value });
-    this.setState({ valid: this.emailValidator() });
   },
 
   handleSubmit() {
-    const { props: { handleClose }, state: { email, valid } } = this;
-    if (!this.emailValidator()) {
-      snack('Digite um email válido');
-      return;
-    };
+    const { props: { handleClose }, state: { email } } = this;
 
     Accounts.forgotPassword({ email }, (err) => {
       if (!err) {
-        snack('Vá até o link de verificação em seu email');
+        snack(texts.forgotPasswordSuccess);
       } else {
         if (err.reason.includes('not found'))
-          snack('Não encontramos o email especificado');
-        else snack('Erro! Entre em contato com nossa equipe');
+          snack(texts.forgotPasswordEmailNotFound);
+        else snack(texts.forgotPasswordSuccess);
       };
 
       handleClose();
     });
   },
 
-  // Validator
-
-  emailValidator() {
-    const { email } = this.state;
-    const filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return filter.test(email);
-  },
-
-  // Render
-
   render() {
     const { open, handleClose } = this.props;
-    const { valid } = this.state;
+    const { email } = this.state;
+
     return (
       <Dialog
-        title='Redefinir senha'
+        title={texts.DialogTitle}
         open={open}
         modal={true}
         actions={[
           <FlatButton
-            label='Enviar'
+            label={texts.SendButton}
             primary={true}
-            disabled={!valid}
+            disabled={!Regex.mail.test(email)}
             onTouchTap={this.handleSubmit} />,
           <FlatButton
-            label='Cancelar'
+            label={texts.CancelButton}
             onTouchTap={handleClose} />,
         ]}
         onRequestClose={handleClose} >
         <div className='row'>
-          <p>Nos diga seu email para enviar uma mensagem de redefinição de senha.</p>
+          <p>{texts.DialogText}</p>
         </div>
         <div className='row'>
           <TextField
-            hintText='Email'
+            hintText={texts.TextFieldEmailLabel}
             data-key='email'
-            errorText={valid ? undefined : 'Digite um email válido'}
-            floatingLabelText='Email'
+            errorText={Regex.mail.test(email) ? undefined
+              : texts.TextFieldEmailError}
+            floatingLabelText={texts.TextFieldEmailLabel}
             onInput={this.handleChange} />
         </div>
       </Dialog>
     );
   },
 });
+
+export default PublicLoginForgot;

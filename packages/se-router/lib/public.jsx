@@ -10,11 +10,11 @@ FlowRouter.route('/', {
   },
 });
 
-FlowRouter.route('/entrar', {
+FlowRouter.route('/login', {
   name: 'PublicLogin',
   action() {
     render({
-      bar: true,
+      bar: false,
       main: <PublicLoginView />,
     });
   },

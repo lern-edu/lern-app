@@ -1,14 +1,16 @@
 import React from 'react';
 
-Screen = {
+const Screen = {
+
+  // Static
+
   breakpoints: [
     { label: 'mobile', width: 320 },
     { label: 'tablet', width: 768 },
     { label: 'computer', width: 992 },
   ],
 
-  /* Methods
-  */
+  // Methods
 
   getMediaQueries() {
     const { breakpoints: bps } = this;
@@ -19,14 +21,14 @@ Screen = {
     ));
   },
 
-  /* Lifecycle
-  */
+  // Lifecycle
 
   getInitialState() {
-    return { screen: undefined };
+    return { screen: undefined, innerHeight: window.innerHeight, innerWidth: window.innerWidth };
   },
 
   componentDidMount() {
+    window.addEventListener('resize', this.handleResize);
     this.queries = this.getMediaQueries();
 
     const { breakpoints: bps, queries } = this;
@@ -38,17 +40,29 @@ Screen = {
   },
 
   componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
     const { queries } = this;
     _.forEach(queries, query =>
       enquire.unregister(query)
     );
   },
 
-  /* Set Context
-  */
+  // handlers
+
+  handleResize(e) {
+    this.setState({ innerHeight: window.innerHeight, innerWidth: window.innerWidth });
+  },
+
+  // Set Context
 
   getChildContext() {
-    return { screen: this.state.screen };
+    return {
+      screen: this.state.screen,
+      innerHeight: this.state.innerHeight,
+      innerWidth: this.state.innerWidth,
+    };
   },
 
 };
+
+export default Screen;
