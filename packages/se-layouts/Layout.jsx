@@ -1,11 +1,19 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 // Components
-import LayoutSnackbar from './components/Snackbar.jsx';
-import LayoutNavigation from './components/Navigation.jsx';
-import LayoutSafe from './components/Safe.jsx';
+import Navigation from './components/Navigation.jsx';
+import Snackbar from './components/Snackbar.jsx';
+import Footer from './components/Footer.jsx';
+import Safe from './components/Safe.jsx';
+
+// mixins
+import Language from './mixins/Language.jsx';
+import Screen from './mixins/Screen.jsx';
+import Render from './mixins/Render.jsx';
+import Data from './mixins/Data.jsx';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -17,7 +25,7 @@ const muiTheme = getMuiTheme({
 });
 
 Layout = React.createClass({
-  mixins: [Data, Render, Screen],
+  mixins: [Data, Render, Screen, Language],
 
   /* Render
   */
@@ -34,22 +42,19 @@ Layout = React.createClass({
         <div>
 
           <nav>
-            {!stuff.nav ? undefined : <LayoutNavigation {...stuff}/>}
+            {!stuff.nav ? undefined : <Navigation {...stuff}/>}
           </nav>
 
           <main style={{ paddingTop: stuff.bar ? 64 : 0 }}>
-            <LayoutSafe {...stuff}>
-              {this.props.main}
-            </LayoutSafe>
+            <Safe {...stuff}> {this.props.main} </Safe>
           </main>
 
-          <footer style={{ marginLeft: stuff.nav &&
-              stuff.screen === 'computer' ? 256 : 0, }}>
-            <LayoutFooter />
+          <footer style={{ marginLeft: stuff.nav && stuff.screen === 'computer' ? 256 : 0 }}>
+            <Footer />
           </footer>
 
           <aside>
-            <LayoutSnackbar />
+            <Snackbar />
           </aside>
 
         </div>
@@ -60,17 +65,21 @@ Layout = React.createClass({
 
 Layout.childContextTypes = {
   route: React.PropTypes.string.isRequired,
-  user: React.PropTypes.object,
   logging: React.PropTypes.bool.isRequired,
+  innerHeight: React.PropTypes.number,
+  innerWidth: React.PropTypes.number,
   screen: React.PropTypes.string,
+  user: React.PropTypes.object,
 };
 
 Layout.propTypes = {
+  route: React.PropTypes.string.isRequired,
+  logging: React.PropTypes.bool.isRequired,
+  innerHeight: React.PropTypes.number,
+  innerWidth: React.PropTypes.number,
+  protect: React.PropTypes.string,
+  screen: React.PropTypes.string,
+  user: React.PropTypes.object,
   nav: React.PropTypes.bool,
   bar: React.PropTypes.bool,
-  protect: React.PropTypes.string,
-  route: React.PropTypes.string.isRequired,
-  user: React.PropTypes.object,
-  logging: React.PropTypes.bool.isRequired,
-  screen: React.PropTypes.string,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontIcon, RaisedButton, LinearProgress } from 'material-ui';
 
-LayoutSafe = React.createClass({
+const Safe = React.createClass({
 
   /* Methods
   */
@@ -89,4 +89,4 @@ LayoutSafe = React.createClass({
   },
 });
 
-export default LayoutSafe;
+export default Safe;

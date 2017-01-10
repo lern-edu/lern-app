@@ -2,7 +2,7 @@ import { mount } from 'react-mounter';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 
-Render = {
+const Render = {
   statics: {
     setup(args1) {
       return {
@@ -25,3 +25,5 @@ Render = {
     },
   },
 };
+
+export default Render;
