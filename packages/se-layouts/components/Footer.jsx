@@ -1,9 +1,11 @@
 import React from 'react';
 
-LayoutFooter = React.createClass({
+const Footer = React.createClass({
   render() {
     return (
       <div/>
     );
   },
 });
+
+export default Footer;

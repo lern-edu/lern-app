@@ -1,6 +1,6 @@
 import React from 'react';
 
-Data = {
+const Data = {
   /* Set Context
   */
 
@@ -9,3 +9,5 @@ Data = {
     return { route, user, logging };
   },
 };
+
+export default Data;

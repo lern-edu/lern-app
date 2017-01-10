@@ -4,7 +4,7 @@ import { RaisedButton, IconButton, Avatar } from 'material-ui';
 import { Divider, LinearProgress, FontIcon, Styles } from 'material-ui';
 import { grey300, grey400 } from 'material-ui/styles/colors';
 
-LayoutNavigation = React.createClass({
+const Navigation = React.createClass({
 
   getInitialState() {
     return {
@@ -221,4 +221,4 @@ LayoutNavigation = React.createClass({
   },
 });
 
-export default LayoutNavigation;
+export default Navigation;

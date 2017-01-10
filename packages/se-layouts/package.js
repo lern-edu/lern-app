@@ -11,6 +11,7 @@ Package.onUse(function (api) {
     'erasaur:meteor-lodash',
     'kadira:react-layout',
     'patrickleet:enquire',
+    'universe:i18n',
   ], 'client');
 
   api.addFiles([
