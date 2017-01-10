@@ -1,0 +1,14 @@
+{
+  "_locale": "en-US",
+  "_namespace": "PublicLoginForgot",
+  "title": "English",
+  "forgotPasswordSuccess": "Message sent",
+  "forgotPasswordEmailNotFound" : "Lern didn't find the email",
+  "forgotPasswordEmailError": "Bad email",
+  "DialogTitle": "Recover Password",
+  "DialogText": "Tell us your email to send recovery link.",
+  "SendButton": "Send",
+  "CancelButton": "Cancel",
+  "TextFieldEmailLabel": "Email",
+  "TextFieldEmailError": "Email invalid"
+}
