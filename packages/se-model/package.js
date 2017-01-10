@@ -99,6 +99,7 @@ Package.onUse(function (api) {
 
     // static
     'StaticCollections',
+    'Regex',
 
     'SubjectAreas',
     'UserRoles',
