@@ -1,27 +1,27 @@
 import React from 'react';
 import { Toolbar, ToolbarSeparator, ToolbarTitle, ToolbarGroup, RaisedButton } from 'material-ui';
 
-AdminPlansToolbar = React.createClass({
+const AdminPlansToolbar = React.createClass({
   render() {
     const { plans } = this.props;
 
     return (
       <Toolbar>
-        <ToolbarGroup float='left'>
-          <ToolbarTitle text={`${plans.length} items`}/>
+        <ToolbarGroup>
+          <ToolbarTitle text={`${plans.length} items`} />
         </ToolbarGroup>
-        <ToolbarGroup float='right'>
-          <ToolbarTitle text='Planos'/>
+        <ToolbarGroup lastChild={true} >
+          <ToolbarTitle text='Planos' />
           <ToolbarSeparator/>
           <RaisedButton
             label='Novo'
             primary={true}
-            
             style={{ textAlign: 'center' }}
-            href={FlowRouter.path('AdminPlanCreate')}
-          />
+            href={FlowRouter.path('AdminPlanCreate')} />
         </ToolbarGroup>
       </Toolbar>
     );
   },
 });
+
+export default AdminPlansToolbar;

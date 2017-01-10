@@ -1,5 +1,9 @@
+// Libs
 import React from 'react';
 import { Paper, TextField, List, ListItem, FontIcon, RaisedButton } from 'material-ui';
+
+// Views
+import AdminPlanCreateFormTasks from './Tasks.jsx';
 
 AdminPlanCreateForm = React.createClass({
   mixins: [AstroForm(Plans.Schema, 'AdminPlanSave')],
@@ -75,7 +79,7 @@ AdminPlanCreateForm = React.createClass({
           <TextField
             hintText='Nome'
             floatingLabelText='Nome'
-            value={name}
+            value={name || ''}
             errorText={errors.name ? instructions.name : undefined}
             onChange={this.handleNameChange} />
         </div>

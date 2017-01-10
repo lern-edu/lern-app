@@ -1,12 +1,12 @@
 import React from 'react';
 import { Paper, SelectField, MenuItem, TextField, FlatButton } from 'material-ui';
 
-AdminUserName = React.createClass({
+const AdminUserName = React.createClass({
 
   // Initial state
 
   getInitialState() {
-    return { name: _.get(this, 'props.user.profile.name') };
+    return { name: _.get(this, 'props.profile.name') };
   },
 
   // Handlers
@@ -53,3 +53,5 @@ AdminUserName = React.createClass({
     );
   },
 });
+
+export  default AdminUserName;

@@ -1,4 +1,10 @@
+// Libs
 import React from 'react';
+import { LinearProgress } from 'material-ui';
+
+// Views
+import AdminUsersToolbar from './Toolbar.jsx';
+import AdminUsersList from './List.jsx';
 
 AdminUsersView = React.createClass({
   mixins: [ReactMeteorData],
@@ -35,9 +41,9 @@ AdminUsersView = React.createClass({
       <div className='ui container'>
 
         <Layout.Bar title='Usuários' />
-        {!_.every(ready) ? <MUI.LinearProgress /> : [
-          <AdminUsersToolbar update={this.handleUpdateQuery} key='toolbar'/>,
-          <AdminUsersList {...this.data} query={query} key='list'/>,
+        {!_.every(ready) ? <LinearProgress/> : [
+          <AdminUsersToolbar update={this.handleUpdateQuery} key='toolbar' />,
+          <AdminUsersList {...this.data} query={query} key='list' />,
         ]}
 
       </div>

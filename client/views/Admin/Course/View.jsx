@@ -1,4 +1,8 @@
 import React from 'react';
+import { LinearProgress } from 'material-ui';
+
+// View
+import AdminCourseForm from './Form/index.jsx';
 
 AdminCourseView = React.createClass({
   mixins: [ReactMeteorData],
@@ -42,12 +46,11 @@ AdminCourseView = React.createClass({
 
         {!ready.course ? undefined : <Layout.Bar
           title={_.get(course, 'name')}
-          crumbs={[
-            { label: 'Escolas', path: 'AdminSchools' },
-          ]} />}
+          crumbs={[{ label: 'Escolas', path: 'AdminSchools' }]} />}
 
-        {!_.every(ready) ? <MUI.LinearProgress/> :
+        {!_.every(ready) ? <LinearProgress/> :
         <AdminCourseForm {...this.data} doc={course} />}
+
       </div>
     );
   },

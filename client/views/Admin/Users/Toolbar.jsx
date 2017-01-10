@@ -1,7 +1,7 @@
 import React from 'react';
 import { Toolbar, ToolbarGroup, TextField, } from 'material-ui';
 
-AdminUsersToolbar = React.createClass({
+const AdminUsersToolbar = React.createClass({
 
   // Render
 
@@ -20,3 +20,5 @@ AdminUsersToolbar = React.createClass({
     );
   },
 });
+
+export default AdminUsersToolbar;
