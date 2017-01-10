@@ -1,7 +1,8 @@
 import React from 'react';
-import { TextField, MenuItem, Paper, List, ListItem, FontIcon, RaisedButton, FlatButton, } from 'material-ui';
+import { TextField, MenuItem, Paper, List } from 'material-ui';
+import { ListItem, FontIcon, RaisedButton, FlatButton } from 'material-ui';
 
-AdminUserEmails = React.createClass({
+const AdminUserEmails = React.createClass({
 
   // Initial State
 
@@ -28,7 +29,8 @@ AdminUserEmails = React.createClass({
 
   handleVerifyEmailPassword({ currentTarget }) {
     const { props: { user: { _id } } } = this;
-    Meteor.call('AdminUserSendEnrollmentEmail', _id, currentTarget.getAttribute('data-email'), (err) => {
+    Meteor.call('AdminUserSendEnrollmentEmail',
+      _id, currentTarget.getAttribute('data-email'), (err) => {
       if (err) snack('Erro!');
       else snack('Email de confirmação enviado!');
     });
@@ -59,8 +61,7 @@ AdminUserEmails = React.createClass({
 
   emailValidator() {
     const { email } = this.state;
-    const filter = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return filter.test(email);
+    return Regex.mail.test(email);
   },
 
   // Render
@@ -138,3 +139,5 @@ AdminUserEmails = React.createClass({
     );
   },
 });
+
+export default AdminUserEmails;

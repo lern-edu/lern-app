@@ -1,5 +1,10 @@
+// Libs
 import React from 'react';
 import { LinearProgress } from 'material-ui';
+
+// Views
+import AdminPlansToolbar from './Toolbar.jsx';
+import AdminPlansList from './List.jsx';
 
 AdminPlansView = React.createClass({
   mixins: [ReactMeteorData],
@@ -25,7 +30,7 @@ AdminPlansView = React.createClass({
     return (
       <div className='ui container'>
 
-        <Layout.Bar title='Planos' crumbs={[{ label: 'Planos', path: 'AdminPlans' }]} />
+        <Layout.Bar title='Planos' />
 
         {!_.every(ready) ? <LinearProgress/> : [
           <AdminPlansToolbar key='toolbar' {...this.data}/>,

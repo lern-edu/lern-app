@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinearProgress } from 'material-ui';
 
 AdminPlanCreateView = React.createClass({
   mixins: [ReactMeteorData],
@@ -28,14 +29,9 @@ AdminPlanCreateView = React.createClass({
 
         <Layout.Bar
           title='Criar Novo'
-          crumbs={[
-            { label: 'Planos', path: 'AdminPlans' },
-          ]}
-        />
+          crumbs={[{ label: 'Planos', path: 'AdminPlans' }]} />
 
-        {!_.every(ready) ? <MUI.LinearProgress/> :
-          <AdminPlanCreateForm {...this.data}/>
-        }
+        {!_.every(ready) ? <LinearProgress/> : <AdminPlanCreateForm {...this.data} />}
 
       </div>
     );

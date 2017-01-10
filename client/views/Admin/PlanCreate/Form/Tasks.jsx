@@ -1,7 +1,8 @@
 import React from 'react';
-import { RaisedButton, Dialog, DatePicker, FlatButton, AutoComplete, MenuItem, TextField, Checkbox, } from 'material-ui';
+import { MenuItem, TextField, Checkbox, } from 'material-ui';
+import { RaisedButton, Dialog, DatePicker, FlatButton, AutoComplete } from 'material-ui';
 
-AdminPlanCreateFormTasks = React.createClass({
+const AdminPlanCreateFormTasks = React.createClass({
 
   // Static Data
 
@@ -34,8 +35,8 @@ AdminPlanCreateFormTasks = React.createClass({
 
   // Handlers
 
-  handleSubjectChange(value, index, items) {
-    this.doc.set({ subject: _.get(items[index], 'value.key') });
+  handleSubjectChange({ value: { key: subject } }, index) {
+    this.doc.set({ subject });
     this.updateValidation();
   },
 
@@ -98,19 +99,14 @@ AdminPlanCreateFormTasks = React.createClass({
               onNewRequest={this.handleSubjectChange}
               disableFocusRipple={false}
               errorText={errors && errors.subject ? instructions.subject : undefined}
-              dataSource={_.map(subjects, s => {
-                return {
-                  text: s.name,
-                  value: (
-                    <MenuItem
-                      primaryText={s.name}
-                      secondaryText={SubjectAreas.getName(s.area)}
-                      key={s._id}
-                    />
-                  ),
-                };
-              })}
-            />
+              dataSource={_.map(subjects, s => _.zipObject(['text', 'value'], [
+                s.name,
+                <MenuItem
+                  primaryText={s.name}
+                  secondaryText={SubjectAreas.getName(s.area)}
+                  key={s._id} />,
+                ])
+              )} />
           </div>
           <div className='row'>
             <TextField
@@ -130,3 +126,5 @@ AdminPlanCreateFormTasks = React.createClass({
     );
   },
 });
+
+export default AdminPlanCreateFormTasks;

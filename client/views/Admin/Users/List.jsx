@@ -2,7 +2,7 @@ import React from 'react';
 import { List, ListItem, FontIcon, Styles } from 'material-ui';
 import { darkBlack } from 'material-ui/styles/colors';
 
-AdminUsersList = React.createClass({
+const AdminUsersList = React.createClass({
   // Lifecycle
 
   getInitialState() {
@@ -59,3 +59,5 @@ AdminUsersList = React.createClass({
     </List>;
   },
 });
+
+export default AdminUsersList;

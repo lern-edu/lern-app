@@ -1,4 +1,9 @@
+// Libs
 import React from 'react';
+import { LinearProgress } from 'material-ui';
+
+// Views
+import AdminUserForm from './Form/Form.jsx';
 
 AdminUserView = React.createClass({
   mixins: [ReactMeteorData],
@@ -27,13 +32,11 @@ AdminUserView = React.createClass({
       <div>
         <Layout.Bar
           title={_.get(user, 'profile.name')}
-          crumbs={[
-            { label: 'Usuários', path: 'AdminUsers' },
-          ]} />
+          crumbs={[{ label: 'Usuários', path: 'AdminUsers' }]} />
 
         <div className='ui centered grid'>
           <div className='ten wide computer sixteen wide tablet column'>
-            {!_.every(ready) ? <MUI.LinearProgress /> :
+            {!_.every(ready) ? <LinearProgress/> :
               <AdminUserForm doc={user} schools={schools} />}
           </div>
         </div>

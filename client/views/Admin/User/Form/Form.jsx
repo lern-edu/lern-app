@@ -1,18 +1,22 @@
+// Libs
 import React from 'react';
-import { AutoComplete, MenuItem, Paper, List, ListItem, FontIcon, RaisedButton, } from 'material-ui';
+import { List, ListItem, FontIcon, RaisedButton, } from 'material-ui';
+import { AutoComplete, MenuItem, Paper } from 'material-ui';
 
-AdminUserForm = React.createClass({
+// Views
+import AdminUserEmails from './Emails.jsx';
+import AdminUserName from './Name.jsx';
+
+const AdminUserForm = React.createClass({
   mixins: [AstroForm(Meteor.users.Schema, 'AdminUserSave')],
 
   /* Handlers
   */
 
-  handleSchoolsChange(value, index, options) {
+  handleSchoolsChange({ value: { key } }, index) {
     if (!_.toString(index)) return;
     let { doc: { profile } } = this;
-    profile.schools ? profile.schools.push(_.get(options[index], 'value.key')) :
-      profile.schools = [_.get(options[index], 'value.key')];
-    this.refs.autoComplete.replaceState({ value: '' });
+    profile.schools ? profile.schools.push(key) : profile.schools = [key];
     this.defaultHandler({ profile }, { doc: true });
   },
 
@@ -61,7 +65,6 @@ AdminUserForm = React.createClass({
           <div className='ui vertical basic segment'>
             <AutoComplete
               floatingLabelText='Escolas'
-              ref='autoComplete'
               onNewRequest={this.handleSchoolsChange}
               filter={this.filter}
               disableFocusRipple={false}
@@ -103,3 +106,5 @@ AdminUserForm = React.createClass({
     );
   },
 });
+
+export default AdminUserForm;
