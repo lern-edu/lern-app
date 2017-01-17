@@ -1,7 +1,7 @@
 import React from 'react';
 import { RaisedButton, LinearProgress } from 'material-ui';
 
-AdminTestActions = React.createClass({
+const AdminTestActions = React.createClass({
 
   getInitialState() {
     return { loading: false };
@@ -10,7 +10,7 @@ AdminTestActions = React.createClass({
   handleCreatePDF() {
     const { test } = this.props;
     this.setState({ loading: true });
-    PDFMaker.createPDF(test, (file) => {
+    PDFMaker.createPDF(test, { header: false },(file) => {
       this.setState({ loading: false });
     });
   },
@@ -33,16 +33,18 @@ AdminTestActions = React.createClass({
           _.isNull(documents) ?
             <RaisedButton
               label='Gerar PDF'
-              disabled={!_.isNull(documents)}
+              disabled={true || !_.isNull(documents)}
               secondary={true}
               onTouchTap={this.handleCreatePDF} /> :
             <RaisedButton
               label='Download PDF'
               disabled={_.isNull(documents)}
-              primary={true}
+              secondary={true}
               onTouchTap={this.handleDownloadPDF} />
         )}
       </div>
     );
   },
 });
+
+export default AdminTestActions;

@@ -1,5 +1,6 @@
 import React from 'react';
-import { TextField, AutoComplete, MenuItem, RaisedButton, SelectField, CircularProgress, } from 'material-ui';
+import { TextField, AutoComplete, MenuItem } from 'material-ui';
+import { RaisedButton, SelectField, CircularProgress } from 'material-ui';
 
 AdminQuestionCreateForm = React.createClass({
   mixins: [AstroForm(Questions.Schema, 'AdminQuestionSave')],
@@ -7,7 +8,7 @@ AdminQuestionCreateForm = React.createClass({
   // Static data
 
   instructions: {
-    subjects: 'Selecione 1 matéria ',
+    subject: 'Selecione 1 matéria ',
     text: 'Redija um enunciado com 4 ou mais letras',
     type: 'Selecione o tipo de questão',
     answer: 'Redija uma resposta com 4 ou mais letras',
@@ -25,13 +26,10 @@ AdminQuestionCreateForm = React.createClass({
 
   handleTypeChange(event, index, type) {
     this.defaultHandler({ type }, { query: true });
-    this.setState({ type });
   },
 
-  handleSubjectChange(value, index, options) {
-    const subjectId = _.get(options[index], 'value.key');
-    this.defaultHandler({ subject: subjectId, tags: [] },
-      { query: true });
+  handleSubjectChange({ value: { key: subject } }) {
+    this.defaultHandler({ subject, tags: [] }, { query: true });
   },
 
   handleSubmitSuccess({ _id }) {
@@ -41,12 +39,12 @@ AdminQuestionCreateForm = React.createClass({
     location.reload();
   },
 
-  handleText({ target: { value } }) {
-    this.defaultHandler({ text: value }, { doc: true });
+  handleText({ target: { value: text } }) {
+    this.defaultHandler({ text }, { doc: true });
   },
 
-  handleAnswer({ target: { value } }) {
-    this.defaultHandler({ answer: value }, { doc: true });
+  handleAnswer({ target: { value: answer } }) {
+    this.defaultHandler({ answer }, { doc: true });
   },
 
   handleSubmitError(error) {
@@ -59,8 +57,10 @@ AdminQuestionCreateForm = React.createClass({
     const { errors, valid } = this.state;
     const { restore, subjects, tags, images, ready } = this.props;
     const { instructions } = this;
-    const { image } = this.doc;
+    const image = _.get(this, 'doc.image');
+
     console.log(errors);
+
     return (
       <div className='ui form'>
 
@@ -78,7 +78,7 @@ AdminQuestionCreateForm = React.createClass({
                 onNewRequest={this.handleSubjectChange}
                 searchText={_.get(_.first(
                   _.filter(subjects, s => s._id === restore.subject)), 'name')}
-                disableFocusRipple={false}
+                disableFocusRipple={true}
                 dataSource={_.map(subjects, s => _.zipObject(
                   ['text', 'value'],
                   [s.name,
@@ -89,7 +89,7 @@ AdminQuestionCreateForm = React.createClass({
                   ])
                 )}
                 fullWidth={true}
-                name={instructions.subjects}
+                name={instructions.subject}
               />
             </div>
           </div>
@@ -97,9 +97,8 @@ AdminQuestionCreateForm = React.createClass({
           {ready.tags ?
             <AdminQuestionCreateFormTags
               tagIds={restore.tags}
-              tags={_.filter(
-                tags, t => t.subject === restore.subject)}
-              form={this}/> : <CircularProgress />}
+              tags={_.filter(tags, t => t.subject === restore.subject)}
+              form={this} /> : <CircularProgress />}
 
           <div className='row'>
             <div className='ten wide column'>
@@ -142,25 +141,21 @@ AdminQuestionCreateForm = React.createClass({
           </div>
 
           <div className='row'>
-              {restore.type ? (restore.type === 'open' ? (
-                <div className='ten wide column'>
-                  <TextField
-                    floatingLabelText='Resposta'
-                    hintText='Resposta'
-                    multiLine={true}
-                    rows={4}
-                    fullWidth={true}
-                    name={instructions.answer}
-                    onInput={this.handleAnswer}
-                  />
-                </div>
-              ) : (ready.images === false ? <CircularProgress /> :
-                  <AdminQuestionCreateFormOptions form={this} images={images}/>
-              )) : undefined}
-          </div>
-
-          <div className='row'>
-            <AdminQuestionCreateFormComplement form={this} />
+            {_.get({
+              open: <div className='ten wide column'>
+                <TextField
+                  floatingLabelText='Resposta'
+                  hintText='Resposta'
+                  multiLine={true}
+                  rows={4}
+                  fullWidth={true}
+                  name={instructions.answer}
+                  onInput={this.handleAnswer} />
+                </div>,
+              closed: (ready.images === false ? <CircularProgress /> :
+                  <AdminQuestionCreateFormOptions form={this} images={images} />),
+              number: null,
+            }, restore.type)}
           </div>
 
           <div className='row'>
