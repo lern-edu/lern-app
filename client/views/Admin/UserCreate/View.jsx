@@ -1,21 +1,10 @@
+// Libs
 import React from 'react';
 
-AdminUserCreateView = React.createClass({
-  mixins: [ReactMeteorData],
+// Views
+import AdminUserCreateForm from './Form/index.jsx';
 
-  /* Reactive Data Fetching
-  */
-
-  getMeteorData() {
-    const handles = {
-      schools: Meteor.subscribe('AdminUsers', { roles: 'school' }),
-    };
-
-    return {
-      ready: _.mapValues(handles, h => h.ready()),
-      schools: Fetch.General.users({ roles: 'school' }).fetch(),
-    };
-  },
+const View = React.createClass({
 
   /* Render
   */
@@ -24,8 +13,10 @@ AdminUserCreateView = React.createClass({
     return (
       <div className='ui container'>
         <Layout.Bar title='Novo Usuário' crumbs={[{ label: 'Home', path: 'AdminHome' }]} />
-        <AdminUserCreateForm {...this.data} />
+        <AdminUserCreateForm {...this.props} />
       </div>
     );
   },
 });
+
+export default View;

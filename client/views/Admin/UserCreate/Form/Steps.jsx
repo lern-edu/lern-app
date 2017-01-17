@@ -1,17 +1,7 @@
 import React from 'react';
+import { Stepper, Step, StepLabel } from 'material-ui';
 
-AdminUserCreateFormSteps = React.createClass({
-  classes: 'ui two steps',
-  items: [
-    {
-      icon: 'truck',
-      title: 'Primeiro',
-    },
-    {
-      icon: 'truck',
-      title: 'Segundo',
-    },
-  ],
+const AdminUserCreateFormSteps = React.createClass({
 
   /* Render
   */
@@ -20,18 +10,16 @@ AdminUserCreateFormSteps = React.createClass({
     const { index } = this.props;
 
     return (
-      <div className={this.classes}>
-
-        {_.map(this.items, (v, i) =>
-          <div className={`step ${index === i ? 'active' : index > i ? 'completed' : ''}`} key={i}>
-            <i className={`${v.icon} icon`} />
-            <div className='content'>
-              <div className='title'>{v.title}</div>
-            </div>
-          </div>
-        )}
-
-      </div>
+      <Stepper activeStep={index}>
+        <Step>
+          <StepLabel>Básico</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Complementar</StepLabel>
+        </Step>
+      </Stepper>
     );
   },
 });
+
+export default AdminUserCreateFormSteps;
