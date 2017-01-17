@@ -1,4 +1,10 @@
+// Libs
 import React from 'react';
+
+// Views
+import AdminUserCreateFormSteps from './Steps.jsx';
+import AdminUserCreateFormBasic from './Basic.jsx';
+import AdminUserCreateFormRest from './Rest.jsx';
 
 AdminUserCreateForm = React.createClass({
   mixins: [AstroForm(Meteor.users.FormSchema, 'AdminUserCreate')],
@@ -16,6 +22,11 @@ AdminUserCreateForm = React.createClass({
   nextStep() {
     const { index } = this.state;
     this.setState({ index: index + 1 });
+  },
+
+  prevStep() {
+    const { index } = this.state;
+    this.setState({ index: index - 1 });
   },
 
   /* Handlers
@@ -44,3 +55,5 @@ AdminUserCreateForm = React.createClass({
     );
   },
 });
+
+export default AdminUserCreateForm;
