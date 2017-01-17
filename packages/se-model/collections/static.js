@@ -59,6 +59,7 @@ SchoolTypes = StaticCollection('SchoolTypes', [
 QuestionTypes = StaticCollection('QuestionTypes', [
   ['open', 'Aberta'],
   ['closed', 'Fechada'],
+  ['number', 'Número'],
   ['unanswered', 'Sem resposta'],
 ]);
 

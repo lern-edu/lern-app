@@ -17,6 +17,22 @@ Questions.OptionSchema = Astro.Class({
   },
 });
 
+Questions.RangeSchema = Astro.Class({
+  name: 'QuestionRange',
+  fields: {
+    min: {
+      type: 'number',
+      immutable: true,
+      optional: true,
+    },
+    max: {
+      type: 'number',
+      immutable: true,
+      optional: true,
+    },
+  },
+});
+
 Questions.Schema = Astro.Class({
   name: 'Question',
   collection: Questions,
@@ -53,6 +69,12 @@ Questions.Schema = Astro.Class({
       optional: true,
       immutable: true,
     },
+    range: {
+      type: 'object',
+      nested: 'QuestionRange',
+      validator: Validators.QuestionRange(),
+      immutable: true,
+    },
     exams: {
       type: 'array',
       validator: Validators.array(),
@@ -74,11 +96,6 @@ Questions.Schema = Astro.Class({
       validator: Validators.Reference(),
       optional: true,
       immutable: true,
-    },
-    complement: {
-      type: 'object',
-      validator: Validators.object(),
-      optional: true,
     },
   },
   behaviors: [

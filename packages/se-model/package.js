@@ -8,8 +8,7 @@ Package.onUse(function (api) {
 
   api.use([
     'ecmascript',
-    'erasaur:meteor-lodash',
-    'jagi:astronomy',
+    'jagi:astronomy@2.3.11',
     'jagi:astronomy-validators',
     'jagi:astronomy-timestamp-behavior',
   ]);
