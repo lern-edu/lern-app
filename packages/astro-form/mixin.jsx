@@ -10,7 +10,8 @@ AstroForm = function (AstroClass, submitMethod) {
       const valid = !error && this.doc.validate(false);
       if (error) this.doc.catchValidationException(error);
       const errors = this.doc.getValidationErrors();
-      this.setState({ errors, valid });
+      if (this.isMounted())
+        this.setState({ errors, valid });
     },
 
     restoreFields(restore) {
@@ -43,8 +44,12 @@ AstroForm = function (AstroClass, submitMethod) {
     },
 
     componentWillMount() {
-      const { doc, restore } = this.props;
+      const { doc } = this.props;
       this.doc = doc || new AstroClass();
+    },
+
+    componentDidMount() {
+      const { doc, restore } = this.props;
       if (restore) this.restoreFields(restore);
       this.updateValidation();
     },
