@@ -20,7 +20,6 @@ lsunsi:semantic-react
 alanning:roles
 lsunsi:se-layouts
 lsunsi:se-fetch
-lsunsi:se-model
 lsunsi:se-router
 lsunsi:astro-form
 rzymek:moment-locale-pt-br
@@ -51,3 +50,4 @@ standard-minifier-js
 shell-server
 react-meteor-data
 universe:i18n
+lsunsi:se-model
