@@ -40,10 +40,8 @@ Astro.createValidator({
   name: 'QuestionRange',
   validate(value) {
     const { type, range } = this;
-    console.log(this, value);
-    return false;
     if (type === 'number')
-      return min < max;
+      return range && range.min < range.max;
     else return true;
   },
 });
