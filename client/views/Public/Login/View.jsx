@@ -60,7 +60,8 @@ PublicLoginView = React.createClass({
     const styles = this.createStyles();
 
     return (
-      <div className='ui middle aligned center aligned grid'>
+      <div className='ui middle aligned center aligned grid'
+        style= {{ marginTop: '0px' }}>
         <div {...styles.background} />
 
         <Paper {...styles.form}>
