@@ -1,4 +1,5 @@
 import React from 'react';
+import { RaisedButton, Dialog, TextField } from 'material-ui';
 
 PublicEnrollmentView = React.createClass({
   /* Lifecycle
@@ -25,38 +26,42 @@ PublicEnrollmentView = React.createClass({
     });
   },
 
+  handlePressEnter(event) {
+    if (event.keyCode == 13) this.handleSubmit();
+  },
+
   /* Render
   */
 
   render() {
     const { password } = this.state;
-
+    const actions = [
+      <div className= 'ui center aligned container'>
+        <TextField
+          type='password'
+          hintText='Mínimo 6 caracteres'
+          value={password}
+          onInput={this.handleInput}
+          onKeyDown={this.handlePressEnter}/>
+        <br/>
+        <RaisedButton
+          label='Salvar'
+          primary={true}
+          onClick={this.handleSubmit}
+          disabled={!(password && password.length >= 6)}
+          style= {{ margin: '30px' }}/>
+        </div>,
+    ];
     return (
       <div className='ui container'>
         <Layout.Bar
           title='Cadastro'
         />
 
-        <MUI.Dialog
+        <Dialog
           title='Escolha sua senha'
           open={true}
-          actions={[
-            <MUI.FlatButton
-              label='Salvar'
-              keyboardFocused={true}
-              primary={true}
-              disabled={!(password && password.length >= 6)}
-              onClick={this.handleSubmit}
-            />,
-          ]}
-        >
-          <MUI.TextField
-            type='password'
-            hintText='Mínimo 6 caracteres'
-            value={password}
-            onChange={this.handleInput}
-          />
-        </MUI.Dialog>
+          actions={actions}/>
       </div>
     );
   },
