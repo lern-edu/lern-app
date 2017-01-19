@@ -1,8 +1,14 @@
+// Libs
 import React from 'react';
 import { TextField, AutoComplete, MenuItem } from 'material-ui';
 import { RaisedButton, SelectField, CircularProgress } from 'material-ui';
 
-AdminQuestionCreateForm = React.createClass({
+// Views
+import AdminQuestionCreateFormTags from './Tags.jsx';
+import AdminQuestionCreateFormUpload from './Upload.jsx';
+import AdminQuestionCreateFormOptions from './Options.jsx';
+
+const AdminQuestionCreateForm = React.createClass({
   mixins: [AstroForm(Questions.Schema, 'AdminQuestionSave')],
 
   // Static data
@@ -180,3 +186,5 @@ AdminQuestionCreateForm = React.createClass({
   },
 
 });
+
+export default AdminQuestionCreateForm;

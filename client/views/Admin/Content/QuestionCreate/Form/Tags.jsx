@@ -1,7 +1,7 @@
 import React from 'react';
 import { AutoComplete, MenuItem, List, ListItem, FontIcon, Paper, } from 'material-ui';
 
-AdminQuestionCreateFormTags = React.createClass({
+const AdminQuestionCreateFormTags = React.createClass({
   // Static data
 
   instructions: {
@@ -73,3 +73,5 @@ AdminQuestionCreateFormTags = React.createClass({
   },
 
 });
+
+export default AdminQuestionCreateFormTags;

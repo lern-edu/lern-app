@@ -3,7 +3,7 @@ import { Paper, Divider, SelectField, MenuItem, FlatButton, Dialog } from 'mater
 import { Table, TableHeaderColumn, TableRow, TableHeader } from 'material-ui';
 import { TableRowColumn, TableBody, TextField } from 'material-ui';
 
-AdminQuestionCreateFormOptions = React.createClass({
+const AdminQuestionCreateFormOptions = React.createClass({
 
   // Static data
 
@@ -202,3 +202,5 @@ AdminQuestionCreateFormOptions = React.createClass({
     );
   },
 });
+
+export default AdminQuestionCreateFormOptions;
