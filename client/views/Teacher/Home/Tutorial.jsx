@@ -36,7 +36,7 @@ TeacherHomeTutorial = React.createClass({
       <div className='ui center aligned medium header'
         style={{ marginTop: '0px', paddingTop: '20px', color: 'white' }}>{tutorial}</div>
       <div className='ui two column computer one column mobile centered grid'>
-           <div className='single-item column' ref='stepper'>
+           <div className='single-item column' ref='stepper' style= {{ marginBottom: '0px' }}>
            {_.map(steps, ({ img, text }, key) =>
              <div key={key}>
                 <Card>
