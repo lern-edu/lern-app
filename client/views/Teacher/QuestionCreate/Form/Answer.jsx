@@ -1,7 +1,5 @@
 import React from 'react';
-import DropdownMenu from 'material-ui/DropdownMenu';
-import TextField from 'material-ui/TextField';
-import MenuItem from 'material-ui/MenuItem';
+import { DropdownMenu, MenuItem, TextField } from 'material-ui';
 
 TeacherQuestionCreateFormAnswer = React.createClass({
 
