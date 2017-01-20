@@ -1,4 +1,7 @@
 import React from 'react';
+import DropdownMenu from 'material-ui/DropdownMenu';
+import TextField from 'material-ui/TextField';
+import MenuItem from 'material-ui/MenuItem';
 
 TeacherQuestionCreateFormAnswer = React.createClass({
 
@@ -131,7 +134,8 @@ TeacherQuestionCreateFormAnswer = React.createClass({
           {type === 'open' ? (
             <div className='six wide field'>
               <label>Resposta Modelo</label>
-              <Semantic.Input tag='textarea' rows='4' placeholder='Digite a resposta' onInput={form.defaultHandler('answer', { doc: true })} />
+              <TextField multiLine={true} rows={4} hintText='Digite a resposta'
+                onInput={form.defaultHandler('answer', { doc: true })} />
               <div className='ui pointing blue basic label'>{instructions.open}</div>
             </div>
           ) : type === 'closed' ? (
@@ -148,15 +152,22 @@ TeacherQuestionCreateFormAnswer = React.createClass({
               </div>
               <div className='ui right action left icon input'>
                 <i className={`${optionType === 'image' ? (uploadStatus === 'fail' ? 'warning sign red' : (uploadStatus === 'success' ? 'checkmark green' : 'folder')) : 'font'} icon`} />
-                <Semantic.Input type='text' placeholder={optionType === 'image' ? 'Selecione uma imagem' : 'Digite o texto da opção'} value={value} onClick={this.handleUploadTrigger} onKeyDown={this.handleKeyDown} onInput={this.handleInput}/>
-                <Semantic.Dropdown tag='select' className='ui compact selection dropdown' onChange={this.handleDropdown}>
-                  <option defaultValue='' value='text'>Texto</option>
-                  <option value='image'>Imagem</option>
-                </Semantic.Dropdown>
-                <div className={`ui basic icon button ${optionType === 'image' ? (uploadStatus === 'fail' ? 'disabled' : null) : null}`} ref='addOption' onClick={this.handleInsertClick} >
+                <TextField hintText={optionType === 'image' ? 'Selecione uma imagem' : 'Digite o texto da opção'}
+                value={value} onClick={this.handleUploadTrigger} onKeyDown={this.handleKeyDown} onInput={this.handleInput}/>
+
+                <DropdownMenu tag='select' className='ui compact selection dropdown'
+                  onChange={this.handleDropdown}>
+                  <MenuItem defaultValue='' value='text'>Texto</MenuItem>
+                  <MenuItem value='image'>Imagem</MenuItem>
+                </DropdownMenu>
+
+                <div className={`ui basic icon button ${optionType === 'image' ? (uploadStatus === 'fail' ? 'disabled' : null) : null}`}
+                  ref='addOption' onClick={this.handleInsertClick} >
                   <i className='add icon' />
                 </div>
-                <Semantic.Input style={{ display: 'none' }} type='file' ref='file' onChange={this.handleImagePath} />
+
+                <Semantic.Input style={{ display: 'none' }} type='file' ref='file'
+                  onChange={this.handleImagePath} />
               </div>
               <div className='ui pointing blue basic label'>{instructions.closed}</div>
             </div>
@@ -164,7 +175,8 @@ TeacherQuestionCreateFormAnswer = React.createClass({
 
         </div>
         <div className='row'>
-          <div className={`ui button ${errors.options || errors.answer ? 'disabled' : 'primary'}`} onClick={form.handleNextClick}>
+          <div className={`ui button ${errors.options || errors.answer ? 'disabled' : 'primary'}`}
+            onClick={form.handleNextClick}>
             Próximo passo
           </div>
         </div>
