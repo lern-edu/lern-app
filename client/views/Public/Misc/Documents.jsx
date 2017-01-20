@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Card, CardActions, CardHeader, FlatButton, CardText, TextField, Dialog, CardTitle, } from 'material-ui';
 
 PublicUploadDocument = React.createClass({
