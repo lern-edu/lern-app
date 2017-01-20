@@ -10,8 +10,7 @@ AstroForm = function (AstroClass, submitMethod) {
       const valid = !error && this.doc.validate(false);
       if (error) this.doc.catchValidationException(error);
       const errors = this.doc.getValidationErrors();
-      if (this.isMounted())
-        this.setState({ errors, valid });
+      this.setState({ errors, valid });
     },
 
     restoreFields(restore) {
@@ -66,8 +65,14 @@ AstroForm = function (AstroClass, submitMethod) {
 
     defaultHandler(arg, opts) {
       if (_.isObject(arg)) {
-        if (opts.doc) this.doc.set(arg);
-        if (opts.query) FlowRouter.withReplaceState(() => FlowRouter.setQueryParams(arg));
+        if (opts.doc) {
+          if (opts.operation == 'push')
+            _.forEach(_.keys(arg), k => this.doc.push(k, arg[k]));
+          else this.doc.set(arg);
+        }
+
+        if (opts.query)
+          FlowRouter.withReplaceState(() => FlowRouter.setQueryParams(arg));
         this.updateValidation();
       } else if (_.isString(arg)) {
         return value => {
@@ -84,6 +89,7 @@ AstroForm = function (AstroClass, submitMethod) {
       if (!submitMethod) this.callback('error', new Meteor.Error('no submit method set'));
       else if (!this.state.valid)
         this.callback('error', new Meteor.Error('invalid state: submit aborted'));
+      else if (_.isFunction(submitMethod)) submitMethod();
       else Meteor.call(submitMethod, this.doc, (err, res) => {
         if (err) {
           this.updateValidation(err);
