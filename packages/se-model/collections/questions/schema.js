@@ -1,5 +1,7 @@
 Questions = new Mongo.Collection('questions');
 
+Questions.ContentSchema = ContentSchema('QuestionContent');
+
 Questions.OptionSchema = Astro.Class({
   name: 'QuestionOption',
   fields: {
@@ -17,30 +19,36 @@ Questions.OptionSchema = Astro.Class({
   },
 });
 
+Questions.RangeSchema = Astro.Class({
+  name: 'QuestionRange',
+  fields: {
+    min: {
+      type: 'number',
+      immutable: true,
+      optional: true,
+    },
+    max: {
+      type: 'number',
+      immutable: true,
+      optional: true,
+    },
+  },
+});
+
 Questions.Schema = Astro.Class({
   name: 'Question',
   collection: Questions,
   fields: {
-    text: {
-      type: 'string',
-      validator: Validators.String({ min: 1, max: 2048 }),
+    statement: {
+      type: 'array',
+      nested: 'QuestionContent',
+      validator: Validators.minLength(1),
+      default: () => [],
     },
-    image: {
-      type: 'string',
-      validator: Validators.Reference(),
-      immutable: true,
-      optional: true,
-    },
-    audio: {
-      type: 'string',
-      validator: Validators.Reference(),
-      immutable: true,
-      optional: true,
-    },
-    video: {
-      type: 'string',
-      validator: Validators.Reference(),
-      immutable: true,
+    help: {
+      type: 'array',
+      nested: 'QuestionContent',
+      validator: Validators.minLength(1),
       optional: true,
     },
     type: {
@@ -51,6 +59,12 @@ Questions.Schema = Astro.Class({
     answer: {
       validator: Validators.QuestionAnswer({ min: 1, max: 2048 }),
       optional: true,
+      immutable: true,
+    },
+    range: {
+      type: 'object',
+      nested: 'QuestionRange',
+      validator: Validators.QuestionRange(),
       immutable: true,
     },
     exams: {
@@ -75,16 +89,11 @@ Questions.Schema = Astro.Class({
       optional: true,
       immutable: true,
     },
-    complement: {
-      type: 'object',
-      validator: Validators.object(),
-      optional: true,
-    },
   },
   behaviors: [
+    'tagable',
     'creatable',
     'timestamp',
-    'tagable',
     'singleSubject',
   ],
 });

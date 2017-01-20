@@ -59,6 +59,7 @@ SchoolTypes = StaticCollection('SchoolTypes', [
 QuestionTypes = StaticCollection('QuestionTypes', [
   ['open', 'Aberta'],
   ['closed', 'Fechada'],
+  ['number', 'Número'],
   ['unanswered', 'Sem resposta'],
 ]);
 
@@ -106,4 +107,13 @@ PostTypes = StaticCollection('PostTypes', [
   ['resolution', 'Resolução'],
   ['ask', 'Pergunta'],
   ['info', 'Informação'],
+]);
+
+ContentTypes = StaticCollection('ContentTypes', [
+  ['text', 'Texto'],
+  ['image', 'Imagem'],
+  ['audio', 'Áudio'],
+  ['video', 'Video'],
+  ['document', 'Documento'],
+  ['link', 'Link'],
 ]);

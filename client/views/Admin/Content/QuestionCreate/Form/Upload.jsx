@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, CardActions, CardHeader, FlatButton, CardText, CardMedia, TextField, Dialog, CardTitle, } from 'material-ui';
+import { CardMedia, TextField, Dialog, CardTitle } from 'material-ui';
+import { Card, CardActions, CardHeader, FlatButton, CardText } from 'material-ui';
 
-AdminQuestionCreateFormUpload = React.createClass({
+const AdminQuestionCreateFormUpload = React.createClass({
   // Static data
 
   instructions: {
@@ -135,3 +136,5 @@ AdminQuestionCreateFormUpload = React.createClass({
   },
 
 });
+
+export default AdminQuestionCreateFormUpload;

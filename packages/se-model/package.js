@@ -3,13 +3,12 @@ Package.describe({
   version: '0.0.1',
 });
 
-Package.onUse(function (api) {
-  api.versionsFrom('1.2.1');
+Package.onUse((api) => {
+  api.versionsFrom('1.4.2.3');
 
   api.use([
     'ecmascript',
-    'erasaur:meteor-lodash',
-    'jagi:astronomy',
+    'jagi:astronomy@1.2.1',
     'jagi:astronomy-validators',
     'jagi:astronomy-timestamp-behavior',
   ]);
@@ -19,6 +18,7 @@ Package.onUse(function (api) {
     'regex.js',
 
     'validators/regex.js',
+    'validators/content.js',
     'validators/date.js',
     'validators/string.js',
     'validators/float.js',
@@ -27,6 +27,8 @@ Package.onUse(function (api) {
     'validators/someof.js',
     'validators/reference.js',
     'validators/tags.js',
+
+    'schemas/content.js',
 
     'behaviors/creatable.js',
     'behaviors/evaluate.js',
@@ -112,6 +114,7 @@ Package.onUse(function (api) {
     'WeekDays',
     'ContactTypes',
     'PostTypes',
+    'ContentTypes',
   ]);
 
 });

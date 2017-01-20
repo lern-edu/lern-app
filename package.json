@@ -1,5 +1,5 @@
 {
-  "name": "se-edu",
+  "name": "lern-app",
   "version": "1.0.0",
   "description": "Lern - Solucoes Educacionais",
   "main": "init.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://deleuterio@bitbucket.org/deleuterio/se-edu.git"
+    "url": "git+https://deleuterio@bitbucket.org/deleuterio/lern@app.git"
   },
   "keywords": [
     "education"
@@ -18,7 +18,6 @@
   "license": "ISC",
   "homepage": "https://lern.com.br",
   "dependencies": {
-    "bcrypt": "^0.8.7",
     "lodash": "^4.17.3",
     "material-ui": "^0.16.5",
     "meteor-node-stubs": "~0.2.0",

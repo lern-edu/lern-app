@@ -1,6 +1,6 @@
 import React from 'react';
 
-AdminTestHeader = React.createClass({
+const AdminTestHeader = React.createClass({
   render() {
     const { test, subjects } = this.props;
 
@@ -18,3 +18,5 @@ AdminTestHeader = React.createClass({
     );
   },
 });
+
+export default AdminTestHeader;

@@ -1,49 +1,27 @@
+// Libs
 import React from 'react';
-import { CircularProgress } from 'material-ui';
+import { LinearProgress } from 'material-ui';
 
-AdminQuestionCreateView = React.createClass({
-  mixins: [ReactMeteorData],
+// View
+import AdminQuestionCreateForm from './Form/index.jsx';
 
-  getMeteorData() {
-    const images = Session.get('images');
-
-    const handles = {
-      subjects: Meteor.subscribe('PublicSubjects'),
-      tags: Meteor.subscribe('PublicTags'),
-    };
-
-    if (images)
-      handles.images = Meteor.subscribe('AdminImages', images);
-
-    const data = {
-      ready: _.mapValues(handles, h => h.ready()),
-      subjects: Fetch.Public().subjects().fetch(),
-      tags: Fetch.Public().tags().fetch(),
-    };
-
-    if (images)
-      data.images = Fetch.General.images().fetch();
-
-    return data;
-  },
+const View = React.createClass({
 
   render() {
-    const { ready } = this.data;
+    const { ready, query } = this.props;
     return (
       <div className='ui container'>
 
-        <Layout.Bar
+      <Layout.Bar
           title='Nova questão'
-          crumbs={[
-            { label: 'Conteúdo', path: 'AdminContent' },
-          ]}
-        />
+          crumbs={[{ label: 'Conteúdo', path: 'AdminContent' }]} />
 
-        {!(ready.subjects || ready.tags) ? <MUI.LinearProgress/> :
-          <AdminQuestionCreateForm {...this.data} restore={this.props.query} />}
+      <AdminQuestionCreateForm {...this.props} restore={query} />
 
       </div>
     );
   },
 
 });
+
+export default View;
