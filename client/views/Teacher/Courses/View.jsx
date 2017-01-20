@@ -1,4 +1,5 @@
 import React from 'react';
+import LinearProgress from 'material-ui';
 
 TeacherCoursesView = React.createClass({
   mixins: [ReactMeteorData],
@@ -28,7 +29,7 @@ TeacherCoursesView = React.createClass({
       <div className='ui container'>
 
         <Layout.Bar title='Turmas' />
-        {!_.every(ready) ? <MUI.LinearProgress /> :
+        {!_.every(ready) ? <LinearProgress /> :
         <div className='ui basic segment'>
           <TeacherCoursesGallery {...this.data} />
         </div>}

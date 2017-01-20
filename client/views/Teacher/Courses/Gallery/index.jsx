@@ -9,7 +9,7 @@ TeacherCoursesGallery = React.createClass({
 
     return (
       <div className='ui grid'>
-        {!ready.courses ? <MUI.LinearProgress /> : !courses.length ? (
+        {!ready.courses ? <LinearProgress /> : !courses.length ? (
           <Layout.NotFound path={FlowRouter.path('TeacherHome')}
             message='Você não está em nenhum curso'
             icon='bookmark_border'/>) : (_.map(courses, c =>

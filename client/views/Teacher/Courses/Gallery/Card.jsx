@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, CardActions, CardTitle, Divider, FlatButton, CardText, FontIcon, List, ListItem, } from 'material-ui';
+import { Card, CardActions, CardTitle, Divider, FlatButton, CardText, FontIcon,
+  List, ListItem } from 'material-ui';
 
 TeacherCoursesGalleryCard = React.createClass({
   /* Render
@@ -37,7 +38,6 @@ TeacherCoursesGalleryCard = React.createClass({
           </CardText>
           <CardActions>
             <FlatButton
-              
               primary={true}
               href={FlowRouter.path('TeacherCourseShow', { courseId: course._id })}
               label='Entrar' />
