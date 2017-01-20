@@ -1,6 +1,17 @@
 import React from 'react';
+import { RaisedButton, TextField, DropDownMenu, MenuItem } from 'material-ui';
 
-AdminUserCreateFormBasic = React.createClass({
+const AdminUserCreateFormBasic = React.createClass({
+
+  // Handlers
+
+  handleInput({ currentTarget, target: { value } }) {
+    this.props.form.defaultHandler({ [currentTarget.getAttribute('name')]: value }, { doc: true });
+  },
+
+  handleRoleChange(event, index, role) {
+    this.props.form.defaultHandler({ role }, { doc: true });
+  },
 
   /* Render
   */
@@ -9,44 +20,46 @@ AdminUserCreateFormBasic = React.createClass({
     const { form } = this.props;
 
     const done = !_.some(['email', 'name', 'role'], k => form.state.errors[k]);
+    const role = _.get(form, 'doc.role') || 'student';
 
     return (
       <div className='ui centered grid'>
 
         <div className='row'>
-          <div className='ui left icon input'>
-            <i className='mail icon' />
-            <Semantic.Input placeholder='Email' onInput={form.defaultHandler('email', { doc: true })} />
-          </div>
+          <TextField
+            value={form.doc.get('email') || ''}
+            floatingLabelText='Email'
+            name='email'
+            errorText={_.get(form.state.errors, 'email')}
+            onInput={this.handleInput} />
         </div>
 
         <div className='row'>
-          <div className='ui left icon input'>
-            <i className='user icon' />
-            <Semantic.Input placeholder='Name' onInput={form.defaultHandler('name', { doc: true })} />
-          </div>
+          <TextField
+            value={form.doc.get('name') || ''}
+            floatingLabelText='Nome'
+            name='name'
+            errorText={_.get(form.state.errors, 'name')}
+            onInput={this.handleInput}  />
         </div>
 
         <div className='row'>
-          <Semantic.Dropdown classes='selection' onChange={form.defaultHandler('role', { doc: true })}>
-            <input type='hidden' name='role' />
-            <i className='dropdown icon' />
-            <div className='default text'>Tipo</div>
-            <div className='menu'>
-              {_.map(UserRoles.all('both'), (v, k) =>
-                <div className='item' data-value={k} key={k}>{v}</div>
-              )}
-            </div>
-          </Semantic.Dropdown>
+          <DropDownMenu value={role} onChange={this.handleRoleChange}>
+            {_.map(UserRoles.all('both'), (v, k) => <MenuItem value={k} key={k} primaryText={v} />)}
+          </DropDownMenu>
         </div>
 
         <div className='row'>
-          <Semantic.Button classes={done ? 'blue' : 'disabled'} onClick={form.nextStep}>
-            Próximo
-          </Semantic.Button>
+          <RaisedButton
+            label='Próximo'
+            disabled={!done}
+            primary={true}
+            onTouchTap={form.nextStep} />
         </div>
 
       </div>
     );
   },
 });
+
+export default AdminUserCreateFormBasic;

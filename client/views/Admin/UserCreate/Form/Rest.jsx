@@ -1,8 +1,22 @@
 import React from 'react';
+import { RaisedButton, TextField, DropDownMenu } from 'material-ui';
+import { MenuItem, FlatButton, CircularProgress } from 'material-ui';
 
-AdminUserCreateFormRest = React.createClass({
+const AdminUserCreateFormRest = React.createClass({
 
   // Handlers
+
+  handleSchoolTypeChange(event, index, schoolType) {
+    this.props.form.defaultHandler({ schoolType }, { doc: true });
+  },
+
+  handleSchoolChange(event, index, school) {
+    this.props.form.defaultHandler({ school }, { doc: true });
+  },
+
+  handleInput({ currentTarget, target: { value } }) {
+    this.props.form.defaultHandler({ [currentTarget.getAttribute('name')]: value }, { doc: true });
+  },
 
   handleSubmit() {
     const { form, form: { doc } } = this.props;
@@ -19,66 +33,71 @@ AdminUserCreateFormRest = React.createClass({
 
     const done = form.state.valid;
     const role = form.doc.get('role');
+    const teacherAndStudentView = [
+      <div className='row' key='school'>
+        {!ready.schools ? <CircularProgress /> :
+          <DropDownMenu
+            value={form.doc.get('school')}
+            onChange={this.handleSchoolChange} >
+            {_.map(schools, school =>
+              <MenuItem
+                key={school._id}
+                value={school._id}
+                primaryText={school.getName()}
+                secondaryText={SchoolTypes.getName(school.profile.schoolType)} />)}
+          </DropDownMenu>}
+      </div>,
+      <div className='row' key='cpf'>
+        <TextField
+          value={form.doc.get('cpf') || ''}
+          floatingLabelText='CPF'
+          name='cpf'
+          errorText={_.get(form.state.errors, 'cpf')}
+          onInput={this.handleInput} />
+      </div>,
+    ];
 
     return (
       <div className='ui centered grid'>
 
-        {role === 'school' ? (
-          [
-            <div className='row' key='schoolType'>
-              <Semantic.Dropdown classes='selection' onChange={form.defaultHandler('schoolType', { doc: true })}>
-                <input type='hidden' name='schoolType' />
-                <i className='dropdown icon' />
-                <div className='default text'>Tipo</div>
-                <div className='menu'>
+        {_.get({
+            school: [
+              <div className='row' key='schoolType'>
+                <DropDownMenu
+                  value={form.doc.get('schoolType') || ''}
+                  onChange={this.handleSchoolTypeChange} >
                   {_.map(SchoolTypes.all('both'), (v, k) =>
-                    <div className='item' data-value={k} key={k}>{v}</div>
-                  )}
-                </div>
-              </Semantic.Dropdown>
-            </div>,
-            <div className='row' key='cnpj'>
-              <div className='ui left icon input'>
-                <i className='barcode icon' />
-                <Semantic.Input placeholder='CNPJ (só números)' onInput={form.defaultHandler('cnpj', { doc: true })} />
-              </div>
-            </div>,
-          ]
-        ) : role === 'student' || role === 'teacher' ? (
-          [
-            <div className='row' key='school'>
-              {!ready.schools ? <div className='ui active inline loader' /> :
-                <Semantic.Dropdown classes='selection' onChange={form.defaultHandler('school', { doc: true })}>
-                  <input type='hidden' name='school' />
-                  <i className='dropdown icon' />
-                  <div className='default text'>Escola</div>
-                  <div className='menu'>
-                    {_.map(schools, school =>
-                      <div className='item' data-value={school._id} key={school._id}>
-                        <div className='description'>{SchoolTypes.getName(school.profile.schoolType)}</div>
-                        <div className='text'>{school.getName()}</div>
-                      </div>
-                    )}
-                  </div>
-                </Semantic.Dropdown>
-              }
-            </div>,
-            <div className='row' key='cpf'>
-              <div className='ui left icon input'>
-                <i className='barcode icon' />
-                <Semantic.Input placeholder='CPF (só números)' onInput={form.defaultHandler('cpf', { doc: true })} />
-              </div>
-            </div>,
-          ]
-        ) : undefined}
+                    <MenuItem value={k} key={k} primaryText={v} />)}
+                </DropDownMenu>
+              </div>,
+              <div className='row' key='cnpj'>
+                <TextField
+                  value={form.doc.get('cpnj')}
+                  floatingLabelText='CNPJ'
+                  name='cnpj'
+                  errorText={_.get(form.state.errors, 'cnpj')}
+                  onInput={this.handleInput} />
+              </div>,
+            ],
+            student: teacherAndStudentView,
+            teacher: teacherAndStudentView,
+          }, form.doc.get('role'))}
 
         <div className='row'>
-          <Semantic.Button classes={done || role === 'school' ? 'blue' : 'disabled'} onClick={this.handleSubmit}>
-            Criar
-          </Semantic.Button>
+          <FlatButton
+            label='Voltar'
+            onTouchTap={form.prevStep}
+            style={{ marginRight: '5px' }} />
+          <RaisedButton
+            label={'Terminar'}
+            disabled={!done}
+            primary={true}
+            onTouchTap={this.handleSubmit} />
         </div>
 
       </div>
     );
   },
 });
+
+export default AdminUserCreateFormRest;
