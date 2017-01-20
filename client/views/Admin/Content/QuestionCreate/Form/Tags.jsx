@@ -14,13 +14,13 @@ const AdminQuestionCreateFormTags = React.createClass({
   handleTagsChange({ value: { key: tag } }) {
     const { tagIds=[], form } = this.props;
     tagIds.push(tag);
-    form.defaultHandler({ tags: tagIds }, { query: true });
+    form.defaultHandler({ tags: tagIds }, { doc: true });
   },
 
   handleTagsRemove(event) {
     const { tagIds, form } = this.props;
     _.pull(tagIds, event.currentTarget.getAttribute('data-key'));
-    form.defaultHandler({ tags: tagIds }, { query: true });
+    form.defaultHandler({ tags: tagIds }, { doc: true });
   },
 
   // Render

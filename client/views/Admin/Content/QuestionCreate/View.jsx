@@ -16,8 +16,7 @@ const View = React.createClass({
           title='Nova questão'
           crumbs={[{ label: 'Conteúdo', path: 'AdminContent' }]} />
 
-        {!(ready.subjects || ready.tags) ? <LinearProgress/> :
-          <AdminQuestionCreateForm {...this.props} restore={query} />}
+      <AdminQuestionCreateForm {...this.props} restore={query} />
 
       </div>
     );
