@@ -27,7 +27,6 @@ TeacherCoursesView = React.createClass({
     const { ready } = this.data;
     return (
       <div className='ui container'>
-
         <Layout.Bar title='Turmas' />
         {!_.every(ready) ? <LinearProgress /> :
         <div className='ui basic segment'>
