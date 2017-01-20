@@ -1,47 +1,6 @@
-import { Class } from 'meteor/jagi:astronomy';
-console.log(Class);
-
 Questions = new Mongo.Collection('questions');
 
-Questions.InfoSchema = Astro.Class({
-  name: 'QuestionInfo',
-  fields: {
-    text: {
-      type: 'string',
-      validator: Validators.String({ min: 1, max: 8192 }),
-      optional: true,
-    },
-    image: {
-      type: 'string',
-      validator: Validators.Reference(),
-      immutable: true,
-      optional: true,
-    },
-    audio: {
-      type: 'string',
-      validator: Validators.Reference(),
-      immutable: true,
-      optional: true,
-    },
-    video: {
-      type: 'string',
-      validator: Validators.Reference(),
-      immutable: true,
-      optional: true,
-    },
-    document: {
-      type: 'string',
-      validator: Validators.Reference(),
-      immutable: true,
-      optional: true,
-    },
-    link: {
-      type: 'string',
-      validator: Validators.url(),
-      optional: true,
-    },
-  },
-});
+Questions.ContentSchema = ContentSchema('QuestionContent');
 
 Questions.OptionSchema = Astro.Class({
   name: 'QuestionOption',
@@ -80,10 +39,17 @@ Questions.Schema = Astro.Class({
   name: 'Question',
   collection: Questions,
   fields: {
-    info: {
+    statement: {
       type: 'array',
-      nested: 'QuestionInfo',
-      validator: Validators.String({ min: 1, max: 2048 }),
+      nested: 'QuestionContent',
+      validator: Validators.minLength(1),
+      default: () => [],
+    },
+    help: {
+      type: 'array',
+      nested: 'QuestionContent',
+      validator: Validators.minLength(1),
+      optional: true,
     },
     type: {
       type: 'string',
@@ -125,9 +91,9 @@ Questions.Schema = Astro.Class({
     },
   },
   behaviors: [
+    'tagable',
     'creatable',
     'timestamp',
-    'tagable',
     'singleSubject',
   ],
 });

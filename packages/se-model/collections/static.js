@@ -108,3 +108,12 @@ PostTypes = StaticCollection('PostTypes', [
   ['ask', 'Pergunta'],
   ['info', 'Informação'],
 ]);
+
+ContentTypes = StaticCollection('ContentTypes', [
+  ['text', 'Texto'],
+  ['image', 'Imagem'],
+  ['audio', 'Áudio'],
+  ['video', 'Video'],
+  ['document', 'Documento'],
+  ['link', 'Link'],
+]);

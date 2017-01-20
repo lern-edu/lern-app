@@ -8,7 +8,7 @@ Package.onUse((api) => {
 
   api.use([
     'ecmascript',
-    'jagi:astronomy@2.3.11',
+    'jagi:astronomy@1.2.1',
     'jagi:astronomy-validators',
     'jagi:astronomy-timestamp-behavior',
   ]);
@@ -18,6 +18,7 @@ Package.onUse((api) => {
     'regex.js',
 
     'validators/regex.js',
+    'validators/content.js',
     'validators/date.js',
     'validators/string.js',
     'validators/float.js',
@@ -26,6 +27,8 @@ Package.onUse((api) => {
     'validators/someof.js',
     'validators/reference.js',
     'validators/tags.js',
+
+    'schemas/content.js',
 
     'behaviors/creatable.js',
     'behaviors/evaluate.js',
@@ -111,6 +114,7 @@ Package.onUse((api) => {
     'WeekDays',
     'ContactTypes',
     'PostTypes',
+    'ContentTypes',
   ]);
 
 });
