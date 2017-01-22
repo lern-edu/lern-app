@@ -1,5 +1,5 @@
 import React from 'react';
-import { AutoComplete, MenuItem, FloatingActionButton, FontIcon } from 'material-ui';
+import { AutoComplete, MenuItem, FloatingActionButton, FontIcon, LinearProgress } from 'material-ui';
 
 StudentPostsView = React.createClass({
   mixins: [ReactMeteorData],
@@ -39,14 +39,14 @@ StudentPostsView = React.createClass({
       <div className='ui container'>
         <Layout.Bar title='Comunidade acadêmica' />
         <StudentPostsToolbar {...this.data} {...this.props}/>
-        {!_.every(ready) ? <MUI.LinearProgress /> :
+        {!_.every(ready) ? <LinearProgress /> :
         <StudentPostsList {...this.data} />}
 
         <div
           className='ui right aligned basic segment'
           style={{ position: 'fixed', bottom: '1em', right: '1em' }}>
           <FloatingActionButton
-            
+
             href={FlowRouter.path('StudentPostCreate')}
             children={<FontIcon className='material-icons'>add</FontIcon>} />
         </div>

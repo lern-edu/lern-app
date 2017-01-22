@@ -1,4 +1,5 @@
 import React from 'react';
+import { Paper } from 'material-ui';
 
 StudentTestAttemptCognitiveQuestion = React.createClass({
 
@@ -29,11 +30,11 @@ StudentTestAttemptCognitiveQuestion = React.createClass({
     const { test, questionsGroup, answersGroup } = this.props;
 
     return (
-      <MUI.Paper className='container ui' style={{ paddingTop: '30px' }}>
+      <Paper className='container ui' style={{ paddingTop: '30px' }}>
 
         <StudentTestAttemptQuestionHeader key='header' {...this.props} />
 
-      </MUI.Paper>
+      </Paper>
     );
   },
 });
