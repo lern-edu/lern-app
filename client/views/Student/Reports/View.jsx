@@ -1,4 +1,5 @@
 import React from 'react';
+import { Paper, LinearProgress } from 'material-ui';
 
 StudentReportsView = React.createClass({
   mixins: [ReactMeteorData],
@@ -54,16 +55,16 @@ StudentReportsView = React.createClass({
           title='Relatórios'
         />
 
-        {!_.every(ready) ? <MUI.LinearProgress/> :
+        {!_.every(ready) ? <LinearProgress/> :
           <div>
 
             <StudentReportsToolbar parent={this} {...this.state} {...this.data}/>
 
             {!subjectId ? undefined :
               <div>
-                <MUI.Paper className='ui basic segment'>
+                <Paper className='ui basic segment'>
                   <StudentReportsTable {...this.state} {...this.data} key={subjectId + 'table'}/>
-                </MUI.Paper>
+                </Paper>
                 <StudentReportsChart {...this.state} {...this.data} key={subjectId + 'chart'}/>
               </div>
             }
