@@ -1,14 +1,15 @@
 import React from 'react';
+import { FlatButton } from 'material-ui';
 
 StudentCourseShowTestsCard = React.createClass({
 
   /* Handlers
   */
 
-  handleStart({ testId }) {
-    const { tests } = this.props;
-    const test = _.find(tests, { _id: testId });
+  handleStart() {
+    const { test: { _id: testId }, test } = this.props;
 
+    //const test = _.find(tests, { _id: test._id });
     Meteor.call('StudentAttemptStart', testId, err =>
       err ? console.log(err) : (
         _.get(test, 'type') === 'cognitive' ?
@@ -17,15 +18,17 @@ StudentCourseShowTestsCard = React.createClass({
       );
   },
 
-  handleContinue({ testId }) {
-    const { tests } = this.props;
-    const test = _.find(tests, { _id: testId });
+  handleContinue() {
+    const { test: { _id: testId }, test } = this.props;
+
+    //const test = _.find(tests, { _id: testId });
     if (_.get(test, 'type') === 'cognitive')
       FlowRouter.go('StudentTestAttemptCognitive', { testId });
     else FlowRouter.go('StudentTestAttempt', { testId });
   },
 
-  handleAttempts({ testId }) {
+  handleAttempts() {
+    const { test: { _id: testId } } = this.props;
     FlowRouter.go('StudentTest', { testId });
   },
 
@@ -56,20 +59,28 @@ StudentCourseShowTestsCard = React.createClass({
         <div className='extra content'>
           <div className='ui two buttons'>
             {atts.length === 0 ?
-              <Semantic.Button classes='green' onClick={this.handleStart} testId={test._id}>Começar</Semantic.Button>
+              <FlatButton
+                label='Começar'
+                style={{ backgroundColor: 'green', width: '100%' }}
+                onTouchTap={this.handleStart}
+              />
             : _.every(atts, 'finished') ? [
-              <Semantic.Button key='try' classes='labeled' onClick={this.handleStart} testId={test._id}>
+              <FlatButton key='try' onTouchTap={this.handleStart} style={{ width: '100%' }}>
                 <div className='ui blue button'>Começar</div>
-                <Semantic.Popup parent={this} classes='ui basic blue left pointing label'>
+                <div className='ui basic blue left pointing label'>
                   {atts.length}
                   <div className='ui popup'>Tentativas terminadas</div>
-                </Semantic.Popup>
-              </Semantic.Button>,
-              <Semantic.Button key='see' classes='labeled' onClick={this.handleAttempts} testId={test._id}>
+                </div>
+              </FlatButton>,
+              <FlatButton key='see' onTouchTap={this.handleAttempts}>
                 <div className='ui green button'>Ver tentativas</div>
-              </Semantic.Button>
+              </FlatButton>,
             ]
-            : <Semantic.Button classes='orange' onClick={this.handleContinue} testId={test._id}>Continuar</Semantic.Button>}
+            : <FlatButton
+                label='Continuar'
+                style={{ backgroundColor: 'orange', width: '100%' }}
+                onTouchTap={this.handleContinue}
+              />}
           </div>
         </div>
       </div>
