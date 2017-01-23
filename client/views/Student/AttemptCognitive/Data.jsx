@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardMedia, CardText, List, ListItem, Avatar, FontIcon } from 'material-ui';
+import { Card, CardMedia, CardText, List, ListItem, Avatar, FontIcon, Subheader } from 'material-ui';
 
 StudentAttemptCognitiveAnswers = React.createClass({
 
@@ -79,7 +79,8 @@ StudentAttemptCognitiveAnswers = React.createClass({
     return (
       <Card>
         <CardText>
-          <List subheader='Legenda'>
+          <List>
+            <Subheader>Legenda</Subheader>
             <ListItem
               primaryText={_.get(user, 'profile.name')}
               leftIcon={<FontIcon className="material-icons" color='#2196F3'>person</FontIcon>}
