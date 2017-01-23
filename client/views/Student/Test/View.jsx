@@ -1,4 +1,5 @@
 import React from 'react';
+import { Divider, LinearProgress, Paper } from 'material-ui';
 
 StudentTestView = React.createClass({
   mixins: [ReactMeteorData],
@@ -49,25 +50,25 @@ StudentTestView = React.createClass({
 
         <div className='ui centered grid'>
           <div className='eight wide computer sixteen wide tablet column'>
-            <MUI.Paper>
+            <Paper>
 
-              {!_.every(ready) ? <MUI.LinearProgress /> : [
+              {!_.every(ready) ? <LinearProgress /> : [
                 <StudentTestTitle {...this.data} key='static'/>,
-                <MUI.Divider key='divider0'/>,
+                <Divider key='divider0'/>,
 
                 <StudentTestAttempts {...this.data} key='attempts'/>,
-                <MUI.Divider key='divider1'/>,
+                <Divider key='divider1'/>,
 
                 // <StudentTestStats {...this.data} key='stats'/>,
-                // <MUI.Divider key='divider1'/>,
+                // <Divider key='divider1'/>,
 
                 <StudentTestGrades {...this.data} key='grades'/>,
-                <MUI.Divider key='divider2'/>,
+                <Divider key='divider2'/>,
 
                 <StudentTestTags {...this.data} key='tags'/>,
               ]}
 
-            </MUI.Paper>
+            </Paper>
           </div>
         </div>
       </div>
