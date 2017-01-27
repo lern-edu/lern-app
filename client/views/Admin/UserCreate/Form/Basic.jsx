@@ -19,7 +19,8 @@ const AdminUserCreateFormBasic = React.createClass({
   render() {
     const { form } = this.props;
 
-    const done = !_.some(['email', 'name', 'role'], k => form.state.errors[k]);
+    const done = !_.some(['email', 'name', 'role'],
+      k => _.get(form, `state.errors[${k}]`));
     const role = _.get(form, 'doc.role') || 'student';
 
     return (
