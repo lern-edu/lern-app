@@ -73,12 +73,11 @@ TestTypes = StaticCollection('TestTypes', [
   ['plans', 'Planos'],
   ['personal', 'Pessoal'],
   ['course', 'Curso'],
-  ['cognitive', 'Cognitivo'],
 ]);
 
 TestTimeoutTypes = StaticCollection('TestTimeoutTypes', [
   ['global', 'Total'],
-  ['question', 'Por Questão'],
+  ['page', 'Por página'],
   ['none', 'Nenhum'],
 ]);
 
@@ -111,9 +110,11 @@ PostTypes = StaticCollection('PostTypes', [
 
 ContentTypes = StaticCollection('ContentTypes', [
   ['text', 'Texto'],
+  ['title', 'Título'],
   ['image', 'Imagem'],
   ['audio', 'Áudio'],
   ['video', 'Video'],
   ['document', 'Documento'],
   ['link', 'Link'],
+  ['question', 'Questão'],
 ]);

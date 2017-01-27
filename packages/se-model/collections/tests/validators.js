@@ -44,8 +44,27 @@ Astro.createValidator({
 Astro.createValidator({
   name: 'TestTimeout',
   validate(value) {
-    const { timeoutType: type } = this;
+    const { timeoutType: type, content } = this;
     if (type === 'none') return _.isNull(value);
+    else if (type === 'page') return _.every(content, ({ timeout }) =>
+      !_.isNull(timeout) &&
+      _.isNumber(timeout) &&
+      _.isFinite(timeout) &&
+      _.inRange(timeout, 60, 24 * 60 * 60));
+    else return (
+      !_.isNull(value) &&
+      _.isNumber(value) &&
+      _.isFinite(value) &&
+      _.inRange(value, 60, 24 * 60 * 60)
+    );
+  },
+});
+
+Astro.createValidator({
+  name: 'TestPageTimeout',
+  validate(value) {
+    const { timeoutType: type } = this;
+    if (type === 'none' || type === 'global') return _.isNull(value);
     else return (
       !_.isNull(value) &&
       _.isNumber(value) &&

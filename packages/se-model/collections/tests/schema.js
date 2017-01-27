@@ -1,5 +1,25 @@
 Tests = new Mongo.Collection('tests');
 
+Tests.ContentSchema = ContentSchema('TestContent');
+
+Tests.PageSchema = Astro.Class({
+  name: 'TestPage',
+  fields: {
+    content: {
+      type: 'array',
+      nested: 'TestContent',
+      validator: Validators.minLength(1),
+      default: () => [],
+    },
+    timeout: {
+      type: 'number',
+      validator: Validators.TestPageTimeout(),
+      optional: true,
+      immutable: true,
+    },
+  },
+});
+
 Tests.RequestSchema = Astro.Class({
   name: 'TestRequest',
   fields: {
@@ -43,16 +63,27 @@ Tests.Schema = Astro.Class({
       validator: Validators.String(),
     },
     info: {
-      type: 'string',
-      validator: Validators.String({ min: 4, max: 32000 }),
+      type: 'array',
+      nested: 'TestContent',
+      validator: Validators.minLength(1),
+      default: () => [],
     },
     type: {
       type: 'string',
       validator: Validators.OneOf(TestTypes.all('keys')),
     },
+    pages: {
+      type: 'array',
+      nested: 'TestPage',
+      validator: Validators.minLength(1),
+      default: () => [],
+    },
     questions: {
       type: 'array',
-      validator: Validators.and([Validators.References(), Validators.minLength(1)]),
+      validator: Validators.and([
+        Validators.References(),
+        Validators.minLength(1),
+      ]),
       immutable: true,
     },
     scores: {
@@ -70,11 +101,6 @@ Tests.Schema = Astro.Class({
       type: 'string',
       validator: Validators.OneOf(TestTimeoutTypes.all('keys')),
       immutable: true,
-    },
-    documents: {
-      type: 'string',
-      validator: Validators.References(),
-      optional: true,
     },
   },
   behaviors: [

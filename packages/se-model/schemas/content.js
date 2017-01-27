@@ -16,6 +16,15 @@ ContentSchema = (name) => Astro.Class({
       default: '',
       optional: true,
     },
+    title: {
+      type: 'string',
+      validator: Validators.or([
+        Validators.String({ min: 1, max: 8192 }),
+        Validators.Content(),
+      ]),
+      default: '',
+      optional: true,
+    },
     image: {
       type: 'string',
       validator: Validators.or([Validators.Reference(), Validators.Content()]),
@@ -38,6 +47,13 @@ ContentSchema = (name) => Astro.Class({
       optional: true,
     },
     document: {
+      type: 'string',
+      validator: Validators.or([Validators.Reference(), Validators.Content()]),
+      default: '',
+      immutable: true,
+      optional: true,
+    },
+    question: {
       type: 'string',
       validator: Validators.or([Validators.Reference(), Validators.Content()]),
       default: '',
