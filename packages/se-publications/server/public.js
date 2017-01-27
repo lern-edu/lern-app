@@ -19,10 +19,21 @@ Helpers.Publications({ type: 'plain', prefix, protect }, {
 });
 
 Helpers.Publications({ type: 'composite', prefix, protect }, {
-  Tags({ tagId }={}) {
+  Tags({ tagId, subjectIds }={}) {
     return {
       find() {
-        return Fetch.Public().tags(tagId);
+        const query = {};
+        if (subjectIds) {
+          if (_.isArray(subjectIds)) query.subject = { $in: subjectIds };
+          else query.subject = subjectIds;
+        };
+
+        if (tagId) {
+          if (_.isArray(tagId)) query._id = { $in: tagId };
+          else query._id = tagId;
+        };
+
+        return Tags.find(query);
       },
 
       children: [
