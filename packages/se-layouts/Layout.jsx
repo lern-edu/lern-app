@@ -1,7 +1,7 @@
+// Libs
 import React from 'react';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 
 // Components
 import Navigation from './components/Navigation.jsx';
@@ -9,7 +9,7 @@ import Snackbar from './components/Snackbar.jsx';
 import Footer from './components/Footer.jsx';
 import Safe from './components/Safe.jsx';
 
-// mixins
+// Mixins
 import Language from './mixins/Language.jsx';
 import Screen from './mixins/Screen.jsx';
 import Render from './mixins/Render.jsx';
