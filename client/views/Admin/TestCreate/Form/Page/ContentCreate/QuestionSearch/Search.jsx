@@ -72,13 +72,22 @@ const AdminTestCreateFormPageQuestionSearch = React.createClass({
     this.setState({ onlyMine });
   },
 
-  handleSkipAdd() { this.setState({ skip: this.state.skip + 1 }); },
+  handleSkipAdd() {
+    const query = _.assign({ notQuestions: this.props.questionsSelected },
+      _.omit(this.state.query, ['notQuestions']));
+    this.setState({ query, skip: this.state.skip + 1 });
+  },
 
-  handleSkipLess() { this.setState({ skip: this.state.skip - 1 }); },
+  handleSkipLess() {
+    const query = _.assign({ notQuestions: this.props.questionsSelected },
+      _.omit(this.state.query, ['notQuestions']));
+    this.setState({ query, skip: this.state.skip - 1 });
+  },
 
   handleSearch() {
-    const query = _.omit(this.state,
-      ['query', 'subjectText', 'tagText', 'skip', 'questionsCount']);
+    const query = _.assign({ notQuestions: this.props.questionsSelected },
+      _.omit(this.state,
+      ['query', 'subjectText', 'tagText', 'skip', 'questionsCount']));
     this.setState({ query });
     this.getQuestionsCount(query);
   },

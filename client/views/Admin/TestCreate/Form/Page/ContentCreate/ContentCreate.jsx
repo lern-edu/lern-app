@@ -1,11 +1,17 @@
 import React from 'react';
 import { CardTitle, FlatButton } from 'material-ui';
-import { DropDownMenu, MenuItem, TextField } from 'material-ui';
+import { SelectField, MenuItem, TextField } from 'material-ui';
 
-import AdminTestCreateFormPageQuestion from './Question/Question.jsx';
+import AdminTestCreateFormPageQuestion from './QuestionSearch/QuestionSearch.jsx';
 
 const AdminTestCreateFormPageCreateContentCreate = React.createClass({
   mixins: [AstroForm(Tests.PageContentSchema)],
+
+  // Lifecycle
+
+  componentWillMount() {
+    this.defaultHandler({ [this.doc.get('type')]: '' }, { doc: true });
+  },
 
   // Handlers
 
@@ -14,7 +20,8 @@ const AdminTestCreateFormPageCreateContentCreate = React.createClass({
     this.props.form.defaultHandler({ content: _.clone(this.doc) },
       { doc: true, operation: 'push' });
     snack('Bloco criado!');
-    this.doc = new Tests.PageContentSchema({ type });
+    this.doc = new Tests.PageContentSchema({ type, [type]: '' });
+    if (type == 'question') this.props.updateQuestionsSelected();
     this.updateValidation();
   },
 
@@ -39,10 +46,10 @@ const AdminTestCreateFormPageCreateContentCreate = React.createClass({
         <CardTitle title='Novo conteúdo' />
 
           <div className='row'>
-            <DropDownMenu value={type} onChange={this.handleTypeChange} >
+            <SelectField value={type} onChange={this.handleTypeChange} >
               {_.map(ContentTypes.all('both'), (v, k) =>
                 <MenuItem key={k} value={k} primaryText={v} />)}
-            </DropDownMenu>
+            </SelectField>
           </div>
 
           <div className='row'>
@@ -76,11 +83,12 @@ const AdminTestCreateFormPageCreateContentCreate = React.createClass({
           </div>
 
           <div className='row'>
-            <FlatButton
-              onTouchTap={this.handleSubmit}
-              disabled={!valid}
-              secondary={true}
-              label='Adicionar conteúdo' />
+            {type == 'question' ? undefined :
+              <FlatButton
+                onTouchTap={this.handleSubmit}
+                disabled={!valid}
+                secondary={true}
+                label='Adicionar conteúdo' />}
           </div>
 
       </div>

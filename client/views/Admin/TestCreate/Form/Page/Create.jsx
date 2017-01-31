@@ -4,8 +4,8 @@ import { FlatButton, Card, CardHeader } from 'material-ui';
 import { CardText, CardActions, Divider, TextField } from 'material-ui';
 
 // View
-import AdminTestCreateFormPageCreateContentCreate from './Content/Create.jsx';
-import AdminTestCreateFormPageCreatContentShow from './Content/Show.jsx';
+import AdminTestCreateFormPageCreateContentCreate from './ContentCreate/ContentCreate.jsx';
+import AdminTestCreateFormPageCreateContentShow from './ContentShow/ContentShow.jsx';
 
 const AdminTestCreateFormPageCreate = React.createClass({
   mixins: [AstroForm(Tests.PageSchema)],
@@ -68,6 +68,7 @@ const AdminTestCreateFormPageCreate = React.createClass({
 
             <div className='row'>
               <AdminTestCreateFormPageCreateContentCreate
+                updateQuestionsSelected={this.props.updateQuestionsSelected}
                 scored={scored}
                 questionsSelected={actualQuestionsSelected}
                 form={this}
@@ -80,13 +81,15 @@ const AdminTestCreateFormPageCreate = React.createClass({
               </div>
             </div>
 
-            {_.map(this.doc.get('content'), (s, i) =>
+            {_.map(this.doc.get('content'), (c, i) =>
               <div className='row' key={i}>
                 <div className='sixteen wide column'>
-                  <AdminTestCreateFormPageCreatContentShow
+                  <AdminTestCreateFormPageCreateContentShow
+                    updateQuestionsSelected={this.props.updateQuestionsSelected}
+                    scored={scored}
                     index={i}
                     form={this}
-                    content={s} />
+                    doc={c} />
                   <Divider/>
               </div>
             </div>)}

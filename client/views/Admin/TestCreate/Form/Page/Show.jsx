@@ -3,6 +3,10 @@ import React from 'react';
 import { FlatButton, Card, CardHeader, TextField } from 'material-ui';
 import { CardText, CardActions, Divider, CardTitle } from 'material-ui';
 
+// Views
+
+import AdminTestCreateFormPageCreateContentShow from './ContentShow/ContentShow.jsx';
+
 const AdminTestCreateFormPageShow = React.createClass({
   mixins: [AstroForm(Tests.PageSchema)],
 
@@ -12,13 +16,13 @@ const AdminTestCreateFormPageShow = React.createClass({
     const { index, form, form: { doc: { pages } } } = this.props;
     _.pullAt(pages, index);
     form.defaultHandler({ pages }, { doc: true });
+    this.props.updateQuestionsSelected();
   },
 
   handleTimeoutChange({ currentTarget }, value) {
-    const field = currentTarget.getAttribute('name');
     const timeout = parseInt(value);
     if (timeout || value == '')
-      this.defaultHandler({ [field]: timeout }, { doc: true });
+      this.defaultHandler({ timeout }, { doc: true });
     else return;
   },
 
@@ -26,37 +30,40 @@ const AdminTestCreateFormPageShow = React.createClass({
   */
 
   render() {
-    const { form, index, doc: { content, timeout } } = this.props;
+    const { form, index, doc: { content, timeout }, scored } = this.props;
     const { errors={} } = this.state;
 
     return (
       <Card>
         <CardHeader title={`Página ${index + 1}`} />
-
         <CardText>
-          <TextField
-            value={timeout || ''}
-            disabled={form.doc.get('timeoutType') != 'page'}
-            floatingLabelText='Cronômetro'
-            errorText={errors.timeout}
-            name='timeout'
-            onChange={this.handleTimeoutChange} />
-        </CardText>
 
-        {_.map(content, (c, i) => <div key={i} >
-            {_.get({
-              text: <CardText><p>{c.text}</p></CardText>,
-              link: <CardText><a>{c.link}</a></CardText>,
-              title: <CardTitle title={c.title} />,
-              question: <CardText><p>{c.question}</p></CardText>,
-            }, c.type)}
+          <div className='ui grid'>
+            {_.map(content, (c, i) =>
+                <div className='row' key={i}>
+                  <div className='sixteen wide column'>
+                    <AdminTestCreateFormPageCreateContentShow
+                      updateQuestionsSelected={this.props.updateQuestionsSelected}
+                      scored={scored}
+                      index={i}
+                      form={this}
+                      doc={c} />
+                    <Divider/>
+                </div>
+              </div>
+            )}
           </div>
-        )}
-
+        </CardText>
         <CardActions>
+          {form.doc.get('timeoutType') != 'page' ? undefined :
+            <TextField
+              value={timeout || ''}
+              floatingLabelText='Cronômetro'
+              errorText={errors.timeout}
+              onChange={this.handleTimeoutChange} />}
           <FlatButton
             onTouchTap={this.handleRemove}
-            secondary={true}
+            primary={true}
             label='Remover página' />
         </CardActions>
 

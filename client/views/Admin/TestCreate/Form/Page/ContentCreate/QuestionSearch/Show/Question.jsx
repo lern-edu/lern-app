@@ -31,8 +31,9 @@ const AdminTestCreateFormPageQuestionSearchShowQuestion = React.createClass({
   },
 
   handleQuestionAdd() {
-    const { form, question } = this.props;
+    const { form, question, parent } = this.props;
     const { score } = this.state;
+    parent.setState({ questionsCount: parent.state.questionsCount - 1 });
     form.defaultHandler({ question: question._id, score }, { doc: true });
     form.handleSubmit();
   },
@@ -62,8 +63,7 @@ const AdminTestCreateFormPageQuestionSearchShowQuestion = React.createClass({
             <FlatButton
               primary={true}
               label='Adicionar'
-              disabled={_.includes(questionsSelected, question._id)
-                || (scored && !score)}
+              disabled={scored && !score}
               onTouchTap={this.handleQuestionAdd} />
           </CardActions>
           <CardText expandable={true}>

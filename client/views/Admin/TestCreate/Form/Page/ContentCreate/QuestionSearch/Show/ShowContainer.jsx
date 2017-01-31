@@ -14,8 +14,8 @@ export default AdminTestCreateFormPageQuestionSearchShow =
 
     const data = {
       ready: _.mapValues(handles, h => h.ready()),
-      questions: Fetch.General.questions().fetch(),
-      questionsCount: Questions.count,
+      questions: Fetch.General.questions({ _id:
+        { $nin: params.questionsSelected }, }).fetch(),
     };
 
     data.images = data.questions && _.flatten(_.map(data.questions, q =>
