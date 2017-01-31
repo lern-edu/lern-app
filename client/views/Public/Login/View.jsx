@@ -22,7 +22,7 @@ PublicLoginView = React.createClass({
   // Styles
 
   createStyles() {
-    const { context } = this;
+    const { innerWidth, innerHeight } = this.context;
     return {
       form: {
         className: 'eight wide computer ten wide tablet thirteen wide mobile column',
@@ -34,8 +34,8 @@ PublicLoginView = React.createClass({
       },
       background: {
         style: {
-          width: `${context.innerWidth}px`,
-          height: `${context.innerHeight}px`,
+          width: `${innerWidth}px`,
+          height: `${innerHeight}px`,
           backgroundSize: 'cover',
           backgroundImage: 'url(/images/login/classroom.jpg)',
           backgroundRepeat: 'round',
