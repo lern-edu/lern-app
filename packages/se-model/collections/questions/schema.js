@@ -39,6 +39,10 @@ Questions.Schema = Astro.Class({
   name: 'Question',
   collection: Questions,
   fields: {
+    text: {
+      type: 'string',
+      validator: Validators.String({ min: 1, max: 2048 }),
+    },
     statement: {
       type: 'array',
       nested: 'QuestionContent',
