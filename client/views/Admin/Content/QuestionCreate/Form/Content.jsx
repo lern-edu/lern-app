@@ -5,6 +5,12 @@ import { FlatButton, DropDownMenu, MenuItem, TextField } from 'material-ui';
 const AdminQuestionCreateFormContent = React.createClass({
   mixins: [AstroForm(Questions.ContentSchema)],
 
+  // Lifecycle
+
+  componentWillMount() {
+    this.defaultHandler({ [this.doc.get('type')]: '' }, { doc: true });
+  },
+
   // Handlers
 
   handleSubmit() {
