@@ -413,4 +413,18 @@ Helpers.Methods({ prefix, protect }, {
 
   },
 
+  AdaptQuestionsToNewContent() {
+    const questions = Questions.find().fetch();
+    _.forEach(questions, q => {
+      const statement = [new Questions.ContentSchema({
+          type: 'text',
+          text: q.get('text'),
+        }),
+      ];
+      q.set('statement', statement);
+      q.save();
+    });
+    return 'success';
+  },
+
 });
