@@ -22,7 +22,8 @@ const AdminQuestionCreateFormContent = React.createClass({
   },
 
   handleTypeChange(event, index, type) {
-    this.defaultHandler({ type }, { doc: true });
+    this.defaultHandler({ type, [type]: '', [this.doc.get('type')]: null },
+      { doc: true });
   },
 
   // Render
