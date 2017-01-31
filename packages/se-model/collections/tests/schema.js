@@ -17,7 +17,6 @@ Tests.PageContentSchema = Astro.Class({
         Validators.String({ min: 1, max: 8192 }),
         Validators.Content(),
       ]),
-      default: '',
       optional: true,
     },
     title: {
