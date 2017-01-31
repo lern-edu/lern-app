@@ -1,12 +1,11 @@
 Astro.createValidator({
-  name: 'TestScores',
+  name: 'TestScore',
   validate(value) {
-    const { questions } = this;
+    const { pages } = this;
     return (
       _.isArray(questions) &&
       value.length === questions.length &&
-      _.every(value, _.isNumber) &&
-      _.every(value, _.isFinite)
+      _.every(value, _.isObject)
     );
   },
 });

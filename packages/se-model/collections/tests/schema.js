@@ -2,12 +2,80 @@ Tests = new Mongo.Collection('tests');
 
 Tests.ContentSchema = ContentSchema('TestContent');
 
+Tests.PageContentSchema = Astro.Class({
+  name: 'TestPageContent',
+  fields: {
+    type: {
+      type: 'string',
+      validator: Validators.OneOf(ContentTypes.all('keys')),
+      immutable: true,
+      default: 'text',
+    },
+    text: {
+      type: 'string',
+      validator: Validators.or([
+        Validators.String({ min: 1, max: 8192 }),
+        Validators.Content(),
+      ]),
+      default: '',
+      optional: true,
+    },
+    title: {
+      type: 'string',
+      validator: Validators.or([
+        Validators.String({ min: 1, max: 8192 }),
+        Validators.Content(),
+      ]),
+      optional: true,
+    },
+    image: {
+      type: 'string',
+      validator: Validators.or([Validators.Reference(), Validators.Content()]),
+      immutable: true,
+      optional: true,
+    },
+    audio: {
+      type: 'string',
+      validator: Validators.or([Validators.Reference(), Validators.Content()]),
+      immutable: true,
+      optional: true,
+    },
+    video: {
+      type: 'string',
+      validator: Validators.or([Validators.Reference(), Validators.Content()]),
+      immutable: true,
+      optional: true,
+    },
+    document: {
+      type: 'string',
+      validator: Validators.or([Validators.Reference(), Validators.Content()]),
+      immutable: true,
+      optional: true,
+    },
+    question: {
+      type: 'string',
+      validator: Validators.or([Validators.Reference(), Validators.Content()]),
+      immutable: true,
+      optional: true,
+    },
+    link: {
+      type: 'string',
+      validator: Validators.or([Validators.url(), Validators.Content()]),
+      optional: true,
+    },
+    score: {
+      type: 'number',
+      optional: true,
+    },
+  },
+});
+
 Tests.PageSchema = Astro.Class({
   name: 'TestPage',
   fields: {
     content: {
       type: 'array',
-      nested: 'TestContent',
+      nested: 'TestPageContent',
       validator: Validators.minLength(1),
       default: () => [],
     },
@@ -85,12 +153,6 @@ Tests.Schema = Astro.Class({
         Validators.minLength(1),
       ]),
       immutable: true,
-    },
-    scores: {
-      validator: Validators.TestScores(),
-      immutable: true,
-      optional: true,
-      default: () => [],
     },
     timeout: {
       type: 'number',
