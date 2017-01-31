@@ -30,12 +30,13 @@ Helpers.Methods({ prefix, protect }, {
     return user;
   },
 
-  QuestionsCount({ subjectId, text, tagsIds, type, onlyMine }={}) {
+  QuestionsCount({ subjectId, text, tagsIds, type, onlyMine, notQuestions }={}) {
     const selector = {};
 
     if (!_.isEmpty(tagsIds)) _.assign(selector, { tags: { $in: tagsIds } });
     if (subjectId) _.assign(selector, { subject: subjectId });
     if (onlyMine) _.assign(selector, { author: _.get(this, 'userId') });
+    if (notQuestions) _.assign(selector, { _id: { $nin: notQuestions } });
     if (type) _.assign(selector, { type });
     if (text) _.assign(selector, { $text: { $search: text } });
 
