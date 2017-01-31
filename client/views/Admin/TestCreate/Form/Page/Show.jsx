@@ -48,6 +48,7 @@ const AdminTestCreateFormPageShow = React.createClass({
               text: <CardText><p>{c.text}</p></CardText>,
               link: <CardText><a>{c.link}</a></CardText>,
               title: <CardTitle title={c.title} />,
+              question: <CardText><p>{c.question}</p></CardText>,
             }, c.type)}
           </div>
         )}

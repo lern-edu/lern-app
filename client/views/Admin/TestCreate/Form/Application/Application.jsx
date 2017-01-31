@@ -23,7 +23,7 @@ const AdminTestCreateFormApplicationView = React.createClass({
   handleScores(event, scored) {
     const { form } = this.props;
     form.setState({ scored });
-    form.defaultHandler({ scores: scored ? [] : null }, { doc: true });
+    form.updateValidation();
   },
 
   handleStartDateChange(event, startDate) {

@@ -24,7 +24,7 @@ const AdminTestCreateForm = React.createClass({
   */
 
   getInitialState() {
-    return { index: 0, allTags: false, noCourse: false, scored: false };
+    return { index: 4, allTags: false, noCourse: false, scored: false };
   },
 
   componentDidMount() {
@@ -50,26 +50,26 @@ const AdminTestCreateForm = React.createClass({
   render() {
     const { state: { index } } = this;
 
-    const done = {
-      basic: !_.some(['name', 'info'],
-        k => _.get(this, `state.errors[${k}]`)),
-      theme: !_.some(['tags', 'subjects'],
-        k => _.get(this, `state.errors[${k}]`)),
-      application: !_.some(['course', 'students', 'endDate', 'startDate'],
-        k => _.get(this, `state.errors[${k}]`)),
-      timing: !_.some(['timeoutType', 'timeout'],
-        k => _.get(this, `state.errors[${k}]`)),
-      pages: !_.some(['timeout', 'questions', 'pages', 'scores'],
-        k => _.get(this, `state.errors[${k}]`)),
-    };
-
     // const done = {
-    //   basic: true,
-    //   theme: true,
-    //   application: true,
-    //   timing: true,
-    //   pages: true,
+    //   basic: !_.some(['name', 'info'],
+    //     k => _.get(this, `state.errors[${k}]`)),
+    //   theme: !_.some(['tags', 'subjects'],
+    //     k => _.get(this, `state.errors[${k}]`)),
+    //   application: !_.some(['course', 'students', 'endDate', 'startDate'],
+    //     k => _.get(this, `state.errors[${k}]`)),
+    //   timing: !_.some(['timeoutType', 'timeout'],
+    //     k => _.get(this, `state.errors[${k}]`)),
+    //   pages: !_.some(['timeout', 'questions', 'pages', 'scores'],
+    //     k => _.get(this, `state.errors[${k}]`)),
     // };
+
+    const done = {
+      basic: true,
+      theme: true,
+      application: true,
+      timing: true,
+      pages: true,
+    };
 
     return (
       <div className='ui basic segment'>

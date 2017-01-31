@@ -2,8 +2,10 @@ import React from 'react';
 import { CardTitle, FlatButton } from 'material-ui';
 import { DropDownMenu, MenuItem, TextField } from 'material-ui';
 
-const AdminTestCreateFormPageCreatContent = React.createClass({
-  mixins: [AstroForm(Tests.ContentSchema)],
+import AdminTestCreateFormPageQuestion from './Question/Question.jsx';
+
+const AdminTestCreateFormPageCreateContentCreate = React.createClass({
+  mixins: [AstroForm(Tests.PageContentSchema)],
 
   // Handlers
 
@@ -12,7 +14,7 @@ const AdminTestCreateFormPageCreatContent = React.createClass({
     this.props.form.defaultHandler({ content: _.clone(this.doc) },
       { doc: true, operation: 'push' });
     snack('Bloco criado!');
-    this.doc = new Tests.ContentSchema();
+    this.doc = new Tests.PageContentSchema({ type });
     this.updateValidation();
   },
 
@@ -22,7 +24,8 @@ const AdminTestCreateFormPageCreatContent = React.createClass({
   },
 
   handleTypeChange(event, index, type) {
-    this.defaultHandler({ type }, { doc: true });
+    this.defaultHandler({ type, [type]: '', [this.doc.get('type')]: null },
+      { doc: true });
   },
 
   // Render
@@ -32,7 +35,7 @@ const AdminTestCreateFormPageCreatContent = React.createClass({
     const { errors, valid } = this.state;
 
     return (
-      <div className='ui basic segment'>
+      <div className='ui basic segment' style={{ width: '100%' }}>
         <CardTitle title='Novo conteúdo' />
 
           <div className='row'>
@@ -64,6 +67,11 @@ const AdminTestCreateFormPageCreatContent = React.createClass({
                   floatingLabelText='Link'
                   onChange={this.handleTextChange}
                   errorText={_.get(errors, 'link')} />,
+              question: <AdminTestCreateFormPageQuestion
+                  form={this}
+                  scored={this.props.scored}
+                  questionsSelected={this.props.questionsSelected}
+                  subjects={this.props.subjects} />,
             }, type)}
           </div>
 
@@ -81,4 +89,4 @@ const AdminTestCreateFormPageCreatContent = React.createClass({
 
 });
 
-export default AdminTestCreateFormPageCreatContent;
+export default AdminTestCreateFormPageCreateContentCreate;

@@ -12,8 +12,10 @@ const AdminTestCreateFormPage = React.createClass({
   */
 
   render() {
-    const { form, done } = this.props;
-    console.log(form.state.errors);
+    const { form, done, subjects, scored } = this.props;
+    const questionsSelected = _.flatten(_.map(form.doc.get('pages'), p =>
+      _.compact(_.map(p.get('content'), 'question'))));
+
     console.log(form.doc.get('pages'));
 
     return (
@@ -22,7 +24,11 @@ const AdminTestCreateFormPage = React.createClass({
 
           <div className='row'>
             <div className='sixteen wide column'>
-              <AdminTestCreateFormPageCreate form={form} />
+              <AdminTestCreateFormPageCreate
+                scored={scored}
+                questionsSelected={questionsSelected}
+                form={form}
+                subjects={subjects} />
             </div>
           </div>
 

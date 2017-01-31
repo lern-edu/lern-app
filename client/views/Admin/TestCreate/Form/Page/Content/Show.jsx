@@ -1,7 +1,7 @@
 import React from 'react';
 import { CardTitle, Divider, FlatButton } from 'material-ui';
 
-const AdminTestCreateFormPageCreatContentShow = React.createClass({
+const AdminTestCreateFormPageCreateContentShow = React.createClass({
 
   // Handlers
 
@@ -14,7 +14,7 @@ const AdminTestCreateFormPageCreatContentShow = React.createClass({
   // Render
 
   render() {
-    const { index, content: { type, text, link, title } } = this.props;
+    const { index, content: { type, text, link, title, question } } = this.props;
 
     return (
       <div className='sixteen wide column'>
@@ -25,6 +25,7 @@ const AdminTestCreateFormPageCreatContentShow = React.createClass({
               text: <p>{text}</p>,
               link: <a>{link}</a>,
               title: <CardTitle title={title} />,
+              question: <p>{question}</p>,
             }, type)}
           </div>
         </div>
@@ -48,4 +49,4 @@ const AdminTestCreateFormPageCreatContentShow = React.createClass({
 
 });
 
-export default AdminTestCreateFormPageCreatContentShow;
+export default AdminTestCreateFormPageCreateContentShow;
