@@ -102,7 +102,7 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
-  Questions({ subjectId, text, tagsIds, type, onlyMine, questionsIds }={},
+  Questions({ subjectId, text, tagsIds, type, onlyMine, questionsIds, notQuestions }={},
       { limit=1, skip=0 },
       { tags, subject }) {
     return {
@@ -116,6 +116,7 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
         if (subjectId) _.assign(selector, { subject: subjectId });
         if (onlyMine) _.assign(selector, { author: _.get(this, 'userId') });
         if (type) _.assign(selector, { type });
+        if (notQuestions) _.assign(selector, { _id: { $nin: notQuestions } });
         if (text) {
           _.assign(selector, { $text: { $search: text } });
           _.assign(options, { sort: { score: { $meta: 'textScore' } },
