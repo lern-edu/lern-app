@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui';
 import { FlatButton, DropDownMenu, MenuItem, TextField } from 'material-ui';
+import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 const AdminQuestionCreateFormContentShow = React.createClass({
 
@@ -24,7 +25,10 @@ const AdminQuestionCreateFormContentShow = React.createClass({
         <CardText>
           <div className='row'>
             {_.get({
-              text: <p>{text}</p>,
+              text: <Editor
+                  readOnly={true}
+                  editorState={EditorState.createWithContent(
+                    convertFromRaw(this.doc.get('text')))} />,
               link: <a>{link}</a>,
             }, type)}
           </div>

@@ -1,8 +1,9 @@
+// Libs
 import React from 'react';
 import { CardTitle, CardText, FlatButton } from 'material-ui';
+import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 // Views
-
 import AdminTestCreateFormPageCreateContentShowQuestion from './QuestionContainer.jsx';
 
 const AdminTestCreateFormPageCreateContentShow = React.createClass({
@@ -27,7 +28,11 @@ const AdminTestCreateFormPageCreateContentShow = React.createClass({
       <div>
 
         {_.get({
-          text: <CardText><p>{this.doc.get('text')}</p></CardText>,
+          text: <CardText><Editor
+              readOnly={true}
+              editorState={EditorState.createWithContent(
+                convertFromRaw(this.doc.get('text')))} />
+            </CardText>,
           link: <CardText><a>{this.doc.get('link')}</a></CardText>,
           title: <CardTitle title={this.doc.get('title')} />,
           question: <AdminTestCreateFormPageCreateContentShowQuestion

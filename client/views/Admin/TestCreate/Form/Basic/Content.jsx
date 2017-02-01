@@ -1,11 +1,16 @@
 import React from 'react';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui';
 import { FlatButton, DropDownMenu, MenuItem, TextField } from 'material-ui';
+import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 
 const AdminTestCreateFormBasicContent = React.createClass({
   mixins: [AstroForm(Tests.ContentSchema)],
 
   // Lifecycle
+
+  getInitialState() {
+    return { editorState: EditorState.createEmpty() };
+  },
 
   componentWillMount() {
     this.defaultHandler({ [this.doc.get('type')]: '' }, { doc: true });
@@ -19,7 +24,24 @@ const AdminTestCreateFormBasicContent = React.createClass({
       { doc: true, operation: 'push' });
     snack('Bloco criado!');
     this.doc = new Tests.ContentSchema();
+    this.setState({ editorState: EditorState.createEmpty() });
     this.updateValidation();
+  },
+
+  handleEditorChange(editorState) {
+    const rawContentState = convertToRaw(editorState.getCurrentContent());
+    this.defaultHandler({ text: rawContentState }, { doc: true });
+    this.setState({ editorState });
+  },
+
+  handleKeyCommand(command) {
+    const newState = RichUtils.handleKeyCommand(this.state.editorState, command);
+    if (newState) {
+      this.handleEditorChange(newState);
+      return 'handled';
+    };
+
+    return 'not-handled';
   },
 
   handleTextChange({ currentTarget }, value) {
@@ -52,13 +74,15 @@ const AdminTestCreateFormBasicContent = React.createClass({
           <div className='row'>
             {_.get({
               text: <TextField
+                  children={<Editor
+                    handleKeyCommand={this.handleKeyCommand}
+                    editorState={this.state.editorState}
+                    onChange={this.handleEditorChange} />}
                   name='text'
-                  value={text}
-                  floatingLabelText='Texto'
-                  onChange={this.handleTextChange}
+                  underlineShow={false}
+                  fullWidth={true}
                   errorText={_.get(errors, 'text')}
-                  multiLine={true}
-                  rows={4} />,
+                  multiLine={true} />,
               title: <TextField
                   name='title'
                   value={title}

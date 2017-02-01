@@ -1,19 +1,40 @@
 import React from 'react';
 import { CardTitle, FlatButton } from 'material-ui';
 import { SelectField, MenuItem, TextField } from 'material-ui';
+import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 
-import AdminTestCreateFormPageQuestion from './QuestionSearch/QuestionSearch.jsx';
+import AdminTestCreateFormPageQuestion from './Question.jsx';
 
 const AdminTestCreateFormPageCreateContentCreate = React.createClass({
   mixins: [AstroForm(Tests.PageContentSchema)],
 
   // Lifecycle
 
+  getInitialState() {
+    return { editorState: EditorState.createEmpty() };
+  },
+
   componentWillMount() {
     this.defaultHandler({ [this.doc.get('type')]: '' }, { doc: true });
   },
 
   // Handlers
+
+  handleEditorChange(editorState) {
+    const rawContentState = convertToRaw(editorState.getCurrentContent());
+    this.defaultHandler({ text: rawContentState }, { doc: true });
+    this.setState({ editorState });
+  },
+
+  handleKeyCommand(command) {
+    const newState = RichUtils.handleKeyCommand(this.state.editorState, command);
+    if (newState) {
+      this.handleEditorChange(newState);
+      return 'handled';
+    };
+
+    return 'not-handled';
+  },
 
   handleSubmit() {
     const { type } = this.doc;
@@ -22,6 +43,7 @@ const AdminTestCreateFormPageCreateContentCreate = React.createClass({
     snack('Bloco criado!');
     this.doc = new Tests.PageContentSchema({ type, [type]: '' });
     if (type == 'question') this.props.updateQuestionsSelected();
+    this.setState({ editorState: EditorState.createEmpty() });
     this.updateValidation();
   },
 
@@ -41,6 +63,8 @@ const AdminTestCreateFormPageCreateContentCreate = React.createClass({
     const { type, text, link, title } = this.doc;
     const { errors, valid } = this.state;
 
+    console.log(text);
+
     return (
       <div className='ui basic segment' style={{ width: '100%' }}>
         <CardTitle title='Novo conteúdo' />
@@ -55,13 +79,15 @@ const AdminTestCreateFormPageCreateContentCreate = React.createClass({
           <div className='row'>
             {_.get({
               text: <TextField
+                  children={<Editor
+                    handleKeyCommand={this.handleKeyCommand}
+                    editorState={this.state.editorState}
+                    onChange={this.handleEditorChange} />}
                   name='text'
-                  value={text}
-                  floatingLabelText='Texto'
-                  onChange={this.handleTextChange}
+                  underlineShow={false}
+                  fullWidth={true}
                   errorText={_.get(errors, 'text')}
-                  multiLine={true}
-                  rows={4} />,
+                  multiLine={true} />,
               title: <TextField
                   name='title'
                   value={title}

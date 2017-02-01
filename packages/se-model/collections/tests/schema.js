@@ -12,9 +12,9 @@ Tests.PageContentSchema = Astro.Class({
       default: 'text',
     },
     text: {
-      type: 'string',
+      type: 'object',
       validator: Validators.or([
-        Validators.String({ min: 1, max: 8192 }),
+        Validators.object(),
         Validators.Content(),
       ]),
       optional: true,

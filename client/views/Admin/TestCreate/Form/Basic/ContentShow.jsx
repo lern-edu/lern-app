@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardActions, CardHeader, CardText } from 'material-ui';
 import { FlatButton, CardTitle } from 'material-ui';
+import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 const AdminTestCreateFormBasicContentShow = React.createClass({
 
@@ -23,7 +24,10 @@ const AdminTestCreateFormBasicContentShow = React.createClass({
 
         <CardText>
           {_.get({
-            text: <p>{text}</p>,
+            text: <Editor
+                readOnly={true}
+                editorState={EditorState.createWithContent(
+                  convertFromRaw(this.doc.get('text')))} />,
             link: <a>{link}</a>,
             title: <CardTitle title={title} />,
           }, type)}
