@@ -13,7 +13,7 @@ export default AdminTestCreateFormTheme = createContainer(({ form }) => {
 
   const data = {
     ready: _.mapValues(handles, h => h.ready()),
-    tags: Fetch.Public().tags().fetch(),
+    tags: Fetch.Public().tags({ subject: { $in: subjectIds || [] } }).fetch(),
   };
 
   return data;
