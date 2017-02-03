@@ -1,5 +1,5 @@
 AstroForm = function (AstroClass, submitMethod) {
-  const restoreFields = AstroClass.getFieldsNames();
+  let restoreFields = AstroClass && AstroClass.getFieldsNames() || {};
 
   return {
 
@@ -44,7 +44,11 @@ AstroForm = function (AstroClass, submitMethod) {
 
     componentWillMount() {
       const { doc } = this.props;
-      this.doc = doc || new AstroClass();
+      if (doc) this.doc = doc;
+      else if (this.props.schema) this.doc = new this.props.schema();
+      else this.doc = new AstroClass();
+
+      if (!AstroClass) restoreFields = this.props.schema.getFieldsNames();
     },
 
     componentDidMount() {
@@ -67,7 +71,7 @@ AstroForm = function (AstroClass, submitMethod) {
       if (_.isObject(arg)) {
         if (opts.doc) {
           if (opts.operation == 'push')
-            _.forEach(_.keys(arg), k => this.doc.push(k, arg[k]));
+          _.forEach(_.keys(arg), k => this.doc.push(k, arg[k]));
           else this.doc.set(arg);
         }
 

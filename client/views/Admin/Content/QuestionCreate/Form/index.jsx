@@ -7,8 +7,6 @@ import { RaisedButton, SelectField, CircularProgress } from 'material-ui';
 import AdminQuestionCreateFormTags from './Tags.jsx';
 import AdminQuestionCreateFormUpload from './Upload.jsx';
 import AdminQuestionCreateFormOptions from './Options.jsx';
-import AdminQuestionCreateFormContent from './Content.jsx';
-import AdminQuestionCreateFormContentShow from './ContentShow.jsx';
 
 const AdminQuestionCreateForm = React.createClass({
   mixins: [AstroForm(Questions.Schema, 'AdminQuestionSave')],
@@ -121,22 +119,27 @@ const AdminQuestionCreateForm = React.createClass({
           </div>
 
           <div className='row'>
-            <p>{_.get(errors, 'statement')}</p>
+            <p>{_.get(errors, 'content')}</p>
           </div>
 
           <div className='row'>
               <div className='ten wide column'>
-                <AdminQuestionCreateFormContent form={this} />
+                <PublicContentCreate
+                  field='content'
+                  schema={Questions.ContentSchema}
+                  contentTypes={ContentTypes}
+                  form={this} />
               </div>
           </div>
 
           <div className='row'>
-            {_.map(this.doc.get('statement'), (s, i) =>
+            {_.map(this.doc.get('content'), (s, i) =>
               <div className='ten wide column' key={i}>
-                <AdminQuestionCreateFormContentShow
-                  index={i}
+                <PublicContentShow
+                  field='content'
+                  schema={Questions.ContentSchema}
                   form={this}
-                  statement={s} />
+                  doc={s} />
               </div>)}
           </div>
 

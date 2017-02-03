@@ -8,7 +8,7 @@ Astro.createValidator({
   events: {
     validationError(e) {
       var fieldName = e.data.fieldName;
-      e.setMessage(fieldName + 'is required!');
+      e.setMessage(fieldName + ' is required!');
     },
   },
 });

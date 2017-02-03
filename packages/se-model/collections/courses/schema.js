@@ -30,6 +30,11 @@ Courses.Schema = Astro.Class({
       validator: Validators.References(),
       default: () => [],
     },
+    school: {
+      type: 'string',
+      validator: Validators.Reference(),
+      optional: true,
+    },
     schedule: {
       type: 'array',
       nested: 'CourseDay',

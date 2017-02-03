@@ -20,43 +20,23 @@ PublicMiscPagination = React.createClass({
     className: 'ui right aligned basic segment',
   },
 
-  // Lifecycle
-
-  componentDidMount() {
-    Session.set('searchPage', 0);
-  },
-
-  componentWillUnmount() {
-    Session.set('searchPage', 0);
-  },
-
-  // Handlers
-
-  handlePageLess() {
-    Session.set('searchPage', Session.get('searchPage') - 1);
-  },
-
-  handlePageAdd() {
-    Session.set('searchPage', Session.get('searchPage') + 1);
-  },
-
   // render
 
   render() {
     const { defaultStyle, props:
-      { length, size, page, total, style=null, less, add }, } = this;
+      { length=0, size=0, page=0, total=0, style=null, less, add, }, } = this;
     const finalCurrentCount = size * page + length;
     return (
       <div {...style} {...defaultStyle} >
         {`${size * page} - ${finalCurrentCount > total ? total : finalCurrentCount} de ${
           total || 0} resultados`}
         {page === 0 ? undefined :
-          <IconButton touch={true} onTouchTap={add || this.handlePageLess}>
+          <IconButton touch={true} onTouchTap={less} >
             <FontIcon className='material-icons'>keyboard_arrow_left</FontIcon>
           </IconButton>}
         {total === 0 || (page + 1) === Math.ceil(total / size)
           ? undefined :
-          <IconButton touch={true} onTouchTap={less || this.handlePageAdd}>
+          <IconButton touch={true} onTouchTap={add} >
           <FontIcon className='material-icons'>keyboard_arrow_right</FontIcon>
         </IconButton>}
       </div>

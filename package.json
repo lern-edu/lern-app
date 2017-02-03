@@ -18,6 +18,7 @@
   "license": "ISC",
   "homepage": "https://lern.com.br",
   "dependencies": {
+    "draft-js": "^0.10.0",
     "lodash": "^4.17.3",
     "material-ui": "^0.16.5",
     "meteor-node-stubs": "~0.2.0",
