@@ -1,3 +1,4 @@
+import { convertToRaw, convertFromRaw, ContentState } from 'draft-js';
 const [prefix, protect] = ['Admin', 'admin'];
 
 Helpers.Methods({ prefix, protect }, {
@@ -423,6 +424,23 @@ Helpers.Methods({ prefix, protect }, {
       ];
       q.set('statement', statement);
       q.save();
+    });
+    return 'success';
+  },
+
+  AdaptQuestionsToNewContentv2() {
+    const questions = Questions.find().fetch();
+    _.forEach(questions, q => {
+      try {
+        console.log(q._id);
+        const content = [new Questions.ContentSchema({
+            type: 'text',
+            text: convertToRaw(ContentState.createFromText(q.get('text'))),
+          }),
+        ];
+        q.set('content', content);
+        q.save();
+      } catch (e) { console.log(q._id + ' error'); };
     });
     return 'success';
   },

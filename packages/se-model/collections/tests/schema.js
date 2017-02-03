@@ -7,14 +7,13 @@ Tests.PageContentSchema = Astro.Class({
   fields: {
     type: {
       type: 'string',
-      validator: Validators.OneOf(ContentTypes.all('keys')),
+      validator: Validators.OneOf(PageContentTypes.all('keys')),
       immutable: true,
       default: 'text',
     },
     text: {
-      type: 'object',
       validator: Validators.or([
-        Validators.object(),
+        Validators.required(),
         Validators.Content(),
       ]),
       optional: true,

@@ -115,6 +115,8 @@ Package.onUse((api) => {
     'ContactTypes',
     'PostTypes',
     'ContentTypes',
+    'PageContentTypes',
+    'QuestionOptionsContentTypes',
   ]);
 
 });

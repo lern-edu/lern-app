@@ -116,5 +116,20 @@ ContentTypes = StaticCollection('ContentTypes', [
   ['video', 'Video'],
   ['document', 'Documento'],
   ['link', 'Link'],
+]);
+
+QuestionOptionsContentTypes = StaticCollection('QuestionOptionsContentTypes', [
+  ['text', 'Texto'],
+  ['image', 'Imagem'],
+]);
+
+PageContentTypes = StaticCollection('PageContentTypes', [
+  ['text', 'Texto'],
+  ['title', 'Título'],
+  ['image', 'Imagem'],
+  ['audio', 'Áudio'],
+  ['video', 'Video'],
+  ['document', 'Documento'],
+  ['link', 'Link'],
   ['question', 'Questão'],
 ]);

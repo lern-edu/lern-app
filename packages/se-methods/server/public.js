@@ -1,6 +1,7 @@
 const [prefix, protect] = ['Public', 'public'];
 
 Helpers.Methods({ prefix, protect }, {
+  QuestionSave: Helpers.DefaultSave,
   SendEmail({ email, text }) {
     Email.send({
       from: email,
