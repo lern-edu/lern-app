@@ -127,7 +127,7 @@ const AdminQuestionCreateForm = React.createClass({
                 <PublicContentCreate
                   field='content'
                   schema={Questions.ContentSchema}
-                  ContentTypes={ContentTypes}
+                  contentTypes={ContentTypes}
                   form={this} />
               </div>
           </div>
