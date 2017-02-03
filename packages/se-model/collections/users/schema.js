@@ -5,6 +5,22 @@ Meteor.users.ProfileSchema = Astro.Class({
       type: 'string',
       validator: Validators.UserName(),
     },
+    profilePic: {
+      type: 'string',
+      optional: true,
+    },
+    gender: {
+      type: 'string',
+      optional: true,
+    },
+    firstName: {
+      type: 'string',
+      optional: true,
+    },
+    lastName: {
+      type: 'string',
+      optional: true,
+    },
     schoolType: {
       type: 'string',
       validator: Validators.OneOf(SchoolTypes.all('keys')),
