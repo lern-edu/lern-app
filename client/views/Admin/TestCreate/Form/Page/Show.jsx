@@ -3,10 +3,6 @@ import React from 'react';
 import { FlatButton, Card, CardHeader, TextField } from 'material-ui';
 import { CardText, CardActions, Divider, CardTitle } from 'material-ui';
 
-// Views
-
-import AdminTestCreateFormPageCreateContentShow from './ContentShow/ContentShow.jsx';
-
 const AdminTestCreateFormPageShow = React.createClass({
   mixins: [AstroForm(Tests.PageSchema)],
 
@@ -42,7 +38,9 @@ const AdminTestCreateFormPageShow = React.createClass({
             {_.map(content, (c, i) =>
                 <div className='row' key={i}>
                   <div className='sixteen wide column'>
-                    <AdminTestCreateFormPageCreateContentShow
+                    <PublicContentShow
+                      field='content'
+                      schema={Tests.PageContentSchema}
                       updateQuestionsSelected={this.props.updateQuestionsSelected}
                       scored={scored}
                       index={i}
@@ -53,6 +51,7 @@ const AdminTestCreateFormPageShow = React.createClass({
               </div>
             )}
           </div>
+
         </CardText>
         <CardActions>
           {form.doc.get('timeoutType') != 'page' ? undefined :

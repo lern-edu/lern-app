@@ -2,10 +2,6 @@
 import React from 'react';
 import { RaisedButton, TextField, MenuItem } from 'material-ui';
 
-// View
-import AdminTestCreateFormBasicContent from './Content.jsx';
-import AdminTestCreateFormBasicContentShow from './ContentShow.jsx';
-
 const AdminTestCreateFormBasic = React.createClass({
 
   // Handlers
@@ -37,17 +33,22 @@ const AdminTestCreateFormBasic = React.createClass({
 
           <div className='row'>
             <div className='sixteen wide column'>
-              <AdminTestCreateFormBasicContent form={form} />
+              <PublicContentCreate
+                schema={Tests.ContentSchema}
+                contentTypes={ContentTypes}
+                form={form} />
             </div>
           </div>
 
           <div className='row'>
             {_.map(form.doc.get('info'), (s, i) =>
               <div className='sixteen wide column' key={i} >
-                <AdminTestCreateFormBasicContentShow
-                  index={i}
+                <PublicContentShow
+                  schema={Tests.ContentSchema}
+                  field='content'
                   form={form}
-                  info={s} />
+                  index={i}
+                  doc={s} />
             </div>)}
           </div>
 
