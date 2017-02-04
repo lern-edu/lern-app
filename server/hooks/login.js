@@ -24,8 +24,9 @@ Meteor.startup(() => {
           profilePic: _.get(google, 'picture'),
           gender: _.get(google, 'gender'),
         };
-      } else
-        user.profile = options.profile;
+      } else user.profile = options.profile;
+
+      if (!user.roles) user.roles = ['student'];
 
       return user;
     });
