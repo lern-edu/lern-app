@@ -1,17 +1,17 @@
 Fetch.School = function (schoolId) {
   return {
     teachers() {
-      const selector = { roles: 'teacher', 'profile.school': schoolId };
+      const selector = { roles: 'teacher', 'profile.schools': schoolId };
       return Fetch.General.users(selector);
     },
 
     students() {
-      const selector = { roles: 'student', 'profile.school': schoolId };
+      const selector = { roles: 'student', 'profile.schools': schoolId };
       return Fetch.General.users(selector);
     },
 
     users() {
-      const selector = { 'profile.school': schoolId };
+      const selector = { 'profile.schools': schoolId };
       return Fetch.General.users(selector);
     },
 
