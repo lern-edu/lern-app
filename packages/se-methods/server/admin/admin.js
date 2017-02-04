@@ -7,6 +7,44 @@ Helpers.Methods({ prefix, protect }, {
   QuestionSave: Helpers.DefaultSave,
   TagSave: Helpers.DefaultSave,
   UserSave: Helpers.DefaultSave,
+  UserPassword(userId, password) {
+    Accounts.setPassword(userId, password, { logout: true });
+  },
+
+  UserCreate(doc) {
+    Check.Astro(doc).valid();
+
+    if (doc.school) doc.schools = [doc.school];
+    const profileFields = ['name', 'schoolType', 'cpf', 'cnpj', 'school', 'schools'];
+
+    const { email, role } = doc;
+    const profile = _.pick(doc, profileFields);
+
+    const userId = Accounts.createUser({ email });
+    const user = _.first(Fetch.General.users(userId).fetch());
+
+    user.set('profile', new Meteor.users.ProfileSchema(profile));
+    user.set('roles', [role]);
+
+    Check.Astro(user).valid();
+    user.save();
+
+    if (_.get(user, 'profile.school') && _.includes(_.get(user, 'roles'), 'student')) {
+      const school = _.get(Meteor.users.findOne(
+        { _id: _.get(user, 'profile.school') },
+        { fields: { profile: 1 } }), 'profile.name');
+
+      Courses.update({ name: school },
+        { $push: { students: _.get(user, '_id') } });
+    };
+
+    Accounts.sendEnrollmentEmail(userId);
+
+    return user;
+  },
+
+  // Documentation finish here
+
   CourseSave(doc) {
     Helpers.DefaultSave(doc);
 
@@ -212,54 +250,6 @@ Helpers.Methods({ prefix, protect }, {
         },
       },
     ]);
-  },
-
-  UserCreate(doc) {
-    Check.Astro(doc).valid();
-
-    const profileFields = ['name', 'schoolType', 'cpf', 'cnpj', 'school', 'schools'];
-
-    const { email, role } = doc;
-    const profile = _.pick(doc, profileFields);
-
-    const userId = Accounts.createUser({ email });
-    const user = _.first(Fetch.General.users(userId).fetch());
-
-    user.set('profile', new Meteor.users.ProfileSchema(profile));
-    user.set('roles', [role]);
-
-    Check.Astro(user).valid();
-    user.save();
-
-    if (_.get(user, 'profile.school') && _.includes(_.get(user, 'roles'), 'student')) {
-      const school = _.get(Meteor.users.findOne(
-        { _id: _.get(user, 'profile.school') },
-        { fields: { profile: 1 } }), 'profile.name');
-
-      Courses.update({ name: school },
-        { $push: { students: _.get(user, '_id') } });
-    };
-
-    if (_.includes(_.get(user, 'roles'), 'school')) {
-      const course = new Courses.Schema({
-        name: _.get(user, 'profile.name'),
-        teachers: _.fill(Array(1), _.get(user, '_id')),
-        startDate: new Date(),
-        endDate: new Date(moment().add(5, 'y').toDate()),
-        subjects: _.map(Subjects.find({}).fetch(), '_id'),
-      });
-
-      Check.Astro(course).valid();
-      course.save();
-    };
-
-    Accounts.sendEnrollmentEmail(userId);
-
-    return user;
-  },
-
-  UserPassword(userId, password) {
-    Accounts.setPassword(userId, password, { logout: true });
   },
 
   UserAddEmail(id, email) {
