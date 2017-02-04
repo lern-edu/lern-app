@@ -1,5 +1,7 @@
 Courses = new Mongo.Collection('courses');
 
+Courses.ContentSchema = ContentSchema('CourseContent');
+
 Courses.DaySchema = Astro.Class({
   name: 'CourseDay',
   fields: {
@@ -21,9 +23,18 @@ Courses.Schema = Astro.Class({
       type: 'string',
       validator: Validators.String(),
     },
+    info: {
+      type: 'array',
+      nested: 'CourseContent',
+      validator: Validators.minLength(1),
+      default: () => [],
+    },
     teachers: {
       type: 'array',
-      validator: Validators.and([Validators.minLength(1), Validators.References()]),
+      validator: Validators.and([
+        Validators.minLength(1),
+        Validators.References(),
+      ]),
     },
     students: {
       type: 'array',
@@ -38,12 +49,11 @@ Courses.Schema = Astro.Class({
     schedule: {
       type: 'array',
       nested: 'CourseDay',
-      validator: Validators.and([Validators.required(), Validators.minLength(0)]),
+      validator: Validators.and([
+        Validators.required(),
+        Validators.minLength(0),
+      ]),
       default: () => [],
-    },
-    score: {
-      type: 'number',
-      default: 100,
     },
     initial: {
       type: 'object',
