@@ -1,5 +1,5 @@
 import React from 'react';
-const { render } = Layout.setup({ protect: 'school', bar: true });
+const { render } = Layout.setup({ protect: 'school', nav: true, bar: true });
 
 const schoolRoutes = FlowRouter.group({
   prefix: '/escola',
@@ -9,6 +9,26 @@ const schoolRoutes = FlowRouter.group({
 schoolRoutes.route('/', {
   name: 'SchoolHome',
   action() {
-    render(<SchoolHomeView />);
+    render({
+      main: <SchoolHome />,
+    });
+  },
+});
+
+schoolRoutes.route('/cursos', {
+  name: 'SchoolCourses',
+  action() {
+    render({
+      main: <SchoolCourses />,
+    });
+  },
+});
+
+schoolRoutes.route('/cursos/novo', {
+  name: 'SchoolCourseCreate',
+  action() {
+    render({
+      main: <SchoolCourseCreate />,
+    });
   },
 });
