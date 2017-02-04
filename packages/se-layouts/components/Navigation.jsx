@@ -36,7 +36,10 @@ const Navigation = React.createClass({
           },
         },
         school: {
-
+          SchoolCourses: {
+            label: 'Cursos',
+            icon: 'dashboard',
+          },
         },
         teacher: {
           TeacherCourses: {
@@ -178,7 +181,6 @@ const Navigation = React.createClass({
             />
             <Divider/>
             {_.map(routes[user.getRole()], ({ label, icon }, _route) =>
-              (_.get(user, 'profile.school') || !_route.includes('Courses')) ?
               <ListItem
                 leftIcon={_.isNull(icon) ? undefined :
                   <FontIcon className='material-icons'>{icon}</FontIcon>}
@@ -187,7 +189,7 @@ const Navigation = React.createClass({
                 key={_route}
                 primaryText={label}
                 href={FlowRouter.path(_route)}
-              /> : undefined
+              />
             )}
             <Divider/>
             <div>
