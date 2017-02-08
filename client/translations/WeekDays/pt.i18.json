@@ -1,0 +1,12 @@
+{
+  "_locale": "pt-BR",
+  "_namespace": "WeekDays",
+  "title": "Português",
+  "mon": "Segunda",
+  "tue": "Terça",
+  "wed": "Quarta",
+  "thu": "Quinta",
+  "fri": "Sexta",
+  "sat": "Sábado",
+  "dom": "Domingo"
+}
