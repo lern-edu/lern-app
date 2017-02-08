@@ -6,20 +6,6 @@ import { MenuItem, TimePicker, SelectField } from 'material-ui';
 const SchoolCourseCreateFormSchedule = React.createClass({
   mixins: [AstroForm(Courses.DaySchema)],
 
-  // Static
-
-  styles: {
-    smallIcon: {
-      width: 36,
-      height: 36,
-    },
-    small: {
-      width: 72,
-      height: 72,
-      padding: 16,
-    },
-  },
-
   /* Handlers
   */
 
@@ -33,7 +19,6 @@ const SchoolCourseCreateFormSchedule = React.createClass({
   },
 
   handleEndDateChange(event, endDate) {
-    console.log(endDate);
     this.defaultHandler({ endDate: moment(endDate, 'H:m').toDate() },
       { doc: true });
   },
@@ -50,7 +35,6 @@ const SchoolCourseCreateFormSchedule = React.createClass({
     const { form } = this.props;
     const schedule = form.doc.get('schedule') || [];
     schedule.push(_.clone(this.doc));
-    console.log(schedule);
     form.defaultHandler({ schedule }, { doc: true });
     snack('Cronograma atualizado!');
     this.doc = new Courses.DaySchema();
@@ -144,7 +128,7 @@ const SchoolCourseCreateFormSchedule = React.createClass({
               label={'Terminar'}
               disabled={!done}
               primary={true}
-              onTouchTap={this.handleSubmit} />
+              onTouchTap={form.defaultSubmit} />
           </div>
 
         </div>

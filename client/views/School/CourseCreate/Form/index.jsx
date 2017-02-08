@@ -10,7 +10,7 @@ import SchoolCourseCreateFormPeople from './People/PeopleContainer.jsx';
 import SchoolCourseCreateFormSchedule from './Schedule/Schedule.jsx';
 
 const SchoolCourseCreateForm = React.createClass({
-  mixins: [AstroForm(Courses.Schema, 'SchoolCourseSave')],
+  mixins: [AstroForm(Courses.Schema, 'SchoolCourseCreate')],
 
   /* Lifecycle
   */

@@ -48,8 +48,6 @@ const SchoolCourseCreateFormPeopleView = React.createClass({
     const { form, done, errors, teachers, students } = this.props;
     const { user } = this.context;
 
-    console.log(teachers, students);
-
     return (
       <div className='ui basic segment' style={{ marginLeft: '5px' }} >
         <div className='ui grid'>
