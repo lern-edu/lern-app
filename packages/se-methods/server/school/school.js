@@ -2,7 +2,10 @@ import { convertToRaw, convertFromRaw, ContentState } from 'draft-js';
 const [prefix, protect] = ['School', 'school'];
 
 Helpers.Methods({ prefix, protect }, {
+
   CourseCreate(doc) {
+    doc.generateAlias();
+
     Helpers.DefaultSave(doc);
 
     const course = _.get(doc, '_id');
@@ -14,7 +17,6 @@ Helpers.Methods({ prefix, protect }, {
       };
     });
 
-    if (_.get(doc, '_isNew'))
     _.forEach(doc.schedule, s => {
       const startDate = moment(s.startDate);
       const endDate = moment(s.endDate);
@@ -37,14 +39,6 @@ Helpers.Methods({ prefix, protect }, {
         lectureDays.add(7, 'd');
       };
     });
-
-    if (_.includes(_.get(doc, 'subjects'), 'k5cvmFbgMcH7di52A')) {
-      const newTest = new Tests.Schema(Tests.findOne('Chzxqg7yBpY3GdbzG'));
-      newTest.set('course', _.get(doc, '_id'));
-      newTest.set('_id', null);
-      const test = newTest.save();
-      doc.set('initial', { 1: { test } });
-    };
 
     return doc;
   },

@@ -18,6 +18,7 @@ Package.onUse(function (api) {
     'helpers.js',
 
     'server/admin/admin.js',
+    'server/school/school.js',
     'server/teacher.js',
     'server/user.js',
     'server/public.js',
