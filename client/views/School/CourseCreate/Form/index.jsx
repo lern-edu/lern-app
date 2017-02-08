@@ -7,6 +7,7 @@ import SchoolCourseCreateFormBasic from './Basic/Basic.jsx';
 import SchoolCourseCreateFormTheme from './Theme/ThemeContainer.jsx';
 import SchoolCourseCreateFormTimeBounds from './TimeBounds/TimeBounds.jsx';
 import SchoolCourseCreateFormPeople from './People/PeopleContainer.jsx';
+import SchoolCourseCreateFormSchedule from './Schedule/Schedule.jsx';
 
 const SchoolCourseCreateForm = React.createClass({
   mixins: [AstroForm(Courses.Schema, 'SchoolCourseSave')],
@@ -15,7 +16,7 @@ const SchoolCourseCreateForm = React.createClass({
   */
 
   getInitialState() {
-    return { subjects: [], index: 3, allTags: false };
+    return { subjects: [], index: 0, allTags: false };
   },
 
   /* Handlers
@@ -49,7 +50,7 @@ const SchoolCourseCreateForm = React.createClass({
   */
 
   render() {
-    const { state: { index, errors } } = this;
+    const { state: { index, errors, valid } } = this;
 
     const done = {
       basic: !_.some(['name', 'info'],
@@ -60,7 +61,6 @@ const SchoolCourseCreateForm = React.createClass({
         k => _.get(this, `state.errors[${k}]`)),
       people: !_.some(['teachers', 'students'],
         k => _.get(this, `state.errors[${k}]`)),
-      schedule: true,
     };
 
     return (
@@ -115,11 +115,16 @@ const SchoolCourseCreateForm = React.createClass({
             </StepContent>
           </Step>
 
-          {/* <Step completed={done.schedule}>
-            <StepLabel>Horários</StepLabel>
-            <StepContent><p>Olá</p>
+          <Step completed={done.schedule}>
+            <StepLabel>Cronograma</StepLabel>
+            <StepContent>
+              <SchoolCourseCreateFormSchedule
+                errors={this.state.errors}
+                done={valid}
+                key='schedule'
+                form={this} />
             </StepContent>
-          </Step> */}
+          </Step>
 
         </Stepper>
 

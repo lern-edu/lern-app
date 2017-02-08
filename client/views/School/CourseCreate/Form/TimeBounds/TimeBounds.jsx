@@ -3,7 +3,7 @@ import React from 'react';
 import { RaisedButton } from 'material-ui';
 import { DatePicker, TimePicker } from 'material-ui';
 
-const PublicCourseCreateFormTimeBounds = React.createClass({
+const SchoolCourseCreateFormTimeBounds = React.createClass({
 
   // Handlers
 
@@ -93,4 +93,4 @@ const PublicCourseCreateFormTimeBounds = React.createClass({
   },
 });
 
-export default PublicCourseCreateFormTimeBounds;
+export default SchoolCourseCreateFormTimeBounds;
