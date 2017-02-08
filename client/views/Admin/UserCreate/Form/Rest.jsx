@@ -15,7 +15,8 @@ const AdminUserCreateFormRest = React.createClass({
   },
 
   handleInput({ currentTarget, target: { value } }) {
-    this.props.form.defaultHandler({ [currentTarget.getAttribute('name')]: value }, { doc: true });
+    this.props.form.defaultHandler({
+      [currentTarget.getAttribute('name')]: value, }, { doc: true });
   },
 
   handleSubmit() {
@@ -44,7 +45,8 @@ const AdminUserCreateFormRest = React.createClass({
                 key={school._id}
                 value={school._id}
                 primaryText={school.getName()}
-                secondaryText={SchoolTypes.getName(school.profile.schoolType)} />)}
+                secondaryText={SchoolTypes.getName(school.profile.schoolType)}
+              />)}
           </DropDownMenu>}
       </div>,
       <div className='row' key='cpf'>
