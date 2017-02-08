@@ -62,6 +62,7 @@ Courses.Schema = Astro.Class({
     },
     alias: {
       type: 'string',
+      validator: Validators.unique(),
     },
   },
   behaviors: [
