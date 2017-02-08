@@ -129,6 +129,8 @@ oauth@1.1.12
 oauth2@1.1.11
 observe-sequence@1.0.14
 ordered-dict@1.0.9
+ostrio:cookies@2.1.2
+ostrio:files@1.7.8
 pascoual:pdfkit@1.0.7
 patrickleet:enquire@2.2.0_1
 percolate:paginated-subscription@0.2.4
