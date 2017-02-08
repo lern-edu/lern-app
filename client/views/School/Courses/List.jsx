@@ -8,10 +8,11 @@ const SchoolCoursesList = React.createClass({
     return (
       <Paper className='ui vertical basic segment'>
         <List>
-         {_.map(courses, ({ _id, name }) =>
+         {_.map(courses, ({ _id, name, alias }) =>
            <ListItem
-            key={schoolId}
-            primaryText={name} />
+            key={_id}
+            primaryText={name}
+            secondaryText={<p>Chave de acesso: <b>{alias}</b></p>}/>
          )}
         </List>
       </Paper>
