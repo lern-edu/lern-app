@@ -14,7 +14,6 @@ if (Meteor.isServer) {
 FS.Images = new FilesCollection({
   storagePath: 'assets/app/uploads/images',
   collectionName: 'FS.Images',
-  debug: true,
   onBeforeUpload: function (file) {
     if (file.size <= (50 * 1024 * 1024) && /png|jpg|jpeg/i.test(file.ext)) {
       return true;
@@ -29,7 +28,7 @@ FS.Images = new FilesCollection({
       localFile: file.path,
       s3Params: {
         Bucket: 'se-edu',
-        Key: file._id,
+        Key: 'images/' + file._id,
       },
     };
 
@@ -45,7 +44,7 @@ FS.Images = new FilesCollection({
         Bucket: 'se-edu',
         Delete: {
           Objects: [{
-            Key: cursor[0]._id,
+            Key: 'images/' + cursor[0]._id,
           },
           ],
         },
@@ -64,17 +63,17 @@ FS.Images = new FilesCollection({
 });
 
 if (Meteor.isServer) {
-  FS.Images.deny({
+  FS.Images.allow({
     insert: function () {
-      return false;
+      return true;
     },
 
     update: function () {
-      return false;
+      return true;
     },
 
     remove: function () {
-      return false;
+      return true;
     },
   });
 }

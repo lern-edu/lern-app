@@ -14,9 +14,10 @@ Package.onUse(function (api) {
   api.addFiles([
     'namespace.js',
 
-    /*'collections/documents.js',*/
+    'collections/documents.js',
     'collections/images.js',
-    /*'collections/audios.js',*/
+    'collections/audios.js',
+    'collections/videos.js',
   ]);
 
   api.export([

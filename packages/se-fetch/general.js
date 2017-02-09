@@ -44,10 +44,13 @@ const defs = {
     collection: FS.Images.collection,
   },
   documents: {
-    collection: FS.Documents,
+    collection: FS.Documents.collection,
   },
   videos: {
-    collection: FS.Videos,
+    collection: FS.Videos.collection,
+  },
+  audios: {
+    collection: FS.Audios.collection,
   },
 };
 
