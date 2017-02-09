@@ -23,7 +23,6 @@ PublicContentCreate = React.createClass({
   handleSubmit() {
     const { type } = this.doc;
     const { form, schema, field, updateQuestionsSelected } = this.props;
-    console.log(this.doc);
     const array = form.doc.get(field) || [];
     array.push(_.clone(this.doc));
     form.defaultHandler({ [field]: array }, { doc: true });
