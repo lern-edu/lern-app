@@ -1,6 +1,9 @@
 import React from 'react';
 import { LinearProgress } from 'material-ui';
 import { FloatingActionButton, FontIcon } from 'material-ui';
+import TeacherCourseShowMenu from '.Menu.jsx';
+import TeacherCourseShowTests from './Tests/index.jsx';
+import TeacherCourseShowReports from './Reports/index.jsx';
 
 const TeacherCourseShowView = React.createClass({
 

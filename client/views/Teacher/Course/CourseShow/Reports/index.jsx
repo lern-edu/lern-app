@@ -1,6 +1,8 @@
 import React from 'react';
+import TeacherCourseShowReportsInput from './Input.jsx';
+import TeacherCourseShowReportsTable from './Table.jsx';
 
-TeacherCourseShowReports = React.createClass({
+const TeacherCourseShowReports = React.createClass({
   mixins: [Semantic.Transition('scale')],
 
   /* Lifecycle
@@ -39,3 +41,5 @@ TeacherCourseShowReports = React.createClass({
     );
   },
 });
+
+export default TeacherCourseShowReports;
