@@ -1,4 +1,4 @@
-![Lern Logo](lern-app/public/images/logo/mipmap-xxxhdpi/ic_launcher.png)
+![Lern Logo](http://ec2-52-67-98-219.sa-east-1.compute.amazonaws.com/wp-content/uploads/2016/10/icone-logo-1.png)
 
 #Lern - Soluções Educacionais
 
@@ -16,6 +16,7 @@
   - SemanticUI
   - Sass
   - MaterialUI
+  - [DraftJS](https://facebook.github.io/draft-js/) - [Examples](http://draftjs-examples.herokuapp.com/)
 - Misc
   - Lodash
   - Moment
