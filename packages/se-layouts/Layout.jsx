@@ -33,7 +33,6 @@ Layout = React.createClass({
   render() {
     const stuff = {
       ...this.props,
-      ...this.data,
       ...this.state,
     };
 

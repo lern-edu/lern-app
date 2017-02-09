@@ -1,0 +1,9 @@
+{
+  "_locale": "pt-BR",
+  "_namespace": "UserRoles",
+  "title": "Português",
+  "teacher": "Professor",
+  "student": "Estudante",
+  "admin": "Administrador",
+  "school": "Escola"
+}

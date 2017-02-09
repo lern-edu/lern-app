@@ -21,7 +21,7 @@ const AdminUserCreateFormBasic = React.createClass({
 
     const done = !_.some(['email', 'name', 'role'],
       k => _.get(form, `state.errors[${k}]`));
-    const role = _.get(form, 'doc.role') || 'student';
+    const role = _.get(form, 'doc.role');
 
     return (
       <div className='ui centered grid'>
@@ -46,7 +46,8 @@ const AdminUserCreateFormBasic = React.createClass({
 
         <div className='row'>
           <DropDownMenu value={role} onChange={this.handleRoleChange}>
-            {_.map(UserRoles.all('both'), (v, k) => <MenuItem value={k} key={k} primaryText={v} />)}
+            {_.map(UserRoles.all('both'), (v, k) =>
+            <MenuItem value={k} key={k} primaryText={v} />)}
           </DropDownMenu>
         </div>
 

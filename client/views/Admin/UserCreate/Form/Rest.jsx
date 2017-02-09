@@ -15,12 +15,13 @@ const AdminUserCreateFormRest = React.createClass({
   },
 
   handleInput({ currentTarget, target: { value } }) {
-    this.props.form.defaultHandler({ [currentTarget.getAttribute('name')]: value }, { doc: true });
+    this.props.form.defaultHandler({
+      [currentTarget.getAttribute('name')]: value, }, { doc: true });
   },
 
   handleSubmit() {
     const { form, form: { doc } } = this.props;
-    if (_.includes(['teacher', 'student'], doc.get('role')))
+    if (_.includes(['teacher', 'student'], doc.get('role')) && doc.get('school'))
       doc.set('schools', [doc.get('school')]);
     form.defaultSubmit();
   },
@@ -35,7 +36,7 @@ const AdminUserCreateFormRest = React.createClass({
     const role = form.doc.get('role');
     const teacherAndStudentView = [
       <div className='row' key='school'>
-        {!ready.schools ? <CircularProgress /> :
+        {(!ready.schools && !schools.length) ? <CircularProgress /> :
           <DropDownMenu
             value={form.doc.get('school')}
             onChange={this.handleSchoolChange} >
@@ -44,7 +45,8 @@ const AdminUserCreateFormRest = React.createClass({
                 key={school._id}
                 value={school._id}
                 primaryText={school.getName()}
-                secondaryText={SchoolTypes.getName(school.profile.schoolType)} />)}
+                secondaryText={SchoolTypes.getName(school.profile.schoolType)}
+              />)}
           </DropDownMenu>}
       </div>,
       <div className='row' key='cpf'>

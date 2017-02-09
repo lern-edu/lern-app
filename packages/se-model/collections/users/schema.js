@@ -5,6 +5,22 @@ Meteor.users.ProfileSchema = Astro.Class({
       type: 'string',
       validator: Validators.UserName(),
     },
+    profilePic: {
+      type: 'string',
+      optional: true,
+    },
+    gender: {
+      type: 'string',
+      optional: true,
+    },
+    firstName: {
+      type: 'string',
+      optional: true,
+    },
+    lastName: {
+      type: 'string',
+      optional: true,
+    },
     schoolType: {
       type: 'string',
       validator: Validators.OneOf(SchoolTypes.all('keys')),
@@ -24,20 +40,16 @@ Meteor.users.ProfileSchema = Astro.Class({
       type: 'string',
       validator: Validators.Reference(),
       optional: true,
-      default: 'fFNyCwTZXy5Xff7Wr',
     },
     schools: {
       type: 'array',
       validator: Validators.References(),
       optional: true,
-      default() {
-        return ['fFNyCwTZXy5Xff7Wr'];
-      },
     },
-    tutorial: {
+    setup: {
       type: 'boolean',
       validator: Validators.boolean(),
-      default: true,
+      default: false,
     },
   },
 });
@@ -88,7 +100,6 @@ Meteor.users.FormSchema = Astro.Class({
     role: {
       type: 'string',
       validator: Validators.OneOf(UserRoles.all('keys')),
-      default: 'student',
     },
     name: {
       type: 'string',
@@ -104,6 +115,7 @@ Meteor.users.FormSchema = Astro.Class({
     cnpj: {
       type: 'string',
       validator: Validators.UserRoles({ roles: ['school'], validator: Validators.cnpj() }),
+      optional: true,
     },
     cpf: {
       type: 'string',
@@ -111,6 +123,7 @@ Meteor.users.FormSchema = Astro.Class({
         roles: ['student', 'teacher'],
         validator: Validators.cpf(),
       }),
+      optional: true,
     },
     school: {
       type: 'string',
@@ -119,7 +132,6 @@ Meteor.users.FormSchema = Astro.Class({
         validator: Validators.Reference(),
       }),
       optional: true,
-      default: 'fFNyCwTZXy5Xff7Wr',
     },
     schools: {
       type: 'array',
@@ -128,9 +140,39 @@ Meteor.users.FormSchema = Astro.Class({
         validator: Validators.References(),
       }),
       optional: true,
-      default() {
-        return ['fFNyCwTZXy5Xff7Wr'];
-      },
+    },
+  },
+});
+
+Meteor.users.SetupSchema = Astro.Class({
+  name: 'UserSetup',
+  fields: {
+    email: {
+      type: 'string',
+      validator: Validators.and([Validators.required(), Validators.email()]),
+    },
+    roles: {
+      type: 'array',
+      validator: Validators.and([Validators.SomeOf(UserRoles.all('keys')), Validators.length(1)]),
+    },
+    name: {
+      type: 'string',
+      validator: Validators.UserName(),
+    },
+    cpf: {
+      type: 'string',
+      validator: Validators.UserRoles({
+        roles: ['student', 'teacher'],
+        validator: Validators.cpf(),
+      }),
+    },
+    schools: {
+      type: 'array',
+      validator: Validators.UserRoles({
+        roles: ['student', 'teacher'],
+        validator: Validators.References(),
+      }),
+      optional: true,
     },
   },
 });
@@ -146,8 +188,10 @@ Meteor.users.Schema = Astro.Class({
 
     roles: {
       type: 'array',
-      validator: Validators.and([Validators.SomeOf(UserRoles.all('keys')), Validators.length(1)]),
-      default: 'student',
+      validator: Validators.and([
+        Validators.SomeOf(UserRoles.all('keys')),
+        Validators.length(1),
+      ]),
     },
 
     profile: {

@@ -56,7 +56,11 @@ Fetch.General = _.mapValues(defs, def => (sel, opts={}) => {
   const selector =
       _.isArray(sel) ? { _id: { $in: _.compact(_.uniq(sel)) } }
     : _.isString(sel) ? sel
-    : _.isObject(sel) ? _.omitBy(sel, _.isUndefined)
+    : _.isObject(sel) ?
+      (_.mapValues(_.omitBy(sel, _.isUndefined), val =>
+        _.isArray(val) ? { $in: _.compact(_.uniq(val)) }
+        : val)
+      )
     : {}
     ;
 
