@@ -26,7 +26,8 @@
     "react-addons-pure-render-mixin": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-mounter": "^1.2.0",
-    "react-tap-event-plugin": "^2.0.0"
+    "react-tap-event-plugin": "^2.0.0",
+    "s3": "^4.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1"
