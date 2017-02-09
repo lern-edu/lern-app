@@ -36,12 +36,20 @@ const Navigation = React.createClass({
           },
         },
         school: {
+          SchoolHome: {
+            label: 'Home',
+            icon: 'home',
+          },
           SchoolCourses: {
             label: 'Cursos',
             icon: 'dashboard',
           },
         },
         teacher: {
+          TeacherHome: {
+            label: 'Home',
+            icon: 'home',
+          },
           TeacherCourses: {
             label: 'Disciplinas',
             icon: 'dashboard',
@@ -60,6 +68,10 @@ const Navigation = React.createClass({
           },
         },
         student: {
+          StudentHome: {
+            label: 'Home',
+            icon: 'home',
+          },
           StudentCourses: {
             label: 'Disciplinas',
             icon: 'dashboard',
@@ -162,7 +174,7 @@ const Navigation = React.createClass({
           </div>
         ) : (
           <div>
-            <ListItem
+            {/* <ListItem
               primaryText={user.getName() || '(no name)'}
               onClick={() => FlowRouter.go(user.getHomeRoute())}
               rightIconButton={
@@ -178,7 +190,7 @@ const Navigation = React.createClass({
                     color={grey300}>settings</FontIcon>
                 </IconButton>
               }
-            />
+            /> */}
             <Divider/>
             {_.map(routes[user.getRole()], ({ label, icon }, _route) =>
               <ListItem
@@ -191,7 +203,7 @@ const Navigation = React.createClass({
                 href={FlowRouter.path(_route)}
               />
             )}
-            <Divider/>
+            {/* <Divider/>
             <div>
               <IconButton
                 onClick={logout}
@@ -214,7 +226,7 @@ const Navigation = React.createClass({
                   className='material-icons'
                   color={grey300}>mail_outline</FontIcon>
               </IconButton>
-            </div>
+            </div> */}
           </div>
         )}
 

@@ -1,5 +1,49 @@
 import React from 'react';
-import { AppBar } from 'material-ui';
+import { AppBar, FlatButton, IconButton, FontIcon } from 'material-ui';
+import { Avatar, MenuItem, IconMenu, Divider } from 'material-ui';
+
+const Settings = React.createClass({
+
+  /* Get Context
+  */
+
+  contextTypes: {
+    user: React.PropTypes.object,
+  },
+
+  render() {
+    const { user } = this.context;
+    const profilePic = _.get(user, 'profile.profilePic');
+    const name = _.get(user, 'profile.name');
+
+    return (
+      !user ? <FlatButton href={FlowRouter.path('PublicLogin')} label='Login' /> :
+      <IconMenu {...this.props}
+        iconButtonElement={
+          <IconButton>{profilePic ? <Avatar src={profilePic} /> :
+            <Avatar size={32}>{_.first(name)}</Avatar>}</IconButton>}
+        targetOrigin={{ horizontal: 'left', vertical: 'bottom' }}
+        anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} >
+        <MenuItem primaryText={name} disabled={true} />
+        <Divider />
+        <MenuItem
+          primaryText='Configurações'
+          leftIcon={<FontIcon className='material-icons' >settings</FontIcon>}
+          onClick={event => event.stopPropagation() ||
+            FlowRouter.go(user.getSettingsRoute())} />
+        <MenuItem
+          primaryText='Fale conosco'
+          leftIcon={<FontIcon className='material-icons' >email</FontIcon>}
+          onClick={event => event.stopPropagation() ||
+            FlowRouter.go('PublicContact')} />
+        <MenuItem
+          primaryText='Sair'
+          leftIcon={<FontIcon className='material-icons' >close</FontIcon>}
+          onClick={event => event.stopPropagation() || Meteor.logout()} />
+      </IconMenu>
+    );
+  },
+});
 
 Layout.Bar = React.createClass({
   propTypes: {
@@ -51,6 +95,7 @@ Layout.Bar = React.createClass({
         title={this.getTitle({ title, screen, crumbs })}
         showMenuIconButton={true}
         onLeftIconButtonTouchTap={window.nav}
+        iconElementRight={<Settings />}
         style={{ position: 'fixed', top: 0, left: 0 }}
       />
     );
