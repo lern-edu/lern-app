@@ -5,6 +5,7 @@ import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 // Views
 import PublicContentShowQuestion from './QuestionContainer.jsx';
+import PublicContentShowImageView from './ImageContainer.jsx';
 
 PublicContentShow = React.createClass({
   mixins: [AstroForm()],
@@ -35,6 +36,9 @@ PublicContentShow = React.createClass({
                 convertFromRaw(text))} />,
           link: <a>{this.doc.get('link')}</a>,
           title: <h4>{this.doc.get('title')}</h4>,
+          image: <PublicContentShowImageView
+            form={this}
+            questionId={this.doc.get('image')} />,
           question: <PublicContentShowQuestion
             score={this.doc.get('score')}
             form={this}

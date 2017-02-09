@@ -68,14 +68,9 @@ const PublicContentCreateUpload = React.createClass({
   handleRemove() {
     const { image } = this.props.form.doc;
     var _this = this;
-    console.log(image);
-    console.log({ _id: image });
-    console.log(FS.Images.find({ _id: image }));
     FS.Images.remove({ _id: image }, function (err) {
-      if (err) {
-        console.log(err);
-        _this.setState({ upload: false });
-      } else {
+      if (err) _this.setState({ upload: false });
+      else {
         _this.props.form.defaultHandler({ image: null }, { doc: true });
         _this.setState({ upload: false,
           remove: false,
