@@ -18,6 +18,8 @@ const AdminTestCreateFormBasic = React.createClass({
   render() {
     const { form, done } = this.props;
 
+    console.log(form.doc);
+
     return (
       <div className='ui basic segment' style={{ marginLeft: '5px' }} >
         <div className='ui grid'>
@@ -34,6 +36,7 @@ const AdminTestCreateFormBasic = React.createClass({
           <div className='row'>
             <div className='sixteen wide column'>
               <PublicContentCreate
+                field='info'
                 schema={Tests.ContentSchema}
                 contentTypes={ContentTypes}
                 form={form} />
@@ -45,7 +48,7 @@ const AdminTestCreateFormBasic = React.createClass({
               <div className='sixteen wide column' key={i} >
                 <PublicContentShow
                   schema={Tests.ContentSchema}
-                  field='content'
+                  field='info'
                   form={form}
                   index={i}
                   doc={s} />
