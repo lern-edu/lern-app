@@ -5,7 +5,7 @@ TeacherQuestionsGallery = React.createClass({
     const { ready, questions } = this.props;
 
     return (
-      <Semantic.Transitions className='ui four cards'>
+      <div className='ui four cards'>
 
         {!ready.questions ? (
           <div className='ui inline active loader' />
@@ -17,7 +17,7 @@ TeacherQuestionsGallery = React.createClass({
           />
         )}
 
-      </Semantic.Transitions>
+      </div>
     );
   },
 });

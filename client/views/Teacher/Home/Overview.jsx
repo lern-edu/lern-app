@@ -13,7 +13,8 @@ TeacherHomeOverview = React.createClass({
         className='ui container fluid'
         style={{ backgroundColor: blue700, height: '90vh' }}>
         <div>
-          <img src="/images/steps-students/seta.svg" style={{ width: '300px', padding: '10px'}}></img>
+          <img src="/images/steps-students/seta.svg" style={{ width: '300px', padding: '10px' }}>
+          </img>
         </div>
         <div className='ui centered grid'>
           <div className='ten wide computer sixteen wide tablet column'>

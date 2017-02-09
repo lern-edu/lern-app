@@ -1,6 +1,8 @@
 import React from 'react';
+import { LinearProgress } from 'material-ui';
+import TeacherCoursesGalleryCard from './Card.jsx';
 
-TeacherCoursesGallery = React.createClass({
+const TeacherCoursesGallery = React.createClass({
   /* Render
   */
 
@@ -9,7 +11,7 @@ TeacherCoursesGallery = React.createClass({
 
     return (
       <div className='ui grid'>
-        {!ready.courses ? <MUI.LinearProgress /> : !courses.length ? (
+        {!ready.courses ? <LinearProgress /> : !courses.length ? (
           <Layout.NotFound path={FlowRouter.path('TeacherHome')}
             message='Você não está em nenhum curso'
             icon='bookmark_border'/>) : (_.map(courses, c =>
@@ -22,3 +24,5 @@ TeacherCoursesGallery = React.createClass({
     );
   },
 });
+
+export default TeacherCoursesGallery;

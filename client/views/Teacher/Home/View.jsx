@@ -1,4 +1,5 @@
 import React from 'react';
+import LinearProgress from 'material-ui';
 
 TeacherHomeView = React.createClass({
   mixins: [ReactMeteorData],
@@ -111,12 +112,12 @@ TeacherHomeView = React.createClass({
     return (
       <div>
         <Layout.Bar title='Início' />
-        <Semantic.Transitions component='div'>
-          {!_.every(ready) ? <MUI.LinearProgress /> : _.get({
+        <div>
+          {!_.every(ready) ? <LinearProgress /> : _.get({
             true: <TeacherHomeTutorial {...this.text} key='tutorial'/>,
             false: <TeacherHomeOverview {...this.data} key='overview'/>,
           }, tutorial)}
-        </Semantic.Transitions>
+        </div>
       </div>
     );
   },

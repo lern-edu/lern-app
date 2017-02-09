@@ -1,39 +1,24 @@
 import React from 'react';
+import { LinearProgress } from 'material-ui';
+import TeacherCoursesGallery from './Gallery/index.jsx';
 
-TeacherCoursesView = React.createClass({
-  mixins: [ReactMeteorData],
-
+const TeacherCoursesView = React.createClass({
   /* Reactive Data Fetching
   */
 
-  getMeteorData() {
-    const userId = Meteor.userId();
-
-    const handles = {
-      courses: Meteor.subscribe('TeacherCourses', {},
-        { subjects: true, tags: true }),
-    };
-
-    return {
-      ready: _.mapValues(handles, h => h.ready()),
-      subjects: Fetch.Public().subjects().fetch(),
-      tags: Fetch.Public().tags().fetch(),
-      courses: Fetch.Teacher(userId).courses().fetch(),
-    };
-  },
-
   render() {
-    const { ready } = this.data;
+    const { ready } = this.props;
     return (
       <div className='ui container'>
-
         <Layout.Bar title='Turmas' />
-        {!_.every(ready) ? <MUI.LinearProgress /> :
+        {!_.every(ready) ? <LinearProgress /> :
         <div className='ui basic segment'>
-          <TeacherCoursesGallery {...this.data} />
+          <TeacherCoursesGallery {...this.props} />
         </div>}
 
       </div>
     );
   },
 });
+
+export default TeacherCoursesView;

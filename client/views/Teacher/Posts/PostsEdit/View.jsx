@@ -1,4 +1,5 @@
 import React from 'react';
+import LinearProgress from 'material-ui';
 
 TeacherPostEditView = React.createClass({
   mixins: [ReactMeteorData],
@@ -20,7 +21,7 @@ TeacherPostEditView = React.createClass({
       ready: _.mapValues(handles, h => h.ready()),
       subjects: Fetch.Public().subjects().fetch(),
       tags: Fetch.Public().tags().fetch(),
-      courses:Fetch.General.courses().fetch(),
+      courses: Fetch.General.courses().fetch(),
       post: _.first(Fetch.General.posts(postId).fetch()),
     };
 
@@ -46,7 +47,7 @@ TeacherPostEditView = React.createClass({
 
         {courses && tags && subjects ? <TeacherPostEditForm
             {...this.data} {...this.props} doc={post}/> :
-          <MUI.LinearProgress />}
+          <LinearProgress />}
 
       </div>
     );
