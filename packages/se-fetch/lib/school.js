@@ -15,8 +15,9 @@ Fetch.School = function (schoolId) {
       return Fetch.General.users(selector);
     },
 
-    courses() {
+    courses(query) {
       const selector = { author: schoolId };
+      if (query) _.assign(selector, query);
       return Fetch.General.courses(selector);
     },
   };
