@@ -57,9 +57,6 @@ const PublicContentCreateUpload = React.createClass({
         else {
           _this.props.form.defaultHandler({ image: fileObj._id }, { doc: true });
           _this.setState({ upload: false, remove: true });
-          const images = Session.get('images') || [];
-          images.push(fileObj._id);
-          Session.set('images', images);
         };
       },
     });
@@ -76,9 +73,6 @@ const PublicContentCreateUpload = React.createClass({
           remove: false,
           file: null,
           fileName: null, });
-        const images = Session.get('images') || [];
-        _.pull(images, image._id);
-        Session.set('images', images);
       }
     });
   },
