@@ -47,7 +47,7 @@ const defs = {
     collection: FS.Documents,
   },
   videos: {
-    collection: FS.Videos,
+    collection: FS.Videos.collection,
   },
 };
 

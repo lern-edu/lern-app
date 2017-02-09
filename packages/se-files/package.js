@@ -17,6 +17,7 @@ Package.onUse(function (api) {
     /*'collections/documents.js',*/
     'collections/images.js',
     /*'collections/audios.js',*/
+    'collections/videos.js',
   ]);
 
   api.export([
