@@ -139,6 +139,7 @@ const AdminQuestionCreateForm = React.createClass({
                   field='content'
                   schema={Questions.ContentSchema}
                   form={this}
+                  index={i}
                   doc={s} />
               </div>)}
           </div>

@@ -14,11 +14,22 @@ PublicContentShow = React.createClass({
 
   handleRemove() {
     const { index, form, field, updateQuestionsSelected } = this.props;
+    console.log(this.props);
     const contentArray = form.doc.get(field);
     _.pullAt(contentArray, index);
     form.defaultHandler({ [field]: contentArray }, { doc: true });
     if (this.doc.get('type') == 'question')
       updateQuestionsSelected && updateQuestionsSelected();
+    if (this.doc.get('type') == 'image') {
+      var _this = this;
+      FS.Images.remove({ _id: _this.doc.get('image') }, function (err) {
+        if (!err) {
+          const images = Session.get('images') || [];
+          _.pull(images, _this.doc.get('image')._id);
+          Session.set('images', images);
+        }
+      });
+    }
   },
 
   // Render
