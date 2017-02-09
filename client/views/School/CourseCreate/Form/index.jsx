@@ -24,6 +24,7 @@ const SchoolCourseCreateForm = React.createClass({
 
   handleSubmitSuccess({ _id }) {
     console.log(`Course created: ${_id}`);
+    snack('Curso criado');
     FlowRouter.go('SchoolCourse', { courseId: _id });
   },
 
@@ -38,12 +39,6 @@ const SchoolCourseCreateForm = React.createClass({
   prevStep() {
     const { index } = this.state;
     this.setState({ index: index - 1 });
-  },
-
-  createCourseId(value) {
-    var year = new Date().getFullYear();
-    var name = value.trim().toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
-    this.defaultHandler({ alias: name.substr(0, 4) + '' + year }, { doc: true });
   },
 
   /* Render
