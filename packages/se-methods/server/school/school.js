@@ -2,6 +2,7 @@ import { convertToRaw, convertFromRaw, ContentState } from 'draft-js';
 const [prefix, protect] = ['School', 'school'];
 
 Helpers.Methods({ prefix, protect }, {
+  CourseSave: Helpers.DefaultSave,
 
   CourseCreate(doc) {
     doc.generateAlias();

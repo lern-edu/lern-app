@@ -1,6 +1,13 @@
 # School - Methods
 
-## CreateCourse:
+## CourseSave:
+- Default Save
+- How to use:
+~~~js
+Meteor.call('SchoolCourseSave', new Courses.Schema(), callback);
+~~~
+
+## CourseCreate:
 - How to use:
 ~~~js
 Meteor.call('SchoolCourseCreate', new Courses.Schema(), callback);
