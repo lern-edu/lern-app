@@ -16,7 +16,5 @@ export default PublicContentShowImage =
       image: _.head(Fetch.General.images(imageId).fetch()),
     };
 
-    data.image.link = FS.Images.link(data.image);
-
     return data;
   }, PublicContentShowImageView);

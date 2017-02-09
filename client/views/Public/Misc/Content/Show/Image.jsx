@@ -1,16 +1,13 @@
 import React from 'react';
-import { RaisedButton } from 'material-ui';
+import { CircularProgress } from 'material-ui';
 
 const PublicContentShowImageView = React.createClass({
   // render
 
   render() {
-    const { form, image } = this.props;
-
-    console.log(this.props);
-
+    const { form, image, ready } = this.props;
     return (
-      <img src={image.link}/>
+      _.every(ready) && image ? <img src={FS.Images.link(image)} /> : <CircularProgress />
     );
   },
 });

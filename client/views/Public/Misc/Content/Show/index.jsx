@@ -5,7 +5,7 @@ import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 // Views
 import PublicContentShowQuestion from './QuestionContainer.jsx';
-import PublicContentShowImageView from './ImageContainer.jsx';
+import PublicContentShowImage from './ImageContainer.jsx';
 
 PublicContentShow = React.createClass({
   mixins: [AstroForm()],
@@ -14,20 +14,15 @@ PublicContentShow = React.createClass({
 
   handleRemove() {
     const { index, form, field, updateQuestionsSelected } = this.props;
-    console.log(this.props);
     const contentArray = form.doc.get(field);
     _.pullAt(contentArray, index);
     form.defaultHandler({ [field]: contentArray }, { doc: true });
     if (this.doc.get('type') == 'question')
       updateQuestionsSelected && updateQuestionsSelected();
     if (this.doc.get('type') == 'image') {
-      var _this = this;
-      FS.Images.remove({ _id: _this.doc.get('image') }, function (err) {
-        if (!err) {
-          const images = Session.get('images') || [];
-          _.pull(images, _this.doc.get('image')._id);
-          Session.set('images', images);
-        }
+      FS.Images.remove({ _id: this.doc.get('image') }, function (err) {
+        if (!err) snack('Imagem removida');
+        else console.err(err);
       });
     }
   },
@@ -47,9 +42,9 @@ PublicContentShow = React.createClass({
                 convertFromRaw(text))} />,
           link: <a>{this.doc.get('link')}</a>,
           title: <h4>{this.doc.get('title')}</h4>,
-          image: <PublicContentShowImageView
+          image: <PublicContentShowImage
             form={this}
-            questionId={this.doc.get('image')} />,
+            imageId={this.doc.get('image')} />,
           question: <PublicContentShowQuestion
             score={this.doc.get('score')}
             form={this}
