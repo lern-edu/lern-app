@@ -8,15 +8,15 @@ Package.onUse(function (api) {
 
   api.use([
     'ecmascript',
-    'cfs:standard-packages',
-    'cfs:filesystem',
-    'cfs:s3',
+    'ostrio:files',
   ]);
 
   api.addFiles([
-    'collections/documents.js',
+    'namespace.js',
+
+    /*'collections/documents.js',*/
     'collections/images.js',
-    'collections/audios.js',
+    /*'collections/audios.js',*/
   ]);
 
   api.export([
