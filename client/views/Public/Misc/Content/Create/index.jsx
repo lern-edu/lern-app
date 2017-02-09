@@ -3,6 +3,7 @@ import { FlatButton, SelectField, MenuItem, TextField, Paper } from 'material-ui
 import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 
 import PublicContentCreateQuestion from './Question.jsx';
+import PublicContentCreateUpload from './Upload.jsx';
 
 PublicContentCreate = React.createClass({
   mixins: [AstroForm()],
@@ -94,6 +95,9 @@ PublicContentCreate = React.createClass({
                 floatingLabelText='Título'
                 onChange={this.handleTextChange}
                 errorText={_.get(errors, 'title')} />,
+            image: <PublicContentCreateUpload
+                  name='image'
+                  form={this} />,
             link: <TextField
                 name='link'
                 value={link}
