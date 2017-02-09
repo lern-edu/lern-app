@@ -11,8 +11,9 @@ Helpers.Publications({ type: 'plain', prefix, protect }, {
     return Fetch.School(userId).students();
   },
 
-  Courses() {
+  Courses({ courseIds }={}) {
     const { userId } = this;
-    return Fetch.School(userId).courses();
+    const selector = courseIds ? { _id: courseIds } : null;
+    return Fetch.School(userId).courses(selector);
   },
 });
