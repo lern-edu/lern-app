@@ -24,6 +24,15 @@ schoolRoutes.route('/cursos', {
   },
 });
 
+schoolRoutes.route('/cursos/:courseId', {
+  name: 'SchoolCourse',
+  action(params) {
+    render({
+      main: <SchoolCourse {...params} />,
+    });
+  },
+});
+
 schoolRoutes.route('/cursos/novo', {
   name: 'SchoolCourseCreate',
   action() {
