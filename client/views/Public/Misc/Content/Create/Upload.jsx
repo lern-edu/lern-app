@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { CardMedia, TextField, Dialog, CardTitle } from 'material-ui';
 import { Card, CardActions, CardHeader, FlatButton, CardText } from 'material-ui';
 
-const AdminQuestionCreateFormUpload = React.createClass({
+const PublicContentCreateUpload = React.createClass({
   // Static data
 
   instructions: {
@@ -55,27 +55,26 @@ const AdminQuestionCreateFormUpload = React.createClass({
       onUploaded: function (err, fileObj) {
         if (err) _this.setState({ file: null, open: true, upload: false });
         else {
-          console.log(_this.props);
           _this.props.form.defaultHandler({ image: fileObj._id }, { doc: true });
           _this.setState({ upload: false, remove: true });
-          const images = Session.get('images') || [];
-          images.push(fileObj._id);
-          Session.set('images', images);
         };
       },
     });
   },
 
   handleRemove() {
-    const { image } = this.props;
-    this.props.form.defaultHandler({ image: null }, { doc: true });
-    this.setState({ upload: false,
-      remove: false,
-      file: null,
-      fileName: null, });
-    const images = Session.get('images') || [];
-    _.pull(images, image._id);
-    Session.set('images', images);
+    const { image } = this.props.form.doc;
+    var _this = this;
+    FS.Images.remove({ _id: image }, function (err) {
+      if (err) _this.setState({ upload: false });
+      else {
+        _this.props.form.defaultHandler({ image: null }, { doc: true });
+        _this.setState({ upload: false,
+          remove: false,
+          file: null,
+          fileName: null, });
+      }
+    });
   },
 
   // Render
@@ -145,4 +144,4 @@ const AdminQuestionCreateFormUpload = React.createClass({
 
 });
 
-export default AdminQuestionCreateFormUpload;
+export default PublicContentCreateUpload;

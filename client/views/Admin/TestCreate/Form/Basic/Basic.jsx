@@ -18,6 +18,8 @@ const AdminTestCreateFormBasic = React.createClass({
   render() {
     const { form, done } = this.props;
 
+    console.log(form.doc);
+
     return (
       <div className='ui basic segment' style={{ marginLeft: '5px' }} >
         <div className='ui grid'>

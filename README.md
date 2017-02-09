@@ -1,6 +1,6 @@
 ![Lern Logo](http://ec2-52-67-98-219.sa-east-1.compute.amazonaws.com/wp-content/uploads/2016/10/icone-logo-1.png)
 
-#Lern - Soluções Educacionais
+# Lern - Soluções Educacionais
 
 ## Tech Stack:
 - Meteor
@@ -20,6 +20,8 @@
 - Misc
   - Lodash
   - Moment
+- Files
+  - [Ostrio](https://github.com/VeliovGroup/Meteor-Files)
 
 ## Languages
 - ES6 Javascript (.js)
