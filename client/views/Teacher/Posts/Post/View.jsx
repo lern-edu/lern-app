@@ -1,5 +1,6 @@
 import React from 'react';
-import { AutoComplete, MenuItem, FloatingActionButton, FontIcon } from 'material-ui';
+import { AutoComplete, MenuItem, FloatingActionButton,
+LinearProgress, FontIcon } from 'material-ui';
 
 TeacherPostView = React.createClass({
   mixins: [ReactMeteorData],
@@ -44,7 +45,7 @@ TeacherPostView = React.createClass({
           ]} />
           <div className='ui centered grid'>
             <div className='ten wide computer sixteen wide tablet column'>
-            {!_.every(ready) ? <MUI.LinearProgress /> : <TeacherPostCard {...this.data} />}
+            {!_.every(ready) ? <LinearProgress /> : <TeacherPostCard {...this.data} />}
             </div>
           </div>
 

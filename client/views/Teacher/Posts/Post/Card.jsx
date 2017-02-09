@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Badge, CardActions, CardHeader, CardMedia, CardTitle, FlatButton, CardText, FontIcon, IconButton, } from 'material-ui';
+import { Card, Badge, CardActions, CardHeader, CardMedia, CardTitle, FlatButton, CardText,
+FontIcon, IconButton, } from 'material-ui';
 
 TeacherPostCard = React.createClass({
 

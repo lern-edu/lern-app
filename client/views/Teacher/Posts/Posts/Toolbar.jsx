@@ -1,5 +1,6 @@
 import React from 'react';
-import { Toolbar, FontIcon, RaisedButton, ToolbarTitle, ToolbarGroup, SelectField, AutoComplete, MenuItem, IconMenu, IconButton, ToolbarSeparator } from 'material-ui';
+import { Toolbar, FontIcon, RaisedButton, ToolbarTitle, ToolbarGroup,
+SelectField, AutoComplete, MenuItem, IconMenu, IconButton, ToolbarSeparator } from 'material-ui';
 
 TeacherPostsToolbar = React.createClass({
 

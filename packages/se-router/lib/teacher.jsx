@@ -101,7 +101,7 @@ teacherRoutes.route('/disciplinas', {
   name: 'TeacherCourses',
   action() {
     render({
-      main: <TeacherCoursesView />,
+      main: <TeacherCourses />,
     });
   },
 });
@@ -110,7 +110,7 @@ teacherRoutes.route('/disciplinas/:courseId', {
   name: 'TeacherCourseShow',
   action(params, query) {
     render({
-      main: <TeacherCourseShowView {...params} {...query} />,
+      main: <TeacherCourseShow {...params} {...query} />,
     });
   },
 });

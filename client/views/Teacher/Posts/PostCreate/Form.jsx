@@ -26,7 +26,7 @@ TeacherPostCreateForm = React.createClass({
 
   handleCourseChange(event, index, course) {
     this.defaultHandler(
-      { course:_.isEqual(course, 'none') ? null : course, subjects: [], tags: [], },
+      { course: _.isEqual(course, 'none') ? null : course, subjects: [], tags: [], },
       { doc: true, query: true });
   },
 

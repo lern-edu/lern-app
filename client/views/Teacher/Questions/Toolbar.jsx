@@ -8,9 +8,7 @@ TeacherQuestionsToolbar = React.createClass({
       className='ui right aligned basic segment'
       style={{ position: 'fixed', bottom: '1em', right: '1em' }}>
         <FloatingActionButton
-          
           href={FlowRouter.path('TeacherQuestionCreate')}
-          labelPosition='after'
           children={<FontIcon className='material-icons'>add</FontIcon>}
         />
       </div>

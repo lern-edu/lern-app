@@ -1,8 +1,11 @@
 import React from 'react';
+import { LinearProgress } from 'material-ui';
 import { FloatingActionButton, FontIcon } from 'material-ui';
+import TeacherCourseShowMenu from '.Menu.jsx';
+import TeacherCourseShowTests from './Tests/index.jsx';
+import TeacherCourseShowReports from './Reports/index.jsx';
 
-TeacherCourseShowView = React.createClass({
-  mixins: [ReactMeteorData],
+const TeacherCourseShowView = React.createClass({
 
   //  static data
 
@@ -32,50 +35,6 @@ TeacherCourseShowView = React.createClass({
     },
   },
 
-  /* Reactive Data Fetching
-  */
-
-  getMeteorData() {
-    const { courseId } = this.props;
-
-    const handles = {
-      subjects: Meteor.subscribe('PublicSubjects'),
-      tags: Meteor.subscribe('PublicTags'),
-      course: Meteor.subscribe('TeacherCourses', { courseId }, {
-        posts: true,
-        users: true,
-        tests: true,
-        lectures: true,
-        attempts: true,
-        answers: true,
-        questions: true,
-        grades: true,
-      }),
-    };
-
-    const data = {
-      ready: _.mapValues(handles, h => h.ready()),
-      subjects: Fetch.Public().subjects().fetch(),
-      tags: Fetch.Public().tags().fetch(),
-      course: _.first(Fetch.General.courses(courseId).fetch()),
-      images: Fetch.General.images().fetch(),
-      documents: Fetch.General.documents().fetch(),
-      attempts: Fetch.General.attempts().fetch(),
-      answers: Fetch.General.answers().fetch(),
-      questions: Fetch.General.questions().fetch(),
-      grades: Fetch.General.grades().fetch(),
-    };
-
-    data.students = data.course && data.course.findStudents().fetch();
-    data.teachers = data.course && data.course.findTeachers().fetch();
-    data.tests = data.course && data.course.findTests().fetch();
-    data.posts = data.course && data.course.findPosts().fetch();
-    data.lectures = data.course && data.course.findLectures().fetch();
-    data.userId = Meteor.userId();
-
-    return data;
-  },
-
   //  Handlers
 
   handleTabChange(active) {
@@ -87,7 +46,7 @@ TeacherCourseShowView = React.createClass({
 
   render() {
     let { active='lectures' } = this.props;
-    const { ready, course } = this.data;
+    const { ready, course } = this.props;
     const { tabs, styles: { main, floatingButton, children: { cards } } } = this;
 
     if (!_.includes(_.keys(tabs), active))
@@ -110,8 +69,8 @@ TeacherCourseShowView = React.createClass({
           </div>
 
           <div {...main}>
-            {!_.every(ready) ? <MUI.LinearProgress /> :
-              <Semantic.Transitions component='div'>
+            {!_.every(ready) ? <LinearProgress /> :
+              <div>
                 {_.get({
                   lectures: <TeacherCourseShowLectures {...this.data} styles={cards} key='lectures' />,
                   tests: <TeacherCourseShowTests {...this.data} styles={cards} key='tests' />,
@@ -120,7 +79,7 @@ TeacherCourseShowView = React.createClass({
                   reports: <TeacherCourseShowReports {...this.data} key='reports' />,
                   posts: <TeacherCourseShowPosts {...this.data} key='posts' />,
                 }, active)}
-              </Semantic.Transitions>}
+              </div>}
           </div>
 
         </div>
@@ -129,7 +88,6 @@ TeacherCourseShowView = React.createClass({
         {!_.includes(['tests', 'posts', 'lectures'], active) ? undefined :
           <div {...floatingButton}>
             <FloatingActionButton
-            
             href={FlowRouter.path(`Teacher${_.get({
               posts: 'Post',
               lectures: 'Lecture',
@@ -143,3 +101,5 @@ TeacherCourseShowView = React.createClass({
     );
   },
 });
+
+export default TeacherCourseShowView;

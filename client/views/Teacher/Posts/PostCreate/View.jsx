@@ -1,4 +1,5 @@
 import React from 'react';
+import LinearProgress from 'material-ui';
 
 TeacherPostCreateView = React.createClass({
   mixins: [ReactMeteorData],
@@ -53,7 +54,7 @@ TeacherPostCreateView = React.createClass({
           ]} />
 
         {courses && tags && subjects ? <TeacherPostCreateForm {...this.data} {...this.props} /> :
-          <MUI.LinearProgress />}
+          <LinearProgress />}
 
       </div>
     );
