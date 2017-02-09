@@ -1,6 +1,6 @@
 ![Lern Logo](lern-app/public/images/logo/mipmap-xxxhdpi/ic_launcher.png)
 
-#Lern - Soluções Educacionais
+# Lern - Soluções Educacionais
 
 ## Tech Stack:
 - Meteor
@@ -19,6 +19,8 @@
 - Misc
   - Lodash
   - Moment
+- Files
+  - [Ostrio](https://github.com/VeliovGroup/Meteor-Files)
 
 ## Languages
 - ES6 Javascript (.js)
