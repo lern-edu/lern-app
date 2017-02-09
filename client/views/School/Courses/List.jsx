@@ -8,11 +8,12 @@ const SchoolCoursesList = React.createClass({
     return (
       <Paper className='ui vertical basic segment'>
         <List>
-         {_.map(courses, ({ _id, name, alias }) =>
+         {_.map(courses, ({ _id: courseId, name, alias }) =>
            <ListItem
-            key={_id}
+            key={courseId}
             primaryText={name}
-            secondaryText={<p>Chave de acesso: <b>{alias}</b></p>}/>
+            secondaryText={<p>Chave de acesso: <b>{alias}</b></p>}
+            onTouchTap={() => FlowRouter.go('SchoolCourse', { courseId })} />
          )}
         </List>
       </Paper>
