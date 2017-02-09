@@ -24,7 +24,7 @@ const SchoolCourseCreateForm = React.createClass({
 
   handleSubmitSuccess({ _id }) {
     console.log(`Course created: ${_id}`);
-    FlowRouter.go('SchoolCourses');
+    FlowRouter.go('SchoolCourse', { courseId: _id });
   },
 
   /* Methods

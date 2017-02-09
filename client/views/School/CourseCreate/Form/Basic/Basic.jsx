@@ -46,7 +46,7 @@ const SchoolCourseCreateForm = React.createClass({
               <div className='sixteen wide column' key={i} >
                 <PublicContentShow
                   schema={Courses.ContentSchema}
-                  field='content'
+                  field='info'
                   form={form}
                   index={i}
                   doc={s} />
