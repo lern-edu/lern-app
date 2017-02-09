@@ -49,6 +49,9 @@ const defs = {
   videos: {
     collection: FS.Videos.collection,
   },
+  audios: {
+    collection: FS.Audios.collection,
+  },
 };
 
 Fetch.General = _.mapValues(defs, def => (sel, opts={}) => {
