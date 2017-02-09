@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardText, FlatButton, CardActions } from 'material-ui';
 
-TeacherCourseShowTestsCard = React.createClass({
+const TeacherCourseShowTestsCard = React.createClass({
   mixins: [Semantic.Transition('scale')],
 
   // Static data
@@ -38,7 +38,7 @@ TeacherCourseShowTestsCard = React.createClass({
               href={_.get(test, 'type') === 'cognitive' ?
             FlowRouter.path('TeacherTestShowCognitive', { courseId: course._id, testId: test._id })
             : FlowRouter.path('TeacherTestShow', { courseId: course._id, testId: test._id })}
-              
+
               label='Ver'
               secondary={true} />
             </CardActions>}
@@ -47,3 +47,5 @@ TeacherCourseShowTestsCard = React.createClass({
     );
   },
 });
+
+export default TeacherCourseShowTestsCard;

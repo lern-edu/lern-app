@@ -1,6 +1,7 @@
 import React from 'react';
+import TeacherCourseShowTestsCard from './Card.jsx';
 
-TeacherCourseShowTests = React.createClass({
+const TeacherCourseShowTests = React.createClass({
   mixins: [Semantic.Transition('scale')],
 
   /* Render
@@ -21,3 +22,5 @@ TeacherCourseShowTests = React.createClass({
     );
   },
 });
+
+export default TeacherCourseShowTests;
