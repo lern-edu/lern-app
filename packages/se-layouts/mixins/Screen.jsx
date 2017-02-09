@@ -24,24 +24,26 @@ const Screen = {
   // Lifecycle
 
   getInitialState() {
-    return { screen: undefined, innerHeight: window.innerHeight, innerWidth: window.innerWidth };
+    return {
+      screen: undefined,
+      innerHeight: window.innerHeight,
+      innerWidth: window.innerWidth,
+      queries: this.getMediaQueries(),
+    };
   },
 
   componentDidMount() {
     window.addEventListener('resize', this.handleResize);
-    this.queries = this.getMediaQueries();
-
-    const { breakpoints: bps, queries } = this;
+    const { queries } = this.state;
+    const { breakpoints: bps } = this;
     _.forEach(queries, (query, i) =>
-      enquire.register(query, () =>
-        this.setState({ screen: bps[i].label })
-      )
+      enquire.register(query, () => this.setState({ screen: bps[i].label }))
     );
   },
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
-    const { queries } = this;
+    const { queries } = this.state;
     _.forEach(queries, query =>
       enquire.unregister(query)
     );
