@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardActions, CardTitle, Divider, FlatButton, CardText, FontIcon,
   List, ListItem } from 'material-ui';
 
-TeacherCoursesGalleryCard = React.createClass({
+const TeacherCoursesGalleryCard = React.createClass({
   /* Render
   */
 
@@ -47,3 +47,5 @@ TeacherCoursesGalleryCard = React.createClass({
     );
   },
 });
+
+export default TeacherCoursesGalleryCard;

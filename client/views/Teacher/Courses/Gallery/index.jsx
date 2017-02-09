@@ -1,7 +1,8 @@
 import React from 'react';
-import LinearProgress from 'material-ui';
+import { LinearProgress } from 'material-ui';
+import TeacherCoursesGalleryCard from './Card.jsx';
 
-TeacherCoursesGallery = React.createClass({
+const TeacherCoursesGallery = React.createClass({
   /* Render
   */
 
@@ -23,3 +24,5 @@ TeacherCoursesGallery = React.createClass({
     );
   },
 });
+
+export default TeacherCoursesGallery;

@@ -101,7 +101,7 @@ teacherRoutes.route('/disciplinas', {
   name: 'TeacherCourses',
   action() {
     render({
-      main: <TeacherCoursesView />,
+      main: <TeacherCourses />,
     });
   },
 });
