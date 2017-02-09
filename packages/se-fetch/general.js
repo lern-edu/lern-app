@@ -41,7 +41,7 @@ const defs = {
   },
 
   images: {
-    collection: FS.Images,
+    collection: FS.Images.collection,
   },
   documents: {
     collection: FS.Documents,
