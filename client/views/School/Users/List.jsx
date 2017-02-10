@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, List, ListItem } from 'material-ui';
 
-const SchoolHomeList = React.createClass({
+const SchoolUsersList = React.createClass({
   render() {
     const { courses } = this.props;
 
@@ -19,4 +19,4 @@ const SchoolHomeList = React.createClass({
   },
 });
 
-export default SchoolHomeList;
+export default SchoolUsersList;

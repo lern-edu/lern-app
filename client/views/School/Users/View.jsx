@@ -1,5 +1,7 @@
 import React from 'react';
 
+import SchoolUsersList from './List.jsx';
+
 /*const*/ SchoolUsers = React.createClass({
 
   /* Render
