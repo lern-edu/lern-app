@@ -15,7 +15,7 @@ const SchoolCoursesView = React.createClass({
 
     return (
       <div className='ui container'>
-        <Layout.Bar title='Home' />
+        <Layout.Bar title='Cursos' />
         <SchoolCoursesToolbar />
         <SchoolCoursesList {...this.props} />
       </div>

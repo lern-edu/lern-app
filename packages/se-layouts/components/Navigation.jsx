@@ -40,6 +40,10 @@ const Navigation = React.createClass({
             label: 'Cursos',
             icon: 'dashboard',
           },
+          SchoolUsers: {
+            label: 'Alunos',
+            icon: 'school',
+          },
         },
         teacher: {
           TeacherCourses: {
