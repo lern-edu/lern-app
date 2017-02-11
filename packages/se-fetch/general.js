@@ -60,8 +60,9 @@ Fetch.General = _.mapValues(defs, def => (sel, opts={}) => {
       _.isArray(sel) ? { _id: { $in: _.compact(_.uniq(sel)) } }
     : _.isString(sel) ? sel
     : _.isObject(sel) ?
-      (_.mapValues(_.omitBy(sel, _.isUndefined), val =>
-        _.isArray(val) ? { $in: _.compact(_.uniq(val)) }
+      (_.mapValues(_.omitBy(sel, _.isUndefined), (val, key) =>
+        _.isArray(val) ?
+        _.head(key) === '$' ? val : { $in: _.compact(_.uniq(val)) }
         : val)
       )
     : {}
