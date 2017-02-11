@@ -3,20 +3,26 @@ import { Paper, List, ListItem } from 'material-ui';
 import { FontIcon } from 'material-ui';
 
 const SchoolUsersList = React.createClass({
+
+  handleUserRemove({ currentTarget }) {
+    let { doc: { profile } } = this;
+    _.pull(profile.schools, currentTarget.getAttribute('data-key'));
+    this.defaultHandler({ profile }, { doc: true });
+  },
+
   render() {
-    const { courses } = this.props;
+    const { state: { group }, props: { courses, users, query } } = this;
 
     return (
       <Paper className='ui vertical basic segment'>
         <List>
            <ListItem
-            key={name}
-            primaryText="{name}"
+            key={_id}
+            data-key={_id}
+            primaryText={name}
             rightIcon={<FontIcon
-              //data-email={address}
-              //onTouchTap=
+              onTouchTap={this.handleUserRemove}
               className='material-icons'>delete</FontIcon>}
-
            />
         </List>
       </Paper>

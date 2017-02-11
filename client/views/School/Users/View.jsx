@@ -2,7 +2,7 @@ import React from 'react';
 
 import SchoolUsersList from './List.jsx';
 
-/*const*/ SchoolUsers = React.createClass({
+const SchoolUsersView = React.createClass({
 
   /* Render
   */
@@ -13,11 +13,11 @@ import SchoolUsersList from './List.jsx';
     return (
       <div className='ui container'>
         <Layout.Bar title='Alunos' />
-        <SchoolUsersToolbar key='toolbar'/>
+        {/* <SchoolUsersToolbar key='toolbar'/> */}
         <SchoolUsersList key='list'/>
       </div>
     );
   },
 });
 
-// export default SchoolUsersView;
+export default SchoolUsersView;
