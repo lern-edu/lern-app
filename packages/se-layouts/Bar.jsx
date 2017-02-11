@@ -13,12 +13,13 @@ const Settings = React.createClass({
 
   render() {
     const { user } = this.context;
+    const { disableActions } = this.props;
     const profilePic = _.get(user, 'profile.profilePic');
     const name = _.get(user, 'profile.name');
 
     return (
       !user ? <FlatButton href={FlowRouter.path('PublicLogin')} label='Login' /> :
-      <IconMenu {...this.props}
+      <IconMenu {..._.omit(this.props, ['disableActions'])}
         iconButtonElement={
           <IconButton>{profilePic ? <Avatar src={profilePic} /> :
             <Avatar size={32}>{_.first(name)}</Avatar>}</IconButton>}
@@ -26,11 +27,11 @@ const Settings = React.createClass({
         anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} >
         <MenuItem primaryText={name} disabled={true} />
         <Divider />
-        <MenuItem
+        {disableActions ? undefined : <MenuItem
           primaryText='Configurações'
           leftIcon={<FontIcon className='material-icons' >settings</FontIcon>}
           onClick={event => event.stopPropagation() ||
-            FlowRouter.go(user.getSettingsRoute())} />
+            FlowRouter.go(user.getSettingsRoute())} />}
         <MenuItem
           primaryText='Fale conosco'
           leftIcon={<FontIcon className='material-icons' >email</FontIcon>}
@@ -87,15 +88,15 @@ Layout.Bar = React.createClass({
 
   render() {
     const { screen } = this.context;
-    const { crumbs, title } = this.props;
+    const { crumbs, title, disableActions } = this.props;
 
     return (
       <AppBar
-        {..._.omit(this.props, ['crumbs'])}
+        {..._.omit(this.props, ['crumbs', 'disableActions'])}
         title={this.getTitle({ title, screen, crumbs })}
         showMenuIconButton={true}
-        onLeftIconButtonTouchTap={window.nav}
-        iconElementRight={<Settings />}
+        onLeftIconButtonTouchTap={disableActions ? () => false : window.nav}
+        iconElementRight={<Settings disableActions={disableActions} />}
         style={{ position: 'fixed', top: 0, left: 0 }}
       />
     );
