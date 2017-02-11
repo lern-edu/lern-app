@@ -30,11 +30,11 @@ PublicContentShow = React.createClass({
   // Render
 
   render() {
-    const { index, scored } = this.props;
+    const { index, scored, canRemove=true } = this.props;
     const text = this.doc.get('text');
 
     return (
-      <Paper style={{ padding: 15 }}>
+      <div style={{ padding: 15 }}>
         {_.get({
           text: <Editor
               readOnly={true}
@@ -54,11 +54,11 @@ PublicContentShow = React.createClass({
 
         <br/>
 
-        <FlatButton
+        {!canRemove ? undefined : <FlatButton
           onTouchTap={this.handleRemove}
           secondary={true}
-          label='Remover' />
-      </Paper>
+          label='Remover' />}
+      </div>
     );
   },
 
