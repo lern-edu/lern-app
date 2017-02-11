@@ -91,17 +91,19 @@ AstroForm = function (AstroClass, submitMethod) {
     },
 
     defaultSubmit(event) {
-      this.setState({ valid: false });
       if (event && event.preventDefault) event.preventDefault();
       if (!submitMethod) this.callback('error', new Meteor.Error('no submit method set'));
       else if (!this.state.valid)
         this.callback('error', new Meteor.Error('invalid state: submit aborted'));
       else if (_.isFunction(submitMethod)) submitMethod();
-      else Meteor.call(submitMethod, this.doc, (err, res) => {
-        if (err) {
-          this.callback('error', err);
-        } else this.callback('success', res);
-      });
+      else {
+        this.setState({ valid: false });
+        Meteor.call(submitMethod, this.doc, (err, res) => {
+          if (err) {
+            this.callback('error', err);
+          } else this.callback('success', res);
+        });
+      };
     },
 
   };
