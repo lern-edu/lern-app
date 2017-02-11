@@ -13,7 +13,8 @@ import SchoolUsersList from './List.jsx';
     return (
       <div className='ui container'>
         <Layout.Bar title='Alunos' />
-        <SchoolUsersList />
+        <SchoolUsersToolbar key='toolbar'/>
+        <SchoolUsersList key='list'/>
       </div>
     );
   },
