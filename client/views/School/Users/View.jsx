@@ -13,9 +13,7 @@ import SchoolUsersList from './List.jsx';
     return (
       <div className='ui container'>
         <Layout.Bar title='Alunos' />
-        <a href={FlowRouter.path('SchoolCourses')}>Que tal gerenciar seus cursos?</a>
-        <a href={FlowRouter.path('SchoolUsers')}>Que tal gerenciar alunos e professores?</a>
-        {/* <SchoolHomeToolbar /> */}
+        <SchoolUsersList />
       </div>
     );
   },

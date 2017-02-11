@@ -1,5 +1,6 @@
 import React from 'react';
 import { Paper, List, ListItem } from 'material-ui';
+import { FontIcon } from 'material-ui';
 
 const SchoolUsersList = React.createClass({
   render() {
@@ -8,11 +9,15 @@ const SchoolUsersList = React.createClass({
     return (
       <Paper className='ui vertical basic segment'>
         <List>
-         {_.map(courses, ({ _id, name }) =>
            <ListItem
-            key={schoolId}
-            primaryText={name} />
-         )}
+            key={name}
+            primaryText="{name}"
+            rightIcon={<FontIcon
+              //data-email={address}
+              //onTouchTap=
+              className='material-icons'>delete</FontIcon>}
+
+           />
         </List>
       </Paper>
     );
