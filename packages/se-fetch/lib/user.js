@@ -10,5 +10,6 @@ Fetch.User = function (userId) {
       const selector = { author: userId, grade: { $ne: null } };
       return Fetch.General.answers(selector, opts);
     },
+
   };
 };
