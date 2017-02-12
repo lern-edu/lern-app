@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SchoolUsersList from './List.jsx';
+import SchoolUsersToolbar from './Toolbar.jsx';
 
 const SchoolUsersView = React.createClass({
 
@@ -13,7 +14,7 @@ const SchoolUsersView = React.createClass({
     return (
       <div className='ui container'>
         <Layout.Bar title='Alunos' />
-        {/* <SchoolUsersToolbar key='toolbar'/> */}
+        <SchoolUsersToolbar key='toolbar'/>
         <SchoolUsersList key='list'/>
       </div>
     );

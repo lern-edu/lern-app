@@ -12,8 +12,7 @@ const SchoolUsersToolbar = React.createClass({
           <ToolbarGroup className='sixteen wide column'>
             <TextField
               hintText='Pesquisar'
-              fullWidth={true}
-              onChange={this.props.update} />
+              fullWidth={true} />
           </ToolbarGroup>
         </div>
       </Toolbar>
