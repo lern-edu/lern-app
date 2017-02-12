@@ -6,15 +6,15 @@ import { Meteor } from 'meteor/meteor';
 import SchoolUsersView from './View.jsx';
 
 SchoolUsers = createContainer(({ params }) => {
+  const userId = Meteor.userId();
   const handles = {
-    users: Meteor.subscribe('AdminUsers'),
-    courses: Meteor.subscribe('AdminCourses'),
+    students: Meteor.subscribe('SchoolStudents'),
   };
 
-  return {
+  const data = {
     ready: _.mapValues(handles, h => h.ready()),
-    users: Fetch.General.users().fetch(),
-    courses: Fetch.General.courses().fetch(),
+    students: Fetch.School(userId).students().fetch(),
   };
 
+  return data;
 }, SchoolUsersView);
