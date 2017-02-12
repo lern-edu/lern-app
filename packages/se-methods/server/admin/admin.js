@@ -11,6 +11,21 @@ Helpers.Methods({ prefix, protect }, {
     Accounts.setPassword(userId, password, { logout: true });
   },
 
+  UserAddEmail(id, email) {
+    Accounts.addEmail(id, email);
+    return true;
+  },
+
+  UserSendEnrollmentEmail(id, email) {
+    Accounts.sendEnrollmentEmail(id, email);
+    return true;
+  },
+
+  UserSendVerificationEmail(id, email) {
+    Accounts.sendVerificationEmail(id, email);
+    return true;
+  },
+
   UserCreate(doc) {
     Check.Astro(doc).valid();
 
@@ -252,21 +267,6 @@ Helpers.Methods({ prefix, protect }, {
     ]);
   },
 
-  UserAddEmail(id, email) {
-    Accounts.addEmail(id, email);
-    return true;
-  },
-
-  UserSendEnrollmentEmail(id, email) {
-    Accounts.sendEnrollmentEmail(id, email);
-    return true;
-  },
-
-  UserSendVerificationEmail(id, email) {
-    Accounts.sendVerificationEmail(id, email);
-    return true;
-  },
-
   SubjectCreate(name) {
     const doc = new Subjects.Schema({ name });
     Check.Astro(doc).valid();
@@ -312,49 +312,6 @@ Helpers.Methods({ prefix, protect }, {
     Check.Astro(test).valid();
     test.save();
     return test;
-  },
-
-  ReplaceUserCourse() {
-    const oldCourse = Courses.findOne('KXPYeZXuyhtNADCZT');
-
-    const rejectStu = ['2T8exFihAGEasSH7L',
-      'FEzv6S5tHgJaC54tC',
-      'H8tCBDTwiqDrMEtw8',
-      'NahyWsxMREYjofSjf',
-      'QQvsvFgsgddsb4WT8',
-      'X3e8fEpX8ZTDAEW7i',
-      'Y45Li8sbEgz5qanSA',
-      'agrLe4tRagLbc68kj',
-      'an9aPh23RgYvtD3Pe',
-      'bY4XEugEQFmEwSiaW',
-      'emPGJ9jxAPLyE8jb8',
-      'evig35iX69TwunNeL',
-      'neuDrsRAAthqmDgxx',
-      'ubPxCgj5DWGKdhbtZ',
-      'yicnfJSWTSYX4Fprs',
-    ];
-
-    const students = oldCourse.get('students');
-    _.uniq(students);
-    _.pullAll(students, rejectStu);
-    oldCourse.set('students', students);
-    oldCourse.save();
-
-    const newCourse = Courses.findOne('yBDMnm7xH9Qqgsddk');
-    const newstuds = newCourse.get('students');
-    newCourse.set('students', _.concat(newstuds, rejectStu));
-    newCourse.save();
-
-    const newtest = Tests.findOne({ course: newCourse.get('_id') });
-
-    const rejeAttempts = Attempts.find({ author: { $in: rejectStu } }).fetch();
-
-    _.forEach(rejeAttempts, ra => {
-      ra.set('test', newtest.get('_id'));
-      ra.save();
-    });
-
-    return true;
   },
 
   ExportData(courseId) {

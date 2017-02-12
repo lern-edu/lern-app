@@ -24,11 +24,31 @@ studentRoutes.route('/relatorio', {
   },
 });
 
+// Settings
+
 studentRoutes.route('/ajustes', {
   name: 'StudentSettings',
   action(params, query) {
     render({
       main: <StudentSettingsView {...query}/>,
+    });
+  },
+});
+
+studentRoutes.route('/setup/:alias?', {
+  name: 'StudentSetup',
+  action(params, query) {
+    render({
+      main: <StudentSetup {...query}/>,
+    });
+  },
+});
+
+studentRoutes.route('/curso/ingressar/:alias?', {
+  name: 'StudentCourseIngress',
+  action(params, query) {
+    render({
+      main: <StudentCourseIngress {...query}/>,
     });
   },
 });

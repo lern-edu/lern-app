@@ -56,7 +56,7 @@ PublicLoginView = React.createClass({
   // render
 
   render() {
-    const { state: { tab } } = this;
+    const { tab } = this.state;
     const styles = this.createStyles();
 
     return (
@@ -67,10 +67,10 @@ PublicLoginView = React.createClass({
         <Paper {...styles.form}>
           <Tabs value={tab} onChange={this.handleTabChange}>
             <Tab label='Entrar' value='enter' >
-              <PublicLoginEnter />
+              <PublicLoginEnter {...this.props} />
             </Tab>
             <Tab label='Cadastrar' value='register' >
-              <PublicLoginRegister />
+              <PublicLoginRegister {...this.props} />
             </Tab>
           </Tabs>
 

@@ -5,7 +5,6 @@ import _ from 'lodash';
 Meteor.startup(() => {
   if (Meteor.isServer) {
     Accounts.onCreateUser((options, user) => {
-
       if (_.get(user, 'services.facebook')) {
         const face = _.get(user, 'services.facebook');
         user.profile = {

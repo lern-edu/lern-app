@@ -25,6 +25,22 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
+  CourseByAlias({ alias=null }, { author }={}) {
+    return {
+      find() {
+        return Fetch.General.courses({ alias });
+      },
+
+      children: [
+        {
+          find(course) {
+            return author && course.findAuthor();
+          },
+        },
+      ],
+    };
+  },
+
   Courses({ courseId }={}, { posts,
     users,
     tests,

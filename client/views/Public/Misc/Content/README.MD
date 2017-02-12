@@ -72,6 +72,7 @@
 - How to use:
 ~~~html
 <PublicContentCreate
+    canRemove={Boolean}
     field='Field to remove from form'
     schema={Collection.ContentSchema}
     form={Document where infos are storaged}
@@ -84,6 +85,7 @@
 - [Example on github](https://github.com/lern-edu/lern-app/blob/develop/lern-app/client/views/Admin/TestCreate/Form/Page/Create.jsx)
 ~~~html
 <PublicContentCreate
+    canRemove={true}
     schema={Tests.PageContentSchema}
     field='content'
     contentTypes={PageContentTypes}
@@ -137,3 +139,6 @@
 - `subjects`
   - **Type**: `[Documents]`
   - **Description**: Fetched subjects to display on query to find questions
+- `canRemove` - Default: `true`
+- **Type**: `Boolean`
+- **Description**: Display button to remove content

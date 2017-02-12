@@ -1,6 +1,10 @@
 Courses.Schema.extend({
   methods: {
 
+    findAuthor() {
+      return Fetch.General.users(this.get('author'));
+    },
+
     findSubjects() {
       return Fetch.General.subjects(_.map(this.subjects));
     },
