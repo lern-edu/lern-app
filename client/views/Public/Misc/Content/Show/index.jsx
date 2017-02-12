@@ -35,6 +35,7 @@ PublicContentShow = React.createClass({
 
     return (
       <div style={{ padding: 15 }}>
+
         {_.get({
           text: <Editor
               readOnly={true}

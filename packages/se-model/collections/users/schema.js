@@ -49,7 +49,7 @@ Meteor.users.ProfileSchema = Astro.Class({
     setup: {
       type: 'boolean',
       validator: Validators.boolean(),
-      default: true,
+      default: false,
     },
   },
 });

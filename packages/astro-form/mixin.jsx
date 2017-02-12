@@ -91,6 +91,7 @@ AstroForm = function (AstroClass, submitMethod) {
     },
 
     defaultSubmit(event) {
+      this.setState({ valid: false });
       if (event && event.preventDefault) event.preventDefault();
       if (!submitMethod) this.callback('error', new Meteor.Error('no submit method set'));
       else if (!this.state.valid)
