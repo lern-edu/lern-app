@@ -1,9 +1,9 @@
 import React from 'react';
 
-import SchoolUsersList from './List.jsx';
+import SchoolUsersList from './List/ListContainer.jsx';
 import SchoolUsersToolbar from './Toolbar.jsx';
 
-const SchoolUsersView = React.createClass({
+SchoolUsers = React.createClass({
 
   /* Render
   */
@@ -20,5 +20,3 @@ const SchoolUsersView = React.createClass({
     );
   },
 });
-
-export default SchoolUsersView;
