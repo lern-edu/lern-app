@@ -51,6 +51,11 @@ Meteor.users.ProfileSchema = Astro.Class({
       validator: Validators.boolean(),
       default: false,
     },
+    role: {
+      type: 'string',
+      validator: Validators.OneOf(UserRoles.all('keys')),
+      optional: true,
+    },
   },
 });
 
@@ -132,39 +137,6 @@ Meteor.users.FormSchema = Astro.Class({
         validator: Validators.Reference(),
       }),
       optional: true,
-    },
-    schools: {
-      type: 'array',
-      validator: Validators.UserRoles({
-        roles: ['student', 'teacher'],
-        validator: Validators.References(),
-      }),
-      optional: true,
-    },
-  },
-});
-
-Meteor.users.SetupSchema = Astro.Class({
-  name: 'UserSetup',
-  fields: {
-    email: {
-      type: 'string',
-      validator: Validators.and([Validators.required(), Validators.email()]),
-    },
-    roles: {
-      type: 'array',
-      validator: Validators.and([Validators.SomeOf(UserRoles.all('keys')), Validators.length(1)]),
-    },
-    name: {
-      type: 'string',
-      validator: Validators.UserName(),
-    },
-    cpf: {
-      type: 'string',
-      validator: Validators.UserRoles({
-        roles: ['student', 'teacher'],
-        validator: Validators.cpf(),
-      }),
     },
     schools: {
       type: 'array',

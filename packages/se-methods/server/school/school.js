@@ -18,6 +18,14 @@ Helpers.Methods({ prefix, protect }, {
       };
     });
 
+    const teachers = doc.get('teachers');
+    const schoolId = Meteor.userId();
+    if (_.includes(doc.get('teachers'), schoolId)) {
+      const school = _.head(Fetch.General.users(schoolId).fetch());
+      school.push('roles', 'teacher');
+      school.save();
+    };
+
     _.forEach(doc.schedule, s => {
       const startDate = moment(s.startDate);
       const endDate = moment(s.endDate);

@@ -1,5 +1,7 @@
 // Libs
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -82,3 +84,14 @@ Layout.propTypes = {
   nav: React.PropTypes.bool,
   bar: React.PropTypes.bool,
 };
+
+LayoutContainer = createContainer(({ params }) => {
+  if (Meteor.userId())
+    Meteor.subscribe('UserData');
+
+  return {
+    route: FlowRouter.getRouteName(),
+    user: Meteor.user(),
+    logging: Meteor.loggingIn(),
+  };
+}, Layout);

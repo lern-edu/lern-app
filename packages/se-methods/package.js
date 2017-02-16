@@ -19,8 +19,8 @@ Package.onUse(function (api) {
 
     'server/admin/admin.js',
     'server/school/school.js',
+    'server/user/user.js',
     'server/teacher.js',
-    'server/user.js',
     'server/public.js',
     'server/student/answer.js',
     'server/student/attempt.js',

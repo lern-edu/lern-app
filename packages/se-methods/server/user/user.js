@@ -8,6 +8,13 @@ Helpers.Methods({ prefix, protect }, {
     Helpers.DefaultSave(user);
   },
 
+  ChangeRole(role) {
+    const user = _.head(Fetch.General.users(Meteor.userId()).fetch());
+    user.set('profile.role', role);
+    user.save();
+    return user;
+  },
+
   UpdateProfileName(name) {
     const user = Meteor.user();
     user.set('profile.name', name);
