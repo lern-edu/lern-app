@@ -24,7 +24,7 @@ schoolRoutes.route('/cursos', {
   },
 });
 
-schoolRoutes.route('/cursos/:courseId', {
+schoolRoutes.route('/curso/:courseId', {
   name: 'SchoolCourse',
   action(params) {
     render({
