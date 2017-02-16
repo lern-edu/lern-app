@@ -100,7 +100,7 @@ adminRoutes.route('/planos/novo', {
   },
 });
 
-adminRoutes.route('/planos/:planId', {
+adminRoutes.route('/plano/:planId', {
   name: 'AdminPlan',
   action(params) {
     render({
