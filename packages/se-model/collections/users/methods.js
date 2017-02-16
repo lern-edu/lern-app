@@ -5,7 +5,11 @@ Meteor.users.Schema.extend({
     },
 
     getRole() {
-      return _.first(this.get('roles'));
+      return this.get('profile.role') || _.first(this.get('roles'));
+    },
+
+    getRoles() {
+      return this.get('roles');
     },
 
     getEmail() {
