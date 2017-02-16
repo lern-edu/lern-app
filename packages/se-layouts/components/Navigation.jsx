@@ -148,7 +148,7 @@ const Navigation = React.createClass({
 
     return (
       <Drawer {..._.omit(this.state, ['open'])} open={!open ? false : true}
-        onRequestChange={open =>this.setState({ open })}>
+        onRequestChange={open => this.setState({ open })}>
 
         {!user ? (
           <div className='ui center aligned basic segment'>
