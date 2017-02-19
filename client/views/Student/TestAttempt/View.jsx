@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinearProgress } from 'material-ui';
 
 StudentTestAttemptView = React.createClass({
   mixins: [ReactMeteorData],
@@ -30,16 +31,21 @@ StudentTestAttemptView = React.createClass({
 
     _.forEach(data.questions, (q) => q.images = q.findAllImages().fetch());
 
-    data.question = data.test && data.questions && _.find(data.questions,
+    data.page = data.test && data.questions && data.test.pages[index];
+
+    /*data.question = data.test && data.questions && _.find(data.questions,
       { _id: data.test.questions[index] });
     data.answer = data.test && data.question && data.attempt && _.find(data.answers,
-      { question: data.question._id });
+      { question: data.question._id });*/
 
     return data;
   },
 
   render() {
-    const { ready, test, question } = this.data;
+    const { ready, test, page } = this.data;
+    const { index } = this.props;
+
+    console.log(this.data);
 
     return (
       <div>
@@ -47,9 +53,9 @@ StudentTestAttemptView = React.createClass({
         <Layout.Bar
           title={_.get(test, 'name')} />
 
-        {!_.every(ready) || !question ? <MUI.LinearProgress /> : [
+        {!_.every(ready) || !page ? <LinearProgress /> : [
           <StudentTestAttemptToolbar {...this.data} {...this.props} key='toolbar'/>,
-          <StudentTestAttemptQuestion {...this.data} key={question._id} />,
+          <StudentTestAttemptPage {...this.data} key={index} />,
         ]}
 
       </div>
