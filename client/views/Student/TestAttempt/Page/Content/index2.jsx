@@ -1,6 +1,7 @@
 import React from 'react';
+import { Paper } from 'material-ui';
 
-StudentTestAttemptQuestion = React.createClass({
+StudentTestAttemptPageQuestion = React.createClass({
 
   /* Methods
   */
@@ -31,14 +32,14 @@ StudentTestAttemptQuestion = React.createClass({
     const state = !answer ? 'idle' : answer.finished ? 'done' : 'onit';
 
     return (
-      <MUI.Paper className='container ui' style={{ paddingTop: '30px' }}>
+      <Paper className='container ui' style={{ paddingTop: '30px' }}>
 
         {state === 'idle' ? undefined : [
           <StudentTestAttemptQuestionHeader key='header' {...this.props} />,
           <StudentTestAttemptQuestionAnswer key='answer' {...this.props} />,
         ]}
 
-      </MUI.Paper>
+      </Paper>
     );
   },
 });
