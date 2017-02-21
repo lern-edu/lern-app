@@ -17,20 +17,31 @@ Meteor.startup(() => {
       }],
       "name": "teste",
       "pages": [{
-          "content": [{
-              "question":"o3jgsW5ERfcBaykNH",
-              "type":"question",
-          }],
-      }],
+          "content" : [{
+            "question" : "o3jgsW5ERfcBaykNH",
+            "type" : "question"
+          },
+          {
+            "question" : "2HgaF7YLCQivSZHm6",
+            "type" : "question"
+          }
+        ]},
+        {
+          "content" : [{
+              "question" : "8dy4BmQ3KzCD9SgdA",
+              "type" : "question"
+            },
+            {
+              "question" : "8gW8sZHNkDE2ezqsL",
+              "type" : "question"
+            }
+        ]}
+      ],
       "subjects": [
           "SueXc4gdkgGayMNnX",
       ],
       "tags": [
           "2dKMuaLHe9f3LSoQy",
-      ],
-      "questions": [
-          "26pwSruafmKGfrryE",
-          "2BKHdEHrQviNwYjrR"
       ],
       "timeout": 500,
       "timeoutType": "global",
