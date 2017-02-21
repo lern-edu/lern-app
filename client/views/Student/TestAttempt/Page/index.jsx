@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper } from 'material-ui';
+import { Paper, Divider, Editor } from 'material-ui';
 
 StudentTestAttemptPage = React.createClass({
 
@@ -28,18 +28,37 @@ StudentTestAttemptPage = React.createClass({
   */
 
   render() {
-    const { test, page, answer } = this.props;
-    const state = !answer ? 'idle' : answer.finished ? 'done' : 'onit';
+    const { test, page, page: { content } } = this.props;
+
+    console.log('132456');
+    console.log(this);
 
     return (
-      <Paper className='container ui' style={{ paddingTop: '30px' }}>
+
+      /*<Paper className='container ui' style={{ paddingTop: '30px' }}>
 
         {state === 'idle' ? undefined : [
-          <StudentTestAttemptQuestionHeader key='header' {...this.props} />,
-          <StudentTestAttemptQuestionAnswer key='answer' {...this.props} />,
+          <StudentTestAttemptPageHeader key='header' {...this.props} />,
+          <StudentTestAttemptPageAnswer key='answer' {...this.props} />,
         ]}
 
-      </Paper>
+      </Paper>*/
+      <div>
+        {_.map(content, (c, i) =>
+          /*<StudentTestAttemptQuestion key={c} content={c} {...this.props} />*/
+          <div className='row' key={i}>
+            <div className='sixteen wide column'>
+              <StudentTestAttemptPageContent
+                field='content'
+                schema={Tests.PageContentSchema}
+                scored={test.scored}
+                doc={c}
+                {...this.props} />
+              <Divider/>
+            </div>
+          </div>
+        )}
+      </div>
     );
   },
 });
