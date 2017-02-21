@@ -62,7 +62,7 @@ StudentTestAttemptToolbar = React.createClass({
     const { screen } = this.context;
 
     return (
-      <Toolbar style={{ position: 'fixed', zIndex: '1000' }}>
+      <Toolbar style={{ position: 'relative', zIndex: '1000' }}>
         <ToolbarGroup float='left'>
           <IconButton
             onTouchTap={this.handleBack}
