@@ -151,6 +151,7 @@ Tests.Schema = Astro.Class({
         Validators.minLength(1),
       ]),
       immutable: true,
+      default: () => [],
     },
     timeout: {
       type: 'number',

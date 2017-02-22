@@ -9,9 +9,10 @@ const AdminTestCreateFormPageShow = React.createClass({
   // Handlers
 
   handleRemove() {
-    const { index, form, form: { doc: { pages } } } = this.props;
+    const { index, form, form: { doc: { pages, questions } } } = this.props;
+    _.pull(questions, ..._.map(_.get(pages, `[${index}].content`), 'question'));
     _.pullAt(pages, index);
-    form.defaultHandler({ pages }, { doc: true });
+    form.defaultHandler({ pages, questions }, { doc: true });
     this.props.updateQuestionsSelected();
   },
 
