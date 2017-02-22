@@ -1,5 +1,12 @@
 Attempts = new Mongo.Collection('attempts');
 
+Attempts.PageTimeTrackedSchema = Astro.Class({
+  name: 'AttemptsPageTimeTracked',
+  behaviors: [
+    'timeTracked',
+  ],
+});
+
 Attempts.Schema = Astro.Class({
   name: 'Attempt',
   collection: Attempts,
@@ -14,10 +21,10 @@ Attempts.Schema = Astro.Class({
       optional: true,
       default: null,
     },
-    grade: {
-      type: 'number',
-      validator: Validators.Float({ min: 0, max: 1 }),
-      default: null,
+    timeTracked: {
+      type: 'array',
+      nested: 'AttemptsPageTimeTracked',
+      validator: Validators.minLength(1),
       optional: true,
     },
   },

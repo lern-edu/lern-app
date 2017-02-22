@@ -11,7 +11,7 @@ Astro.createBehavior({
         finishedAt: {
           type: 'date',
           immutable: true,
-          optiona: true,
+          optional: true,
         },
         finished: {
           type: 'boolean',
