@@ -54,7 +54,6 @@ Helpers.Methods({ prefix, protect }, {
     _.pull(schools, schoolId);
     console.log(schools);
     user.set();
-    Check.Astro(doc).valid();
     user.save();
 
     return user;
