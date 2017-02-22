@@ -8,11 +8,9 @@ const SchoolUsersListView = React.createClass({
     user: React.PropTypes.object,
   },
 
-  // handleUserRemove({ currentTarget }) {
-  //   let { doc: { profile } } = this;
-  //   _.pull(profile.schools, currentTarget.getAttribute('data-key'));
-  //   this.defaultHandler({ profile }, { doc: true });
-  // },
+  handleUserRemove {
+    
+  },
 
   render() {
     const { form, done, errors, teachers, students } = this.props;
@@ -26,8 +24,8 @@ const SchoolUsersListView = React.createClass({
             data-key={_id}
             primaryText={name}
             rightIcon={<FontIcon
-              //onTouchTap={this.handleUserRemove}
-              className='material-icons'>delete</FontIcon>}
+            onTouchTap={this.handleUserRemove}
+            className='material-icons'>delete</FontIcon>}
            />
          )}
         </List>
