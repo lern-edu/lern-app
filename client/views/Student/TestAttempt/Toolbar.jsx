@@ -1,7 +1,8 @@
 import React from 'react';
-import { Toolbar, ToolbarGroup, ToolbarTitle, IconButton, ToolbarSeparator, FontIcon, RaisedButton, } from 'material-ui';
+import { Toolbar, ToolbarGroup, ToolbarTitle, IconButton, } from 'material-ui';
+import { ToolbarSeparator, FontIcon, RaisedButton } from 'material-ui';
 
-StudentTestAttemptToolbar = React.createClass({
+const StudentTestAttemptToolbar = React.createClass({
 
   // handlers
 
@@ -63,7 +64,7 @@ StudentTestAttemptToolbar = React.createClass({
 
     return (
       <Toolbar style={{ position: 'relative', zIndex: '1000' }}>
-        <ToolbarGroup float='left'>
+        <ToolbarGroup firstChild={true}>
           <IconButton
             onTouchTap={this.handleBack}
             children={<FontIcon className='material-icons' >arrow_back</FontIcon>}
@@ -72,8 +73,6 @@ StudentTestAttemptToolbar = React.createClass({
             touch={true}
             tooltip='Voltar'
             tooltipPosition='bottom-right' />
-        </ToolbarGroup>
-        <ToolbarGroup float='left'>
           <IconButton
             onTouchTap={this.handleForward}
             children={<FontIcon className='material-icons' >arrow_forward</FontIcon>}
@@ -84,14 +83,14 @@ StudentTestAttemptToolbar = React.createClass({
             tooltipPosition='bottom-left' />
         </ToolbarGroup>
           {screen !== 'computer' ? (
-          <ToolbarGroup float='right'>
+          <ToolbarGroup lastChild={true}>
             <RaisedButton
               primary={true}
               label='Responder'
               disabled={_.get(answer, 'finished') ? true : false}
               onClick={this.handleAnswer} />
           </ToolbarGroup>) : (
-            <ToolbarGroup float='right'>
+            <ToolbarGroup lastChild={true}>
               <ToolbarTitle key='title'
                 text={question && `Questão ${1 + _.indexOf(test.questions, question._id)}`} />
               <ToolbarSeparator key='separator' />
@@ -107,3 +106,5 @@ StudentTestAttemptToolbar = React.createClass({
   },
 
 });
+
+export default StudentTestAttemptToolbar;
