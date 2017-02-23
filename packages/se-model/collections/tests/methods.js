@@ -16,6 +16,11 @@ Tests.Schema.extend({
       )));
     },
 
+    findPageQuestions(index) {
+      const page = this.get(`pages.[${index}]`);
+      return Fetch.General.questions(_.compact(_.map(page.content, 'question')));
+    },
+
     findAttempts(author) {
       const test = this.get('_id');
       return Fetch.General.attempts({ test, author });
