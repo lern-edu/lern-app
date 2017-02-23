@@ -2,7 +2,17 @@ import React from 'react';
 import { Paper, FontIcon } from 'material-ui';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui';
 
+import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
+
+const recentsIcon = <FontIcon className="material-icons">restore</FontIcon>;
+const favoritesIcon = <FontIcon className="material-icons">favorite</FontIcon>;
+const nearbyIcon = <IconLocationOn />;
+
 const StudentTestAttemptFooter = React.createClass({
+
+  getInitialState() {
+    return { selectedIndex: 0 };
+  },
 
   // handlers
 
@@ -20,6 +30,10 @@ const StudentTestAttemptFooter = React.createClass({
   handleBack() {
     const { index=0, test } = this.props;
     if (_.parseInt(index)) FlowRouter.setParams({ index: _.parseInt(index) - 1 });
+  },
+
+  select(x) {
+    this.setState({ selectedIndex: x })
   },
 
   /* Get Context

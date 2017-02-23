@@ -1,13 +1,10 @@
 import React from 'react';
 import { LinearProgress } from 'material-ui';
 
-import StudentTestAttemptToolbar from './Toolbar.jsx';
-import StudentTestAttemptFooter from './Footer.jsx';
-
 const StudentTestAttemptView = React.createClass({
 
   render() {
-    const { ready, test, course, page } = this.props;
+    const { ready, test, course } = this.props;
 
     return (
       <div>
@@ -22,11 +19,7 @@ const StudentTestAttemptView = React.createClass({
           ]}
         />
 
-        {!_.every(ready) ? <LinearProgress /> : [
-          <StudentTestAttemptToolbar {...this.props} key='toolbar'/>,
-          <StudentTestAttemptPage {...this.props} key='page' />,
-          <StudentTestAttemptFooter {...this.props} key='footer' />,
-        ]}
+        {!_.every(ready) ? <LinearProgress /> : <StudentTestAttemptPage {...this.props} />}
 
       </div>
     );

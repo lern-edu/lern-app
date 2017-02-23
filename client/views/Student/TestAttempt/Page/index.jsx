@@ -1,17 +1,25 @@
 import React from 'react';
-import { Paper, Divider, Editor } from 'material-ui';
+import { Paper, Divider } from 'material-ui';
+
+import StudentTestAttemptToolbar from './Toolbar.jsx';
+import StudentTestAttemptFooter from './Footer.jsx';
 
 StudentTestAttemptPage = React.createClass({
+
+  // Initial state
+
+  getInitialState() { return { index: 0 }; },
 
   /* Methods
   */
 
-  startAnswer({ test, question }) {
-    Meteor.call('StudentAnswerStart', test._id, question._id, err => {
+  startAnswer({ test }) {
+    Meteor.call('StudentPageAnswersStart', test._id, this.state.index, err => {
       if (err) {
         console.log(err);
         snack(':(');
-        FlowRouter.go('StudentHome');
+
+        // FlowRouter.go('StudentHome');
       }
     });
   },
@@ -20,32 +28,31 @@ StudentTestAttemptPage = React.createClass({
   */
 
   componentDidMount() {
-    const { answer } = this.props;
-    if (!answer) this.startAnswer(this.props);
+    const { answers, test } = this.props;
+    const { index } = this.state;
+
+    const questionsPage = _.compact(_.map(_.get(test, `page.[${index}].content`), 'question'));
+    const questionAnswers = _.filter(_.map(answers, 'question'),
+      question => _.includes(questionsPage, question));
+
+    if (questionAnswers.length < questionsPage.length || _.isEmpty(answers))
+      this.startAnswer(this.props);
   },
 
   /* Render
   */
 
   render() {
-    const { test, page, page: { content } } = this.props;
+    const { test } = this.props;
 
-    console.log('132456');
-    console.log(this);
+    console.log(this.props);
 
     return (
-
-      /*<Paper className='container ui' style={{ paddingTop: '30px' }}>
-
-        {state === 'idle' ? undefined : [
-          <StudentTestAttemptPageHeader key='header' {...this.props} />,
-          <StudentTestAttemptPageAnswer key='answer' {...this.props} />,
-        ]}
-
-      </Paper>*/
       <div>
-        {_.map(content, (c, i) =>
-          /*<StudentTestAttemptQuestion key={c} content={c} {...this.props} />*/
+
+        <StudentTestAttemptToolbar {...this.props} />,
+
+        {/* {_.map(content, (c, i) =>
           <div className='row' key={i}>
             <div className='sixteen wide column'>
               <StudentTestAttemptPageContent
@@ -57,7 +64,9 @@ StudentTestAttemptPage = React.createClass({
               <Divider/>
             </div>
           </div>
-        )}
+        )} */}
+
+        {/* <StudentTestAttemptFooter {...this.props} key='footer' />, */}
       </div>
     );
   },

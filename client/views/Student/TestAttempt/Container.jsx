@@ -11,6 +11,7 @@ StudentTestAttempt = createContainer(({ testId, index=0 }) => {
   const handles = {
     test: Meteor.subscribe('StudentTests', { testId }, {
       questions: true,
+      course: true,
       subjects: true,
       tags: true,
     }),
@@ -27,11 +28,10 @@ StudentTestAttempt = createContainer(({ testId, index=0 }) => {
   };
 
   data.questions = data.test && data.test.findQuestions().fetch();
+  data.course = data.test && _.first(data.test.findCourse().fetch());
   data.answers = data.attempt && data.attempt.findAnswers().fetch();
 
   _.forEach(data.questions, (q) => q.images = q.findAllImages().fetch());
-
-  data.page = data.test && data.questions && data.test.pages[index];
 
   /*data.question = data.test && data.questions && _.find(data.questions,
     { _id: data.test.questions[index] });
