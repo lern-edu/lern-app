@@ -1,6 +1,7 @@
 import React from 'react';
 import { LinearProgress } from 'material-ui';
 
+<<<<<<< HEAD
 import StudentTestAttemptToolbar from './Toolbar.jsx';
 import StudentTestAttemptFooter from './Footer.jsx';
 
