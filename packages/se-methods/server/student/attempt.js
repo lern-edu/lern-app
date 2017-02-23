@@ -17,6 +17,13 @@ Helpers.Methods({ prefix, protect }, {
 
     attempt = new Attempts.Schema({ test: testId, score: _.sum(test.scores) || null });
     if (test.timeoutType === 'global') attempt.set('maxDuration', test.timeout);
+
+    // else if (test.timeoutType === 'page') _.each(test.get('pages'), p => {
+    //   const timeTracked = p.get('timeTracked') || [];
+    //   timeTracked.push(new Tests.PageTimeTrackedSchema({ maxDuration: p.get('timeout') }));
+    //   attempt.set('timeTracked', timeTracked);
+    // });
+
     Check.Astro(attempt).valid();
     attempt.save();
 

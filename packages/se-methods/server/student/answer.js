@@ -20,12 +20,52 @@ Helpers.Methods({ prefix, protect }, {
     let answer = Fetch.General.answers({ question: questionId, attempt: attempt._id });
     Check.Cursor(answer).none();
 
-    answer = new Answers.Schema({ question: questionId, attempt: attempt._id, type: question.type });
+    answer = new Answers.Schema({
+      question: questionId,
+      attempt: attempt._id,
+      type: question.type, });
     if (test.timeoutType === 'question') answer.set('maxDuration', test.timeout);
 
     Check.Astro(answer).valid();
     answer.save();
     return answer;
+  },
+
+  PageAnswersStart(testId, index) {
+    Check.Regex(testId).id();
+    const { userId } = this;
+
+    let test = Fetch.General.tests({ _id: testId });
+    Check.Cursor(test).some();
+    test = _.first(test.fetch());
+
+    let attempt = Fetch.User(userId).attempts({ test: testId, last: true, finished: null });
+    Check.Cursor(attempt).some();
+    attempt = _.first(attempt.fetch());
+
+    let questions = test.findPageQuestions(index);
+    Check.Cursor(questions).some();
+
+    let answers = Fetch.General.answers({ question: test.get('questions'), attempt: attempt._id });
+    Check.Cursor(answer).none();
+
+    const page = _.get(test.get('pages'), index);
+    _.forEach(page, content => {
+      if (content.question) {
+        question = _.find(questions, content.question);
+
+        const answer = new Answers.Schema({
+          question: question._id,
+          attempt: attempt._id,
+          type: question.type, });
+        if (test.timeoutType === 'page') answer.set('maxDuration', page.timeout);
+
+        Check.Astro(answer).valid();
+        answer.save();
+      };
+    });
+
+    return attempt.findPageAnswers().fetch();
   },
 
   AnswerCognitiveStart(testId, questionsId) {
@@ -104,7 +144,8 @@ Helpers.Methods({ prefix, protect }, {
     Check.Regex(...answersId).id();
     const { userId } = this;
 
-    let answers = Fetch.General.answers({ _id: { $in: answersId }, finished: null, author: userId });
+    let answers = Fetch.General.answers(
+      { _id: { $in: answersId }, finished: null, author: userId });
     answers = answers.fetch();
 
     _.forEach(answers, a => {
