@@ -61,7 +61,7 @@ const AdminUserEmails = React.createClass({
 
   emailValidator() {
     const { email } = this.state;
-    return Regex.mail.test(email);
+    return Match.Regex.mail(email);
   },
 
   // Render
