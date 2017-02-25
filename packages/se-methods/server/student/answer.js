@@ -39,25 +39,42 @@ Helpers.Methods({ prefix, protect }, {
     Check.Cursor(test).some();
     test = _.first(test.fetch());
 
+    const page = _.get(test.get('pages'), index);
+
     let attempt = Fetch.User(userId).attempts({ test: testId, last: true, finished: null });
     Check.Cursor(attempt).some();
     attempt = _.first(attempt.fetch());
 
+    if (test.timeoutType == 'page' && !_.get(attempt, `timeTracked[${index}]`)) {
+      const pageTimeTracked = new Attempts.PageTimeTrackedSchema({
+        maxDuration: page.timeout,
+        startedAt: new Date(),
+      });
+      attempt.get('timeTracked')
+        ? attempt.push('timeTracked', _.clone(pageTimeTracked))
+        : attempt.set('timeTracked', [_.clone(pageTimeTracked)]);
+      Check.Astro(attempt).valid();
+      attempt.save();
+    };
+
     let questions = test.findPageQuestions(index);
     Check.Cursor(questions).some();
+    questions = questions.fetch();
 
-    let answers = Fetch.General.answers({ question: test.get('questions'), attempt: attempt._id });
-    Check.Cursor(answer).none();
+    let answers = Fetch.General.answers({
+      question: _.map(questions, '_id'),
+      attempt: attempt._id,
+    });
+    Check.Cursor(answers).none();
 
-    const page = _.get(test.get('pages'), index);
-    _.forEach(page, content => {
+    _.forEach(page.content, content => {
       if (content.question) {
-        question = _.find(questions, content.question);
+        const question = _.find(questions, { _id: content.question });
 
         const answer = new Answers.Schema({
-          question: question._id,
-          attempt: attempt._id,
-          type: question.type, });
+          question: _.get(question, '_id'),
+          attempt: _.get(attempt, '_id'),
+          type: _.get(question, 'type'), });
         if (test.timeoutType === 'page') answer.set('maxDuration', page.timeout);
 
         Check.Astro(answer).valid();
@@ -65,7 +82,7 @@ Helpers.Methods({ prefix, protect }, {
       };
     });
 
-    return attempt.findPageAnswers().fetch();
+    return attempt.findPageAnswers({ index, author: userId }).fetch();
   },
 
   AnswerCognitiveStart(testId, questionsId) {
@@ -92,7 +109,7 @@ Helpers.Methods({ prefix, protect }, {
     const answersToReturn = [];
     _.forEach(questions, ({ _id, type }) => {
       let answer = new Answers.Schema({ question: _id, attempt: attempt._id, type: type });
-      if (test.timeoutType === 'question') answer.set('maxDuration', test.timeout);
+      if (test.timeoutType === 'page') answer.set('maxDuration', test.timeout);
 
       Check.Astro(answer).valid();
       answer.save();
