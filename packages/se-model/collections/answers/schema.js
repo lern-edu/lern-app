@@ -22,7 +22,7 @@ Answers.Schema = Astro.Class({
     },
     grade: {
       type: 'number',
-      validator: Validators.Float({ min:0, max:1 }),
+      validator: Validators.Float({ min: 0, max: 1 }),
       optional: true,
     },
     comment: {
