@@ -3,7 +3,6 @@ Check.Astro = function (doc) {
     valid(...args) {
       if (!doc.validate(...args))
         doc.throwValidationException();
-      console.log(doc);
     },
   };
 };
