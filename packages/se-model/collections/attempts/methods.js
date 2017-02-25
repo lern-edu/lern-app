@@ -16,9 +16,10 @@ Attempts.Schema.extend({
       return Fetch.General.answers({ attempt, author });
     },
 
-    findPageAnswers(index) {
-      const test = _.head(Fetch.General.tests(id).fetch());
-      const questionsId = _.compact(_.map(_.get(test, `pages.[${index}].content`), 'question'));
+    findPageAnswers({ index, author }) {
+      const attempt = this.get('_id');
+      const test = _.head(Fetch.General.tests(this.get('test')).fetch());
+      const questionsId = _.compact(_.map(_.get(test, `pages[${index}].content`), 'question'));
       return Fetch.General.answers({ attempt, author, question: questionsId });
     },
 
