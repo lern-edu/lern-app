@@ -17,7 +17,7 @@ Tests.Schema.extend({
     },
 
     findPageQuestions(index) {
-      const page = this.get(`pages.[${index}]`);
+      const page = _.get(this, `pages[${index}]`);
       return Fetch.General.questions(_.compact(_.map(page.content, 'question')));
     },
 
