@@ -4,7 +4,7 @@ import { LinearProgress } from 'material-ui';
 const StudentTestAttemptView = React.createClass({
 
   render() {
-    const { ready, test, course } = this.props;
+    const { ready, test, course, attempt } = this.props;
 
     return (
       <div>
@@ -19,7 +19,8 @@ const StudentTestAttemptView = React.createClass({
           ]}
         />
 
-        {!_.every(ready) ? <LinearProgress /> : <StudentTestAttemptPage {...this.props} />}
+        {_.every(ready) && attempt ? <StudentTestAttemptPage {...this.props} /> :
+           <LinearProgress />}
 
       </div>
     );

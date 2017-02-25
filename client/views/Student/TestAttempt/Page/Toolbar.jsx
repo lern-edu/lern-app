@@ -2,36 +2,47 @@ import React from 'react';
 import { Toolbar, ToolbarGroup, ToolbarTitle, IconButton, } from 'material-ui';
 import { ToolbarSeparator, FontIcon, RaisedButton } from 'material-ui';
 
+import StudentTestAttemptInfo from './Info.jsx';
+
 const StudentTestAttemptToolbar = React.createClass({
+
+  // Lifecycle
+
+  componentDidMount() {
+    const { test } = this.props;
+    if (test.timeoutType != 'none') this.interval = setInterval(() => this.forceUpdate(), 1000);
+  },
+
+  componentWillUnmount() {
+    const { test } = this.props;
+    if (test.timeoutType != 'none') clearInterval(this.interval);
+  },
+
+  // Initial state
+
+  getInitialState() { return { info: false }; },
 
   // handlers
 
-  handleForward() {
-    const { index=0, test, answers, answer } = this.props;
-    if (_.parseInt(index) < _.get(test, 'questions.length') - 1)
-      FlowRouter.setParams({ index: _.parseInt(index) + 1 });
-
-    // when you answer all questions ypu can finish
-    if (_.isEqual(_.get(test, 'questions.length'), answers.length)
-      && _.every(_.pullAllBy(answers, [{ _id: answer._id }], '_id'), 'finished'))
-      this.finishAttempt();
+  handleOpen(field) {
+    const value = this.state[field];
+    this.setState({ [field]: !value });
   },
 
-  handleBack() {
-    const { index=0, test } = this.props;
-    if (_.parseInt(index)) FlowRouter.setParams({ index: _.parseInt(index) - 1 });
-  },
+  handleTime() {
+    const { test, attempt, index, parent } = this.props;
+    const timeTracked = _.get(attempt, `timeTracked[${index}]`);
+    const now = _.now();
+    const startTime = {
+      page: _.get(timeTracked, 'startedAt'),
+      global: attempt.startedAt,
+    }[test.timeoutType];
+    let remaining = (test.timeout || _.get(timeTracked, 'maxDuration')) + (startTime - now) / 1000;
+    let expired = remaining < 0;
 
-  handleAnswer() {
-    const { answer, answers } = this.props;
-    Meteor.call('StudentAnswerFinish', answer._id, err => {
-      if (err) {
-        console.log(err);
-        if (!_.isEmpty(_.get(err, 'reason.answer')))
-          snack('Marque alguma alternativa');
-        else snack(':(');
-      } else this.handleForward();
-    });
+    if (expired) clearInterval(this.interval);
+
+    return { label: expired ? 'Expirado' : numeral(remaining).format('00:00:00') };
   },
 
   // util
@@ -49,58 +60,46 @@ const StudentTestAttemptToolbar = React.createClass({
     });
   },
 
-  /* Get Context
-  */
-
-  contextTypes: {
-    screen: React.PropTypes.string,
-  },
-
   // render
 
   render() {
-    const { test, question, index=0, answer } = this.props;
-    const { screen } = this.context;
+    const { test } = this.props;
+    const { info } = this.state;
 
     return (
-      <Toolbar style={{ position: 'relative', zIndex: '1000' }}>
+      <Toolbar style={{
+        marginTop: 64,
+        paddingBottom: 10,
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        zIndex: '1000',
+      }}>
         <ToolbarGroup firstChild={true}>
           <IconButton
-            onTouchTap={this.handleBack}
-            children={<FontIcon className='material-icons' >arrow_back</FontIcon>}
-            disabled={!_.isEqual(_.get(test, 'timeoutType'), 'question') && _.parseInt(index)
-              ? false : true}
+            onTouchTap={() => this.handleOpen('info')}
+            children={<FontIcon className='material-icons' >info</FontIcon>}
             touch={true}
-            tooltip='Voltar'
+            tooltip='Informações'
             tooltipPosition='bottom-right' />
           <IconButton
-            onTouchTap={this.handleForward}
-            children={<FontIcon className='material-icons' >arrow_forward</FontIcon>}
+            onTouchTap={() => this.handleOpen('help')}
+            children={<FontIcon className='material-icons' >help</FontIcon>}
             touch={true}
-            disabled={!_.isEqual(_.get(test, 'timeoutType'), 'question') &&
-              _.parseInt(index) < _.get(test, 'questions.length') - 1 ? false : true}
-            tooltip='Avançar'
-            tooltipPosition='bottom-left' />
+            tooltip='Ajuda'
+            tooltipPosition='bottom-right' />
         </ToolbarGroup>
-          {screen !== 'computer' ? (
-          <ToolbarGroup lastChild={true}>
-            <RaisedButton
-              primary={true}
-              label='Responder'
-              disabled={_.get(answer, 'finished') ? true : false}
-              onClick={this.handleAnswer} />
-          </ToolbarGroup>) : (
-            <ToolbarGroup lastChild={true}>
-              <ToolbarTitle key='title'
-                text={question && `Questão ${1 + _.indexOf(test.questions, question._id)}`} />
-              <ToolbarSeparator key='separator' />
-              <RaisedButton
-                primary={true}
-                label='Responder'
-                disabled={_.get(answer, 'finished') ? true : false}
-                onClick={this.handleAnswer} />
-            </ToolbarGroup>
-          )}
+        {test.timeoutType === 'none' ? undefined :
+          <ToolbarGroup>
+            <ToolbarTitle text={`Tempo ${i18n.__(`TestTimeoutTypes.${test.timeoutType}`)}`} />
+            <ToolbarSeparator />
+            <RaisedButton {...this.handleTime()} />
+          </ToolbarGroup>
+        }
+        <StudentTestAttemptInfo
+          open={info}
+          test={test}
+          handleClose={() => this.handleOpen('info')} />
       </Toolbar>
     );
   },
