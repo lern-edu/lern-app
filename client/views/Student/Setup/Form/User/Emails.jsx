@@ -46,7 +46,7 @@ const StudentSetupFormUserEmails = React.createClass({
 
   emailValidator() {
     const { email } = this.state;
-    return Match.Regex.mail(email);
+    return Match.Regex(email).mail();
   },
 
   // Render
