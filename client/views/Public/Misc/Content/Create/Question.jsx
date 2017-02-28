@@ -1,8 +1,8 @@
 import React from 'react';
 import { RaisedButton } from 'material-ui';
 
-import AdminTestCreateFormPageQuestionSearch from './QuestionSearch/QuestionSearch.jsx';
-import AdminTestCreateFormPageQuestionCreate from './QuestionCreate/QuestionCreate.jsx';
+import PublicContentCreateQuestionSearch from './QuestionSearch/QuestionSearch.jsx';
+import PublicContentCreateQuestionCreate from './QuestionCreate/QuestionCreate.jsx';
 
 const PublicContentCreateQuestion = React.createClass({
 
@@ -53,12 +53,12 @@ const PublicContentCreateQuestion = React.createClass({
            </div>
 
            <div className='row' >
-             <AdminTestCreateFormPageQuestionSearch
+             <PublicContentCreateQuestionSearch
                scored={scored}
                handleClose={this.handleSearch}
                {...this.props}
                open={search} />
-             <AdminTestCreateFormPageQuestionCreate
+             <PublicContentCreateQuestionCreate
                scored={scored}
                handleClose={this.handleCreate}
                {...this.props}
