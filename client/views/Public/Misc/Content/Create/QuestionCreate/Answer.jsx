@@ -101,25 +101,67 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
           }, form.doc.get('type'))}
         </div>
 
-        <div className='row' >
-          <div className='sixteen wide column'>
-            <RadioButtonGroup
-              onChange={this.handleAnswerChange}
-              name='options'
-              defaultSelected='not_light'>
-              {_.map(form.doc.get('options'), (c, i) =>
-                    <RadioButton
-                      value={i}
-                      key={i}
-                      label={<PublicContentShow
-                        field='options'
-                        schema={Tests.PageContentSchema}
-                        index={i}
-                        form={form}
-                        doc={c} />} />)}
-            </RadioButtonGroup>
+        {form.doc.get('type') === 'closed' ?
+          <div className='row' >
+            <div className='sixteen wide column'>
+              {/*<RadioButtonGroup
+                onChange={this.handleAnswerChange}
+                name='options'
+                defaultSelected='not_light'>
+                {_.map(form.doc.get('options'), (c, i) =>
+                      <RadioButton
+                        value={i}
+                        key={i}
+                        label={<PublicContentShow
+                          field='options'
+                          schema={Tests.PageContentSchema}
+                          index={i}
+                          form={form}
+                          doc={c} />} />)}
+              </RadioButtonGroup>*/}
+
+              <Table onCellClick={this.handleAnswerChange}>
+                <TableHeader>
+                  <TableRow>
+                    <TableHeaderColumn>Tipo</TableHeaderColumn>
+                    <TableHeaderColumn>Conteúdo</TableHeaderColumn>
+                  </TableRow>
+                </TableHeader>
+                <TableBody deselectOnClickaway={false} >
+                  {_.map(form.doc.get('options'), (op, index) => {
+                    const text = op.text ? _.first(op.text.blocks).text
+                      : <PublicContentShowImage
+                        form={this}
+                        imageId={op.image} />;
+                    return (
+                      <TableRow
+                        key={op.text ? _.first(op.text.blocks).text : op.image}
+                        selected={index === form.doc.get('answer')}>
+                        <TableRowColumn>
+                          {op.text ? 'Texto' : 'Imagem'}
+                        </TableRowColumn>
+                        <TableRowColumn>
+                          {text}
+                        </TableRowColumn>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+              <div className='ui right aligned grid'
+                style={{ marginTop: '1rem' }}>
+                <div className='sixteen wide column'
+                  style={{ paddingBottom: 0, margin: '0.25rem' }}>
+                  <FlatButton
+                    label='Remover'
+                    disabled={(form.doc.get('options') && form.doc.get('options').length) ? false : true}
+                    secondary={true}
+                    onTouchTap={this.handleOptionRemove} />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        : undefined }
 
       </div>
     );
