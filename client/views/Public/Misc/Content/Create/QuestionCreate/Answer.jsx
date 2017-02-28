@@ -2,6 +2,8 @@
 import React from 'react';
 import { FlatButton, Dialog, Divider, RadioButtonGroup, RadioButton } from 'material-ui';
 import { TextField, RaisedButton, SelectField, MenuItem } from 'material-ui';
+import { Table, TableHeaderColumn, TableRow, TableHeader } from 'material-ui';
+import { TableRowColumn, TableBody } from 'material-ui';
 
 const PublicContentCreateQuestionCreateAnswer = React.createClass({
 
@@ -25,7 +27,7 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
     form.defaultHandler({ type, answer: null }, { doc: true });
   },
 
-  handleAnswerChange(event, answer) {
+  handleAnswerChange(answer) {
     this.props.form.defaultHandler({ answer }, { doc: true });
   },
 
@@ -40,6 +42,12 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
     if (range || value == '')
       this.props.form.defaultHandler({ [field]: range }, { doc: true });
     else return;
+  },
+
+  handleOptionRemove() {
+    const { options, answer } = this.props.form.doc;
+    _.pullAt(options, answer);
+    this.props.form.defaultHandler({ options, answer: null }, { doc: true });
   },
 
   // render
