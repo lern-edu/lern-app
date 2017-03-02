@@ -1,11 +1,11 @@
 const [prefix, protect] = ['Student', 'student'];
 
 Helpers.Methods({ prefix, protect }, {
-  AnswerStart(testId, questionId) {
-    Check.Regex(testId, questionId).id();
+  AnswersStart(testId) {
+    Check.Regex(testId).id();
     const { userId } = this;
 
-    let test = Fetch.General.tests({ _id: testId, questions: questionId });
+    let test = Fetch.General.tests({ _id: testId });
     Check.Cursor(test).some();
     test = _.first(test.fetch());
 
@@ -13,25 +13,41 @@ Helpers.Methods({ prefix, protect }, {
     Check.Cursor(attempt).some();
     attempt = _.first(attempt.fetch());
 
-    let question = Fetch.General.questions(questionId);
-    Check.Cursor(question).some();
-    question = _.first(question.fetch());
+    if (test.timeoutType == 'global')
+      attempt.set('maxDuration', test.timeout);
+    attempt.set('startedAt', new Date());
 
-    let answer = Fetch.General.answers({ question: questionId, attempt: attempt._id });
-    Check.Cursor(answer).none();
+    Check.Astro(attempt).valid();
+    attempt.save();
 
-    answer = new Answers.Schema({
-      question: questionId,
+    let questions = test.findQuestions();
+    Check.Cursor(questions).some();
+    questions = questions.fetch();
+
+    let answers = Fetch.General.answers({
+      question: _.map(questions, '_id'),
       attempt: attempt._id,
-      type: question.type, });
-    if (test.timeoutType === 'question') answer.set('maxDuration', test.timeout);
+    });
+    Check.Cursor(answers).none();
 
-    Check.Astro(answer).valid();
-    answer.save();
-    return answer;
+    _.forEach(questions, ({ _id, type }) => {
+      const answer = new Answers.Schema({
+        question: _id,
+        attempt: _.get(attempt, '_id'),
+        type: type,
+      });
+
+      if (test.timeoutType === 'global')
+        answer.set('maxDuration', test.timeout);
+
+      Check.Astro(answer).valid();
+      answer.save();
+    });
+
+    return attempt.findAnswers({ author: userId }).fetch();
   },
 
-  PageAnswersStart(testId, index) {
+  AnswersPageStart(testId, index) {
     Check.Regex(testId).id();
     const { userId } = this;
 
@@ -44,18 +60,6 @@ Helpers.Methods({ prefix, protect }, {
     let attempt = Fetch.User(userId).attempts({ test: testId, last: true, finished: null });
     Check.Cursor(attempt).some();
     attempt = _.first(attempt.fetch());
-
-    if (test.timeoutType == 'page' && !_.get(attempt, `timeTracked[${index}]`)) {
-      const pageTimeTracked = new Attempts.PageTimeTrackedSchema({
-        maxDuration: page.timeout,
-        startedAt: new Date(),
-      });
-      attempt.get('timeTracked')
-        ? attempt.push('timeTracked', _.clone(pageTimeTracked))
-        : attempt.set('timeTracked', [_.clone(pageTimeTracked)]);
-      Check.Astro(attempt).valid();
-      attempt.save();
-    };
 
     let questions = test.findPageQuestions(index);
     Check.Cursor(questions).some();
@@ -74,8 +78,9 @@ Helpers.Methods({ prefix, protect }, {
         const answer = new Answers.Schema({
           question: _.get(question, '_id'),
           attempt: _.get(attempt, '_id'),
-          type: _.get(question, 'type'), });
-        if (test.timeoutType === 'page') answer.set('maxDuration', page.timeout);
+          type: _.get(question, 'type'),
+          maxDuration: test.timeoutType === 'page' ? page.timeout : null,
+        });
 
         Check.Astro(answer).valid();
         answer.save();
