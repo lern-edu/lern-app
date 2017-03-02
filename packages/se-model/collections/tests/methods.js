@@ -8,17 +8,24 @@ Tests.Schema.extend({
     },
 
     findQuestions() {
-      const pages = this.get('pages');
-      return Fetch.General.questions(_.compact(_.flatMap(pages, (page) =>
-        _.flatMap(page.content, (content) =>
-          content.type === 'question' ? content.question : undefined
-        )
-      )));
+      const questions =
+        _.compact(
+          _.flatMap(this.get('pages'), (page) =>
+            _.flatMap(page.content, (content) =>
+              content.type === 'question' ? content.question : undefined
+            )
+          )
+        );
+      return Fetch.General.questions(questions);
     },
 
     findPageQuestions(index) {
-      const page = _.get(this, `pages[${index}]`);
-      return Fetch.General.questions(_.compact(_.map(page.content, 'question')));
+      const pageQuestions = _.compact(
+        _.map(
+          _.get(this, `pages[${index}].content`),
+        'question')
+      );
+      return Fetch.General.questions(pageQuestions);
     },
 
     findAttempts(author) {
