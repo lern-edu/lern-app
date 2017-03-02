@@ -15,19 +15,31 @@ Helpers.Methods({ prefix, protect }, {
     let attempt = Fetch.User(userId).attempts({ test: testId, finished: null });
     Check.Cursor(attempt).none();
 
-    attempt = new Attempts.Schema({ test: testId, score: _.sum(test.scores) || null });
-    if (test.timeoutType === 'global') attempt.set('maxDuration', test.timeout);
-
-    // else if (test.timeoutType === 'page') _.each(test.get('pages'), p => {
-    //   const timeTracked = p.get('timeTracked') || [];
-    //   timeTracked.push(new Tests.PageTimeTrackedSchema({ maxDuration: p.get('timeout') }));
-    //   attempt.set('timeTracked', timeTracked);
-    // });
+    attempt = new Attempts.Schema({
+      test: testId,
+      score: _.sum(test.scores) || null,
+      type: test.timeoutType,
+      maxDuration: test.timeoutType === 'global' ? test.timeout : null,
+      timeTracked: test.timeoutType === 'page'
+        ? _.map(test.pages,
+          ({ timeout }) => new Attempts.PageTimeTrackedSchema({ maxDuration: timeout }))
+        : null,
+    });
 
     Check.Astro(attempt).valid();
     attempt.save();
 
     return attempt;
+  },
+
+  AttemptTime(attemptId) {
+    let attempt = Fetch.General.attempts(attemptId);
+    Check.Cursor(attempt).some();
+    attempt = _.head(attempt.fetch());
+
+    if (attempt.type === 'page') attempt.startTimeoutPage();
+
+    return true;
   },
 
   AttemptFinish(testId) {
