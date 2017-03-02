@@ -26,9 +26,6 @@ const StudentTestAttemptPageContentQuestionView = React.createClass({
   render() {
     const { question, subject, tags, scored, ready, score } = this.props;
 
-    console.log('sad123bkc');
-    console.log(question);
-
     return (
       !_.every(ready) ? <CircularProgress size={60} thickness={7} /> :
       <div>

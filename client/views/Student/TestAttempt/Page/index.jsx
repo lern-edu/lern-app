@@ -8,69 +8,96 @@ StudentTestAttemptPage = React.createClass({
 
   // Initial state
 
-  getInitialState() { return { index: 0, expired: false }; },
+  getInitialState() { return { index: 0 }; },
 
   /* Methods
   */
 
-  startAnswer({ test }) {
-    Meteor.call('StudentPageAnswersStart', test._id, this.state.index, err => {
-      if (err) {
-        console.log(err);
-        snack(':(');
+  startAnswers() {
+    const { answers, questions, test, pages } = this.props;
+    const { index } = this.state;
 
-        // FlowRouter.go('StudentHome');
-      }
-    });
+    console.log(pages.answers[index].length, pages.questions[index].length);
+    console.log(answers.length, questions.length);
+
+    if (test.timeoutType == 'global'
+      ? answers.length != questions.length
+      : pages.answers[index].length != pages.questions[index].length) {
+
+      this.setStartTimeout();
+
+      test.timeoutType == 'page'
+      ? Meteor.call('StudentAnswersPageStart', test._id, index, err => {
+        if (err) {
+          console.log(err);
+          snack(':(');
+        };
+      })
+      : Meteor.call('StudentAnswersStart', test._id, err => {
+        if (err) {
+          console.log(err);
+          snack(':(');
+
+          // FlowRouter.go('StudentHome');
+        }
+      });
+
+    };
+  },
+
+  setStartTimeout() {
+    const { attempt } = this.props;
+    const { index } = this.state;
+    if (index === 0) {
+      console.log(index);
+      Meteor.call('StudentAttemptTime', attempt._id, (err, res) => {
+        if (err) {
+          console.log(err);
+          snack(':(');
+        } else console.log(res);
+      });
+    };
   },
 
   /* Lifecycle
   */
 
   componentDidMount() {
-    const { answers, test } = this.props;
-    const { index } = this.state;
-
-    const questionsPage = _.compact(_.map(_.get(test, `pages[${index}].content`), 'question'));
-    const questionAnswers = _.filter(_.map(answers, 'question'),
-      question => _.includes(questionsPage, question));
-
-    if (questionAnswers.length < questionsPage.length)
-      this.startAnswer(this.props);
+    this.startAnswers();
   },
 
   // Handlers
 
-  handleForward() {
-    const { test, answers } = this.props;
-    const { index } = this.state;
-
-    if (index < _.get(test, 'questions.length') - 1)
-      this.setState({ index: index + 1 });
-
-    // when you answer all questions you can finish
-    if (_.isEqual(_.get(test, 'questions.length'), answers.length)
-      && _.every(_.pullAllBy(answers, [{ _id: answer._id }], '_id'), 'finished'))
-      this.finishAttempt();
-  },
-
-  handleBack() {
-    const { test } = this.props;
-    const { index } = this.state;
-    if (index) this.setState({ index: index - 1 });
-  },
-
-  handleAnswer() {
-    const { answer, answers } = this.props;
-    Meteor.call('StudentAnswerFinish', answer._id, err => {
-      if (err) {
-        console.log(err);
-        if (!_.isEmpty(_.get(err, 'reason.answer')))
-          snack('Marque alguma alternativa');
-        else snack(':(');
-      } else this.handleForward();
-    });
-  },
+  // handleForward() {
+  //   const { test, answers } = this.props;
+  //   const { index } = this.state;
+  //
+  //   if (index < _.get(test, 'questions.length') - 1)
+  //     this.setState({ index: index + 1 });
+  //
+  //   // when you answer all questions you can finish
+  //   if (_.isEqual(_.get(test, 'questions.length'), answers.length)
+  //     && _.every(_.pullAllBy(answers, [{ _id: answer._id }], '_id'), 'finished'))
+  //     this.finishAttempt();
+  // },
+  //
+  // handleBack() {
+  //   const { test } = this.props;
+  //   const { index } = this.state;
+  //   if (index) this.setState({ index: index - 1 });
+  // },
+  //
+  // handleAnswer() {
+  //   const { answer, answers } = this.props;
+  //   Meteor.call('StudentAnswerFinish', answer._id, err => {
+  //     if (err) {
+  //       console.log(err);
+  //       if (!_.isEmpty(_.get(err, 'reason.answer')))
+  //         snack('Marque alguma alternativa');
+  //       else snack(':(');
+  //     } else this.handleForward();
+  //   });
+  // },
 
   /* Render
   */
@@ -78,7 +105,6 @@ StudentTestAttemptPage = React.createClass({
   render() {
     const { test, attempt } = this.props;
     const { index } = this.state;
-    console.log(attempt);
     return (
       <div>
 

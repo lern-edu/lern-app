@@ -14,9 +14,6 @@ StudentTestAttemptPageContent = React.createClass({
     const { scored, questions } = this.props;
     const text = this.doc.get('text');
 
-    console.log('ABCD');
-    console.log(this.props);
-
     return (
       <div style={{ padding: 15 }}>
 

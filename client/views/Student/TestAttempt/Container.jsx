@@ -30,13 +30,18 @@ StudentTestAttempt = createContainer(({ testId, index=0 }) => {
   data.questions = data.test && data.test.findQuestions().fetch();
   data.course = data.test && _.first(data.test.findCourse().fetch());
   data.answers = data.attempt && data.attempt.findAnswers().fetch();
+  data.pages = data.test && data.questions && {
+    questions: _.map(
+      data.test.get('pages'),
+      (p, index) => data.test.findPageQuestions(index).fetch()
+    ),
+    answers: data.attempt && _.map(
+      data.test.get('pages'),
+      (p, index) => data.attempt.findPageAnswers({ index, author: userId }).fetch()
+    ),
+  };
 
   _.forEach(data.questions, (q) => q.images = q.findAllImages().fetch());
-
-  /*data.question = data.test && data.questions && _.find(data.questions,
-    { _id: data.test.questions[index] });
-  data.answer = data.test && data.question && data.attempt && _.find(data.answers,
-    { question: data.question._id });*/
 
   return data;
 }, StudentTestAttemptView);

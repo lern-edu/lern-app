@@ -33,16 +33,22 @@ const StudentTestAttemptToolbar = React.createClass({
     const { test, attempt, index, parent } = this.props;
     const timeTracked = _.get(attempt, `timeTracked[${index}]`);
     const now = _.now();
-    const startTime = {
+    const startTime = _.get({
       page: _.get(timeTracked, 'startedAt'),
       global: attempt.startedAt,
-    }[test.timeoutType];
+    }, test.timeoutType);
     let remaining = (test.timeout || _.get(timeTracked, 'maxDuration')) + (startTime - now) / 1000;
     let expired = remaining < 0;
 
     if (expired) clearInterval(this.interval);
 
-    return { label: expired ? 'Expirado' : numeral(remaining).format('00:00:00') };
+    return {
+      label: expired ? 'Expirado' : numeral(remaining).format('00:00:00'),
+      labelColor: 'white',
+      buttonStyle: {
+        backgroundColor: remaining > 60 ? '#8BC34A' : remaining > 10 ? '#FFC107' : '#F44336',
+      },
+    };
   },
 
   // util

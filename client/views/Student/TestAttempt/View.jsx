@@ -19,8 +19,11 @@ const StudentTestAttemptView = React.createClass({
           ]}
         />
 
-        {_.every(ready) && attempt ? <StudentTestAttemptPage {...this.props} /> :
-           <LinearProgress />}
+        {
+          _.every(ready) && attempt
+            ? <StudentTestAttemptPage {...this.props} key='page'/>
+            : <LinearProgress />
+        }
 
       </div>
     );
