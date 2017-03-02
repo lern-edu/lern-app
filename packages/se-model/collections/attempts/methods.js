@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 Attempts.Schema.extend({
   methods: {
     getGrade() {
@@ -26,5 +28,35 @@ Attempts.Schema.extend({
     findAuthor(author) {
       return Meteor.users.find(this.get('author'));
     },
+
+    startTimeoutPage() {
+      const timeTracked = _.find(this.get('timeTracked'), { finished: null });
+
+      if (timeTracked) {
+        timeTracked.get('startedAt') ? undefined : timeTracked.set('startedAt', new Date());
+        this.save();
+
+        const setPageFinished = () => {
+          timeTracked.get('finished') ? undefined : timeTracked.set('finished', true);
+          timeTracked.get('finishedAt') ? undefined : timeTracked.set('finishedAt', new Date());
+          this.save();
+          this.startTimeoutPage();
+        };
+
+        const setPageFinishedFibers = Meteor.wrapAsync(setPageFinished, this);
+        Meteor.setTimeout(setPageFinishedFibers, timeTracked.get('maxDuration') * 1000);
+      } else {
+        const setFinished = () => {
+          this.get('finished') ? undefined : this.set('finished', true);
+          this.get('finishedAt') ? undefined : this.set('finishedAt', new Date());
+          this.save();
+        };
+
+        const setFinishedFibers = Meteor.wrapAsync(setFinished, this);
+        setFinishedFibers();
+      };
+
+    },
+
   },
 });
