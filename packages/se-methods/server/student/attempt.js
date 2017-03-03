@@ -32,12 +32,24 @@ Helpers.Methods({ prefix, protect }, {
     return attempt;
   },
 
-  AttemptTime(attemptId) {
+  AttemptStartTimeoutPage(attemptId) {
     let attempt = Fetch.General.attempts(attemptId);
     Check.Cursor(attempt).some();
     attempt = _.head(attempt.fetch());
 
-    if (attempt.type === 'page') attempt.startTimeoutPage();
+    attempt.startTimeoutPage();
+
+    return true;
+  },
+
+  AttemptTimePageFinish(attemptId) {
+    let attempt = Fetch.General.attempts(attemptId);
+    Check.Cursor(attempt).some();
+    attempt = _.head(attempt.fetch());
+
+    if (attempt.type === 'page') {
+      attempt.startTimeoutPage();
+    }
 
     return true;
   },
@@ -54,9 +66,11 @@ Helpers.Methods({ prefix, protect }, {
     Check.Cursor(attempt).some();
     attempt = _.first(attempt.fetch());
 
-    let answers = Fetch.General.answers({ author: userId,
+    let answers = Fetch.General.answers({
+      author: userId,
       question: { $in: test.questions },
-      attempt: attempt._id, });
+      attempt: attempt._id,
+    });
     Check.Cursor(answers).some();
     answers = answers.fetch();
 
