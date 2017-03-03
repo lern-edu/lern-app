@@ -2,20 +2,18 @@ import React from 'react';
 import { Toolbar, ToolbarGroup, ToolbarTitle, IconButton, } from 'material-ui';
 import { ToolbarSeparator, FontIcon, RaisedButton } from 'material-ui';
 
-import StudentTestAttemptInfo from './Info.jsx';
+import StudentTestAttemptPageInfo from './Info.jsx';
 
-const StudentTestAttemptToolbar = React.createClass({
+const StudentTestAttemptPageToolbar = React.createClass({
 
   // Lifecycle
 
   componentDidMount() {
-    const { test } = this.props;
-    if (test.timeoutType != 'none') this.interval = setInterval(() => this.forceUpdate(), 1000);
+    this.interval = setInterval(() => this.forceUpdate(), 1000);
   },
 
   componentWillUnmount() {
-    const { test } = this.props;
-    if (test.timeoutType != 'none') clearInterval(this.interval);
+    clearInterval(this.interval);
   },
 
   // Initial state
@@ -30,17 +28,16 @@ const StudentTestAttemptToolbar = React.createClass({
   },
 
   handleTime() {
-    const { test, attempt, index, parent } = this.props;
+    const { test, attempt, index, parent, pages } = this.props;
     const timeTracked = _.get(attempt, `timeTracked[${index}]`);
-    const now = _.now();
-    const startTime = _.get({
-      page: _.get(timeTracked, 'startedAt'),
-      global: attempt.startedAt,
-    }, test.timeoutType);
-    let remaining = (test.timeout || _.get(timeTracked, 'maxDuration')) + (startTime - now) / 1000;
-    let expired = remaining < 0;
 
-    if (expired) clearInterval(this.interval);
+    const now = _.now();
+    const startTime = _.get(timeTracked, 'startedAt');
+
+    let remaining = (test.timeout || _.get(timeTracked, 'maxDuration')) + (startTime - now) / 1000;
+    const expired = timeTracked.get('finished');
+
+    if (expired) parent.finishAnswers();
 
     return {
       label: expired ? 'Expirado' : numeral(remaining).format('00:00:00'),
@@ -49,21 +46,6 @@ const StudentTestAttemptToolbar = React.createClass({
         backgroundColor: remaining > 60 ? '#8BC34A' : remaining > 10 ? '#FFC107' : '#F44336',
       },
     };
-  },
-
-  // util
-
-  finishAttempt() {
-    const { test } = this.props;
-    Meteor.call('StudentAttemptFinish', test._id, err => {
-      if (err) {
-        console.log(err);
-        snack(':(');
-      } else {
-        snack('Enviado');
-        FlowRouter.go('StudentTest', { testId: test._id });
-      }
-    });
   },
 
   // render
@@ -95,14 +77,12 @@ const StudentTestAttemptToolbar = React.createClass({
             tooltip='Ajuda'
             tooltipPosition='bottom-right' />
         </ToolbarGroup>
-        {test.timeoutType === 'none' ? undefined :
           <ToolbarGroup>
             <ToolbarTitle text={`Tempo ${i18n.__(`TestTimeoutTypes.${test.timeoutType}`)}`} />
             <ToolbarSeparator />
             <RaisedButton {...this.handleTime()} />
           </ToolbarGroup>
-        }
-        <StudentTestAttemptInfo
+        <StudentTestAttemptPageInfo
           open={info}
           test={test}
           handleClose={() => this.handleOpen('info')} />
@@ -112,4 +92,4 @@ const StudentTestAttemptToolbar = React.createClass({
 
 });
 
-export default StudentTestAttemptToolbar;
+export default StudentTestAttemptPageToolbar;

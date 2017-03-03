@@ -1,5 +1,10 @@
+// Libs
 import React from 'react';
 import { LinearProgress } from 'material-ui';
+
+// Views
+import StudentTestAttemptGlobal from './Global/index.jsx';
+import StudentTestAttemptPage from './Page/index.jsx';
 
 const StudentTestAttemptView = React.createClass({
 
@@ -21,7 +26,12 @@ const StudentTestAttemptView = React.createClass({
 
         {
           _.every(ready) && attempt
-            ? <StudentTestAttemptPage {...this.props} key='page'/>
+            ?
+              _.get({
+                page: <StudentTestAttemptPage {...this.props} key='page'/>,
+                global: <StudentTestAttemptGlobal {...this.props} key='global'/>,
+                none: <StudentTestAttemptGlobal {...this.props} key='none'/>,
+              }, test.timeoutType)
             : <LinearProgress />
         }
 

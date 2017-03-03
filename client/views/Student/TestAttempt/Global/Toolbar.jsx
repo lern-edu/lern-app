@@ -31,7 +31,6 @@ const StudentTestAttemptGlobalToolbar = React.createClass({
 
   handleTime() {
     const { test, attempt, index, parent, pages } = this.props;
-    const timeTracked = _.get(attempt, `timeTracked[${index}]`);
 
     const now = _.now();
     const startTime = attempt.startedAt;

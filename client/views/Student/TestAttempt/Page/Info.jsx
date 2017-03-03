@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog, FlatButton } from 'material-ui';
 
-const StudentTestAttemptInfo = React.createClass({
+const StudentTestAttemptPageInfo = React.createClass({
 
   // Render
 
@@ -41,4 +41,4 @@ const StudentTestAttemptInfo = React.createClass({
 
 });
 
-export default StudentTestAttemptInfo;
+export default StudentTestAttemptPageInfo;
