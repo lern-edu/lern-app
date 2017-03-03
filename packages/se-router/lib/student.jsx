@@ -175,7 +175,7 @@ studentRoutes.route('/posts/:postId', {
 /* Test Taking
 */
 
-studentRoutes.route('/provas/fazer/:testId/pagina', {
+studentRoutes.route('/provas/fazer/:testId', {
   name: 'StudentTestAttempt',
   triggersExit: [(context, redirect, stop) => {
       // console.log(context);
