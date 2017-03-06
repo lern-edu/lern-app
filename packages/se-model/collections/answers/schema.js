@@ -14,6 +14,7 @@ Answers.Schema = Astro.Class({
     },
     answer: {
       validator: Validators.AnswerAnswer(),
+      optional: true,
     },
     type: {
       type: 'string',
