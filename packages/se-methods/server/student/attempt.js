@@ -43,28 +43,6 @@ Helpers.Methods({ prefix, protect }, {
     return true;
   },
 
-  AttemptFinishTimeoutPage(attemptId) {
-    let attempt = Fetch.General.attempts(attemptId);
-    Check.Cursor(attempt).some();
-    attempt = _.head(attempt.fetch());
-
-    attempt.finishTimeoutPage();
-
-    return true;
-  },
-
-  AttemptTimePageFinish(attemptId) {
-    let attempt = Fetch.General.attempts(attemptId);
-    Check.Cursor(attempt).some();
-    attempt = _.head(attempt.fetch());
-
-    if (attempt.type === 'page') {
-      attempt.startTimeoutPage();
-    }
-
-    return true;
-  },
-
   AttemptFinish(testId) {
     Check.Regex(testId).id();
     const { userId } = this;
@@ -82,6 +60,7 @@ Helpers.Methods({ prefix, protect }, {
       question: { $in: test.questions },
       attempt: attempt._id,
     });
+
     Check.Cursor(answers).some();
     answers = answers.fetch();
 

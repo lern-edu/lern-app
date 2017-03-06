@@ -96,30 +96,6 @@ Helpers.Methods({ prefix, protect }, {
     return answer;
   },
 
-  AnswerFinish(answerId) {
-    Check.Regex(answerId).id();
-    const { userId } = this;
-
-    let answer = Fetch.General.answers({ _id: answerId, finished: null, author: userId });
-    Check.Cursor(answer).some();
-    answer = _.first(answer.fetch());
-
-    if (answer.type === 'closed') {
-      let question = Fetch.General.questions(answer.question);
-      Check.Cursor(question).some();
-      question = _.first(question.fetch());
-      const grade = +(question.answer === answer.answer);
-      question.inc({ answerCount: 1, hitCount: grade });
-      question.save();
-      answer.set('grade', grade);
-    }
-
-    answer.set('finished', true);
-    Check.Astro(answer).valid();
-    answer.save();
-    return answer;
-  },
-
   AnswersFinish(answersId) {
     Check.Regex(...answersId).id();
     const { userId } = this;
