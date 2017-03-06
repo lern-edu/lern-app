@@ -3,9 +3,6 @@ Attempts = new Mongo.Collection('attempts');
 Attempts.PageTimeTrackedSchema = Astro.Class({
   name: 'AttemptsPageTimeTracked',
   fields: {
-    time: {
-      type: 'object',
-    },
     startedAt: {
       type: 'date',
       immutable: true,
