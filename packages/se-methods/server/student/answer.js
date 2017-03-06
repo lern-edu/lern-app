@@ -88,8 +88,11 @@ Helpers.Methods({ prefix, protect }, {
     Check.Cursor(answer).some();
     answer = _.first(answer.fetch());
 
-    answer.set('answer', value);
-    answer.save();
+    if (!answer.get('finished')) {
+      answer.set('answer', value);
+      answer.save();
+    };
+
     return answer;
   },
 
