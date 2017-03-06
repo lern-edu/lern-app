@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 const [prefix, protect] = ['Student', 'student'];
 
 Helpers.Methods({ prefix, protect }, {
@@ -38,6 +39,16 @@ Helpers.Methods({ prefix, protect }, {
     attempt = _.head(attempt.fetch());
 
     attempt.startTimeoutPage();
+
+    return true;
+  },
+
+  AttemptFinishTimeoutPage(attemptId) {
+    let attempt = Fetch.General.attempts(attemptId);
+    Check.Cursor(attempt).some();
+    attempt = _.head(attempt.fetch());
+
+    attempt.finishTimeoutPage();
 
     return true;
   },
