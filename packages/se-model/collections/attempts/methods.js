@@ -1,5 +1,3 @@
-import { Meteor } from 'meteor/meteor';
-
 Attempts.Schema.extend({
   methods: {
     getGrade() {
@@ -29,12 +27,9 @@ Attempts.Schema.extend({
       return Meteor.users.find(this.get('author'));
     },
 
-    startTimeoutPage() {
+    finishTimeoutPage() {
       const timeTracked = _.find(this.get('timeTracked'), { finished: null });
-
       if (timeTracked) {
-        timeTracked.get('startedAt') ? undefined : timeTracked.set('startedAt', new Date());
-        this.save();
 
         const setPageFinished = () => {
           timeTracked.get('finished') ? undefined : timeTracked.set('finished', true);
@@ -44,7 +39,28 @@ Attempts.Schema.extend({
         };
 
         const setPageFinishedFibers = Meteor.wrapAsync(setPageFinished, this);
-        Meteor.setTimeout(setPageFinishedFibers, timeTracked.get('maxDuration') * 1000);
+      };
+    },
+
+    startTimeoutPage() {
+      const timeTracked = _.find(this.get('timeTracked'), { finished: null });
+
+      const setPageFinished = () => {
+        timeTracked.get('finished') ? undefined : timeTracked.set('finished', true);
+        timeTracked.get('finishedAt') ? undefined : timeTracked.set('finishedAt', new Date());
+        this.save();
+        this.startTimeoutPage();
+      };
+
+      if (timeTracked) {
+        const setPageFinishedFibers = Meteor.wrapAsync(setPageFinished, this);
+        if (timeTracked.get('startedAt'))
+          setPageFinishedFibers();
+        else {
+          timeTracked.set('startedAt', new Date());
+          this.save();
+          Meteor.setTimeout(setPageFinishedFibers, timeTracked.get('maxDuration') * 1000);
+        };
       } else {
         const setFinished = () => {
           this.get('finished') ? undefined : this.set('finished', true);
@@ -55,7 +71,6 @@ Attempts.Schema.extend({
         const setFinishedFibers = Meteor.wrapAsync(setFinished, this);
         setFinishedFibers();
       };
-
     },
 
   },
