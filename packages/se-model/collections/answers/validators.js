@@ -7,9 +7,14 @@ Astro.createValidator({
     else if (type === 'open') {
       return (
         _.isString(value) &&
-        _.inRange(value.length, 0, 1024)
+        _.inRange(value.length, 0, 4096)
       );
     } else if (type === 'closed') {
+      return (
+        _.isNumber(value) &&
+        value >= 0
+      );
+    } else if (type === 'number') {
       return (
         _.isNumber(value) &&
         value >= 0

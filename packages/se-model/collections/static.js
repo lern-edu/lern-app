@@ -77,7 +77,6 @@ TestTypes = StaticCollection('TestTypes', [
 
 TestTimeoutTypes = StaticCollection('TestTimeoutTypes', [
   ['global', 'Total'],
-  ['page', 'Por página'],
   ['none', 'Nenhum'],
 ]);
 

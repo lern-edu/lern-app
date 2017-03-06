@@ -5,6 +5,7 @@ import { Divider, Paper, LinearProgress } from 'material-ui';
 // Views
 import AdminTestHeader from './Header.jsx';
 import AdminTestActions from './Actions.jsx';
+import AdminTestForm from './Form/index.jsx';
 
 AdminTestView = React.createClass({
   mixins: [ReactMeteorData],
@@ -38,7 +39,7 @@ AdminTestView = React.createClass({
   */
 
   render() {
-    const { ready, test } = this.data;
+    const { ready, test, subjects } = this.data;
     return (
       <div className='ui container'>
 
@@ -50,6 +51,8 @@ AdminTestView = React.createClass({
           {!_.every(ready) ? <LinearProgress/> : [
             <AdminTestHeader key='header' {...this.data} />,
             <Divider key='d0'/>,
+            <AdminTestForm key='question' doc={test} subjects={subjects} />,
+            <Divider key='d1'/>,
             <AdminTestActions key='actions' {...this.data} />,
           ]}
         </Paper>

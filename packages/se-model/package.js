@@ -101,7 +101,6 @@ Package.onUse((api) => {
 
     // static
     'StaticCollections',
-    'Regex',
 
     'SubjectAreas',
     'UserRoles',

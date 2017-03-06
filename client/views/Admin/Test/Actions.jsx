@@ -10,7 +10,7 @@ const AdminTestActions = React.createClass({
   handleCreatePDF() {
     const { test } = this.props;
     this.setState({ loading: true });
-    PDFMaker.createPDF(test, { header: false },(file) => {
+    PDFMaker.createPDF(test, { header: false }, (file) => {
       this.setState({ loading: false });
     });
   },

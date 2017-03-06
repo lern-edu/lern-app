@@ -8,23 +8,13 @@ StudentCourseShowTestsCard = React.createClass({
 
   handleStart() {
     const { test: { _id: testId }, test } = this.props;
-
-    //const test = _.find(tests, { _id: test._id });
     Meteor.call('StudentAttemptStart', testId, err =>
-      err ? console.log(err) : (
-        _.get(test, 'type') === 'cognitive' ?
-        FlowRouter.go('StudentTestAttemptCognitive', { testId })
-        : FlowRouter.go('StudentTestAttempt', { testId }))
-      );
+      err ? console.log(err) : FlowRouter.go('StudentTestAttempt', { testId }));
   },
 
   handleContinue() {
     const { test: { _id: testId }, test } = this.props;
-
-    //const test = _.find(tests, { _id: testId });
-    if (_.get(test, 'type') === 'cognitive')
-      FlowRouter.go('StudentTestAttemptCognitive', { testId });
-    else FlowRouter.go('StudentTestAttempt', { testId });
+    FlowRouter.go('StudentTestAttempt', { testId });
   },
 
   handleAttempts() {
