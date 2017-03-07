@@ -92,10 +92,12 @@ const PublicContentShowQuestionView = React.createClass({
                 :
                 <div key={op.image} >
                   {i == question.answer ? this.answer : this.notAnswer}
+                  <span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
                     <PublicContentShowImage
                       form={this}
                       imageId={op.image}
                     />
+                </span>
                 </div>,
             ),
           }, question.type)}
