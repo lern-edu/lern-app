@@ -25,6 +25,8 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
         { doc: true });
     else form.defaultHandler({ range: null }, { doc: true });
     form.defaultHandler({ type, answer: null }, { doc: true });
+    if (type == 'closed')
+      form.defaultHandler({ answer: '' }, { doc: true });
   },
 
   handleAnswerChange(answer) {
@@ -47,7 +49,7 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
   handleOptionRemove() {
     const { options, answer } = this.props.form.doc;
     _.pullAt(options, answer);
-    this.props.form.defaultHandler({ options, answer: null }, { doc: true });
+    this.props.form.defaultHandler({ options, answer: '' }, { doc: true });
   },
 
   // render
