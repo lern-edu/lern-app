@@ -5,6 +5,7 @@ const StudentCourseShowMenu = React.createClass({
   //  static data
 
   tabs: {
+    home: 'Inicio',
     lectures: 'Aulas',
     tests: 'Atividades',
     posts: 'Blog',

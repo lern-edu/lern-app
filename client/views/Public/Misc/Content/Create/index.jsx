@@ -4,6 +4,7 @@ import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 
 import PublicContentCreateQuestion from './Question.jsx';
 import PublicContentCreateUpload from './Upload.jsx';
+import PublicContentRichText from './../RichText.jsx';
 
 PublicContentCreate = React.createClass({
   mixins: [AstroForm()],
@@ -63,7 +64,7 @@ PublicContentCreate = React.createClass({
 
   render() {
     const { type, text, link, title } = this.doc;
-    const { errors, valid } = this.state;
+    const { errors, valid, editorState } = this.state;
     return (
       <div>
         <div className='row'>
@@ -75,19 +76,7 @@ PublicContentCreate = React.createClass({
         <div className='row'>
           {_.get({
             text: <Paper zDepth={1}>
-              <TextField
-                children={<Editor
-                  handleKeyCommand={this.handleKeyCommand}
-                  editorState={this.state.editorState}
-                  onChange={this.handleEditorChange} />}
-                name='text'
-                hintText={!this.doc.get('text') && 'Texto'}
-                style={{ marginLeft: 20 }}
-                errorStyle={{ marginTop: 15 }}
-                underlineShow={false}
-                fullWidth={true}
-                errorText={_.get(errors, 'text')}
-                multiLine={true} />
+                <PublicContentRichText parent={this} editorState={editorState} />
               </Paper>,
             title: <TextField
                 name='title'

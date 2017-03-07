@@ -1,4 +1,4 @@
-Check.Cursor = function(cursor) {
+Check.Cursor = function (cursor) {
   return {
     some() {
       const count = cursor.count();

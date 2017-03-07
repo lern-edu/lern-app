@@ -50,7 +50,7 @@ StudentCourseShowView = React.createClass({
   */
 
   render() {
-    const { active='lectures' } = this.props;
+    const { active='home' } = this.props;
     const { ready, course } = this.data;
     const { user } = this.context;
 
@@ -67,6 +67,7 @@ StudentCourseShowView = React.createClass({
           {!_.every(ready) ? <div className='ui active loader' /> :
             <div>
               {{
+                home: <StudentCourseShowHome {...this.data} key='home' />,
                 lectures: <StudentCourseShowLectures {...this.data} key='lectures' />,
                 tests: <StudentCourseShowTests {...this.data} key='tests' />,
                 reports: <StudentCourseShowReports {...this.data} user={user} key='reports' />,
@@ -77,7 +78,7 @@ StudentCourseShowView = React.createClass({
         </div>
 
         {!_.every(ready) ? undefined :
-        <StudentCourseShowInitial open={_.get(user, 'profile.tutorial')}
+        <StudentCourseShowInitial open={_.get(user, 'profile.tutorial') || false}
           {...this.data} user={user} />}
 
       </div>

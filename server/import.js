@@ -1,6 +1,54 @@
 
 Meteor.startup(() => {
   if (Meteor.isServer) {
+    /*Tests.insert({
+      "course": "KXPYeZXuyhtNADCZT",
+      "endDate": new Date(2017, 03, 22, 0, 0, 0, 0),
+      "startDate": new Date(),
+      "info": [{
+          "text": {
+              "blocks": [{
+                  "key": "9fbjm",
+                  "text": "teste",
+                  "type": "unstyled"
+              }],
+          },
+          "type": "text",
+      }],
+      "name": "teste",
+      "pages": [{
+          "content" : [{
+            "question" : "o3jgsW5ERfcBaykNH",
+            "type" : "question"
+          },
+          {
+            "question" : "2HgaF7YLCQivSZHm6",
+            "type" : "question"
+          }
+        ]},
+        {
+          "content" : [{
+              "question" : "8dy4BmQ3KzCD9SgdA",
+              "type" : "question"
+            },
+            {
+              "question" : "8gW8sZHNkDE2ezqsL",
+              "type" : "question"
+            }
+        ]}
+      ],
+      "subjects": [
+          "SueXc4gdkgGayMNnX",
+      ],
+      "tags": [
+          "2dKMuaLHe9f3LSoQy",
+      ],
+      "timeout": 500,
+      "timeoutType": "global",
+      "type": "course",
+  });
+  console.log("inserted");*/
+
     const Future = Npm.require('fibers/future');
     DataManager = {
       clearCollections(collection, query={}) {

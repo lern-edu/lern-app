@@ -52,7 +52,7 @@ const PublicLoginForgot = React.createClass({
           <FlatButton
             label={texts.SendButton}
             primary={true}
-            disabled={!Regex.mail.test(email)}
+            disabled={!Match.Regex(email).mail()}
             onTouchTap={this.handleSubmit} />,
           <FlatButton
             label={texts.CancelButton}
@@ -66,7 +66,7 @@ const PublicLoginForgot = React.createClass({
           <TextField
             hintText={texts.TextFieldEmailLabel}
             data-key='email'
-            errorText={Regex.mail.test(email) ? undefined
+            errorText={Match.Regex(email).mail() ? undefined
               : texts.TextFieldEmailError}
             floatingLabelText={texts.TextFieldEmailLabel}
             onInput={this.handleChange} />

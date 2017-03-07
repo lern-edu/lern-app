@@ -87,7 +87,7 @@ studentRoutes.route('/provas/:testId/tentativas/:attemptId', {
   name: 'StudentAttempt',
   action(params) {
     render({
-      main: <StudentAttemptView {...params}/>,
+      main: <StudentTestAttempt {...params}/>,
     });
   },
 });
@@ -175,11 +175,17 @@ studentRoutes.route('/posts/:postId', {
 /* Test Taking
 */
 
-studentRoutes.route('/provas/fazer/:testId/questao/:index?', {
+studentRoutes.route('/provas/fazer/:testId', {
   name: 'StudentTestAttempt',
+  triggersExit: [(context, redirect, stop) => {
+      // console.log(context);
+      // confirm('Deseja realmente abandonar esse teste?') ? stop() : redirect(context.path);
+      // Need do something to prevent user to get away from this window
+    },
+  ],
   action(params) {
     render({
-      main: <StudentTestAttemptView {...params} />,
+      main: <StudentTestAttempt {...params} />,
     });
   },
 });

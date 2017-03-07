@@ -41,7 +41,7 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
   handleRangeChange({ currentTarget }, value) {
     const field = currentTarget.getAttribute('name');
     const range = parseInt(value);
-    if (range || value == '')
+    if (range || range == 0 || value == '')
       this.props.form.defaultHandler({ [field]: range }, { doc: true });
     else return;
   },
