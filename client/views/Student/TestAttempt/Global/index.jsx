@@ -36,6 +36,8 @@ const StudentTestAttemptGlobal = React.createClass({
     const { test, answers, pages, attempt } = this.props;
     const { index } = this.state;
 
+    if (!confirm('Deseja finalizar esse teste?')) return;
+
     const answersId = _.map(answers, '_id');
 
     Meteor.call('StudentAnswersFinish', _.map(answers, '_id'), err => {
