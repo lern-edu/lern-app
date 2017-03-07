@@ -6,6 +6,7 @@ import { Editor, EditorState, convertFromRaw } from 'draft-js';
 // Views
 import PublicContentShowQuestion from './QuestionContainer.jsx';
 import PublicContentShowImage from './ImageContainer.jsx';
+import PublicContentRichText from './../RichText.jsx';
 
 PublicContentShow = React.createClass({
   mixins: [AstroForm()],
@@ -37,10 +38,13 @@ PublicContentShow = React.createClass({
       <div style={{ padding: 15 }}>
 
         {_.get({
-          text: <Editor
-              readOnly={true}
-              editorState={text && EditorState.createWithContent(
-                convertFromRaw(text))} />,
+          text: <PublicContentRichText
+            editorState={text
+              ? EditorState.createWithContent(convertFromRaw(text))
+              : EditorState.createEmpty()}
+            parent={this}
+            readOnly={true}
+          />,
           link: <a>{this.doc.get('link')}</a>,
           title: <h4>{this.doc.get('title')}</h4>,
           image: <PublicContentShowImage
