@@ -84,10 +84,10 @@ studentRoutes.route('/provas/:testId', {
 });
 
 studentRoutes.route('/provas/:testId/tentativas/:attemptId', {
-  name: 'StudentAttempt',
+  name: 'StudentAttemptDefault',
   action(params) {
     render({
-      main: <StudentTestAttempt {...params}/>,
+      main: <StudentAttemptDefaultView {...params}/>,
     });
   },
 });
