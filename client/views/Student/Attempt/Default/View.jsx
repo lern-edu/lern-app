@@ -1,6 +1,6 @@
 import React from 'react';
 
-StudentAttemptView = React.createClass({
+StudentAttemptDefaultView = React.createClass({
   mixins: [ReactMeteorData],
 
   getMeteorData() {
