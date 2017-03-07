@@ -76,16 +76,23 @@ const PublicContentShowQuestionView = React.createClass({
             unwasered: <p>Sem resposta</p>,
             number: <p>De {_.get(question, 'range.min')} até {_.get(question, 'range.max')}</p>,
             closed: _.map(question.options, (op, i) =>
-              op.text ? <div key={i} >
-                {i == question.answer ? this.answer : this.notAnswer}
-                <Editor
-                  readOnly={true}
-                  editorState={EditorState.createWithContent(
-                    convertFromRaw(_.first(op.text.blocks).text))} />
-                </div> :
-              <p key={op.image} >
-                {i == question.answer ? this.answer : this.notAnswer}
-                Imagem a definir</p>,
+              op.text ?
+                <div key={i} >
+                  {i == question.answer ? this.answer : this.notAnswer}
+                  <span style={{ display: 'inline-block',
+                                position: 'relative',
+                                transform: 'translate(0, -50%)',
+                              }}>
+                    <Editor
+                      readOnly={true}
+                      editorState={EditorState.createWithContent(
+                        convertFromRaw(op.text))} />
+                  </span>
+                </div>
+                :
+                <p key={op.image} >
+                  {i == question.answer ? this.answer : this.notAnswer}
+                  Imagem a definir</p>,
             ),
           }, question.type)}
         </div>
