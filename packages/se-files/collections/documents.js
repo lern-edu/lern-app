@@ -1,35 +1,79 @@
-const documentS3Store = (
-  new FS.Store.S3('documents', !Meteor.isServer ? undefined : {
-    region: 'sa-east-1',
-    accessKeyId: Meteor.settings.credentials.S3.accessKeyId,
-    secretAccessKey: Meteor.settings.credentials.S3.secretAccessKey,
-    bucket: 'se-edu',
-  })
-);
+import { FilesCollection } from 'meteor/ostrio:files';
 
-// const documentS3Store = new FS.Store.FileSystem('documents', { path: '~/Desktop/cfs/documents' });
-
-FS.Documents = new FS.Collection('documents', {
-  stores: [documentS3Store],
-  filter: {
-    maxSize: 10 * 1024 * 1024,
-    allow: {
-      contentTypes: ['application/pdf'],
-      extensions: ['pdf'],
+if (Meteor.isServer) {
+  var s3 = require('s3');
+  var client = s3.createClient({
+    s3Options: {
+      region: 'sa-east-1',
+      accessKeyId: Meteor.settings.credentials.S3.accessKeyId,
+      secretAccessKey: Meteor.settings.credentials.S3.secretAccessKey,
     },
+  });
+}
+
+FS.Documents = new FilesCollection({
+  storagePath: 'assets/app/uploads/documents',
+  collectionName: 'FS.Documents',
+  onBeforeUpload: function (file) {
+    if (file.size <= (10 * 1024 * 1024) && /pdf/i.test(file.ext)) {
+      return true;
+    } else {
+      return 'Please upload document, with size equal or less than 10MB';
+    }
   },
+
+  onAfterUpload: function (file) {
+    var _this = this;
+    var params = {
+      localFile: file.path,
+      s3Params: {
+        Bucket: 'se-edu',
+        Key: 'documents/' + file._id,
+      },
+    };
+
+    var uploader = client.uploadFile(params);
+    uploader.on('error', function (err) {
+      console.error('unable to upload:', err.stack);
+    });
+  },
+
+  onAfterRemove: function (cursor) {
+    if (cursor && cursor.length) {
+      var params = {
+        Bucket: 'se-edu',
+        Delete: {
+          Objects: [{
+            Key: 'documents/' + cursor[0]._id,
+          },
+          ],
+        },
+      };
+      var remover = client.deleteObjects(params);
+      remover.on('error', function (err) {
+        console.error('unable to remove:', err.stack);
+      });
+
+      return true;
+    }
+
+    return false;
+  },
+
 });
 
-FS.Documents.allow({
-  insert() {
-    return true;
-  },
+if (Meteor.isServer) {
+  FS.Documents.allow({
+    insert: function () {
+      return true;
+    },
 
-  update() {
-    return true;
-  },
+    update: function () {
+      return true;
+    },
 
-  download() {
-    return true;
-  },
-});
+    remove: function () {
+      return true;
+    },
+  });
+}

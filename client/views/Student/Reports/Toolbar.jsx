@@ -14,7 +14,7 @@ StudentReportsToolbar = React.createClass({
 
     return (
       <Toolbar>
-        <ToolbarGroup firstChild={true} float='left'>
+        <ToolbarGroup firstChild={true} style={{ float: 'left' }}>
           <DropDownMenu value={subjectId} onChange={parent.handleSubjectChange}>
             {_.map(subjects, subject =>
               <MenuItem
@@ -25,7 +25,7 @@ StudentReportsToolbar = React.createClass({
             )}
           </DropDownMenu>
         </ToolbarGroup>
-        <ToolbarGroup lastChild={true} float='right'>
+        <ToolbarGroup lastChild={true} style={{ float: 'right' }}>
           <ToolbarTitle text={_.get(_.find(subjects, { _id: subjectId }), 'name')}/>
         </ToolbarGroup>
       </Toolbar>

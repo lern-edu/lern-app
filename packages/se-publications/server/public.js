@@ -19,10 +19,21 @@ Helpers.Publications({ type: 'plain', prefix, protect }, {
 });
 
 Helpers.Publications({ type: 'composite', prefix, protect }, {
-  Tags({ tagId }={}) {
+  Tags({ tagId, subjectIds }={}) {
     return {
       find() {
-        return Fetch.Public().tags(tagId);
+        const query = {};
+        if (subjectIds) {
+          if (_.isArray(subjectIds)) query.subject = { $in: subjectIds };
+          else query.subject = subjectIds;
+        };
+
+        if (tagId) {
+          if (_.isArray(tagId)) query._id = { $in: tagId };
+          else query._id = tagId;
+        };
+
+        return Tags.find(query);
       },
 
       children: [
@@ -91,22 +102,27 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
-  QuestionsText({ subject, text, tags, type, onlyMine }={}, { limit=1, skip=0 }) {
+  Questions({ subjectId, text, tagsIds, type, onlyMine, questionsIds, notQuestions }={},
+      { limit=1, skip=0 },
+      { tags, subject }) {
     return {
       find() {
         const selector = {};
         const options = { limit, skip, sort: { createdAt: 1 } };
 
-        if (!_.isEmpty(tags)) _.assign(selector, { tags: { $in: tags } });
-        if (subject) _.assign(selector, { subject });
+        if (questionsIds)
+          return Fetch.General.questions(_.isEmpty(questionsIds) ? [] : questionsIds);
+        if (!_.isEmpty(tagsIds)) _.assign(selector, { tags: { $in: tagsIds } });
+        if (subjectId) _.assign(selector, { subject: subjectId });
         if (onlyMine) _.assign(selector, { author: _.get(this, 'userId') });
         if (type) _.assign(selector, { type });
+        if (notQuestions) _.assign(selector, { _id: { $nin: notQuestions } });
         if (text) {
           _.assign(selector, { $text: { $search: text } });
           _.assign(options, { sort: { score: { $meta: 'textScore' } },
             fields: { score: { $meta: 'textScore' } }, });
         };
-        console.log(selector);
+
         return Questions.find(_.isEmpty(selector) ? null : selector, options);
       },
 
@@ -115,21 +131,13 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
           find(question) {
             return question && question.findAllImages();
           },
-        },
-      ],
-    };
-  },
-
-  Questions({ questionsIds }) {
-    return {
-      find() {
-        return Fetch.General.questions(_.isEmpty(questionsIds) ? [] : questionsIds);
-      },
-
-      children: [
-        {
+        }, {
           find(question) {
-            return question && question.findAllImages();
+            return subject && question && question.findSubject();
+          },
+        }, {
+          find(question) {
+            return tags && question && question.findTags();
           },
         },
       ],

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Card, CardActions, CardHeader, FlatButton, CardText, CardMedia, TextField, Dialog, CardTitle, } from 'material-ui';
+import ReactDOM from 'react-dom';
+import { CardMedia, TextField, Dialog, CardTitle } from 'material-ui';
+import { Card, CardActions, CardHeader, FlatButton, CardText } from 'material-ui';
 
-AdminQuestionCreateFormUpload = React.createClass({
+const AdminQuestionCreateFormUpload = React.createClass({
   // Static data
 
   instructions: {
@@ -45,15 +47,22 @@ AdminQuestionCreateFormUpload = React.createClass({
 
   handleUpload() {
     const { file } = this.state;
-    FS.Images.insert(file, (err, fileObj) => {
-      if (err) this.setState({ file: null, open: true, upload: false });
-      else {
-        this.props.form.defaultHandler({ image: fileObj._id }, { doc: true });
-        this.setState({ upload: false, remove: true });
-        const images = Session.get('images') || [];
-        images.push(fileObj._id);
-        Session.set('images', images);
-      };
+    var _this = this;
+    FS.Images.insert({
+      file: file,
+      streams: 'dynamic',
+      chunkSize: 'dynamic',
+      onUploaded: function (err, fileObj) {
+        if (err) _this.setState({ file: null, open: true, upload: false });
+        else {
+          console.log(_this.props);
+          _this.props.form.defaultHandler({ image: fileObj._id }, { doc: true });
+          _this.setState({ upload: false, remove: true });
+          const images = Session.get('images') || [];
+          images.push(fileObj._id);
+          Session.set('images', images);
+        };
+      },
     });
   },
 
@@ -135,3 +144,5 @@ AdminQuestionCreateFormUpload = React.createClass({
   },
 
 });
+
+export default AdminQuestionCreateFormUpload;

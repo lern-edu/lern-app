@@ -10,12 +10,12 @@ FlowRouter.route('/', {
   },
 });
 
-FlowRouter.route('/login', {
+FlowRouter.route('/login/:alias?', {
   name: 'PublicLogin',
-  action() {
+  action(params, query) {
     render({
       bar: false,
-      main: <PublicLoginView />,
+      main: <PublicLoginView query={query} />,
     });
   },
 });

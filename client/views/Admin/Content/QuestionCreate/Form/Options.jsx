@@ -1,7 +1,9 @@
 import React from 'react';
-import { Table, TableHeaderColumn, TableRow, TableHeader, TableRowColumn, TableBody, TextField, Paper, Divider, SelectField, MenuItem, FlatButton, Dialog, } from 'material-ui';
+import { Paper, Divider, SelectField, MenuItem, FlatButton, Dialog } from 'material-ui';
+import { Table, TableHeaderColumn, TableRow, TableHeader } from 'material-ui';
+import { TableRowColumn, TableBody, TextField } from 'material-ui';
 
-AdminQuestionCreateFormOptions = React.createClass({
+const AdminQuestionCreateFormOptions = React.createClass({
 
   // Static data
 
@@ -40,16 +42,18 @@ AdminQuestionCreateFormOptions = React.createClass({
     this.setState({ type });
   },
 
-  handleOptionText(event) {
-    const { options } = this.props.form.doc;
-    const text = _.get(event, 'target.value').trim();
-    if (text) options.push({ text });
-    this.props.form.defaultHandler({ options }, { doc: true });
-    this.setState({ text: '' });
+  handleOptionText(proxy, event) {
+    if (proxy.keyCode == 13 || proxy.which == 13) {
+      const { options } = this.props.form.doc;
+      const { text } = this.state;
+      if (text) options.push({ text: text.trim() });
+      this.props.form.defaultHandler({ options }, { doc: true });
+      this.setState({ text: '' });
+    };
   },
 
-  handleText(event) {
-    this.setState({ text: _.get(event, 'target.value') });
+  handleText(event, text) {
+    this.setState({ text });
   },
 
   handleAnswer(answer) {
@@ -123,11 +127,11 @@ AdminQuestionCreateFormOptions = React.createClass({
         {type === 'text' ? (
           <TextField
             value={text}
-            hintText='Texto'
             onChange={this.handleText}
+            hintText='Texto'
             name={instructions.text}
             floatingLabelText='Texto'
-            onEnterKeyDown={this.handleOptionText}
+            onKeyDown={this.handleOptionText}
             multiLine={true}
             fullWidth={true}
             rows={1} />
@@ -198,3 +202,5 @@ AdminQuestionCreateFormOptions = React.createClass({
     );
   },
 });
+
+export default AdminQuestionCreateFormOptions;

@@ -1,4 +1,10 @@
+// Libs
 import React from 'react';
+import { LinearProgress } from 'material-ui';
+
+// Views
+import AdminTestsList from './List.jsx';
+import AdminTestsToolbar from './Toolbar.jsx';
 
 AdminTestsView = React.createClass({
   mixins: [ReactMeteorData],
@@ -22,15 +28,13 @@ AdminTestsView = React.createClass({
     const { ready } = this.data;
 
     return (
-      <div className='ui container'>
+      <div className='ui container' >
 
-        <Layout.Bar
-          title='Provas'
-        />
+        <Layout.Bar title='Provas' />
 
-        {!_.every(ready) ? <MUI.LinearProgress/> : [
-          <AdminTestsToolbar key='toolbar' {...this.data}/>,
-          <AdminTestsList key='list' {...this.data}/>,
+        {!_.every(ready) ? <LinearProgress/> : [
+          <AdminTestsToolbar key='toolbar' {...this.data} />,
+          <AdminTestsList key='list' {...this.data} />,
         ]}
 
       </div>

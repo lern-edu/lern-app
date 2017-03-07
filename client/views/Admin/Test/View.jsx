@@ -1,4 +1,10 @@
+// Libs
 import React from 'react';
+import { Divider, Paper, LinearProgress } from 'material-ui';
+
+// Views
+import AdminTestHeader from './Header.jsx';
+import AdminTestActions from './Actions.jsx';
 
 AdminTestView = React.createClass({
   mixins: [ReactMeteorData],
@@ -38,18 +44,15 @@ AdminTestView = React.createClass({
 
         <Layout.Bar
           title={_.get(test, 'name')}
-          crumbs={[
-            { label: 'Provas', path: 'AdminTests' },
-          ]}
-        />
+          crumbs={[{ label: 'Provas', path: 'AdminTests' }]} />
 
-        <MUI.Paper>
-          {!_.every(ready) ? <MUI.LinearProgress/> : [
-            <AdminTestHeader key='header' {...this.data}/>,
-            <MUI.Divider key='d0'/>,
-            <AdminTestActions key='actions' {...this.data}/>,
+        <Paper>
+          {!_.every(ready) ? <LinearProgress/> : [
+            <AdminTestHeader key='header' {...this.data} />,
+            <Divider key='d0'/>,
+            <AdminTestActions key='actions' {...this.data} />,
           ]}
-        </MUI.Paper>
+        </Paper>
 
       </div>
     );

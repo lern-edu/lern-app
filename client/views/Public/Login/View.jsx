@@ -22,7 +22,7 @@ PublicLoginView = React.createClass({
   // Styles
 
   createStyles() {
-    const { context } = this;
+    const { innerWidth, innerHeight } = this.context;
     return {
       form: {
         className: 'eight wide computer ten wide tablet thirteen wide mobile column',
@@ -34,8 +34,8 @@ PublicLoginView = React.createClass({
       },
       background: {
         style: {
-          width: `${context.innerWidth}px`,
-          height: `${context.innerHeight}px`,
+          width: `${innerWidth}px`,
+          height: `${innerHeight}px`,
           backgroundSize: 'cover',
           backgroundImage: 'url(/images/login/classroom.jpg)',
           backgroundRepeat: 'round',
@@ -56,7 +56,7 @@ PublicLoginView = React.createClass({
   // render
 
   render() {
-    const { state: { tab } } = this;
+    const { tab } = this.state;
     const styles = this.createStyles();
 
     return (
@@ -67,10 +67,10 @@ PublicLoginView = React.createClass({
         <Paper {...styles.form}>
           <Tabs value={tab} onChange={this.handleTabChange}>
             <Tab label='Entrar' value='enter' >
-              <PublicLoginEnter />
+              <PublicLoginEnter {...this.props} />
             </Tab>
             <Tab label='Cadastrar' value='register' >
-              <PublicLoginRegister />
+              <PublicLoginRegister {...this.props} />
             </Tab>
           </Tabs>
 

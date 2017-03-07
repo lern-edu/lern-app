@@ -106,6 +106,7 @@ Meteor.startup(() => {
       const { admin } = Meteor.settings.credentials;
       const userId = Accounts.createUser(admin);
       Meteor.users.update(userId, { $set: { roles: ['admin'] } });
+      Meteor.users.update(userId, { $set: { profile: { name: 'admin' } } });
     };
   };
 });

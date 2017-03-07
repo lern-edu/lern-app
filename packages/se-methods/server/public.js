@@ -1,6 +1,7 @@
 const [prefix, protect] = ['Public', 'public'];
 
 Helpers.Methods({ prefix, protect }, {
+  QuestionSave: Helpers.DefaultSave,
   SendEmail({ email, text }) {
     Email.send({
       from: email,
@@ -28,5 +29,20 @@ Helpers.Methods({ prefix, protect }, {
     Accounts.sendEnrollmentEmail(userId);
 
     return user;
+  },
+
+  QuestionsCount({ subjectId, text, tagsIds, type, onlyMine, notQuestions }={}) {
+    const selector = {};
+
+    if (!_.isEmpty(tagsIds)) _.assign(selector, { tags: { $in: tagsIds } });
+    if (subjectId) _.assign(selector, { subject: subjectId });
+    if (onlyMine) _.assign(selector, { author: _.get(this, 'userId') });
+    if (notQuestions) _.assign(selector, { _id: { $nin: notQuestions } });
+    if (type) _.assign(selector, { type });
+    if (text) _.assign(selector, { $text: { $search: text } });
+
+    this.unblock();
+
+    return Questions.find(_.isEmpty(selector) ? null : selector).count();
   },
 });

@@ -21,5 +21,20 @@ Questions.Schema.extend({
         this.set('hitRate', hitCount / answerCount);
       }
     },
+
+    beforeSave(e) {
+      const contentText = _.join(
+        _.map(
+          _.flatten(_.compact(_.map(this.get('content'), 'text.blocks'))),
+        'text'),
+      ' ') || '';
+      const optionsText = _.join(
+        _.map(
+          _.flatten(_.compact(_.map(this.get('options'), 'text.blocks'))),
+        'text'),
+      ' ') || '';
+
+      this.set('text', _.join([contentText, optionsText], ' '));
+    },
   },
 });

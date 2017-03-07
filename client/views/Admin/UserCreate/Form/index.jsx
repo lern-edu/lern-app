@@ -42,6 +42,7 @@ AdminUserCreateForm = React.createClass({
 
   render() {
     const { index } = this.state;
+
     return (
       <div className='ui basic segment'>
 

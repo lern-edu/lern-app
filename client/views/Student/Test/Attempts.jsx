@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, ListItem } from 'material-ui';
+import { List, ListItem, Subheader } from 'material-ui';
 
 StudentTestAttempts = React.createClass({
   render() {
@@ -16,7 +16,8 @@ StudentTestAttempts = React.createClass({
         </div>
       </div>
     ) : (
-      <List subheader='Desempenho por Questão'>
+      <List>
+        <Subheader>Desempenho por Questão</Subheader>
         {_.map(atts, (attempt, i) =>
           <ListItem
             key={attempt._id}

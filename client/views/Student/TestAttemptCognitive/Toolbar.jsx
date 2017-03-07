@@ -56,7 +56,7 @@ StudentTestAttemptCognitiveToolbar = React.createClass({
     const { open } = this.state;
     return (
       <Toolbar style={{ position: 'fixed', zIndex: '1000' }}>
-        <ToolbarGroup float='left'>
+        <ToolbarGroup style={{ float: 'left' }}>
           <IconButton
             onTouchTap={this.handleOpen}
             children={<FontIcon className='material-icons' >help</FontIcon>}
@@ -65,7 +65,7 @@ StudentTestAttemptCognitiveToolbar = React.createClass({
             tooltipPosition='bottom-left' />
         </ToolbarGroup>
           {screen !== 'computer' ? (
-          <ToolbarGroup float='right'>
+          <ToolbarGroup style={{ float: 'right' }}>
             <RaisedButton
               primary={true}
               label='Responder'
@@ -76,7 +76,7 @@ StudentTestAttemptCognitiveToolbar = React.createClass({
               })}
               onClick={this.handleAnswer} />
           </ToolbarGroup>) : (
-            <ToolbarGroup float='right'>
+            <ToolbarGroup style={{ float: 'right' }}>
               <RaisedButton
                 primary={true}
                 label='Responder'

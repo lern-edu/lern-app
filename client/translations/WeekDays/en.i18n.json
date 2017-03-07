@@ -1,0 +1,12 @@
+{
+  "_locale": "en-US",
+  "_namespace": "WeekDays",
+  "title": "English",
+  "mon": "Monday",
+  "tue": "Tuesday",
+  "wed": "Wednesday",
+  "thu": "Thursday",
+  "fri": "Friday",
+  "sat": "Saturday",
+  "dom": "Sunday"
+}
