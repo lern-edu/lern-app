@@ -90,9 +90,13 @@ const PublicContentShowQuestionView = React.createClass({
                   </span>
                 </div>
                 :
-                <p key={op.image} >
+                <div key={op.image} >
                   {i == question.answer ? this.answer : this.notAnswer}
-                  Imagem a definir</p>,
+                    <PublicContentShowImage
+                      form={this}
+                      imageId={op.image}
+                    />
+                </div>,
             ),
           }, question.type)}
         </div>
