@@ -16,7 +16,7 @@ const StudentTestAttemptGlobalFooter = React.createClass({
         position: 'fixed',
         bottom: 0,
         width: '100%',
-        zIndex: '10000',
+        zIndex: '999',
       }} >
         <BottomNavigation
           selectedIndex={
@@ -51,6 +51,11 @@ const StudentTestAttemptGlobalFooter = React.createClass({
 
           <BottomNavigationItem
             label={index == pages.answers.length - 1 ? 'Terminar' : 'Avançar'}
+            disabled={
+              index == pages.answers.length - 1
+              ? !_.every(answers, ({ answer }) => !_.isNull(answer))
+              : !_.every(pages.answers[index], ({ answer }) => !_.isNull(answer))
+            }
             icon={
               <FontIcon className='material-icons' >arrow_forward</FontIcon>
             }
