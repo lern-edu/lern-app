@@ -10,7 +10,9 @@ const StudentAttemptDefaultAnswers = React.createClass({
   getAnswerLetter(answer) {
     if (answer.type !== 'closed') return '';
     else if (_.isNull(answer.answer)) return '';
-    else return `(${String.fromCharCode(answer.answer + 65)})`;
+
+    // else return `(${String.fromCharCode(answer.answer + 65)})`;
+    else return `Opção ${answer.answer + 1}`;
   },
 
   // Render
@@ -76,7 +78,7 @@ const StudentAttemptDefaultAnswers = React.createClass({
                     number: [
                       <h4 className='ui header' key='header'>Intervalo de resposta</h4>,
                       <p key='answer'>
-                        De {question.range.min} até {question.range.max}
+                        De {_.get(question, 'range.min')} até {_.get(question, 'range.max')}
                       </p>,
                     ],
                     closed: [
@@ -88,7 +90,7 @@ const StudentAttemptDefaultAnswers = React.createClass({
                         defaultSelected='not_light'
                       >
                         {
-                          _.map(question.options, (options, index) =>
+                          _.map(question.options, (option, index) =>
                             <RadioButton
                               key={index}
                               style={{ marginTop: '20px', marginBotton: '20px' }}
