@@ -6,9 +6,6 @@ StudentTestAttempts = React.createClass({
     const { attempts, test } = this.props;
     const atts = _.sortBy(_.filter(attempts, 'finishedAt'), 'finishedAt');
 
-    const route = _.get(test, 'type') === 'cognitive'
-      ? 'StudentAttemptCognitive' : 'StudentAttempt';
-
     return _.isEmpty(atts) ? (
       <div className='ui basic segment'>
         <div className='ui light grey header'>
@@ -18,14 +15,26 @@ StudentTestAttempts = React.createClass({
     ) : (
       <List>
         <Subheader>Desempenho por Questão</Subheader>
-        {_.map(atts, (attempt, i) =>
-          <ListItem
-            key={attempt._id}
-            primaryText={`Tentativa ${i + 1}`}
-            secondaryText={moment(attempt.finishedAt).fromNow()}
-            href={FlowRouter.path(route, { testId: test._id, attemptId: attempt._id })}
-          />
-        )}
+
+        {
+          _.map(atts, (attempt, i) =>
+            <ListItem
+              key={attempt._id}
+              primaryText={`Tentativa ${i + 1}`}
+              secondaryText={moment(attempt.finishedAt).fromNow()}
+              href={
+                FlowRouter.path(
+                  `Student${test.get('resolution')}`,
+                  {
+                    testId: test._id,
+                    attemptId: attempt._id,
+                  }
+                )
+              }
+            />
+          )
+        }
+
       </List>
     );
   },
