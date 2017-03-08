@@ -1,44 +1,20 @@
+// Libs
 import React from 'react';
-import { Divider, LinearProgress, Paper } from 'material-ui';
+import { Divider, LinearProgress } from 'material-ui';
 
-StudentTestView = React.createClass({
-  mixins: [ReactMeteorData],
+// Views
+import StudentTestTitle from './Title.jsx';
+import StudentTestAttempts from './Attempts.jsx';
+import StudentTestGrades from './Grades.jsx';
+import StudentTestTags from './Tags.jsx';
 
-  /* Reactive Data Fetching
-  */
-
-  getMeteorData() {
-    const { testId } = this.props;
-
-    const handles = {
-      test: Meteor.subscribe('StudentTests', { testId }, {
-        questions: true,
-        attempts: true,
-        subjects: true,
-        course: true,
-        tags: true,
-      }),
-    };
-
-    const data = {
-      ready: _.mapValues(handles, h => h.ready()),
-      test: _.first(Fetch.General.tests(testId).fetch()),
-    };
-
-    data.questions = data.test && data.test.findQuestions().fetch();
-    data.attempts = data.test && data.test.findAttempts().fetch();
-    data.subjects = data.test && data.test.findSubjects().fetch();
-    data.course = data.test && _.head(data.test.findCourse().fetch());
-    data.tags = data.test && data.test.findTags().fetch();
-
-    return data;
-  },
+const StudentTestView = React.createClass({
 
   /* Render
   */
 
   render() {
-    const { ready, test, course } = this.data;
+    const { ready, test, course } = this.props;
 
     return (
       <div className='ui container'>
@@ -61,28 +37,24 @@ StudentTestView = React.createClass({
 
         <div className='ui basic segment'>
 
-          <Paper>
+            {
+              !_.every(ready)
+                ? <LinearProgress />
+                : [
+                  <StudentTestTitle {...this.props} key='static'/>,
 
-            {!_.every(ready) ? <LinearProgress /> : [
-              <StudentTestTitle {...this.data} key='static'/>,
-              <Divider key='divider0'/>,
+                  <StudentTestAttempts {...this.props} key='attempts'/>,
 
-              <StudentTestAttempts {...this.data} key='attempts'/>,
-              <Divider key='divider1'/>,
+                  <StudentTestGrades {...this.props} key='grades'/>,
 
-              // <StudentTestStats {...this.data} key='stats'/>,
-              // <Divider key='divider1'/>,
-
-              <StudentTestGrades {...this.data} key='grades'/>,
-              <Divider key='divider2'/>,
-
-              <StudentTestTags {...this.data} key='tags'/>,
-            ]}
-
-          </Paper>
+                  <StudentTestTags {...this.props} key='tags'/>,
+              ]
+            }
 
         </div>
       </div>
     );
   },
 });
+
+export default StudentTestView;

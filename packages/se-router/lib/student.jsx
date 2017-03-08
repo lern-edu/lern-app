@@ -78,7 +78,7 @@ studentRoutes.route('/provas/:testId', {
   name: 'StudentTest',
   action(params, query) {
     render({
-      main: <StudentTestView {...params} {...query}/>,
+      main: <StudentTest {...params} {...query}/>,
     });
   },
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { RaisedButton, FontIcon } from 'material-ui';
 
-StudentTestTitle = React.createClass({
+const StudentTestTitle = React.createClass({
 
   handleTestStart() {
     const { test, attempts } = this.props;
@@ -57,3 +57,5 @@ StudentTestTitle = React.createClass({
     );
   },
 });
+
+export default StudentTestTitle;

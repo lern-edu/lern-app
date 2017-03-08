@@ -1,41 +1,45 @@
 import React from 'react';
-import { List, ListItem, Subheader } from 'material-ui';
+import { List, ListItem, Subheader, Paper } from 'material-ui';
 
-StudentTestAttempts = React.createClass({
+const StudentTestAttempts = React.createClass({
   render() {
     const { attempts, test } = this.props;
     const atts = _.sortBy(_.filter(attempts, 'finishedAt'), 'finishedAt');
 
     return _.isEmpty(atts) ? (
-      <div className='ui basic segment'>
+      <Paper className='ui basic segment'>
         <div className='ui light grey header'>
           Sem tentativas ainda
         </div>
-      </div>
+      </Paper>
     ) : (
-      <List>
-        <Subheader>Desempenho por Questão</Subheader>
+      <Paper className='ui basic segment'>
+        <List>
+          <Subheader>Tentativas</Subheader>
 
-        {
-          _.map(atts, (attempt, i) =>
-            <ListItem
-              key={attempt._id}
-              primaryText={`Tentativa ${i + 1}`}
-              secondaryText={moment(attempt.finishedAt).fromNow()}
-              href={
-                FlowRouter.path(
-                  `Student${test.get('resolution')}`,
-                  {
-                    testId: test._id,
-                    attemptId: attempt._id,
-                  }
-                )
-              }
-            />
-          )
-        }
+          {
+            _.map(atts, (attempt, i) =>
+              <ListItem
+                key={attempt._id}
+                primaryText={`Tentativa ${i + 1}`}
+                secondaryText={moment(attempt.finishedAt).fromNow()}
+                href={
+                  FlowRouter.path(
+                    `Student${test.get('resolution')}`,
+                    {
+                      testId: test._id,
+                      attemptId: attempt._id,
+                    }
+                  )
+                }
+              />
+            )
+          }
 
-      </List>
+        </List>
+      </Paper>
     );
   },
 });
+
+export default StudentTestAttempts;
