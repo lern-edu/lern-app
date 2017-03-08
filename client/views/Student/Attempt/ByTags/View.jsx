@@ -19,7 +19,7 @@ const StudentAttemptByTagsView = React.createClass({
   render() {
     const { ready, test, attempt, course } = this.props;
     return (
-      <div>
+      <div className='ui container'>
 
         {!_.every(ready) ? undefined :
           <Layout.Bar
@@ -44,16 +44,16 @@ const StudentAttemptByTagsView = React.createClass({
           />
         }
 
-        <div className='ui centered grid'>
-          <div className='ten wide computer sixteen wide tablet column'>
+        <div className='ui basic segment'>
 
-              {!_.every(ready) ? undefined : [
+            {
+              !_.every(ready) ? undefined : [
                 <StudentAttemptByTagsTitle {...this.props} key='static'/>,
                 <Divider key='divider0'/>,
                 <StudentAttemptByTagsData {...this.props} {...this.context} key='grades'/>,
-              ]}
+              ]
+            }
 
-          </div>
         </div>
 
       </div>

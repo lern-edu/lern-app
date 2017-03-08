@@ -11,7 +11,7 @@ const StudentAttemptDefaultView = React.createClass({
   render() {
     const { ready, test, attempt, course } = this.props;
     return (
-      <div>
+      <div className='ui container'>
 
         {!_.every(ready) ? undefined :
           <Layout.Bar
@@ -36,16 +36,16 @@ const StudentAttemptDefaultView = React.createClass({
           />
         }
 
-        <div className='ui centered grid'>
-          <div className='eight wide computer sixteen wide tablet column'>
+        <div className='ui basic segment'>
 
-              {!_.every(ready) ? undefined : [
+            {
+              !_.every(ready) ? undefined : [
                 <StudentAttemptDefaultTitle {...this.props} key='static'/>,
                 <Divider key='divider0'/>,
                 <StudentAttemptDefaultAnswers {...this.props} key='grades'/>,
-              ]}
+              ]
+            }
 
-          </div>
         </div>
 
       </div>

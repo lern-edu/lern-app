@@ -43,33 +43,44 @@ StudentTestView = React.createClass({
     return (
       <div className='ui container'>
 
-        {_.every(ready) && _.get(test, 'course') ? <Layout.Bar title={_.get(test, 'name')}
-        crumbs={[
-          { label: _.get(course, 'name'), path: FlowRouter.path('StudentCourseShow', { courseId: _.get(test, 'course') }) },
-        ]} /> : <Layout.Bar title='Prova' />}
+        {
+          _.every(ready) && _.get(test, 'course')
+          ? <Layout.Bar
+            title={_.get(test, 'name')}
+            crumbs={
+              [
+                {
+                  label: _.get(course, 'name'),
+                  path: FlowRouter.path('StudentCourseShow', { courseId: _.get(test, 'course') }),
+                },
+              ]
+            }
+          />
+          : <Layout.Bar title='Prova' />
+        }
 
-        <div className='ui centered grid'>
-          <div className='eight wide computer sixteen wide tablet column'>
-            <Paper>
+        <div className='ui basic segment'>
 
-              {!_.every(ready) ? <LinearProgress /> : [
-                <StudentTestTitle {...this.data} key='static'/>,
-                <Divider key='divider0'/>,
+          <Paper>
 
-                <StudentTestAttempts {...this.data} key='attempts'/>,
-                <Divider key='divider1'/>,
+            {!_.every(ready) ? <LinearProgress /> : [
+              <StudentTestTitle {...this.data} key='static'/>,
+              <Divider key='divider0'/>,
 
-                // <StudentTestStats {...this.data} key='stats'/>,
-                // <Divider key='divider1'/>,
+              <StudentTestAttempts {...this.data} key='attempts'/>,
+              <Divider key='divider1'/>,
 
-                <StudentTestGrades {...this.data} key='grades'/>,
-                <Divider key='divider2'/>,
+              // <StudentTestStats {...this.data} key='stats'/>,
+              // <Divider key='divider1'/>,
 
-                <StudentTestTags {...this.data} key='tags'/>,
-              ]}
+              <StudentTestGrades {...this.data} key='grades'/>,
+              <Divider key='divider2'/>,
 
-            </Paper>
-          </div>
+              <StudentTestTags {...this.data} key='tags'/>,
+            ]}
+
+          </Paper>
+
         </div>
       </div>
     );
