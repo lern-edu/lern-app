@@ -28,7 +28,7 @@ const StudentTestAttemptGlobalContentQuestion = React.createClass({
   handleNumberAnswer(event, value) {
     const { question: { range } } = this.props;
     const answer = parseInt(value);
-    if (!value || _.inRange(answer, range.min, range.max)) {
+    if (!value || _.inRange(answer, range.min, range.max) || value == range.max) {
       this.setState({ answer: !value ? null : answer });
       this.handleUpdateAnswer(!value ? null : _.toNumber(answer));
     } else return;

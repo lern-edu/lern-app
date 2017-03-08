@@ -22,15 +22,19 @@ const StudentTestAttemptGlobalContent = React.createClass({
                 <div className='row' key={`${index}.${i}.content`}>
                   <div className='sixteen wide column' >
                     {_.get({
-                      text: <Editor
-                          readOnly={true}
-                          editorState={c.text && EditorState.createWithContent(
-                            convertFromRaw(c.text))} />,
+                      text: <PublicContentShow
+                        canRemove={false}
+                        schema={Questions.OptionSchema}
+                        index={i}
+                        doc={c}
+                      />,
                       link: <a>{c.link}</a>,
                       title: <h4>{c.title}</h4>,
-                      image: <PublicContentShowImage
-                        form={this}
-                        imageId={c.image}
+                      image: <PublicContentShow
+                        schema={Questions.OptionSchema}
+                        canRemove={false}
+                        index={i}
+                        doc={c}
                       />,
                       question: <StudentTestAttemptGlobalContentQuestion
                         parent={this.props.parent}
