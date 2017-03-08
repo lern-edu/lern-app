@@ -121,8 +121,8 @@ const PublicContentCreateQuestionCreate = React.createClass({
 
           <div className='row'>
             <PublicContentCreateQuestionCreateAnswer
-                form={this}
-                images={images} />
+              form={this}
+            />
           </div>
 
         </div>

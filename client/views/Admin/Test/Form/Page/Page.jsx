@@ -41,17 +41,6 @@ const AdminTestFormPage = React.createClass({
         <div className='ui grid'>
 
           <div className='row'>
-            <div className='sixteen wide column'>
-              <AdminTestFormPageCreate
-                updateQuestionsSelected={this.updateQuestionsSelected}
-                scored={scored}
-                questionsSelected={questionsSelected}
-                form={form}
-                subjects={subjects} />
-            </div>
-          </div>
-
-          <div className='row'>
             {_.map(form.doc.get('pages'), (c, i) =>
               <div className='sixteen wide column' key={i}>
                 <AdminTestFormPageShow
