@@ -35,13 +35,11 @@ PublicContentShow = React.createClass({
     const text = this.doc.get('text');
 
     return (
-      <div style={{ padding: 15 }}>
+      <div>
 
         {_.get({
           text: <PublicContentRichText
-            editorState={text
-              ? EditorState.createWithContent(convertFromRaw(text))
-              : EditorState.createEmpty()}
+            editorState={text && EditorState.createWithContent(convertFromRaw(text))}
             parent={this}
             readOnly={true}
           />,

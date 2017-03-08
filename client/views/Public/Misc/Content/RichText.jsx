@@ -105,7 +105,13 @@ const PublicContentRichText = React.createClass({
     }
 
     return (
-      <div className='RichEditor-root'>
+      <div
+        className='RichEditor-root'
+        style={readOnly
+          ? undefined
+          : { padding: 15 }
+        }
+      >
         {readOnly
           ? undefined
           : [
@@ -121,7 +127,13 @@ const PublicContentRichText = React.createClass({
             />,
           ]}
         <div
-          style={readOnly ? undefined : { borderTop: '1px solid #ddd' }}
+          style={readOnly
+            ? undefined
+            : {
+              borderTop: '1px solid #ddd',
+              marginTop: 10,
+            }
+          }
           className={className}
           onClick={this.focus}>
           <Editor
