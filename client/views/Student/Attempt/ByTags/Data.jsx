@@ -1,31 +1,19 @@
+// Lib
 import React from 'react';
-import { Card, CardMedia, CardText, List, ListItem, Avatar, FontIcon, Subheader } from 'material-ui';
+import Chart from 'chart.js';
+import { Card, CardMedia, CardText, List } from 'material-ui';
+import { ListItem, Avatar, Chip, Subheader } from 'material-ui';
 
-StudentAttemptCognitiveAnswers = React.createClass({
-
-  getInitialState() {
-    return { avaregeQuestions: null, avaregeEntrepeneur: null, tagsIds: null };
-  },
-
-  // static data
-
-  entrepeneurData: {
-    'dMPH4XToypCGjWm3s': 8.1,
-    'aaFhkXjcDwsTxmS3Z': 8.9,
-    'rh59gcHjLRYdcoqan': 8.9,
-    'Ekn5QwTEGrLxFLH9y': 9.1,
-    '8oPm9rs8ZJojXS9Z8': 9.0,
-    'XNFyWkYM2jFv42gE5': 8.2,
-    'k3QuioXc5e58NfpfY': 8.5,
-    'm5ZERR3w2aYNgejGH': 8.3,
-    '9MsQL7oSWL6RsGCuJ': 8.4,
-    'sBeagbN5pD2TbpMQM': 8.6,
-  },
+const StudentAttemptByTagsData = React.createClass({
 
   // Lifecycle
 
+  getInitialState() {
+    return { avaregeQuestions: null, tagsIds: null };
+  },
+
   componentDidMount() {
-    const { refs: { chart }, props: { answers, questions, tags, user }, entrepeneurData } = this;
+    const { refs: { chart }, props: { answers, questions, tags, user } } = this;
 
     // define label
     const orderedTags = _.orderBy(tags, ['text']);
@@ -48,57 +36,81 @@ StudentAttemptCognitiveAnswers = React.createClass({
       )
     );
 
-    // calc success entrepeneur
-    const avaregeEntrepeneur = _.map(tagsIds, t => _.get(entrepeneurData, t));
-
     // upadate state
-    this.setState({ tagsIds, avaregeQuestions, avaregeEntrepeneur });
+    this.setState({ tagsIds, avaregeQuestions });
 
-    const data = {
-      labels,
-      series: [
-        { className: 'user', name: _.get(user, 'profile.name'), data: avaregeQuestions },
-        { className: 'entrepeneur', name: 'Empreendedor de sucesso', data: avaregeEntrepeneur },
-      ],
-    };
-
-    const node = new Chartist.Bar(chart, data, {
-      seriesBarDistance: 10,
+    const node = new Chart(chart, {
+      type: 'radar',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: _.get(user, 'profile.name'),
+            backgroundColor: 'rgba(33,150,243,0.2)',
+            borderColor: 'rgba(33,150,243,1)',
+            pointBackgroundColor: 'rgba(33,150,243,1)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgba(33,150,243,1)',
+            data: avaregeQuestions,
+          },
+        ],
+      },
+      options: {
+        legend: {
+          display: false,
+        },
+        scale: {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      },
     });
 
-    // node.on('draw', (e1, e2, e3) => {
-    //   console.log(e1, e2, e3);
-    // });
   },
 
   // Render
 
   render() {
-    const { props: { user, tags },
-      state: { tagsIds, avaregeQuestions, avaregeEntrepeneur, }, } = this;
+    const {
+      props: { user: { profile: { name, profilePic } }, tags },
+      state: { tagsIds, avaregeQuestions },
+    } = this;
     return (
-      <Card>
-        <CardText>
-          <List>
-            <Subheader>Legenda</Subheader>
-            <ListItem
-              primaryText={_.get(user, 'profile.name')}
-              leftIcon={<FontIcon className="material-icons" color='#2196F3'>person</FontIcon>}
-              nestedItems={_.map(tagsIds, (id, index) =>
-                <ListItem key={id} primaryText={_.get(_.find(tags, { _id: id }), 'text')}
-                secondaryText={<p>Sua média: <b>{_.get(avaregeQuestions, index)}</b>
-                -- Empreendedores de sucesso: <b>{_.get(avaregeEntrepeneur, index)}</b></p>}
-                disabled={true}/>)}
-              />
-            <ListItem
-              primaryText='Empreendedores de sucesso'
-              leftIcon={<FontIcon className="material-icons" color='#FFC107'>star</FontIcon>}
-            />
-          </List>
-        </CardText>
-        <CardMedia><div ref='chart' /></CardMedia>
-      </Card>
+      <div>
+        <Card>
+          <CardText>
+            <List>
+                <Subheader>Média</Subheader>
+                <ListItem
+                  disabled={true}
+                  children={
+                    <div key={'avarege'} style={{ display: 'flex', flexWrap: 'wrap' }}>
+                      {
+                        _.map(tagsIds, (id, index) =>
+                          <Chip key={id} style={{ margin: 4 }} >
+                            {
+                              _.get(_.find(tags, { _id: id }), 'text')
+                            }: {
+                              _.isNaN(_.get(avaregeQuestions, index))
+                              ? 'Sem valor'
+                              : _.get(avaregeQuestions, index)
+                            }
+                          </Chip>
+                        )
+                      }
+                    </div>
+                  }
+                  />
+            </List>
+          </CardText>
+        </Card>
+        <canvas ref='chart' width={300} height={300} />
+      </div>
     );
   },
 
 });
+
+export default StudentAttemptByTagsData;
