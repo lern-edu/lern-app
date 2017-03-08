@@ -87,7 +87,7 @@ studentRoutes.route('/provas/:testId/tentativas/:attemptId', {
   name: 'StudentAttemptDefault',
   action(params) {
     render({
-      main: <StudentAttemptDefaultView {...params}/>,
+      main: <StudentAttemptDefault {...params}/>,
     });
   },
 });
