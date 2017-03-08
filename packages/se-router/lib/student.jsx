@@ -83,11 +83,20 @@ studentRoutes.route('/provas/:testId', {
   },
 });
 
-studentRoutes.route('/provas/:testId/tentativas/:attemptId', {
+studentRoutes.route('/provas/:testId/tentativas/:attemptId/padrao', {
   name: 'StudentAttemptDefault',
   action(params) {
     render({
       main: <StudentAttemptDefault {...params}/>,
+    });
+  },
+});
+
+studentRoutes.route('/provas/:testId/tentativas/:attemptId/por-tags', {
+  name: 'StudentAttemptByTags',
+  action(params) {
+    render({
+      main: <StudentAttemptByTags {...params} />,
     });
   },
 });
