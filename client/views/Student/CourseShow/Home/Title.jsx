@@ -4,13 +4,14 @@ import { FlatButton, RaisedButton, Avatar, Chip } from 'material-ui';
 const StudentCourseShowHomeTitle = React.createClass({
 
   render() {
-    const { course, subjects, teachers } = this.props;
+    const { course, subjects, teachers, tags } = this.props;
 
     return (
       <div className='ui basic segment' style={{ marginBottom: 0 }}>
 
         <h1 className='ui header' style={{ marginTop: 0 }}>
-          <div className='content'>
+
+          <div>
             {course.name}
             <div className='sub header'>
               {
@@ -21,11 +22,12 @@ const StudentCourseShowHomeTitle = React.createClass({
                 }`
               }
             </div>
+
             <div className='sub header' style={{ display: 'flex', flexWrap: 'wrap' }} >
               <span style={{ marginTop: 11 }} >
                 {`Professor${teachers.length === 1 ? '' : 'es'}: `}
               </span>
-              <div>
+              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {
                   _.map(teachers, ({ profile: { profilePic, name }, _id }) =>
                     <Chip key={_id} style={{ margin: 5 }} >
@@ -40,6 +42,20 @@ const StudentCourseShowHomeTitle = React.createClass({
                 }
               </div>
             </div>
+
+            {/* <div className='sub header' style={{ display: 'flex', flexWrap: 'wrap' }} >
+              <span style={{ marginTop: 11 }} >Tags:</span>
+              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                {
+                  _.map(tags, ({ text, _id }) =>
+                    <Chip key={_id} style={{ margin: 5 }} >
+                      {text}
+                    </Chip>
+                  )
+                }
+              </div>
+            </div> */}
+
           </div>
         </h1>
 

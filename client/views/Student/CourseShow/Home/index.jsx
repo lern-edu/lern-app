@@ -1,8 +1,10 @@
+// Libs
 import React from 'react';
-import { Card, CardTitle, Paper } from 'material-ui';
 
-import StudentCourseShowHomeCard from './Card.jsx';
+// Views
 import StudentCourseShowHomeTitle from './Title.jsx';
+import StudentCourseShowHomeContent from './Content.jsx';
+import StudentCourseShowHomeTags from './Tags.jsx';
 
 const StudentCourseShowHome = React.createClass({
 
@@ -17,7 +19,9 @@ const StudentCourseShowHome = React.createClass({
 
         <StudentCourseShowHomeTitle {...this.props} />
 
-        <StudentCourseShowHomeCard {...this.props} />
+        <StudentCourseShowHomeContent {...this.props} />
+
+        <StudentCourseShowHomeTags {...this.props} />
 
       </div>
     );
