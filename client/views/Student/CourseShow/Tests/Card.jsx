@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatButton } from 'material-ui';
 
-StudentCourseShowTestsCard = React.createClass({
+const StudentCourseShowTestsCard = React.createClass({
 
   /* Handlers
   */
@@ -77,3 +77,5 @@ StudentCourseShowTestsCard = React.createClass({
     );
   },
 });
+
+export default StudentCourseShowTestsCard;

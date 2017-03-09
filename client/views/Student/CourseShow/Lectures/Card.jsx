@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardTitle, CardText, FlatButton, } from 'material-ui';
 
-StudentCourseShowLecturesCard = React.createClass({
+const StudentCourseShowLecturesCard = React.createClass({
 
   handleAttemptTest() {
     const { lecture, course, tags, tests, attempts } = this.props;
@@ -38,7 +38,7 @@ StudentCourseShowLecturesCard = React.createClass({
             {_.isEmpty(test) ? undefined :
               <FlatButton
               onTouchTap={this.handleAttemptTest}
-              
+
               label={_.get(test, 'name')}
               labelPosition='before'
               secondary={true} />}
@@ -48,3 +48,5 @@ StudentCourseShowLecturesCard = React.createClass({
     );
   },
 });
+
+export default StudentCourseShowLecturesCard;

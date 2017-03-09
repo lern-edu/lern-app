@@ -2,15 +2,9 @@ import React from 'react';
 import { Card, CardTitle, Paper } from 'material-ui';
 
 import StudentCourseShowHomeCard from './Card.jsx';
+import StudentCourseShowHomeTitle from './Title.jsx';
 
-StudentCourseShowHome = React.createClass({
-
-  /* Lifecycle
-  */
-
-  getInitialState() {
-    return { };
-  },
+const StudentCourseShowHome = React.createClass({
 
   /* Render
   */
@@ -19,11 +13,15 @@ StudentCourseShowHome = React.createClass({
     const { course } = this.props;
 
     return (
-      <div className='ui container fluid' style={{ marginTop: '30px' }}>
-       <div className='ui centered grid' style={{ margin: '0 !important' }}>
-         <StudentCourseShowHomeCard course={course} {...this.props}/>
-       </div>
-     </div>
+      <div className='ui basic segment'>
+
+        <StudentCourseShowHomeTitle {...this.props} />
+
+        <StudentCourseShowHomeCard {...this.props} />
+
+      </div>
     );
   },
 });
+
+export default StudentCourseShowHome;

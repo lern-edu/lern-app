@@ -138,7 +138,7 @@ studentRoutes.route('/disciplinas/:courseId', {
   name: 'StudentCourseShow',
   action(params, query) {
     render({
-      main: <StudentCourseShowView {...params} {...query} />,
+      main: <StudentCourseShow {...params} {...query} />,
     });
   },
 });

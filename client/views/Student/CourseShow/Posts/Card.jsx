@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, RaisedButton, FlatButton, CardText, FontIcon, } from 'material-ui';
+import { RaisedButton, FlatButton, CardText, FontIcon, } from 'material-ui';
+import { Card, CardActions, CardHeader, CardMedia, CardTitle } from 'material-ui';
 
-StudentCourseShowPostsCard = React.createClass({
+const StudentCourseShowPostsCard = React.createClass({
 
   // Handles
 
@@ -68,3 +69,5 @@ StudentCourseShowPostsCard = React.createClass({
   },
 
 });
+
+export default StudentCourseShowPostsCard;
