@@ -163,6 +163,11 @@ Tests.Schema = Astro.Class({
       validator: Validators.OneOf(TestTimeoutTypes.all('keys')),
       immutable: true,
     },
+    resolution: {
+      type: 'string',
+      validator: Validators.OneOf(TestResolutionTypes.all('keys')),
+      default: 'AttemptDefault',
+    },
   },
   behaviors: [
     'creatable',

@@ -78,16 +78,25 @@ studentRoutes.route('/provas/:testId', {
   name: 'StudentTest',
   action(params, query) {
     render({
-      main: <StudentTestView {...params} {...query}/>,
+      main: <StudentTest {...params} {...query}/>,
     });
   },
 });
 
-studentRoutes.route('/provas/:testId/tentativas/:attemptId', {
-  name: 'StudentAttempt',
+studentRoutes.route('/provas/:testId/tentativas/:attemptId/padrao', {
+  name: 'StudentAttemptDefault',
   action(params) {
     render({
-      main: <StudentTestAttempt {...params}/>,
+      main: <StudentAttemptDefault {...params}/>,
+    });
+  },
+});
+
+studentRoutes.route('/provas/:testId/tentativas/:attemptId/por-tags', {
+  name: 'StudentAttemptByTags',
+  action(params) {
+    render({
+      main: <StudentAttemptByTags {...params} />,
     });
   },
 });
@@ -129,7 +138,7 @@ studentRoutes.route('/disciplinas/:courseId', {
   name: 'StudentCourseShow',
   action(params, query) {
     render({
-      main: <StudentCourseShowView {...params} {...query} />,
+      main: <StudentCourseShow {...params} {...query} />,
     });
   },
 });

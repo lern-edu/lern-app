@@ -1,16 +1,12 @@
+// Libs
 import React from 'react';
-import { Card, CardTitle, Paper } from 'material-ui';
 
-import StudentCourseShowHomeCard from './Card.jsx';
+// Views
+import StudentCourseShowHomeTitle from './Title.jsx';
+import StudentCourseShowHomeContent from './Content.jsx';
+import StudentCourseShowHomeTags from './Tags.jsx';
 
-StudentCourseShowHome = React.createClass({
-
-  /* Lifecycle
-  */
-
-  getInitialState() {
-    return { };
-  },
+const StudentCourseShowHome = React.createClass({
 
   /* Render
   */
@@ -19,11 +15,17 @@ StudentCourseShowHome = React.createClass({
     const { course } = this.props;
 
     return (
-      <div className='ui container fluid' style={{ marginTop: '30px' }}>
-       <div className='ui centered grid' style={{ margin: '0 !important' }}>
-         <StudentCourseShowHomeCard course={course} {...this.props}/>
-       </div>
-     </div>
+      <div className='ui basic segment'>
+
+        <StudentCourseShowHomeTitle {...this.props} />
+
+        <StudentCourseShowHomeContent {...this.props} />
+
+        <StudentCourseShowHomeTags {...this.props} />
+
+      </div>
     );
   },
 });
+
+export default StudentCourseShowHome;

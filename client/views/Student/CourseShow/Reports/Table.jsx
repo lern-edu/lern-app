@@ -1,6 +1,6 @@
 import React from 'react';
 
-StudentCourseShowReportsTable = React.createClass({
+const StudentCourseShowReportsTable = React.createClass({
 
   /* Methods
   */
@@ -75,3 +75,5 @@ StudentCourseShowReportsTable = React.createClass({
     );
   },
 });
+
+export default StudentCourseShowReportsTable;

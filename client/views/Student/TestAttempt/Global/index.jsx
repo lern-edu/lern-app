@@ -55,7 +55,13 @@ const StudentTestAttemptGlobal = React.createClass({
         console.error(err);
         snack(':(');
       } else
-        FlowRouter.go('StudentAttempt', { testId: test._id, attemptId: attempt._id });
+        FlowRouter.go(
+          `Student${test.get('resolution')}`,
+          {
+            testId: test._id,
+            attemptId: attempt._id,
+          }
+        );
     });
   },
 

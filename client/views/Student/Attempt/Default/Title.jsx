@@ -1,16 +1,15 @@
 import React from 'react';
 import { FlatButton, RaisedButton } from 'material-ui';
 
-StudentAttemptTitle = React.createClass({
+const StudentAttemptDefaultTitle = React.createClass({
 
   handleTestStart() {
     const { test, attempts } = this.props;
-    const route = _.get(test, 'type') === 'cognitive'
-      ? 'StudentAttemptCognitive' : 'StudentAttempt';
     const attempt = _.find(attempts, { test: test._id, finished: null });
+
     if (attempt) {
       snack('Boa sorte!');
-      FlowRouter.go(route, { testId: test._id });
+      FlowRouter.go('StudentTestAttempt', { testId: test._id });
     } else {
       Meteor.call('StudentAttemptStart', test._id, err => {
         if (err) {
@@ -18,8 +17,8 @@ StudentAttemptTitle = React.createClass({
           snack('Algo deu errado', 'orange warning');
         } else {
           snack('Boa sorte!');
-          FlowRouter.go(route, { testId: test._id });
-        }
+          FlowRouter.go('StudentTestAttempt', { testId: test._id });
+        };
       });
     }
   },
@@ -28,8 +27,12 @@ StudentAttemptTitle = React.createClass({
     const { attempt } = this.props;
     Meteor.call('StudentTestRedoWrongs', { attemptId: attempt._id }, (err, res) => {
       if (err) {
-        console.log(err);
-        snack(':(');
+        if (err.message.includes('none-cursor'))
+          snack('Essa tentativa não contém respostas erradas');
+        else {
+          snack(':(');
+          console.log(err);
+        };
       } else {
         Meteor.call('StudentAttemptStart', res._id, err => {
           if (err) {
@@ -40,7 +43,7 @@ StudentAttemptTitle = React.createClass({
             FlowRouter.go('StudentTestAttempt', { testId: res._id });
           }
         });
-      }
+      };
     });
   },
 
@@ -62,6 +65,7 @@ StudentAttemptTitle = React.createClass({
           label='Refazer Erradas'
           style={{ float: 'right' }}
           primary={true}
+          disabled={!_attempt.finished}
           onClick={this.handleRedoClick}
         />
         <FlatButton
@@ -80,3 +84,5 @@ StudentAttemptTitle = React.createClass({
     );
   },
 });
+
+export default StudentAttemptDefaultTitle;

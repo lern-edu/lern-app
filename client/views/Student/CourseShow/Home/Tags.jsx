@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatButton, Paper } from 'material-ui';
 
-const StudentTestTags = React.createClass({
+const StudentCourseShowHomeTags = React.createClass({
   render() {
     const { tags } = this.props;
     return (
@@ -20,4 +20,4 @@ const StudentTestTags = React.createClass({
   },
 });
 
-export default StudentTestTags;
+export default StudentCourseShowHomeTags;

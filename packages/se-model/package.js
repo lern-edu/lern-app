@@ -109,6 +109,7 @@ Package.onUse((api) => {
     'QuestionTypes',
     'TestTypes',
     'TestTimeoutTypes',
+    'TestResolutionTypes',
     'AccessStates',
     'WeekDays',
     'ContactTypes',

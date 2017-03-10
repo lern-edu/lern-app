@@ -18,11 +18,9 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
 
   handleTypeChange(event, index, type) {
     const { form } = this.props;
-    form.defaultHandler({ options: type != 'closed' ? null : [] },
-      { doc: true });
+    form.defaultHandler({ options: type != 'closed' ? null : [] }, { doc: true });
     if (type == 'number')
-      form.defaultHandler({ range: new Questions.RangeSchema() },
-        { doc: true });
+      form.defaultHandler({ range: new Questions.RangeSchema() }, { doc: true });
     else form.defaultHandler({ range: null }, { doc: true });
     form.defaultHandler({ type, answer: null }, { doc: true });
     if (type == 'closed')
@@ -41,8 +39,8 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
   handleRangeChange({ currentTarget }, value) {
     const field = currentTarget.getAttribute('name');
     const range = parseInt(value);
-    if (range || range == 0 || value == '')
-      this.props.form.defaultHandler({ [field]: range }, { doc: true });
+    if (!_.isNaN(range) || value == '')
+      this.props.form.defaultHandler({ [field]: value == '' ? value : range }, { doc: true });
     else return;
   },
 
@@ -91,22 +89,23 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
                 contentTypes={QuestionOptionsContentTypes}
                 form={form} />
               </div>,
-            number: [<div {...this.column} key='range.min'>
-              <TextField
-                value={form.doc.get('range.min') || ''}
-                floatingLabelText='Mínimo'
-                hintText='Mínimo'
-                name='range.min'
-                onChange={this.handleRangeChange} />
+            number: [
+              <div {...this.column} key='range.min'>
+                <TextField
+                  value={_.isNull(form.doc.get('range.min')) ? '' : form.doc.get('range.min')}
+                  floatingLabelText='Mínimo'
+                  hintText='Mínimo'
+                  name='range.min'
+                  onChange={this.handleRangeChange} />
               </div>,
               <div {...this.column} key='range.max'>
                 <TextField
-                  value={form.doc.get('range.max') || ''}
+                  value={_.isNull(form.doc.get('range.max')) ? '' : form.doc.get('range.max')}
                   floatingLabelText='Máximo'
                   hintText='Máximo'
                   name='range.max'
                   onChange={this.handleRangeChange} />
-                </div>,
+              </div>,
             ],
           }, form.doc.get('type'))}
         </div>

@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import { RaisedButton, TextField, MenuItem } from 'material-ui';
+import { RaisedButton, TextField, MenuItem, SelectField } from 'material-ui';
 
 const AdminTestFormBasic = React.createClass({
 
@@ -10,6 +10,10 @@ const AdminTestFormBasic = React.createClass({
     this.props.form.defaultHandler({
       [currentTarget.getAttribute('name')]: value,
     }, { doc: true });
+  },
+
+  handleResolutionChange(event, index, resolution) {
+    this.props.form.defaultHandler({ resolution }, { doc: true });
   },
 
   /* Render
@@ -29,6 +33,17 @@ const AdminTestFormBasic = React.createClass({
               name='name'
               errorText={_.get(form.state.errors, 'name')}
               onInput={this.handleInput}  />
+          </div>
+
+          <div className='row'>
+            <SelectField
+              floatingLabelText='Resolução'
+              value={form.doc.get('resolution')}
+              errorText={_.get(form.state.errors, 'resolution')}
+              onChange={this.handleResolutionChange} >
+              {_.map(TestResolutionTypes.all('both'), (v, k) =>
+                <MenuItem key={k} value={k} primaryText={v} />)}
+            </SelectField>
           </div>
 
           <div className='row'>

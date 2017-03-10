@@ -1,16 +1,14 @@
 import React from 'react';
 import { RaisedButton } from 'material-ui';
 
-StudentAttemptCognitiveTitle = React.createClass({
+const StudentAttemptByTagsTitle = React.createClass({
 
   handleTestStart() {
     const { test, attempts } = this.props;
-    const route = _.get(test, 'type') === 'cognitive'
-      ? 'StudentAttemptCognitive' : 'StudentAttempt';
     const attempt = _.find(attempts, { test: test._id, finished: null });
     if (attempt) {
       snack('Boa sorte!');
-      FlowRouter.go(route, { testId: test._id });
+      FlowRouter.go('StudentAttemptStart', { testId: test._id });
     } else {
       Meteor.call('StudentAttemptStart', test._id, err => {
         if (err) {
@@ -18,7 +16,7 @@ StudentAttemptCognitiveTitle = React.createClass({
           snack('Algo deu errado', 'orange warning');
         } else {
           snack('Boa sorte!');
-          FlowRouter.go(route, { testId: test._id });
+          FlowRouter.go('StudentAttemptStart', { testId: test._id });
         }
       });
     }
@@ -30,8 +28,8 @@ StudentAttemptCognitiveTitle = React.createClass({
     const _attempts = _.sortBy(_.filter(attempts, 'finishedAt'), 'finishedAt');
     const _attempt = _.last(_.sortBy(attempts, 'startedAt'));
     const buttonLabel = (
-      !_attempt ? 'Fazer Todas' :
-      _attempt.finished ? 'Refazer Todas' :
+      !_attempt ? 'Fazer teste' :
+      _attempt.finished ? 'Refazer teste' :
       'Continuar'
     );
 
@@ -53,3 +51,5 @@ StudentAttemptCognitiveTitle = React.createClass({
     );
   },
 });
+
+export default StudentAttemptByTagsTitle;

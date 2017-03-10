@@ -1,6 +1,10 @@
+// Libs
 import React from 'react';
 
-StudentCourseShowPosts = React.createClass({
+// Views
+import StudentCourseShowPostsCard from './Card.jsx';
+
+const StudentCourseShowPosts = React.createClass({
 
   // render
 
@@ -9,21 +13,24 @@ StudentCourseShowPosts = React.createClass({
 
     return (
       <div className='ui centered grid'>
-        {_.map(_.clone(posts).reverse(), post => {
-          return (
-            <div className='sixteen wide mobile sixteen wide tablet eight wide computer column' key={post._id}>
-              <StudentCourseShowPostsCard
-              post={post}
-              images={images}
-              documents={documents}
-              tags={tags}
-              subjects={subjects}
-              teacher={_.first(_.filter(teachers, t => t._id === post.author))}
-              />
-            </div>
-          );
-        })}
+        {_.map(_.clone(posts).reverse(), post =>
+          <div
+            key={post._id}
+            className='sixteen wide mobile sixteen wide tablet eight wide computer column'
+          >
+            <StudentCourseShowPostsCard
+            post={post}
+            images={images}
+            documents={documents}
+            tags={tags}
+            subjects={subjects}
+            teacher={_.first(_.filter(teachers, t => t._id === post.author))}
+            />
+          </div>
+        )}
       </div>
     );
   },
 });
+
+export default StudentCourseShowPosts;
