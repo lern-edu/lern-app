@@ -10,7 +10,6 @@ Package.onUse(function (api) {
     'ecmascript',
     'erasaur:meteor-lodash',
     'kadira:react-layout',
-    'patrickleet:enquire',
     'universe:i18n',
   ], 'client');
 
