@@ -20,6 +20,7 @@
 - Misc
   - Lodash
   - Moment
+  - [ChartJS](http://www.chartjs.org/)
 - Files
   - [Ostrio](https://github.com/VeliovGroup/Meteor-Files)
 
