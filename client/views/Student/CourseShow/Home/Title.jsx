@@ -43,19 +43,6 @@ const StudentCourseShowHomeTitle = React.createClass({
               </div>
             </div>
 
-            {/* <div className='sub header' style={{ display: 'flex', flexWrap: 'wrap' }} >
-              <span style={{ marginTop: 11 }} >Tags:</span>
-              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {
-                  _.map(tags, ({ text, _id }) =>
-                    <Chip key={_id} style={{ margin: 5 }} >
-                      {text}
-                    </Chip>
-                  )
-                }
-              </div>
-            </div> */}
-
           </div>
         </h1>
 
