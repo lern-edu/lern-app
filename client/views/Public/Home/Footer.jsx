@@ -9,7 +9,6 @@ const PublicHomeFooter = React.createClass({
     footer: {
       backgroundColor: 'dimgrey',
       padding: '38px',
-      bottom: '-50px',
       color: '#e2e2e2',
       position: 'relative',
       width: '100%',

@@ -1,7 +1,7 @@
 import React from 'react';
-import { FloatingActionButton, RaisedButton, FontIcon, AppBar, FlatButton } from 'material-ui';;
+import { RaisedButton, FontIcon, AppBar, FlatButton } from 'material-ui';;
 
-PublicHomeAction = React.createClass({
+const PublicHomeAction = React.createClass({
 
   // Context
 
@@ -50,3 +50,5 @@ PublicHomeAction = React.createClass({
     );
   },
 });
+
+export default PublicHomeAction;

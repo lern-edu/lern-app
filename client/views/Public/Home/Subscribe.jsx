@@ -16,6 +16,7 @@ const PublicHomeSubscribe = React.createClass({
   // Styles
 
   render() {
+    const { parent } = this.props;
     return (
       <Paper className='ui equal width center aligned padded grid fluid'>
         <div className='row'>
@@ -40,7 +41,10 @@ const PublicHomeSubscribe = React.createClass({
                 </div>
                 <div className='column' >
                   <div className='ui left aligned basic segment' style={{ marginTop: 19 }}>
-                    <RaisedButton secondary={true} label='inscrever' />
+                    <RaisedButton
+                      secondary={true}
+                      label='inscrever'
+                      onTouchTap={parent.handleSubmit} />
                   </div>
                 </div>
               </div>
