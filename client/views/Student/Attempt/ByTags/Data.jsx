@@ -78,8 +78,8 @@ const StudentAttemptByTagsData = React.createClass({
       state: { tagsIds, avaregeQuestions },
     } = this;
     return (
-      <div>
-        <Card>
+      <div className='ui center aligned grid' style={{ marginTop: 10 }}>
+        <Card className='sixteen wide tablet seven wide computer column' >
           <CardText>
             <List>
                 <Subheader>Média</Subheader>
@@ -106,7 +106,9 @@ const StudentAttemptByTagsData = React.createClass({
             </List>
           </CardText>
         </Card>
-        <canvas ref='chart' width={300} height={300} />
+        <div className='sixteen wide tablet nine wide computer column'>
+          <canvas ref='chart' width={300} height={300} />
+        </div>
       </div>
     );
   },
