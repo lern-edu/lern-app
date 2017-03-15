@@ -60,25 +60,24 @@ const PublicHomeDevices = React.createClass({
           <div className='right aligned sixteen wide column' style={{ textAlign: 'center' }}>
             <h1>Disponível em diversas plataformas</h1>
           </div>
-          <div className='eight wide computer sixteen wide mobile column'
-            style={{ fontSize: '18px' }}>
-            <br />
-            A lern é compatível em dispositivos móveis, desktops ou através do seu
-            navegador preferido.
-            <br />
+          <div className='eight wide computer sixteen wide mobile column' >
+            <div className='ui basic center aligned segment' style={{ fontSize: '18px' }}>
+              A lern é compatível em dispositivos móveis, desktops ou através do seu
+              navegador preferido.
+            </div>
             <div className='ui three column grid'>
               <div className='column'>
-                <div className='ui basic segment'>
+                <div className='ui basic center aligned segment'>
                   <i className='huge chrome icon'></i>
                 </div>
               </div>
               <div className='column'>
-                <div className='ui basic segment'>
+                <div className='ui basic center aligned segment'>
                   <i className='huge firefox icon'></i>
                 </div>
               </div>
               <div className='column'>
-                <div className='ui basic segment'>
+                <div className='ui basic center aligned segment'>
                   <i className='huge safari icon'></i>
                 </div>
               </div>
