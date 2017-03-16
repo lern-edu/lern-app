@@ -45,6 +45,7 @@ const PublicHomeChart = React.createClass({
       options: {
         legend: {
           display: true,
+          onClick: null,
         },
         scale: {
           ticks: {

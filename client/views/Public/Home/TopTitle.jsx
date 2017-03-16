@@ -1,5 +1,4 @@
 import React from 'react';
-import { RaisedButton } from 'material-ui';
 
 const CommonContent = React.createClass({
 
@@ -7,7 +6,7 @@ const CommonContent = React.createClass({
     const { className } = this.props;
     return (
       <div className={className} >
-        <div className='computer only seven wide column' style={{ top: '12vh' }}>
+        <div className='computer only seven wide column' style={{ margin: 'auto', top: '12vh' }}>
           <img style={{ width: '60%' }} src='/images/icons/web_hi_res_512.png' />
         </div>
         <div
@@ -18,7 +17,7 @@ const CommonContent = React.createClass({
             style={{
               lineHeight: '1.5',
               textShadow: '0 0 10px rgba(0,0,0,.85)',
-              marginTop: '8vh',
+              marginTop: '16vh',
             }}
           >
             <h1 className='ui inverted header' style={{ fontSize: 58 }}>
@@ -27,7 +26,6 @@ const CommonContent = React.createClass({
               de competências
             </h1>
           </div>
-          <RaisedButton secondary={true} label='Conheça o curso de habilidades empreendedoras' />
         </div>
 
         <div className='mobile only sixteen wide column' >
@@ -54,7 +52,6 @@ const CommonContent = React.createClass({
               de competências
             </h1>
           </div>
-          <RaisedButton secondary={true} label='Conheça nosso curso' />
         </div>
       </div>
     );
