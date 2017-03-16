@@ -20,7 +20,6 @@ PublicHomeView = React.createClass({
   getInitialState() {
     return {
       email: '',
-      text: 'Quero conhecer o curso',
       valid: false,
     };
   },
@@ -69,7 +68,7 @@ PublicHomeView = React.createClass({
 
         <PublicHomeSubscribe
           parent={this}
-          text='Se increva aqui para conversar com a nossa equipe' />
+          text='Deixe seu e-mail para entrarmos em contato' />
 
         <PublicHomeFooter />
 
