@@ -1,6 +1,6 @@
 import React from 'react';
 
-StudentCourseShowReportsStats = React.createClass({
+const StudentCourseShowReportsStats = React.createClass({
   classes: 'two',
   stats: {
     score: {
@@ -42,3 +42,5 @@ StudentCourseShowReportsStats = React.createClass({
     );
   },
 });
+
+export default StudentCourseShowReportsStats;

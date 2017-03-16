@@ -101,7 +101,6 @@ Package.onUse((api) => {
 
     // static
     'StaticCollections',
-    'Regex',
 
     'SubjectAreas',
     'UserRoles',
@@ -110,6 +109,7 @@ Package.onUse((api) => {
     'QuestionTypes',
     'TestTypes',
     'TestTimeoutTypes',
+    'TestResolutionTypes',
     'AccessStates',
     'WeekDays',
     'ContactTypes',

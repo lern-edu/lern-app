@@ -1,6 +1,10 @@
+// Libs
 import React from 'react';
 
-StudentCourseShowLectures = React.createClass({
+// Views
+import StudentCourseShowLecturesCard from './Card.jsx';
+
+const StudentCourseShowLectures = React.createClass({
 
   orders: {
     date: {
@@ -84,3 +88,5 @@ StudentCourseShowLectures = React.createClass({
     );
   },
 });
+
+export default StudentCourseShowLectures;

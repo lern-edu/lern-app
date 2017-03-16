@@ -24,12 +24,14 @@ const AdminTestCreateFormPageCreate = React.createClass({
   handleSubmit() {
     const { form } = this.props;
     const pages = form.doc.get('pages');
+    const questions = _.union(form.doc.get('questions'),
+      _.compact(_.map(this.doc.get('content'), 'question')));
     pages.push(_.clone(this.doc));
-    form.defaultHandler({ pages }, { doc: true });
+    form.defaultHandler({ pages, questions }, { doc: true });
     snack('Página criada!');
     this.doc = new Tests.PageSchema();
     this.updateValidation();
-    if (this.props.form.doc.get('timeoutType') == 'page')
+    if (form.doc.get('timeoutType') == 'page')
       this.defaultHandler({ timeout: '' }, { doc: true });
   },
 

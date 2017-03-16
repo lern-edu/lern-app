@@ -1,5 +1,7 @@
 // Libs
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
+import { createContainer } from 'meteor/react-meteor-data';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -25,7 +27,7 @@ const muiTheme = getMuiTheme({
 });
 
 Layout = React.createClass({
-  mixins: [Data, Render, Screen, Language],
+  mixins: [Data, Render, Language],
 
   /* Render
   */
@@ -48,9 +50,9 @@ Layout = React.createClass({
             <Safe {...stuff}> {this.props.main} </Safe>
           </main>
 
-          <footer style={{ marginLeft: stuff.nav && stuff.screen === 'computer' ? 256 : 0 }}>
+          {/* <footer style={{ marginLeft: stuff.nav && stuff.screen === 'computer' ? 256 : 0 }}>
             <Footer />
-          </footer>
+          </footer> */}
 
           <aside>
             <Snackbar />
@@ -65,20 +67,25 @@ Layout = React.createClass({
 Layout.childContextTypes = {
   route: React.PropTypes.string.isRequired,
   logging: React.PropTypes.bool.isRequired,
-  innerHeight: React.PropTypes.number,
-  innerWidth: React.PropTypes.number,
-  screen: React.PropTypes.string,
   user: React.PropTypes.object,
 };
 
 Layout.propTypes = {
   route: React.PropTypes.string.isRequired,
   logging: React.PropTypes.bool.isRequired,
-  innerHeight: React.PropTypes.number,
-  innerWidth: React.PropTypes.number,
   protect: React.PropTypes.string,
-  screen: React.PropTypes.string,
   user: React.PropTypes.object,
   nav: React.PropTypes.bool,
   bar: React.PropTypes.bool,
 };
+
+LayoutContainer = createContainer(({ params }) => {
+  if (Meteor.userId())
+    Meteor.subscribe('UserData');
+
+  return {
+    route: FlowRouter.getRouteName(),
+    user: Meteor.user(),
+    logging: Meteor.loggingIn(),
+  };
+}, Layout);

@@ -151,6 +151,7 @@ Tests.Schema = Astro.Class({
         Validators.minLength(1),
       ]),
       immutable: true,
+      default: () => [],
     },
     timeout: {
       type: 'number',
@@ -161,6 +162,11 @@ Tests.Schema = Astro.Class({
       type: 'string',
       validator: Validators.OneOf(TestTimeoutTypes.all('keys')),
       immutable: true,
+    },
+    resolution: {
+      type: 'string',
+      validator: Validators.OneOf(TestResolutionTypes.all('keys')),
+      default: 'AttemptDefault',
     },
   },
   behaviors: [

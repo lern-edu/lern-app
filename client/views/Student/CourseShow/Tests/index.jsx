@@ -1,6 +1,10 @@
+// Libs
 import React from 'react';
 
-StudentCourseShowTests = React.createClass({
+// Views
+import StudentCourseShowTestsCard from './Card.jsx';
+
+const StudentCourseShowTests = React.createClass({
 
   categories: {
     tries: {
@@ -94,3 +98,5 @@ StudentCourseShowTests = React.createClass({
     );
   },
 });
+
+export default StudentCourseShowTests;

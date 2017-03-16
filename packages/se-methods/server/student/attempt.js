@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 const [prefix, protect] = ['Student', 'student'];
 
 Helpers.Methods({ prefix, protect }, {
@@ -15,12 +16,31 @@ Helpers.Methods({ prefix, protect }, {
     let attempt = Fetch.User(userId).attempts({ test: testId, finished: null });
     Check.Cursor(attempt).none();
 
-    attempt = new Attempts.Schema({ test: testId, score: _.sum(test.scores) || null });
-    if (test.timeoutType === 'global') attempt.set('maxDuration', test.timeout);
+    attempt = new Attempts.Schema({
+      test: testId,
+      score: _.sum(test.scores) || null,
+      type: test.timeoutType,
+      maxDuration: test.timeoutType === 'global' ? test.timeout : null,
+      timeTracked: test.timeoutType === 'page'
+        ? _.map(test.pages,
+          ({ timeout }) => new Attempts.PageTimeTrackedSchema({ maxDuration: timeout }))
+        : null,
+    });
+
     Check.Astro(attempt).valid();
     attempt.save();
 
     return attempt;
+  },
+
+  AttemptStartTimeoutPage(attemptId) {
+    let attempt = Fetch.General.attempts(attemptId);
+    Check.Cursor(attempt).some();
+    attempt = _.head(attempt.fetch());
+
+    attempt.startTimeoutPage();
+
+    return true;
   },
 
   AttemptFinish(testId) {
@@ -35,9 +55,12 @@ Helpers.Methods({ prefix, protect }, {
     Check.Cursor(attempt).some();
     attempt = _.first(attempt.fetch());
 
-    let answers = Fetch.General.answers({ author: userId,
+    let answers = Fetch.General.answers({
+      author: userId,
       question: { $in: test.questions },
-      attempt: attempt._id, });
+      attempt: attempt._id,
+    });
+
     Check.Cursor(answers).some();
     answers = answers.fetch();
 

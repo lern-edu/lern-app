@@ -100,11 +100,11 @@ adminRoutes.route('/planos/novo', {
   },
 });
 
-adminRoutes.route('/planos/:planId', {
+adminRoutes.route('/plano/:planId', {
   name: 'AdminPlan',
   action(params) {
     render({
-      main: <AdminPlanView {...params}/>,
+      main: <AdminPlanView {...params} />,
     });
   },
 });
@@ -118,20 +118,20 @@ adminRoutes.route('/provas', {
   },
 });
 
-adminRoutes.route('/prova/:testId', {
-  name: 'AdminTest',
-  action(params) {
-    render({
-      main: <AdminTestView {...params}/>,
-    });
-  },
-});
-
 adminRoutes.route('/provas/novo', {
   name: 'AdminTestCreate',
   action(params, query) {
     render({
       main: <AdminTestCreateView {...query} />,
+    });
+  },
+});
+
+adminRoutes.route('/provas/:testId', {
+  name: 'AdminTest',
+  action(params) {
+    render({
+      main: <AdminTestView {...params} />,
     });
   },
 });

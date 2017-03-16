@@ -1,43 +1,17 @@
+// Libs
 import React from 'react';
+import { LinearProgress } from 'material-ui';
+
+// Views
 import StudentCourseShowMenu from './Menu.jsx';
 import StudentCourseShowInitial from './Initial.jsx';
+import StudentCourseShowHome from './Home/index.jsx';
+import StudentCourseShowLectures from './Lectures/index.jsx';
+import StudentCourseShowTests from './Tests/index.jsx';
+import StudentCourseShowReports from './Reports/index.jsx';
+import StudentCourseShowPosts from './Posts/index.jsx';
 
-StudentCourseShowView = React.createClass({
-  mixins: [ReactMeteorData],
-
-  /* Reactive Data Fetching
-  */
-
-  getMeteorData() {
-    const userId = Meteor.userId();
-    const { courseId } = this.props;
-
-    const handles = {
-      course: Meteor.subscribe('StudentCourses', { courseId },
-        { posts: true, users: true, tests: true, lectures: true,
-          attempts: true, answers: true, questions: true, subjects: true, tags: true, }),
-    };
-
-    const data = {
-      ready: _.mapValues(handles, h => h.ready()),
-      course: _.first(Fetch.General.courses(courseId).fetch()),
-      images: Fetch.General.images().fetch(),
-      documents: Fetch.General.documents().fetch(),
-      attempts: Fetch.General.attempts().fetch(),
-      answers: Fetch.General.answers().fetch(),
-      questions: Fetch.General.questions().fetch(),
-    };
-
-    data.students = data.course && data.course.findStudents().fetch();
-    data.teachers = data.course && data.course.findTeachers().fetch();
-    data.tests = data.course && data.course.findCurrentTests().fetch();
-    data.posts = data.course && data.course.findPosts().fetch();
-    data.lectures = data.course && data.course.findLectures().fetch();
-    data.subjects = data.course && data.course.findSubjects().fetch();
-    data.tags = data.course && data.course.findTags().fetch();
-
-    return data;
-  },
+const StudentCourseShowView = React.createClass({
 
   /* Get Context
   */
@@ -50,8 +24,7 @@ StudentCourseShowView = React.createClass({
   */
 
   render() {
-    const { active='lectures' } = this.props;
-    const { ready, course } = this.data;
+    const { ready, course, active='home' } = this.props;
     const { user } = this.context;
 
     return (
@@ -63,24 +36,29 @@ StudentCourseShowView = React.createClass({
 
         <StudentCourseShowMenu active={active} />
 
-        <div className='ui container'>
-          {!_.every(ready) ? <div className='ui active loader' /> :
-            <div>
-              {{
-                lectures: <StudentCourseShowLectures {...this.data} key='lectures' />,
-                tests: <StudentCourseShowTests {...this.data} key='tests' />,
-                reports: <StudentCourseShowReports {...this.data} user={user} key='reports' />,
-                posts: <StudentCourseShowPosts {...this.data} user={user} key='posts' />,
-              }[active]}
+          {
+            !_.every(ready)
+            ? <LinearProgress />
+            : <div className='ui container'>
+              {
+                _.get({
+                  home: <StudentCourseShowHome {...this.props} key='home' />,
+                  lectures: <StudentCourseShowLectures {...this.props} key='lectures' />,
+                  tests: <StudentCourseShowTests {...this.props} key='tests' />,
+                  reports: <StudentCourseShowReports {...this.props} user={user} key='reports' />,
+                  posts: <StudentCourseShowPosts {...this.props} user={user} key='posts' />,
+                }, active)
+              }
             </div>
           }
-        </div>
 
         {!_.every(ready) ? undefined :
-        <StudentCourseShowInitial open={_.get(user, 'profile.tutorial')}
-          {...this.data} user={user} />}
+        <StudentCourseShowInitial open={_.get(user, 'profile.tutorial') || false}
+          {...this.props} user={user} />}
 
       </div>
     );
   },
 });
+
+export default StudentCourseShowView;

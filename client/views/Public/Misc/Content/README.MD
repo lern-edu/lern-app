@@ -10,6 +10,7 @@
     index={index}
     updateQuestionsSelected={Function to update selected questions}
     scored={Question has score?}
+    canRemove={Boolean}
     doc={Document to display} />
 ~~~
 - [Example on github](https://github.com/lern-edu/lern-app/blob/develop/client/views/Admin/TestCreate/Form/Basic/Basic.jsx)
@@ -23,6 +24,7 @@
       scored={scored}
       index={i}
       form={this}
+      canRemove={true}
       doc={c} />
 )}
 ~~~
@@ -43,10 +45,10 @@
   - **Description**: Parent view who is controlling Document data
 - `index`
   - **Type**: `Number`
-  - `updateQuestionsSelected`
-    - **Type**: `Function`
-    - **Description**: A Function to update selected questions when some question is removed on `form` content field.
-    - **Example**: [see on github page]((https://github.com/lern-edu/lern-app/blob/develop/lern-app/client/views/Admin/TestCreate/Form/Page/Page.jsx).
+- `updateQuestionsSelected`
+  - **Type**: `Function`
+  - **Description**: A Function to update selected questions when some question is removed on `form` content field.
+  - **Example**: [see on github page]((https://github.com/lern-edu/lern-app/blob/develop/lern-app/client/views/Admin/TestCreate/Form/Page/Page.jsx).
 
   ~~~js
     questionsSelected() {
@@ -59,9 +61,10 @@
     },
   ~~~
 
-  - `scored`
-    - **Type**: `Boolean`
-    - **Description**: Simple bool to active if true `TextFields` to insert scores on questions
+- `scored`
+  - **Type**: `Boolean`
+  - **Description**: Simple bool to active if true `TextFields` to insert scores on questions
+- `canRemove` - Default: `true`
 - `doc`
   - **Type**: `Document`
   - **Description**: Document with content data
@@ -137,3 +140,5 @@
 - `subjects`
   - **Type**: `[Documents]`
   - **Description**: Fetched subjects to display on query to find questions
+- **Type**: `Boolean`
+- **Description**: Display button to remove content

@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import { green500 } from 'material-ui/styles/colors';
+import { green500, red500 } from 'material-ui/styles/colors';
 import { TextField, ListItem, Divider } from 'material-ui';
 import { FlatButton } from 'material-ui';
 import { FontIcon, CircularProgress } from 'material-ui';
@@ -11,6 +11,7 @@ const PublicContentShowQuestionView = React.createClass({
   // Static
 
   answer: <FontIcon className='material-icons' color={green500} >done</FontIcon>,
+  notAnswer: <FontIcon className='material-icons' color={red500} >clear</FontIcon>,
 
   // Handlers
 
@@ -75,11 +76,29 @@ const PublicContentShowQuestionView = React.createClass({
             unwasered: <p>Sem resposta</p>,
             number: <p>De {_.get(question, 'range.min')} até {_.get(question, 'range.max')}</p>,
             closed: _.map(question.options, (op, i) =>
-              op.text ? <p key={i} >
-                {i == question.answer ? this.answer : undefined}{op.text}</p> :
-              <p key={op.image} >
-                {i == question.answer ? this.answer : undefined}
-                Imagem a definir</p>,
+              op.text ?
+                <div key={i} >
+                  {i == question.answer ? this.answer : this.notAnswer}
+                  <span style={{ display: 'inline-block',
+                                position: 'relative',
+                                transform: 'translate(0, -50%)',
+                              }}>
+                    <Editor
+                      readOnly={true}
+                      editorState={EditorState.createWithContent(
+                        convertFromRaw(op.text))} />
+                  </span>
+                </div>
+                :
+                <div key={op.image} >
+                  {i == question.answer ? this.answer : this.notAnswer}
+                  <span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+                    <PublicContentShowImage
+                      form={this}
+                      imageId={op.image}
+                    />
+                </span>
+                </div>,
             ),
           }, question.type)}
         </div>

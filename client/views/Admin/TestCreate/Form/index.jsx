@@ -14,10 +14,10 @@ const AdminTestCreateForm = React.createClass({
 
   // Handlers
 
-  handleSubmitSuccess({ _id }) {
-    console.log(`Test created: ${_id}`);
+  handleSubmitSuccess({ _id: testId }) {
+    console.log(`Test created: ${testId}`);
     snack('Teste criado');
-    FlowRouter.go('AdminTest', _id);
+    FlowRouter.go('AdminTest', { testId });
   },
 
   /* Lifecycle

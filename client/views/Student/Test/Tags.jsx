@@ -1,21 +1,23 @@
 import React from 'react';
-import { FlatButton } from 'material-ui';
+import { FlatButton, Paper } from 'material-ui';
 
-StudentTestTags = React.createClass({
+const StudentTestTags = React.createClass({
   render() {
     const { tags } = this.props;
     return (
-      <div>
+      <Paper className='ui basic segment'>
         {_.map(tags, tag =>
           <FlatButton
             key={tag._id}
             label={tag.text}
             secondary={true}
-            
+
             href={FlowRouter.path('StudentTag', { tagId: tag._id })}
           />
         )}
-      </div>
+      </Paper>
     );
   },
 });
+
+export default StudentTestTags;

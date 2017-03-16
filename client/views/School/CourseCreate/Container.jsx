@@ -10,9 +10,6 @@ SchoolCourseCreate = createContainer(({ params }) => {
 
   const handles = {
     subjects: Meteor.subscribe('PublicSubjects'),
-
-    // tags: Meteor.subscribe('PublicTags'),
-    // users: Meteor.subscribe('AdminSchoolUsers', userId),
   };
 
   return {
@@ -22,6 +19,7 @@ SchoolCourseCreate = createContainer(({ params }) => {
     // tags: Fetch.Public().tags().fetch(),
     // students: Fetch.School(schoolId).students().fetch(),
     // teachers: Fetch.School(schoolId).teachers().fetch(),
+
   };
 
 }, SchoolCourseCreateView);

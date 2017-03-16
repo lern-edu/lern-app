@@ -2,9 +2,9 @@
 
 ## CreateUser:
 - How to use:
-~~~js
+```js
 Meteor.call('AdminUserCreate', new Meteor.users.FormSchema(), callback);
-~~~
+```
 - This method create users from all roles, each role has your own behavior:
   - **Admin**: Nothing special
   - **Teacher**: Nothing special
@@ -25,6 +25,20 @@ Meteor.call('AdminUserCreate', new Meteor.users.FormSchema(), callback);
 ## UserPassword
 - This method will update user password and logout selected user
 - How to use:
-~~~js
+```js
 Meteor.call('AdminUserPassword', userId, password);
-~~~
+```
+
+## AddEmail
+- How to use:
+```js
+Meteor.call('AdminUserAddEmail', userId, email, callback);
+```
+- Use Meteor method [`Accounts.addEmail`](http://docs.meteor.com/api/passwords.html#Accounts-addEmail)
+
+## SendVerificationEmail
+- How to use:
+```js
+Meteor.call('AdminUserSendVerificationEmail', userId, email, callback);
+```
+- Use Meteor method [`Accounts.sendVerificationEmail`](http://docs.meteor.com/api/passwords.html#Accounts-sendVerificationEmail)

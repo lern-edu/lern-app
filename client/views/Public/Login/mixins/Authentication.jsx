@@ -36,42 +36,33 @@ const PublicLoginAuthentication = {
           snack(err.reason.includes('password') ? 'Senha incorreta' :
           'Usuário não encontrado');
           this.clear();
-        } else {
-          FlowRouter.go(Meteor.user().getHomeRoute());
-          snack('Bem vindo!');
-        };
+        } else this.handleRedirect();
       });
     } else snack('Preencha todos os campos');
   },
 
   handleFacebookLogin() {
-    Meteor.loginWithFacebook({
-      requestPermissions: ['public_profile', 'email'],
-    }, (err) => {
+    Meteor.loginWithFacebook({ requestPermissions: ['public_profile', 'email'] },
+    (err) => {
       if (err) snack('Problemas ao cadastrar');
-      else {
-        snack('Bem vindo!');
-        const user = Meteor.user();
-        console.log(Meteor.userId());
-        if (_.get(user, 'profile.tutorial'))
-          FlowRouter.go('StudentSettings', {}, { tab: 'course' });
-        else FlowRouter.go(user.getHomeRoute());
-      };
+      else this.handleRedirect();
     });
   },
 
   handleGoogleLogin() {
     Meteor.loginWithGoogle({}, (err) => {
       if (err) snack('Problemas ao cadastrar');
-      else {
-        snack('Bem vindo!');
-        const user = Meteor.user();
-        console.log(Meteor.userId());
-        if (_.get(user, 'profile.tutorial'))
-          FlowRouter.go('StudentSettings', {}, { tab: 'course' });
-        else FlowRouter.go(user.getHomeRoute());
-      };
+      else this.handleRedirect();
     });
+  },
+
+  handleRedirect() {
+    snack('Bem vindo!');
+    const user = Meteor.user();
+    console.log(Meteor.userId());
+    if (_.get(this, 'props.query.alias'))
+      FlowRouter.go(user.getSetupRoute(), {}, { ...this.props.query });
+    else FlowRouter.go(user.getHomeRoute(), {}, { ...this.props.query });
   },
 
 };

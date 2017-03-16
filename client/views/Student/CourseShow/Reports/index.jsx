@@ -1,6 +1,11 @@
+// Libs
 import React from 'react';
 
-StudentCourseShowReports = React.createClass({
+// Views
+import StudentCourseShowReportsTable from './Table.jsx';
+import StudentCourseShowReportsStats from './Stats.jsx';
+
+const StudentCourseShowReports = React.createClass({
 
   render() {
     return (
@@ -23,3 +28,5 @@ StudentCourseShowReports = React.createClass({
     );
   },
 });
+
+export default StudentCourseShowReports;

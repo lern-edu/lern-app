@@ -6,6 +6,7 @@ import { Editor, EditorState, convertFromRaw } from 'draft-js';
 // Views
 import PublicContentShowQuestion from './QuestionContainer.jsx';
 import PublicContentShowImage from './ImageContainer.jsx';
+import PublicContentRichText from './../RichText.jsx';
 
 PublicContentShow = React.createClass({
   mixins: [AstroForm()],
@@ -30,16 +31,18 @@ PublicContentShow = React.createClass({
   // Render
 
   render() {
-    const { index, scored } = this.props;
+    const { index, scored, canRemove=true } = this.props;
     const text = this.doc.get('text');
 
     return (
-      <Paper style={{ padding: 15 }}>
+      <div>
+
         {_.get({
-          text: <Editor
-              readOnly={true}
-              editorState={text && EditorState.createWithContent(
-                convertFromRaw(text))} />,
+          text: <PublicContentRichText
+            editorState={text && EditorState.createWithContent(convertFromRaw(text))}
+            parent={this}
+            readOnly={true}
+          />,
           link: <a>{this.doc.get('link')}</a>,
           title: <h4>{this.doc.get('title')}</h4>,
           image: <PublicContentShowImage
@@ -54,11 +57,11 @@ PublicContentShow = React.createClass({
 
         <br/>
 
-        <FlatButton
+        {!canRemove ? undefined : <FlatButton
           onTouchTap={this.handleRemove}
           secondary={true}
-          label='Remover' />
-      </Paper>
+          label='Remover' />}
+      </div>
     );
   },
 

@@ -2,6 +2,8 @@
 import React from 'react';
 import { FlatButton, Dialog, Divider, RadioButtonGroup, RadioButton } from 'material-ui';
 import { TextField, RaisedButton, SelectField, MenuItem } from 'material-ui';
+import { Table, TableHeaderColumn, TableRow, TableHeader } from 'material-ui';
+import { TableRowColumn, TableBody } from 'material-ui';
 
 const PublicContentCreateQuestionCreateAnswer = React.createClass({
 
@@ -16,16 +18,16 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
 
   handleTypeChange(event, index, type) {
     const { form } = this.props;
-    form.defaultHandler({ options: type != 'closed' ? null : [] },
-      { doc: true });
+    form.defaultHandler({ options: type != 'closed' ? null : [] }, { doc: true });
     if (type == 'number')
-      form.defaultHandler({ range: new Questions.RangeSchema() },
-        { doc: true });
+      form.defaultHandler({ range: new Questions.RangeSchema() }, { doc: true });
     else form.defaultHandler({ range: null }, { doc: true });
     form.defaultHandler({ type, answer: null }, { doc: true });
+    if (type == 'closed')
+      form.defaultHandler({ answer: '' }, { doc: true });
   },
 
-  handleAnswerChange(event, answer) {
+  handleAnswerChange(answer) {
     this.props.form.defaultHandler({ answer }, { doc: true });
   },
 
@@ -37,9 +39,15 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
   handleRangeChange({ currentTarget }, value) {
     const field = currentTarget.getAttribute('name');
     const range = parseInt(value);
-    if (range || value == '')
-      this.props.form.defaultHandler({ [field]: range }, { doc: true });
+    if (!_.isNaN(range) || value == '')
+      this.props.form.defaultHandler({ [field]: value == '' ? value : range }, { doc: true });
     else return;
+  },
+
+  handleOptionRemove() {
+    const { options, answer } = this.props.form.doc;
+    _.pullAt(options, answer);
+    this.props.form.defaultHandler({ options, answer: '' }, { doc: true });
   },
 
   // render
@@ -81,45 +89,88 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
                 contentTypes={QuestionOptionsContentTypes}
                 form={form} />
               </div>,
-            number: [<div {...this.column} key='range.min'>
-              <TextField
-                value={form.doc.get('range.min') || ''}
-                floatingLabelText='Mínimo'
-                hintText='Mínimo'
-                name='range.min'
-                onChange={this.handleRangeChange} />
+            number: [
+              <div {...this.column} key='range.min'>
+                <TextField
+                  value={_.isNull(form.doc.get('range.min')) ? '' : form.doc.get('range.min')}
+                  floatingLabelText='Mínimo'
+                  hintText='Mínimo'
+                  name='range.min'
+                  onChange={this.handleRangeChange} />
               </div>,
               <div {...this.column} key='range.max'>
                 <TextField
-                  value={form.doc.get('range.max') || ''}
+                  value={_.isNull(form.doc.get('range.max')) ? '' : form.doc.get('range.max')}
                   floatingLabelText='Máximo'
                   hintText='Máximo'
                   name='range.max'
                   onChange={this.handleRangeChange} />
-                </div>,
+              </div>,
             ],
           }, form.doc.get('type'))}
         </div>
 
-        <div className='row' >
-          <div className='sixteen wide column'>
-            <RadioButtonGroup
-              onChange={this.handleAnswerChange}
-              name='options'
-              defaultSelected='not_light'>
-              {_.map(form.doc.get('options'), (c, i) =>
-                    <RadioButton
-                      value={i}
-                      key={i}
-                      label={<PublicContentShow
-                        field='options'
-                        schema={Tests.PageContentSchema}
-                        index={i}
-                        form={form}
-                        doc={c} />} />)}
-            </RadioButtonGroup>
+        {form.doc.get('type') === 'closed' ?
+          <div className='row' >
+            <div className='sixteen wide column'>
+              {/*<RadioButtonGroup
+                onChange={this.handleAnswerChange}
+                name='options'
+                defaultSelected='not_light'>
+                {_.map(form.doc.get('options'), (c, i) =>
+                      <RadioButton
+                        value={i}
+                        key={i}
+                        label={<PublicContentShow
+                          field='options'
+                          schema={Tests.PageContentSchema}
+                          index={i}
+                          form={form}
+                          doc={c} />} />)}
+              </RadioButtonGroup>*/}
+
+              <Table onCellClick={this.handleAnswerChange}>
+                <TableHeader>
+                  <TableRow>
+                    <TableHeaderColumn>Tipo</TableHeaderColumn>
+                    <TableHeaderColumn>Conteúdo</TableHeaderColumn>
+                  </TableRow>
+                </TableHeader>
+                <TableBody deselectOnClickaway={false} >
+                  {_.map(form.doc.get('options'), (op, index) => {
+                    const text = op.text ? _.first(op.text.blocks).text
+                      : <PublicContentShowImage
+                        form={this}
+                        imageId={op.image} />;
+                    return (
+                      <TableRow
+                        key={op.text ? _.first(op.text.blocks).text : op.image}
+                        selected={index === form.doc.get('answer')}>
+                        <TableRowColumn>
+                          {op.text ? 'Texto' : 'Imagem'}
+                        </TableRowColumn>
+                        <TableRowColumn>
+                          {text}
+                        </TableRowColumn>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+              <div className='ui right aligned grid'
+                style={{ marginTop: '1rem' }}>
+                <div className='sixteen wide column'
+                  style={{ paddingBottom: 0, margin: '0.25rem' }}>
+                  <FlatButton
+                    label='Remover'
+                    disabled={(form.doc.get('options') && form.doc.get('options').length) ? false : true}
+                    secondary={true}
+                    onTouchTap={this.handleOptionRemove} />
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        : undefined }
 
       </div>
     );
