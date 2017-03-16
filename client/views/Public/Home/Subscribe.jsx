@@ -5,7 +5,7 @@ const PublicHomeSubscribe = React.createClass({
 
   // Handlers
 
-  handleChange({ target: { value }, currentTarget }, id) {
+  handleChange({ target: { value }, currentTarget }, idorange) {
     const { parent } = this.props;
     parent.setState({
       [currentTarget.getAttribute('data-key')]: value,
@@ -18,15 +18,15 @@ const PublicHomeSubscribe = React.createClass({
   render() {
     const { parent } = this.props;
     return (
-      <Paper className='ui equal width center aligned padded grid fluid'>
-        <div className='row'>
-          <div className='orange column' >
+      <Paper className='ui equal width center aligned padded grid fluid' >
+        <div className='orange row' style={{ paddingBottom: '0px' }}>
+          <div className='column' >
             <h2 style={{ textShadow: '0 0 10px rgba(0,0,0,.85)' }} >
               {this.props.text}
             </h2>
           </div>
         </div>
-        <div className='row'>
+        <div className='orange row' style={{ padding: '0px' }}>
           <div className='column' >
             <div className='ui equal width center aligned padded grid fluid'>
               <div className='row' style={{ padding: 0 }}>
@@ -49,7 +49,6 @@ const PublicHomeSubscribe = React.createClass({
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </Paper>
