@@ -4,7 +4,6 @@ import { Tabs, Tab, Paper } from 'material-ui';
 
 // Views
 import PublicLoginEnter from './Enter.jsx';
-import PublicLoginRegister from './Register.jsx';
 
 PublicLoginView = React.createClass({
 
@@ -59,15 +58,7 @@ PublicLoginView = React.createClass({
         <div {...background} />
 
         <Paper {...form}>
-          <Tabs value={tab} onChange={this.handleTabChange}>
-            <Tab label='Entrar' value='enter' >
               <PublicLoginEnter {...this.props} />
-            </Tab>
-            <Tab label='Cadastrar' value='register' >
-              <PublicLoginRegister {...this.props} />
-            </Tab>
-          </Tabs>
-
         </Paper>
 
       </div>
