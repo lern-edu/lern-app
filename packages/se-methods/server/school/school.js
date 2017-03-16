@@ -46,7 +46,7 @@ Helpers.Methods({ prefix, protect }, {
 
   UserRemove({ currentTarget }) {
     const user = _.first(Fetch.General.users(userId).fetch());
-    const schools = user.getd('profile.schools');
+    const schools = user.get('profile.schools');
     const schoolId = Meteor.userId();
 
     // tira schoolId do schools do user
