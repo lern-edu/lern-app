@@ -15,6 +15,15 @@ schoolRoutes.route('/', {
   },
 });
 
+schoolRoutes.route('/alunos', {
+  name: 'SchoolUsers',
+  action() {
+    render({
+      main: <SchoolUsers />,
+    });
+  },
+});
+
 schoolRoutes.route('/cursos', {
   name: 'SchoolCourses',
   action() {

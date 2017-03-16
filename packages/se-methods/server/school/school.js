@@ -51,4 +51,19 @@ Helpers.Methods({ prefix, protect }, {
 
     return doc;
   },
+
+  UserRemove(userId) {
+    const user = _.first(Fetch.General.users(userId).fetch());
+    const schools = user.get('profile.schools');
+    const schoolId = Meteor.userId();
+
+    // tira schoolId do schools do user
+
+    _.pull(schools, schoolId);
+    console.log(schools);
+    user.set("profile.schools", schools);
+    user.save();
+
+    return user;
+  },
 });
