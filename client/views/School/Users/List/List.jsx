@@ -8,9 +8,12 @@ const SchoolUsersListView = React.createClass({
     user: React.PropTypes.object,
   },
 
-  handleUserRemove() {
-    const user = this.props;
-    Meteor.call('SchoolUserRemove', user._id, snack('Aluno removido'));
+  handleUserRemove(userId) {
+    Meteor.call('SchoolUserRemove', userId, (err) =>
+    {
+      if (err) snack('Problemas ao remover o aluno');
+      else snack('Aluno removido');
+    });
   },
 
   render() {
@@ -25,7 +28,7 @@ const SchoolUsersListView = React.createClass({
             data-key={_id}
             primaryText={name}
             rightIcon={<FontIcon
-            onTouchTap={this.handleUserRemove}
+            onTouchTap={() => this.handleUserRemove(_id)}
             className='material-icons'>delete</FontIcon>}
            />
          )}
