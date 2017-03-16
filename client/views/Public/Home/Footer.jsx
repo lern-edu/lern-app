@@ -19,7 +19,7 @@ const PublicHomeFooter = React.createClass({
   render() {
     return (
       <div className='footer' style={this.styles.footer}>
-        Copyright © 2016 | Lern - Soluções Educacionais
+        Copyright © 2017 | Lern - Soluções Educacionais
       </div>
     );
   },
