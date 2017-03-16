@@ -10,8 +10,7 @@ const SchoolUsersListView = React.createClass({
 
   handleUserRemove() {
     const user = this.props;
-    Meteor.call('SchoolUserRemove', user._id, console.log('chamou'));
-    snack('Aluno removido');
+    Meteor.call('SchoolUserRemove', user._id, snack('Aluno removido'));
   },
 
   render() {

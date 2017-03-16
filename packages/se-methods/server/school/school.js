@@ -44,7 +44,7 @@ Helpers.Methods({ prefix, protect }, {
     return doc;
   },
 
-  UserRemove(userId) {
+  UserRemove({ currentTarget }) {
     const user = _.first(Fetch.General.users(userId).fetch());
     const schools = user.get('profile.schools');
     const schoolId = Meteor.userId();
