@@ -1,5 +1,8 @@
 import React from 'react';
-import { FlatButton } from 'material-ui';
+import { Card, CardActions, CardHeader } from 'material-ui';
+import { List, Subheader, ListItem, Avatar, CardText } from 'material-ui';
+import { FlatButton, FontIcon } from 'material-ui';
+import { blue500 } from 'material-ui/styles/colors';
 
 const StudentCourseShowTestsCard = React.createClass({
 
@@ -30,50 +33,83 @@ const StudentCourseShowTestsCard = React.createClass({
     const atts = _.filter(attempts, { test: test._id });
 
     return (
-      <div className='ui card'>
-        <div className='content'>
-          <div className='header'>{test.name}</div>
-          <div className='meta'>{test.questions.length} questões</div>
-          <div className='meta'>{test.scores ? `Valor: ${_.sum(test.scores)} pontos` : 'Simulado'}</div>
-          <div className='meta'>{`${TestTimeoutTypes.getName(test.timeoutType)}: ${numeral(test.timeout).format('00:00:00')}`}</div>
-        </div>
-        <div className='extra content'>
-          <div className='ui list'>
-            {_.map(test.tags, t =>
-              <div className='item' key={t}>
-                {_.get(_.find(tags, { _id: t }), 'text')}
-              </div>
-            )}
-          </div>
-        </div>
-        <div className='extra content'>
-          <div className='ui two buttons'>
-            {atts.length === 0 ?
-              <FlatButton
-                label='Começar'
-                style={{ backgroundColor: 'green', width: '100%' }}
-                onTouchTap={this.handleStart}
-              />
-            : _.every(atts, 'finished') ? [
-              <FlatButton key='try' onTouchTap={this.handleStart} style={{ width: '100%' }}>
-                <div className='ui blue button'>Começar</div>
-                <div className='ui basic blue left pointing label'>
-                  {atts.length}
-                  <div className='ui popup'>Tentativas terminadas</div>
-                </div>
-              </FlatButton>,
-              <FlatButton key='see' onTouchTap={this.handleAttempts}>
-                <div className='ui green button'>Ver tentativas</div>
-              </FlatButton>,
-            ]
-            : <FlatButton
-                label='Continuar'
-                style={{ backgroundColor: 'orange', width: '100%' }}
-                onTouchTap={this.handleContinue}
-              />}
-          </div>
-        </div>
-      </div>
+      <Card className='sixteen wide mobile eight wide tablet four wide computer column' >
+        <CardHeader
+          title={test.name}
+          subtitle={_.every(atts, 'finished') ? 'Terminado' : 'Em andamento'}
+        />
+        <CardText>
+          <List>
+            <ListItem
+              disabled={true}
+              leftAvatar={
+                <Avatar backgroundColor={blue500}>
+                  {test.questions.length}
+                </Avatar>
+              }
+              primaryText='questões'
+            />
+            <ListItem
+              disabled={true}
+              leftAvatar={
+                <Avatar
+                  backgroundColor={blue500}
+                  icon={
+                    <FontIcon className='material-icons' color='#FFF' >
+                      {test.scores ? 'star_border' : 'star'}
+                    </FontIcon>
+                  }
+                />
+              }
+              primaryText={test.scores ? `Valor: ${_.sum(test.scores)} pontos` : 'Sem pontuação'}
+            />
+            <ListItem
+              disabled={true}
+              leftAvatar={
+                <Avatar
+                  backgroundColor={blue500}
+                  icon={
+                    <Avatar backgroundColor={blue500}>
+                      {
+                        TestTimeoutTypes.getName(test.timeoutType) === 'Nenhum'
+                        ? <FontIcon className='material-icons' color='#FFF' >
+                            hourglass_empty
+                          </FontIcon>
+                        : moment.duration(test.timeout, 'seconds').humanize().match('[0-9]')
+                        ? _.head(moment.duration(test.timeout, 'seconds').humanize().match('[0-9]'))
+                        : <FontIcon className='material-icons' color='#FFF' >
+                            hourglass_full
+                          </FontIcon>
+                      }
+                    </Avatar>
+                  }
+                />
+              }
+              primaryText={
+                TestTimeoutTypes.getName(test.timeoutType)  === 'Nenhum'
+                ? TestTimeoutTypes.getName(test.timeoutType)
+                : `${
+                  moment.duration(test.timeout, 'seconds').humanize().match('[0-9]')
+                ? _.head(moment.duration(test.timeout, 'seconds').humanize().match('[a-z]'))
+                : moment.duration(test.timeout, 'seconds').humanize()} ${
+                  TestTimeoutTypes.getName(test.timeoutType)}`
+              }
+            />
+          </List>
+        </CardText>
+        <CardActions>
+          <FlatButton
+            primary={true}
+            label={_.every(atts, 'finished') ? 'Começar' : 'Continuar'}
+            onTouchTap={
+              _.every(atts, 'finished')
+              ? this.handleStart
+              : this.handleContinue
+            }
+          />
+          <FlatButton secondary={true} label='Ver' onTouchTap={this.handleAttempts} />
+        </CardActions>
+      </Card>
     );
   },
 });

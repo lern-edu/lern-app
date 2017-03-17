@@ -1,5 +1,7 @@
 // Libs
 import React from 'react';
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui';
+import { ToolbarSeparator, DropDownMenu, MenuItem } from 'material-ui';
 
 // Views
 import StudentCourseShowTestsCard from './Card.jsx';
@@ -54,8 +56,7 @@ const StudentCourseShowTests = React.createClass({
   /* Handlers
   */
 
-  handleMenuClick({ value: category }, event) {
-    event.preventDefault();
+  handleMenuClick(event, index, category) {
     this.setState({ category });
   },
 
@@ -72,27 +73,39 @@ const StudentCourseShowTests = React.createClass({
     return (
       <div>
 
-        <div className='ui text menu'>
-          <div className='header item'>Ordenar</div>
-          {_.map(this.categories, (v, k) =>
-            <Semantic.Button tag='a' href='#' className={`item ${k === category ? 'active blue' : ''}`} key={k} onClick={this.handleMenuClick} value={k}>
-              <div className='content'>
-                <div className='header'>{v.name}</div>
-              </div>
-            </Semantic.Button>
-          )}
-        </div>
+        <Toolbar>
+          <ToolbarGroup >
+            <ToolbarTitle text='Testes' />
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <ToolbarTitle text='Ordenar' />
+            <ToolbarSeparator />
+            <DropDownMenu value={category} onChange={this.handleMenuClick}>
+              {
+                _.map(this.categories, (v, k) =>
+                  <MenuItem  key={k} value={k} primaryText={v.name} />
+                )
+              }
+            </DropDownMenu>
+          </ToolbarGroup>
+        </Toolbar>
 
-        {_.map(groups, (v, k) => [
-          <div className='ui header'>
-            {cat.groupNames.call(this, k)}
-          </div>,
-          <div className='ui four stackable cards' key={k}>
-            {_.map(v, test =>
-              <StudentCourseShowTestsCard test={test} {...this.props} key={test._id} />
-            )}
-          </div>,
-        ])}
+        {
+          _.map(groups, (v, k) => [
+            <div className='ui header'>
+              {cat.groupNames.call(this, k)}
+            </div>,
+            <div className='ui grid container' key={k}>
+              <div className='row'>
+                {
+                  _.map(v, test =>
+                    <StudentCourseShowTestsCard test={test} {...this.props} key={test._id} />
+                  )
+                }
+              </div>
+            </div>,
+          ])
+        }
 
       </div>
     );
