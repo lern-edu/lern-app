@@ -6,8 +6,6 @@ const StudentCourseShowMenu = React.createClass({
 
   tabs: {
     home: 'Inicio',
-    lectures: 'Aulas',
-    tests: 'Atividades',
     posts: 'Blog',
   },
 
@@ -22,12 +20,20 @@ const StudentCourseShowMenu = React.createClass({
   */
 
   render() {
-    const { props: { active }, tabs } = this;
+    const { props: { active, lectures, tests }, tabs } = this;
 
     return (
       <Tabs value={active} onChange={this.handleTabChange}>
-        {_.map(_.keys(tabs), key =>
-          <Tab key={key} value={key} label={_.get(tabs, key)} />)}
+        <Tab key='home' value='home' label='Início' />
+        {
+          _.isEmpty(tests) ? undefined
+          : <Tab key='tests' value='tests' label='Testes' />
+        }
+        {
+          _.isEmpty(lectures) ? undefined
+          : <Tab key='lectures' value='lectures' label='Aulas' />
+        }
+        <Tab key='blog' value='blog' label='Blog' />
       </Tabs>
     );
   },
