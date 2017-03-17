@@ -41,13 +41,16 @@ const defs = {
   },
 
   images: {
-    collection: FS.Images,
+    collection: FS.Images.collection,
   },
   documents: {
-    collection: FS.Documents,
+    collection: FS.Documents.collection,
   },
   videos: {
-    collection: FS.Videos,
+    collection: FS.Videos.collection,
+  },
+  audios: {
+    collection: FS.Audios.collection,
   },
 };
 
@@ -56,7 +59,12 @@ Fetch.General = _.mapValues(defs, def => (sel, opts={}) => {
   const selector =
       _.isArray(sel) ? { _id: { $in: _.compact(_.uniq(sel)) } }
     : _.isString(sel) ? sel
-    : _.isObject(sel) ? _.omitBy(sel, _.isUndefined)
+    : _.isObject(sel) ?
+      (_.mapValues(_.omitBy(sel, _.isUndefined), (val, key) =>
+        _.isArray(val) ?
+        _.head(key) === '$' ? val : { $in: _.compact(_.uniq(val)) }
+        : val)
+      )
     : {}
     ;
 

@@ -59,6 +59,7 @@ SchoolTypes = StaticCollection('SchoolTypes', [
 QuestionTypes = StaticCollection('QuestionTypes', [
   ['open', 'Aberta'],
   ['closed', 'Fechada'],
+  ['number', 'Número'],
   ['unanswered', 'Sem resposta'],
 ]);
 
@@ -72,13 +73,16 @@ TestTypes = StaticCollection('TestTypes', [
   ['plans', 'Planos'],
   ['personal', 'Pessoal'],
   ['course', 'Curso'],
-  ['cognitive', 'Cognitivo'],
 ]);
 
 TestTimeoutTypes = StaticCollection('TestTimeoutTypes', [
   ['global', 'Total'],
-  ['question', 'Por Questão'],
   ['none', 'Nenhum'],
+]);
+
+TestResolutionTypes = StaticCollection('TestTypes', [
+  ['AttemptDefault', 'Padrão'],
+  ['AttemptByTags', 'Por tags'],
 ]);
 
 AccessAllowedTypes = StaticCollection('AccessAllowedTypes', [
@@ -106,4 +110,30 @@ PostTypes = StaticCollection('PostTypes', [
   ['resolution', 'Resolução'],
   ['ask', 'Pergunta'],
   ['info', 'Informação'],
+]);
+
+ContentTypes = StaticCollection('ContentTypes', [
+  ['text', 'Texto'],
+  ['title', 'Título'],
+  ['image', 'Imagem'],
+  ['audio', 'Áudio'],
+  ['video', 'Video'],
+  ['document', 'Documento'],
+  ['link', 'Link'],
+]);
+
+QuestionOptionsContentTypes = StaticCollection('QuestionOptionsContentTypes', [
+  ['text', 'Texto'],
+  ['image', 'Imagem'],
+]);
+
+PageContentTypes = StaticCollection('PageContentTypes', [
+  ['text', 'Texto'],
+  ['title', 'Título'],
+  ['image', 'Imagem'],
+  ['audio', 'Áudio'],
+  ['video', 'Video'],
+  ['document', 'Documento'],
+  ['link', 'Link'],
+  ['question', 'Questão'],
 ]);

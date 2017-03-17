@@ -1,4 +1,5 @@
 import React from 'react';
+import { LinearProgress } from 'material-ui';
 
 StudentTestAttemptCognitiveView = React.createClass({
   mixins: [ReactMeteorData],
@@ -35,8 +36,11 @@ StudentTestAttemptCognitiveView = React.createClass({
 
     _.forEach(data.questions, (q) => q.images = q.findAllImages().fetch());
 
+    /*data.questionsGroup = data.test && data.questions && _.filter(data.questions,
+      _.matches({ complement: { group: _.toString(index) } }));*/
+
     data.questionsGroup = data.test && data.questions && _.filter(data.questions,
-      _.matches({ complement: { group: _.toString(index) } }));
+      { _id: data.test.questions[index] });
 
     data.answersGroup = data.test && data.questionsGroup && data.attempt &&
       _.filter(data.answers, a =>_.includes(_.map(data.questionsGroup, '_id'), a.question));
@@ -53,13 +57,14 @@ StudentTestAttemptCognitiveView = React.createClass({
 
   render() {
     const { ready, test, questionsGroup } = this.data;
+
     return (
       <div>
 
         <Layout.Bar
           title={_.get(test, 'name')} />
 
-        {!_.every(ready) || _.isEmpty(questionsGroup) ? <MUI.LinearProgress /> : [
+        {!_.every(ready) || _.isEmpty(questionsGroup) ? <LinearProgress /> : [
           <StudentTestAttemptCognitiveToolbar
             {...this.data}
             {...this.props}

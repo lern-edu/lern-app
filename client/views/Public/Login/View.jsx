@@ -1,10 +1,9 @@
+// Libs
 import React from 'react';
 import { Tabs, Tab, Paper } from 'material-ui';
-import lodash from 'lodash';
-_ = lodash;
 
+// Views
 import PublicLoginEnter from './Enter.jsx';
-import PublicLoginRegister from './Register.jsx';
 
 PublicLoginView = React.createClass({
 
@@ -14,37 +13,31 @@ PublicLoginView = React.createClass({
     return { tab: 'enter' };
   },
 
-  contextTypes: {
-    innerHeight: React.PropTypes.number,
-    innerWidth: React.PropTypes.number,
-  },
-
   // Styles
 
-  createStyles() {
-    const { context } = this;
-    return {
-      form: {
-        className: 'eight wide computer ten wide tablet thirteen wide mobile column',
-        style: {
-          marginTop: '7%',
-          padding: '0px',
-        },
-        zDepth: 4,
+  styles: {
+    form: {
+      className: 'eight wide computer ten wide tablet thirteen wide mobile column',
+      style: {
+        marginTop: '7%',
+        padding: '0px',
       },
-      background: {
-        style: {
-          width: `${context.innerWidth}px`,
-          height: `${context.innerHeight}px`,
-          backgroundSize: 'cover',
-          backgroundImage: 'url(/images/login/classroom.jpg)',
-          backgroundRepeat: 'round',
-          opacity: '0.5',
-          position: 'fixed',
-          zIndex: '-1',
-        },
+      zDepth: 4,
+    },
+    background: {
+      style: {
+        width: `100%`,
+        height: `100%`,
+        top: 0,
+        left: 0,
+        backgroundSize: 'cover',
+        backgroundImage: 'url(/images/login/classroom.jpg)',
+        backgroundRepeat: 'round',
+        opacity: '0.5',
+        position: 'fixed',
+        zIndex: '-1',
       },
-    };
+    },
   },
 
   // Handlers
@@ -56,24 +49,16 @@ PublicLoginView = React.createClass({
   // render
 
   render() {
-    const { state: { tab } } = this;
-    const styles = this.createStyles();
+    const { tab } = this.state;
+    const { background, form } = this.styles;
 
     return (
       <div className='ui middle aligned center aligned grid'
         style= {{ marginTop: '0px' }}>
-        <div {...styles.background} />
+        <div {...background} />
 
-        <Paper {...styles.form}>
-          <Tabs value={tab} onChange={this.handleTabChange}>
-            <Tab label='Entrar' value='enter' >
-              <PublicLoginEnter />
-            </Tab>
-            <Tab label='Cadastrar' value='register' >
-              <PublicLoginRegister />
-            </Tab>
-          </Tabs>
-
+        <Paper {...form}>
+              <PublicLoginEnter {...this.props} />
         </Paper>
 
       </div>

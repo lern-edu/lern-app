@@ -24,11 +24,31 @@ studentRoutes.route('/relatorio', {
   },
 });
 
+// Settings
+
 studentRoutes.route('/ajustes', {
   name: 'StudentSettings',
   action(params, query) {
     render({
       main: <StudentSettingsView {...query}/>,
+    });
+  },
+});
+
+studentRoutes.route('/setup/:alias?', {
+  name: 'StudentSetup',
+  action(params, query) {
+    render({
+      main: <StudentSetup {...query}/>,
+    });
+  },
+});
+
+studentRoutes.route('/curso/ingressar/:alias?', {
+  name: 'StudentCourseIngress',
+  action(params, query) {
+    render({
+      main: <StudentCourseIngress {...query}/>,
     });
   },
 });
@@ -58,16 +78,25 @@ studentRoutes.route('/provas/:testId', {
   name: 'StudentTest',
   action(params, query) {
     render({
-      main: <StudentTestView {...params} {...query}/>,
+      main: <StudentTest {...params} {...query}/>,
     });
   },
 });
 
-studentRoutes.route('/provas/:testId/tentativas/:attemptId', {
-  name: 'StudentAttempt',
+studentRoutes.route('/provas/:testId/tentativas/:attemptId/padrao', {
+  name: 'StudentAttemptDefault',
   action(params) {
     render({
-      main: <StudentAttemptView {...params}/>,
+      main: <StudentAttemptDefault {...params}/>,
+    });
+  },
+});
+
+studentRoutes.route('/provas/:testId/tentativas/:attemptId/por-tags', {
+  name: 'StudentAttemptByTags',
+  action(params) {
+    render({
+      main: <StudentAttemptByTags {...params} />,
     });
   },
 });
@@ -109,7 +138,7 @@ studentRoutes.route('/disciplinas/:courseId', {
   name: 'StudentCourseShow',
   action(params, query) {
     render({
-      main: <StudentCourseShowView {...params} {...query} />,
+      main: <StudentCourseShow {...params} {...query} />,
     });
   },
 });
@@ -155,11 +184,17 @@ studentRoutes.route('/posts/:postId', {
 /* Test Taking
 */
 
-studentRoutes.route('/provas/fazer/:testId/questao/:index?', {
+studentRoutes.route('/provas/fazer/:testId', {
   name: 'StudentTestAttempt',
+  triggersExit: [(context, redirect, stop) => {
+      // console.log(context);
+      // confirm('Deseja realmente abandonar esse teste?') ? stop() : redirect(context.path);
+      // Need do something to prevent user to get away from this window
+    },
+  ],
   action(params) {
     render({
-      main: <StudentTestAttemptView {...params} />,
+      main: <StudentTestAttempt {...params} />,
     });
   },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 
-StudentTestStats = React.createClass({
+const StudentTestStats = React.createClass({
   render() {
     return (
       <div className='ui two statistics'>
@@ -16,3 +16,5 @@ StudentTestStats = React.createClass({
     );
   },
 });
+
+export default StudentTestStats;

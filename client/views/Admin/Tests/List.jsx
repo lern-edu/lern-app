@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, ListItem } from 'material-ui';
 
-AdminTestsList = React.createClass({
+const AdminTestsList = React.createClass({
   render() {
     const { tests } = this.props;
 
@@ -16,3 +16,5 @@ AdminTestsList = React.createClass({
     );
   },
 });
+
+export default AdminTestsList;

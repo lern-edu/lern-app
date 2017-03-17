@@ -1,7 +1,7 @@
 import React from 'react';
 import { AutoComplete, MenuItem, List, ListItem, FontIcon, Paper, } from 'material-ui';
 
-AdminQuestionCreateFormTags = React.createClass({
+const AdminQuestionCreateFormTags = React.createClass({
   // Static data
 
   instructions: {
@@ -11,16 +11,16 @@ AdminQuestionCreateFormTags = React.createClass({
   /* Handlers
   */
 
-  handleTagsChange(value, index, options) {
-    const { tagIds=[] } = this.props;
-    tagIds.push(_.get(options[index], 'value.key'));
-    this.props.form.defaultHandler({ tags: tagIds }, { query: true });
+  handleTagsChange({ value: { key: tag } }) {
+    const { tagIds=[], form } = this.props;
+    tagIds.push(tag);
+    form.defaultHandler({ tags: tagIds }, { doc: true });
   },
 
   handleTagsRemove(event) {
-    const { tagIds } = this.props;
+    const { tagIds, form } = this.props;
     _.pull(tagIds, event.currentTarget.getAttribute('data-key'));
-    this.props.form.defaultHandler({ tags: tagIds }, { query: true });
+    form.defaultHandler({ tags: tagIds }, { doc: true });
   },
 
   // Render
@@ -39,17 +39,10 @@ AdminQuestionCreateFormTags = React.createClass({
               searchText=''
               disableFocusRipple={false}
               dataSource={_.map(_.filter(
-                tags, t => !_.includes(tagIds, t._id)), t => {
-                  return {
-                    text: t.text,
-                    value: (
-                      <MenuItem
-                        primaryText={t.text}
-                        key={t._id}
-                      />
-                    ),
-                  };
-                })}
+                tags, t => !_.includes(tagIds, t._id)), t => _.zipObject(
+                  ['text', 'value'],
+                  [t.text, <MenuItem primaryText={t.text} key={t._id} />]
+                ))}
               fullWidth={true}
               name={instructions.tags}
             />
@@ -80,3 +73,5 @@ AdminQuestionCreateFormTags = React.createClass({
   },
 
 });
+
+export default AdminQuestionCreateFormTags;

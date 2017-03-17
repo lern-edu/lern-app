@@ -11,7 +11,7 @@ Astro.createBehavior({
         finishedAt: {
           type: 'date',
           immutable: true,
-          optiona: true,
+          optional: true,
         },
         finished: {
           type: 'boolean',
@@ -29,11 +29,23 @@ Astro.createBehavior({
           this.set('startedAt', new Date());
         },
 
+        afterInsert() {
+          if (this.get('maxDuration')) {
+            const setFinished = () => {
+              this.get('finished') ? undefined : this.set('finished', true);
+              this.get('finishedAt') ? undefined : this.set('finishedAt', new Date());
+              this.save();
+            };
+
+            const setFinishedFibers = Meteor.wrapAsync(setFinished, this);
+            Meteor.setTimeout(setFinishedFibers, this.get('maxDuration') * 1000);
+          };
+        },
+
         beforeSet(e) {
           const { fieldName, setValue } = e.data;
-          if (fieldName === 'finished' && setValue === true) {
+          if (fieldName === 'finished' && setValue === true)
             this.set('finishedAt', new Date());
-          }
         },
       },
 

@@ -1,5 +1,5 @@
 AstroForm = function (AstroClass, submitMethod) {
-  const restoreFields = AstroClass.getFieldsNames();
+  let restoreFields = AstroClass && AstroClass.getFieldsNames() || {};
 
   return {
 
@@ -22,10 +22,12 @@ AstroForm = function (AstroClass, submitMethod) {
 
     callback(key, ...args) {
       if (key === 'success') {
+        this.setState({ valid: true });
         if (_.isFunction(this.handleSubmitSuccess))
           this.handleSubmitSuccess(...args);
         else console.info(args);
       } else if (key === 'error') {
+        this.updateValidation();
         if (_.isFunction(this.handleSubmitError))
           this.handleSubmitError(...args);
         else console.warn(args);
@@ -43,8 +45,16 @@ AstroForm = function (AstroClass, submitMethod) {
     },
 
     componentWillMount() {
+      const { doc } = this.props;
+      if (doc) this.doc = doc;
+      else if (this.props.schema) this.doc = new this.props.schema();
+      else this.doc = new AstroClass();
+
+      if (!AstroClass) restoreFields = this.props.schema.getFieldsNames();
+    },
+
+    componentDidMount() {
       const { doc, restore } = this.props;
-      this.doc = doc || new AstroClass();
       if (restore) this.restoreFields(restore);
       this.updateValidation();
     },
@@ -61,8 +71,14 @@ AstroForm = function (AstroClass, submitMethod) {
 
     defaultHandler(arg, opts) {
       if (_.isObject(arg)) {
-        if (opts.doc) this.doc.set(arg);
-        if (opts.query) FlowRouter.withReplaceState(() => FlowRouter.setQueryParams(arg));
+        if (opts.doc) {
+          if (opts.operation == 'push')
+          _.forEach(_.keys(arg), k => this.doc.push(k, arg[k]));
+          else this.doc.set(arg);
+        }
+
+        if (opts.query)
+          FlowRouter.withReplaceState(() => FlowRouter.setQueryParams(arg));
         this.updateValidation();
       } else if (_.isString(arg)) {
         return value => {
@@ -75,16 +91,20 @@ AstroForm = function (AstroClass, submitMethod) {
     },
 
     defaultSubmit(event) {
+      this.setState({ valid: false });
       if (event && event.preventDefault) event.preventDefault();
       if (!submitMethod) this.callback('error', new Meteor.Error('no submit method set'));
       else if (!this.state.valid)
         this.callback('error', new Meteor.Error('invalid state: submit aborted'));
-      else Meteor.call(submitMethod, this.doc, (err, res) => {
-        if (err) {
-          this.updateValidation(err);
-          this.callback('error', err);
-        } else this.callback('success', res);
-      });
+      else if (_.isFunction(submitMethod)) submitMethod();
+      else {
+        this.setState({ valid: false });
+        Meteor.call(submitMethod, this.doc, (err, res) => {
+          if (err) {
+            this.callback('error', err);
+          } else this.callback('success', res);
+        });
+      };
     },
 
   };

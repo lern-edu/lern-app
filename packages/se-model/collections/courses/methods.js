@@ -1,6 +1,10 @@
 Courses.Schema.extend({
   methods: {
 
+    findAuthor() {
+      return Fetch.General.users(this.get('author'));
+    },
+
     findSubjects() {
       return Fetch.General.subjects(_.map(this.subjects));
     },
@@ -48,6 +52,12 @@ Courses.Schema.extend({
     findLectures() {
       const course = this.get('_id');
       return Fetch.General.lectures({ course });
+    },
+
+    generateAlias() {
+      this.set('alias', Random.hexString(5));
+      while (!this.validate())
+        this.set('alias', Random.hexString(5));
     },
   },
 });

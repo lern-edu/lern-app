@@ -71,14 +71,15 @@ Meteor.startup(() => {
       `<h3>Olá ${user.profile.name},<h3><p>Estamos muito felizes por` +
       `você estar conosco nessa jornada.</p>` +
       `<p>Nós, da Lern - Soluções Educaionais, queremos ajudá-lo ao ` +
-      `máximo com os seus processos e desempenho acadêmico.</p>` +
+      `máximo com suas habilidades e desenvolvimento pessoal.</p>` +
       `<p>Para isso, precisamos que acesse esse ` +
       `<a href='${url}'>link de verificação</a> e finalize o seu cadastro.</p>` +
-      `<p>Se ainda não cadastrou sua turma responda a esse email com o endereço ` +
-      `de email e nome de seus alunos, nome do curso, horário das aulas, matéria da ` +
-      `turma, data de início e de fim da turma.</p>` +
+      `<p>Se ainda resta alguma dúvida, responda por esse e-mail. ` +
+      `<br>` +
+      `<br>` +
       `<p>Caso você ou sua escola não tenham se registrado, ignore esta mensagem.</p>` +
-      `<p>Equipe Lern - Soluções Educacionais.</p>`;
+      `<br>` +
+      `<p>Equipe Lern .</p>`;
 
     Accounts.emailTemplates.resetPassword.subject =
       (user) => `Redefinir senha Lern`;
@@ -106,6 +107,7 @@ Meteor.startup(() => {
       const { admin } = Meteor.settings.credentials;
       const userId = Accounts.createUser(admin);
       Meteor.users.update(userId, { $set: { roles: ['admin'] } });
+      Meteor.users.update(userId, { $set: { profile: { name: 'admin' } } });
     };
   };
 });

@@ -1,7 +1,7 @@
 import React from 'react';
-import { List, ListItem, Badge, FontIcon } from 'material-ui';
+import { LinearProgress, List, ListItem, Badge, FontIcon, Paper } from 'material-ui';
 
-AdminContentList = React.createClass({
+const AdminContentList = React.createClass({
 
   // Initialize
 
@@ -49,70 +49,73 @@ AdminContentList = React.createClass({
 
     const groupedTags = _.groupBy(tags, 'subject');
 
-    return (_.isEmpty(tagsCount) || _.isEmpty(subjectsCount) ? <MUI.LinearProgress/> :
-      <List>
-        {_.map(groupedTags, (value, subjectId) => {
-          const subject = _.first(_.filter(
-            subjects, s => s._id === subjectId));
-          const subjectCount = _.first(_.filter(
-            subjectsCount, sc => sc._id === subjectId));
-          return (
-            <ListItem
-              data-value={subject._id}
-              key={subject._id}
-              primaryText={subject.name}
-              leftIcon={
-                <Badge
-                  badgeContent={subjectCount ? subjectCount.count : 0}
-                  badgeStyle={{ fontSize: 16 }} >
-              </Badge>}
-              initiallyOpen={false}
-              primaryTogglesNestedList={false}
-              onTouchTap={this.handleSubject}
-              nestedItems={_.map(value, tag => {
-                const tagCount = _.first(_.filter(
-                  tagsCount, tc => tc._id === tag._id));
-                return (<ListItem
-                  key={tag._id}
-                  primaryText={tag.text}
-                  initiallyOpen={false}
-                  primaryTogglesNestedList={true}
-                  leftIcon={
-                    <Badge
-                      badgeContent={tagCount ? tagCount.count : 0}
-                      badgeStyle={{ fontSize: 16 }} >
-                  </Badge>}
-                  nestedItems={[
-                    <ListItem
-                      data-value={tag._id}
-                      key='add'
-                      primaryText='Adicionar questões'
-                      onTouchTap={this.handleListItem}
-                      leftIcon={
-                        <FontIcon
-                          className='material-icons'>
-                        library_add</FontIcon>
-                      }
-                    />,
-                    <ListItem
-                      data-value={tag._id}
-                      key='edit'
-                      primaryText='Editar tag'
-                      onTouchTap={this.handleTagEdit}
-                      leftIcon={
-                        <FontIcon
-                          className='material-icons'>
-                        edit</FontIcon>
-                      }
-                    />,
-                  ]}
-                />);
-              })}
-            />
-          );
-        })}
-      </List>
+    return (_.isEmpty(tagsCount) || _.isEmpty(subjectsCount) ? <LinearProgress/> :
+      <Paper>
+        <List>
+          {_.map(groupedTags, (value, subjectId) => {
+            const subject = _.first(_.filter(
+              subjects, s => s._id === subjectId));
+            const subjectCount = _.first(_.filter(
+              subjectsCount, sc => sc._id === subjectId));
+            return (
+              <ListItem
+                data-value={subject._id}
+                key={subject._id}
+                primaryText={subject.name}
+                leftIcon={
+                  <Badge
+                    badgeContent={subjectCount ? subjectCount.count : 0}
+                    badgeStyle={{ fontSize: 16 }} >
+                </Badge>}
+                initiallyOpen={false}
+                primaryTogglesNestedList={false}
+                onTouchTap={this.handleSubject}
+                nestedItems={_.map(value, tag => {
+                  const tagCount = _.first(_.filter(
+                    tagsCount, tc => tc._id === tag._id));
+                  return (<ListItem
+                    key={tag._id}
+                    primaryText={tag.text}
+                    initiallyOpen={false}
+                    primaryTogglesNestedList={true}
+                    leftIcon={
+                      <Badge
+                        badgeContent={tagCount ? tagCount.count : 0}
+                        badgeStyle={{ fontSize: 16 }} >
+                    </Badge>}
+                    nestedItems={[
+                      <ListItem
+                        data-value={tag._id}
+                        key='add'
+                        primaryText='Adicionar questões'
+                        onTouchTap={this.handleListItem}
+                        leftIcon={
+                          <FontIcon
+                            className='material-icons'>
+                          library_add</FontIcon>
+                        }
+                      />,
+                      <ListItem
+                        data-value={tag._id}
+                        key='edit'
+                        primaryText='Editar tag'
+                        onTouchTap={this.handleTagEdit}
+                        leftIcon={
+                          <FontIcon
+                            className='material-icons'>
+                          edit</FontIcon>
+                        }
+                      />,
+                    ]}
+                  />);
+                })}
+              />
+            );
+          })}
+        </List>
+      </Paper>
     );
   },
-
 });
+
+export default AdminContentList;

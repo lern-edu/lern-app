@@ -1,7 +1,7 @@
 import React from 'react';
 import { grey300 } from 'material-ui/styles/colors';
 
-StudentTestGrades = React.createClass({
+const StudentTestGrades = React.createClass({
 
   /* Lifecycle
   */
@@ -29,7 +29,7 @@ StudentTestGrades = React.createClass({
     const grades = _.map(attempts, 'grade');
     return !_.every(grades, _.isNull) ? (
       <div className='ui basic segment'>
-        <div>Desempenho por Treino</div>
+        <div>Desempenho por tentativa</div>
         <div ref='chart' />
       </div>
     ) : (
@@ -41,3 +41,5 @@ StudentTestGrades = React.createClass({
     );
   },
 });
+
+export default StudentTestGrades;
