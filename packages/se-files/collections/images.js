@@ -15,6 +15,7 @@ if (Meteor.isServer) {
 FS.Images = new FilesCollection({
   storagePath: 'assets/app/uploads/images',
   collectionName: 'GRID.Images',
+  debug: Meteor.isServer && process.env.NODE_ENV === 'development',
   onBeforeUpload: function (file) {
     if (file.size <= (50 * 1024 * 1024) && /png|jpg|jpeg/i.test(file.ext)) {
       return true;
