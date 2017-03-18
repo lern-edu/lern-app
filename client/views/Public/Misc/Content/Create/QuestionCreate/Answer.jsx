@@ -140,8 +140,10 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
                   {_.map(form.doc.get('options'), (op, index) => {
                     const text = op.text ? _.first(op.text.blocks).text
                       : <PublicContentShowImage
-                        form={this}
-                        imageId={op.image} />;
+                          form={this}
+                          imageId={op.image}
+                          width={'300px'}
+                        />;
                     return (
                       <TableRow
                         key={op.text ? _.first(op.text.blocks).text : op.image}
