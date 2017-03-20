@@ -96,6 +96,7 @@ const PublicContentShowQuestionView = React.createClass({
                     <PublicContentShowImage
                       form={this}
                       imageId={op.image}
+                      width={'320px'}
                     />
                 </span>
                 </div>,
