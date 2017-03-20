@@ -35,7 +35,7 @@ const PublicContentCreateUpload = React.createClass({
   handleFilePath(event) {
     const { value, files } = event.target;
     const file = _.first(files);
-    if (file.type === 'image/jpeg')
+    if (/png|jpg|jpeg/g.test(file.type))
       this.setState({ upload: true, file, fileName: file.name });
     else
       this.setState({ open: true });
