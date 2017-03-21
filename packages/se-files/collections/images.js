@@ -1,20 +1,22 @@
 import { FilesCollection } from 'meteor/ostrio:files';
+import Grid from 'gridfs-stream'; // We'll use this package to work with GridFS
+import fs from 'fs';              // Required to read files initially uploaded via Meteor-Files
+import { MongoInternals } from 'meteor/mongo';
 
+// Set up gfs instance
+let gfs;
 if (Meteor.isServer) {
-  var s3 = require('s3');
-  var client = s3.createClient({
-    s3Options: {
-      region: 'sa-east-1',
-      accessKeyId: Meteor.settings.credentials.S3.accessKeyId,
-      secretAccessKey: Meteor.settings.credentials.S3.secretAccessKey,
-    },
-  });
+  gfs = Grid(
+    MongoInternals.defaultRemoteCollectionDriver().mongo.db,
+    MongoInternals.NpmModule
+  );
 }
 
 FS.Images = new FilesCollection({
   storagePath: 'assets/app/uploads/images',
-  collectionName: 'FS.Images',
-  onBeforeUpload: function (file) {
+  collectionName: 'GRID.Images',
+  debug: Meteor.isServer && process.env.NODE_ENV === 'development',
+  onBeforeUpload(file) {
     if (file.size <= (50 * 1024 * 1024) && /png|jpg|jpeg/i.test(file.ext)) {
       return true;
     } else {
@@ -22,42 +24,45 @@ FS.Images = new FilesCollection({
     }
   },
 
-  onAfterUpload: function (file) {
-    var _this = this;
-    var params = {
-      localFile: file.path,
-      s3Params: {
-        Bucket: 'se-edu',
-        Key: 'images/' + file._id,
-      },
-    };
+  onAfterUpload(image) {
+    // Move file to GridFS
+    Object.keys(image.versions).forEach(versionName => {
+      const metadata = { versionName, imageId: image._id, storedAt: new Date() }; // Optional
+      const writeStream = gfs.createWriteStream({ filename: image.name, metadata });
 
-    var uploader = client.uploadFile(params);
-    uploader.on('error', function (err) {
-      console.error('unable to upload:', err.stack);
+      fs.createReadStream(image.versions[versionName].path).pipe(writeStream);
+
+      writeStream.on('close', Meteor.bindEnvironment(file => {
+        const property = `versions.${versionName}.meta.gridFsFileId`;
+
+        // Convert ObjectID to String. Because Meteor (EJSON?) seems to convert it to a
+        // LocalCollection.ObjectID, which GFS doesn't understand.
+        this.collection.update(image._id, { $set: { [property]: file._id.toString() } });
+
+        // Unlink file by version from FS
+        this.unlink(this.collection.findOne(image._id), versionName);
+      }));
     });
   },
 
-  onAfterRemove: function (cursor) {
-    if (cursor && cursor.length) {
-      var params = {
-        Bucket: 'se-edu',
-        Delete: {
-          Objects: [{
-            Key: 'images/' + cursor[0]._id,
-          },
-          ],
-        },
-      };
-      var remover = client.deleteObjects(params);
-      remover.on('error', function (err) {
-        console.error('unable to remove:', err.stack);
-      });
-
-      return true;
+  interceptDownload(http, image, versionName) {
+    const _id = (image.versions[versionName].meta || {}).gridFsFileId;
+    if (_id) {
+      const readStream = gfs.createReadStream({ _id });
+      readStream.on('error', err => { throw err; });
+      readStream.pipe(http.response);
     }
 
-    return false;
+    return Boolean(_id); // Serve file from either GridFS or FS if it wasn't uploaded yet
+  },
+
+  onAfterRemove(images) {
+    images.forEach(image => {
+      Object.keys(image.versions).forEach(versionName => {
+        const _id = (image.versions[versionName].meta || {}).gridFsFileId;
+        if (_id) gfs.remove({ _id }, err => { if (err) throw err; });
+      });
+    });
   },
 
 });
