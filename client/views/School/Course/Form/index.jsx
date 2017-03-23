@@ -25,14 +25,20 @@ const SchoolCourseFormView = React.createClass({
   */
 
   getInitialState() {
-    return { subjects: [], index: 0, allTags: false };
+    return { subjects: [], index: 0, allTags: false, waitingCallback: false };
   },
 
   /* Handlers
   */
 
+  handleSubmit() {
+    this.setState({ waitingCallback: true });
+    this.defaultSubmit();
+  },
+
   handleSubmitSuccess({ _id }) {
-    console.log(`Course created: ${_id}`);
+    this.setState({ waitingCallback: false });
+    console.log(`Course updated: ${_id}`);
     FlowRouter.go('SchoolCourses');
     snack('Curso atualizado');
   },
@@ -41,7 +47,7 @@ const SchoolCourseFormView = React.createClass({
   */
 
   render() {
-    const { state: { index, errors, valid } } = this;
+    const { state: { index, errors, valid, waitingCallback } } = this;
 
     const done = {
       basic: !_.some(['name', 'info'],
@@ -57,7 +63,7 @@ const SchoolCourseFormView = React.createClass({
     return (
       <div>
         <div className='ui basic segment'>
-          
+
           <Stepper linear={false} activeStep={index} orientation='vertical' >
 
             <Step completed={done.basic}>
@@ -119,8 +125,8 @@ const SchoolCourseFormView = React.createClass({
 
           <div {...this.styles.floatingButton} >
             <FloatingActionButton
-              disabled={!valid}
-              onTouchTap={this.defaultSubmit}
+              disabled={!valid || waitingCallback}
+              onTouchTap={this.handleSubmit}
               children={<FontIcon className='material-icons' >check</FontIcon>} />
           </div>
 

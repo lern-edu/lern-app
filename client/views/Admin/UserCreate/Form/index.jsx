@@ -13,7 +13,7 @@ AdminUserCreateForm = React.createClass({
   */
 
   getInitialState() {
-    return { index: 0 };
+    return { index: 0, waitingCallback: false };
   },
 
   /* Methods
@@ -32,7 +32,18 @@ AdminUserCreateForm = React.createClass({
   /* Handlers
   */
 
+  handleSubmit() {
+    this.setState({ waitingCallback: true });
+    this.defaultSubmit();
+  },
+
+  handleSubmitError() {
+    this.setState({ waitingCallback: false });
+    snack('Problemas ao criar teste');
+  },
+
   handleSubmitSuccess({ _id }) {
+    this.setState({ waitingCallback: false });
     console.log(`User created: ${_id}`);
     FlowRouter.go('AdminHome', {}, { active: 'users' });
   },

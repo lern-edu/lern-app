@@ -23,7 +23,7 @@ const AdminUserCreateFormRest = React.createClass({
     const { form, form: { doc } } = this.props;
     if (_.includes(['teacher', 'student'], doc.get('role')) && doc.get('school'))
       doc.set('schools', [doc.get('school')]);
-    form.defaultSubmit();
+    form.handleSubmit();
   },
 
   /* Render
@@ -31,8 +31,8 @@ const AdminUserCreateFormRest = React.createClass({
 
   render() {
     const { ready, form, schools } = this.props;
+    const { valid, waitingCallback } = form.state;
 
-    const done = form.state.valid;
     const role = form.doc.get('role');
     const teacherAndStudentView = [
       <div className='row' key='school'>
@@ -92,7 +92,7 @@ const AdminUserCreateFormRest = React.createClass({
             style={{ marginRight: '5px' }} />
           <RaisedButton
             label={'Terminar'}
-            disabled={!done}
+            disabled={!valid || waitingCallback}
             primary={true}
             onTouchTap={this.handleSubmit} />
         </div>

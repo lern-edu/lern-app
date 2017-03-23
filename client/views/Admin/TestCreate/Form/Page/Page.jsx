@@ -74,7 +74,7 @@ const AdminTestCreateFormPage = React.createClass({
               label='Próximo'
               disabled={!done}
               primary={true}
-              onTouchTap={form.defaultSubmit} />
+              onTouchTap={form.handleSubmit} />
           </div>
 
         </div>

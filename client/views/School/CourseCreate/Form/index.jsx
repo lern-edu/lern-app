@@ -16,14 +16,25 @@ const SchoolCourseCreateForm = React.createClass({
   */
 
   getInitialState() {
-    return { subjects: [], index: 0, allTags: false };
+    return { subjects: [], index: 0, allTags: false, waitingCallback: false };
   },
 
   /* Handlers
   */
 
+  handleSubmit() {
+    this.setState({ waitingCallback: true });
+    form.defaultSubmit();
+  },
+
+  handleSubmitError() {
+    this.setState({ waitingCallback: false });
+    snack('Problemas ao iniciar curso');
+  },
+
   handleSubmitSuccess({ _id }) {
     console.log(`Course created: ${_id}`);
+    this.setState({ waitingCallback: false });
     snack('Curso criado');
     FlowRouter.go('SchoolCourse', { courseId: _id });
   },
@@ -45,7 +56,7 @@ const SchoolCourseCreateForm = React.createClass({
   */
 
   render() {
-    const { state: { index, errors, valid } } = this;
+    const { state: { index, errors, valid, waitingCallback } } = this;
 
     const done = {
       basic: !_.some(['name', 'info'],
@@ -115,7 +126,7 @@ const SchoolCourseCreateForm = React.createClass({
             <StepContent>
               <SchoolCourseCreateFormSchedule
                 errors={this.state.errors}
-                done={valid}
+                done={valid && !waitingCallback}
                 key='schedule'
                 form={this} />
             </StepContent>
