@@ -23,7 +23,7 @@ PublicContentShow = React.createClass({
     if (this.doc.get('type') == 'image') {
       FS.Images.remove({ _id: this.doc.get('image') }, function (err) {
         if (!err) snack('Imagem removida');
-        else console.err(err);
+        else console.error(err);
       });
     }
   },

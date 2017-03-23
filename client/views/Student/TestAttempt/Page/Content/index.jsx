@@ -29,7 +29,6 @@ StudentTestAttemptPageContent = React.createClass({
                       link: <a>{c.link}</a>,
                       title: <h4>{c.title}</h4>,
                       image: <PublicContentShowImage
-                        form={this}
                         imageId={c.image}
                       />,
                       question: <StudentTestAttemptPageContentQuestion

@@ -22,6 +22,11 @@ PublicContentCreate = React.createClass({
   // Handlers
 
   handleSubmit() {
+    if (this.props.handleSubmit) {
+      this.props.handleSubmit();
+      return;
+    }
+
     const { type } = this.doc;
     const { form, schema, field, updateQuestionsSelected } = this.props;
     const array = form.doc.get(field) || [];
@@ -75,35 +80,53 @@ PublicContentCreate = React.createClass({
         </div>
         <div className='row'>
           {_.get({
-            text: <Paper zDepth={1}>
-                <PublicContentRichText parent={this} editorState={editorState} />
+            text:
+              <Paper zDepth={1}>
+                <PublicContentRichText
+                  parent={this}
+                  editorState={editorState}
+                />
               </Paper>,
-            title: <TextField
+            title:
+              <TextField
                 name='title'
                 value={title}
                 floatingLabelText='Título'
                 onChange={this.handleTextChange}
-                errorText={_.get(errors, 'title')} />,
-            image: <PublicContentCreateUpload form={this} />,
-            link: <TextField
+                errorText={_.get(errors, 'title')}
+              />,
+            image:
+              <PublicContentCreateUpload
+                form={this}
+              />,
+            link:
+              <TextField
                 name='link'
                 value={link}
                 floatingLabelText='Link'
                 onChange={this.handleTextChange}
-                errorText={_.get(errors, 'link')} />,
-            question: <PublicContentCreateQuestion
+                errorText={_.get(errors, 'link')}
+              />,
+            question:
+              <PublicContentCreateQuestion
                 form={this}
                 scored={this.props.scored}
                 questionsSelected={this.props.questionsSelected}
-                subjects={this.props.subjects} />,
+                subjects={this.props.subjects}
+              />,
           }, type)}
         </div>
+
+        {type === 'image' ?
+          undefined :
           <FlatButton
             style={{ marginTop: 15 }}
-            onTouchTap={this.props.handleSubmit || this.handleSubmit}
+            onTouchTap={this.handleSubmit}
             disabled={!valid}
             primary={true}
-            label='Adicionar' />
+            label='Adicionar'
+          />
+        }
 
       </div>
     );
