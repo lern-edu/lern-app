@@ -178,23 +178,6 @@ const Navigation = React.createClass({
           </div>
         ) : (
           <div>
-            {/* <ListItem
-              primaryText={user.getName() || '(no name)'}
-              onClick={() => FlowRouter.go(user.getHomeRoute())}
-              rightIconButton={
-                <IconButton
-                  onClick={event => event.stopPropagation() ||
-                    FlowRouter.go(user.getSettingsRoute())}
-                  tooltip='Ajustes'
-                  tooltipPosition='bottom-left'
-                  touch={true}
-                >
-                  <FontIcon
-                    className='material-icons'
-                    color={grey300}>settings</FontIcon>
-                </IconButton>
-              }
-            /> */}
             <Divider/>
             {_.map(routes[user.getRole()], ({ label, icon }, _route) =>
               <ListItem
@@ -207,30 +190,18 @@ const Navigation = React.createClass({
                 href={FlowRouter.path(_route)}
               />
             )}
-            {/* <Divider/>
+            <Divider/>
             <div>
-              <IconButton
-                onClick={logout}
-                tooltip='Sair'
-                tooltipPosition='bottom-right'
-                touch={true}
-                style={{ float: 'left' }} >
-                <FontIcon
-                  className='material-icons'
-                  color={grey300}>exit_to_app</FontIcon>
-              </IconButton>
-              <IconButton
-                href={FlowRouter.path('PublicContact')}
-                tooltip='Contato'
-                tooltipPosition='bottom-left'
-                touch={true}
-                style={{ float: 'right' }}
-              >
-                <FontIcon
-                  className='material-icons'
-                  color={grey300}>mail_outline</FontIcon>
-              </IconButton>
-            </div> */}
+              <ListItem
+                primaryText="Configurações"
+                href={FlowRouter.path(user.getSettingsRoute())} />
+              <ListItem
+                primaryText="Fale conosco"
+                href={FlowRouter.path('PublicContact')} />
+              <ListItem
+                primaryText="Sair"
+                onClick={logout} />
+            </div>
           </div>
         )}
 
