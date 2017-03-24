@@ -1,5 +1,7 @@
 Subjects = new Mongo.Collection('subjects');
 
+Subjects.ContentSchema = ContentSchema('SubjectContent');
+
 Subjects.Schema = Astro.Class({
   name: 'Subject',
   collection: Subjects,
@@ -7,6 +9,12 @@ Subjects.Schema = Astro.Class({
     name: {
       type: 'string',
       validator: Validators.String(),
+    },
+    info: {
+      type: 'array',
+      nested: 'SubjectContent',
+      validator: Validators.minLength(0),
+      optional: true,
     },
     area: {
       type: 'string',
