@@ -139,9 +139,20 @@ const Navigation = React.createClass({
     if (window) {
       if (window.nav) window.nav = null;
       else throw new Meteor.Error('Nav already removed');
-    }
+    }    const { user } = this.context;
+
+    const profilePic = _.get(user, 'profile.profilePic');
+
+    const name = _.get(user, 'profile.name');
+
   },
 
+  handleRoleChange(role) {
+    Meteor.call('UserChangeRole', role, (err, user) => {
+      if (err) snack('Erro');
+      else FlowRouter.go(user.getHomeRoute());
+    });
+  },
   /* Render
   */
 
@@ -149,6 +160,9 @@ const Navigation = React.createClass({
     const { user, logging, route } = this.props;
     const { routes, open } = this.state;
     const logout = () => Meteor.logout();
+    const profilePic = _.get(user, 'profile.profilePic');
+    const name = _.get(user, 'profile.name');
+    const roles = _.get(user, 'roles');
 
     return (
       <Drawer {..._.omit(this.state, ['open'])} open={!open ? false : true}
@@ -178,7 +192,10 @@ const Navigation = React.createClass({
           </div>
         ) : (
           <div>
-            <Divider/>
+            <IconButton>{profilePic ? <Avatar src={profilePic} /> :
+              <Avatar size={32}>{_.first(name)}</Avatar>}</IconButton>
+              <ListItem primaryText={name} disabled={true}/>
+          <Divider />
             {_.map(routes[user.getRole()], ({ label, icon }, _route) =>
               <ListItem
                 leftIcon={_.isNull(icon) ? undefined :
@@ -190,6 +207,16 @@ const Navigation = React.createClass({
                 href={FlowRouter.path(_route)}
               />
             )}
+            {roles.length <= 1 ? undefined : <ListItem
+              primaryText='Ver como'
+              disabled={true}
+              leftIcon={<FontIcon className='material-icons' >remove_red_eye</FontIcon>}
+              nestedItems={_.map(roles, r => <ListItem
+                key={r}
+                primaryText={i18n.__(`UserRoles.${r}`)}
+                onClick={() => this.handleRoleChange(r)} />)
+              } />
+            }
             <Divider/>
             <div>
               <ListItem

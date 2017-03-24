@@ -11,15 +11,6 @@ const Settings = React.createClass({
     user: React.PropTypes.object,
   },
 
-  // Handlers
-
-  handleRoleChange(role) {
-    Meteor.call('UserChangeRole', role, (err, user) => {
-      if (err) snack('Erro');
-      else FlowRouter.go(user.getHomeRoute());
-    });
-  },
-
   // Render
 
   render() {
@@ -37,7 +28,7 @@ const Settings = React.createClass({
         targetOrigin={{ horizontal: 'left', vertical: 'bottom' }}
         anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }} >
         <MenuItem primaryText={name} disabled={true} />
-        <Divider />
+    });    <Divider />
         {disableActions ? undefined : <MenuItem
           primaryText='Configurações'
           rightIcon={<FontIcon className='material-icons' >settings</FontIcon>}
@@ -61,7 +52,7 @@ const Settings = React.createClass({
             FlowRouter.go('PublicContact')} />
         <MenuItem
           primaryText='Sair'
-          rightIcon={<FontIcon className='material-icons' >close</FontIcon>}
+          rightIcon={<FontIcon className='material-icons' >exit_to_app</FontIcon>}
           onClick={event => event.stopPropagation() || Meteor.logout()} />
       </IconMenu>
     );
@@ -122,7 +113,6 @@ Layout.Bar = React.createClass({
         title={this.getTitle({ title, crumbs })}
         showMenuIconButton={true}
         onLeftIconButtonTouchTap={disableActions ? () => false : window.nav}
-        iconElementRight={<Settings disableActions={disableActions} />}
         style={{ position: 'fixed', top: 0, left: 0 }}
       />
     );
