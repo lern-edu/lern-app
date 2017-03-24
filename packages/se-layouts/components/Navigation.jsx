@@ -80,14 +80,15 @@ const Navigation = React.createClass({
             label: 'Disciplinas',
             icon: 'dashboard',
           },
-          StudentTests: {
-            label: 'Estudos',
-            icon: 'import_contacts',
-          },
-          StudentReports: {
-            label: 'Relatórios',
-            icon: 'timeline',
-          },
+
+          // StudentTests: {
+          //   label: 'Estudos',
+          //   icon: 'import_contacts',
+          // },
+          // StudentReports: {
+          //   label: 'Relatórios',
+          //   icon: 'timeline',
+          // },
           StudentPosts: {
             label: 'Comunidade acadêmica',
             icon: 'forum',
