@@ -49,7 +49,7 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
   Subject({ subjectId }={}) {
     return {
       find() {
-        return Fetch.Public().subjects(subjectId);
+        return Fetch.General.subjects(subjectId);
       },
 
       children: [
