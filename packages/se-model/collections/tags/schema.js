@@ -1,5 +1,7 @@
 Tags = new Mongo.Collection('tags');
 
+Tags.ContentSchema = ContentSchema('TagContent');
+
 Tags.Schema = Astro.Class({
   name: 'Tag',
   collection: Tags,
@@ -7,6 +9,12 @@ Tags.Schema = Astro.Class({
     text: {
       type: 'string',
       validator: Validators.String(),
+    },
+    info: {
+      type: 'array',
+      nested: 'SubjectContent',
+      validator: Validators.minLength(0),
+      optional: true,
     },
     parent: {
       type: 'string',
