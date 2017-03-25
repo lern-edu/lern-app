@@ -4,8 +4,7 @@ import { LinearProgress } from 'material-ui';
 
 // Views
 import AdminSubjectsForm from './Form/index.jsx';
-
-// import AdminSubjectsList from './List.jsx';
+import AdminSubjectsTags from './Tags/index.jsx';
 
 const AdminSubjectView = React.createClass({
 
@@ -25,6 +24,7 @@ const AdminSubjectView = React.createClass({
           ? <LinearProgress />
           : [
             <AdminSubjectsForm doc={subject} key='subject' />,
+            <AdminSubjectsTags {...this.props} key='tags' />,
           ]
         }
 
