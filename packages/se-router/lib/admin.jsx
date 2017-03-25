@@ -53,6 +53,15 @@ adminRoutes.route('/materias/:subjectId', {
   },
 });
 
+adminRoutes.route('/materias/:subjectId/:tagId', {
+  name: 'AdminTag',
+  action(params) {
+    render({
+      main: <AdminTag {...params} />,
+    });
+  },
+});
+
 adminRoutes.route('/conteudo/materia/:subjectId/tag/:tagId', {
   name: 'AdminTagEdit',
   action(params) {
