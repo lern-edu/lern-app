@@ -62,6 +62,22 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
+  Tag({ tagId, subjectId }={}) {
+    return {
+      find() {
+        return Fetch.General.tags({ _id: tagId, subject: subjectId });
+      },
+
+      children: [
+        {
+          find(tag) {
+            return tag.findSubject();
+          },
+        },
+      ],
+    };
+  },
+
   Posts(query={}, options={}, { author, subjects, tags, images, documents }={}) {
     return {
       find() {
