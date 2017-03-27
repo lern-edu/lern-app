@@ -4,6 +4,7 @@ const [prefix, protect] = ['Admin', 'admin'];
 Helpers.Methods({ prefix, protect }, {
   TestSave: Helpers.DefaultSave,
   PlanSave: Helpers.DefaultSave,
+  SubjectSave: Helpers.DefaultSave,
   QuestionSave: Helpers.DefaultSave,
   TagSave: Helpers.DefaultSave,
   UserSave: Helpers.DefaultSave,

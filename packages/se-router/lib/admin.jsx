@@ -26,11 +26,38 @@ adminRoutes.route('/planos', {
 
 // Content
 
-adminRoutes.route('/conteudo', {
-  name: 'AdminContent',
+adminRoutes.route('/materias', {
+  name: 'AdminSubjects',
   action() {
     render({
-      main: <AdminContentView />,
+      main: <AdminSubjects />,
+    });
+  },
+});
+
+adminRoutes.route('/materias/novo', {
+  name: 'AdminSubjectCreate',
+  action() {
+    render({
+      main: <AdminSubjectCreate />,
+    });
+  },
+});
+
+adminRoutes.route('/materias/:subjectId', {
+  name: 'AdminSubject',
+  action(params) {
+    render({
+      main: <AdminSubject {...params} />,
+    });
+  },
+});
+
+adminRoutes.route('/materias/:subjectId/:tagId', {
+  name: 'AdminTag',
+  action(params) {
+    render({
+      main: <AdminTag {...params} />,
     });
   },
 });
@@ -40,15 +67,6 @@ adminRoutes.route('/conteudo/materia/:subjectId/tag/:tagId', {
   action(params) {
     render({
       main: <AdminTagEditView {...params} />,
-    });
-  },
-});
-
-adminRoutes.route('/conteudo/materia/:subjectId', {
-  name: 'AdminSubject',
-  action(params) {
-    render({
-      main: <AdminSubjectView {...params} />,
     });
   },
 });

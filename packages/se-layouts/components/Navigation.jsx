@@ -22,8 +22,8 @@ const Navigation = React.createClass({
             label: 'Provas',
             icon: null,
           },
-          AdminContent: {
-            label: 'Conteúdo',
+          AdminSubjects: {
+            label: 'Matérias',
             icon: null,
           },
           AdminSchools: {

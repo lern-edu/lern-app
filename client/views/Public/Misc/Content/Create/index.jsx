@@ -24,9 +24,7 @@ PublicContentCreate = React.createClass({
   handleSubmit() {
     const { type } = this.doc;
     const { form, schema, field, updateQuestionsSelected } = this.props;
-    const array = form.doc.get(field) || [];
-    array.push(_.clone(this.doc));
-    form.defaultHandler({ [field]: array }, { doc: true });
+    form.defaultHandler({ [field]: _.clone(this.doc) }, { doc: true, operation: 'push' });
     snack('Bloco criado!');
     this.doc = new this.props.schema({ type, [type]: '' });
     if (type == 'question') updateQuestionsSelected && updateQuestionsSelected();

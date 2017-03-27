@@ -1,27 +1,28 @@
 import React from 'react';
 import { Toolbar, ToolbarSeparator, ToolbarTitle, ToolbarGroup, RaisedButton, } from 'material-ui';
 
-const AdminContentToolbar = React.createClass({
+const AdminSubjectsToolbar = React.createClass({
   render() {
-    const { tags, subjects } = this.props;
+    const { subjects } = this.props;
 
     return (
       <Toolbar>
         <ToolbarGroup>
-          <ToolbarTitle text={`${subjects.length} Matérias e ${tags.length} Tags`} />
+          <ToolbarTitle text={`${subjects.length} items`} />
         </ToolbarGroup>
         <ToolbarGroup lastChild={true} >
-          <ToolbarTitle text='Questões' />
+          <ToolbarTitle text='Matéria' />
           <ToolbarSeparator/>
           <RaisedButton
             label='Nova'
-            secondary={true}
+            primary={true}
             style={{ textAlign: 'center' }}
-            href={FlowRouter.path('AdminQuestionCreate', {}, {})} />
+            href={FlowRouter.path('AdminSubjectCreate')}
+          />
         </ToolbarGroup>
       </Toolbar>
     );
   },
 });
 
-export default AdminContentToolbar;
+export default AdminSubjectsToolbar;
