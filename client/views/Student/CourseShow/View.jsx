@@ -34,7 +34,7 @@ const StudentCourseShowView = React.createClass({
           title={_.get(course, 'name')}
           crumbs={[{ label: 'Disciplinas', path: 'StudentCourses' }]} />
 
-        <StudentCourseShowMenu active={active} />
+        <StudentCourseShowMenu active={active} {...this.props} />
 
           {
             !_.every(ready)

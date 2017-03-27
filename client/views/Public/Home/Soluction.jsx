@@ -22,12 +22,12 @@ const PublicHomeSoluction = React.createClass({
   text: {
     prof: {
       title: 'Professores @ Lern',
-      image: '/images/home/Google_Material-Design.jpg',
+      image: '/images/home/teacher.jpg',
       text: 'Crie, aplique e revise exercícios por meio de uma interface simple e interativa!',
     },
     student: {
       title: 'Estudante @ Lern',
-      image: '/images/home/beach.jpg',
+      image: '/images/home/student.jpg',
       text: 'Conhecendo por completo suas competências, você é mais que seu boletim!',
     },
     pedagogy: {
@@ -37,7 +37,7 @@ const PublicHomeSoluction = React.createClass({
     },
     school: {
       title: 'Escola @ Lern',
-      image: '/images/home/school.jpeg',
+      image: '/images/home/school.jpg',
       text: 'Otimização dos processos e recursos informacionais para um upgrade pedagógico.',
     },
   },

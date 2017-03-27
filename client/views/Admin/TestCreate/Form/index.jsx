@@ -14,7 +14,18 @@ const AdminTestCreateForm = React.createClass({
 
   // Handlers
 
+  handleSubmit() {
+    this.setState({ waitingCallback: true });
+    form.defaultSubmit();
+  },
+
+  handleSubmitError() {
+    this.setState({ waitingCallback: false });
+    snack('Problemas ao criar teste');
+  },
+
   handleSubmitSuccess({ _id: testId }) {
+    this.setState({ waitingCallback: false });
     console.log(`Test created: ${testId}`);
     snack('Teste criado');
     FlowRouter.go('AdminTest', { testId });
@@ -24,7 +35,7 @@ const AdminTestCreateForm = React.createClass({
   */
 
   getInitialState() {
-    return { index: 0, allTags: false, noCourse: false, scored: false };
+    return { index: 0, allTags: false, noCourse: false, scored: false, waitingCallback: false };
   },
 
   componentDidMount() {
@@ -48,7 +59,7 @@ const AdminTestCreateForm = React.createClass({
   */
 
   render() {
-    const { state: { index } } = this;
+    const { state: { index, waitingCallback } } = this;
 
     const done = {
       basic: !_.some(['name', 'info'],
@@ -121,7 +132,7 @@ const AdminTestCreateForm = React.createClass({
               <AdminTestCreateFormPage
                 errors={this.state.errors}
                 scored={this.state.scored}
-                done={done.pages}
+                done={done.pages && !waitingCallback}
                 {...this.props}
                 key='pages'
                 form={this} />

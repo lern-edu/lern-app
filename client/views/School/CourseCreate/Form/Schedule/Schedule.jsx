@@ -125,7 +125,7 @@ const SchoolCourseCreateFormSchedule = React.createClass({
               onTouchTap={form.prevStep}
               style={{ marginRight: '5px' }} />
             <RaisedButton
-              label={'Terminar'}
+              label='Terminar'
               disabled={!done}
               primary={true}
               onTouchTap={form.defaultSubmit} />

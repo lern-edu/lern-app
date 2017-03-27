@@ -70,11 +70,31 @@ AstroForm = function (AstroClass, submitMethod) {
     */
 
     defaultHandler(arg, opts) {
+
       if (_.isObject(arg)) {
+
         if (opts.doc) {
-          if (opts.operation == 'push')
-          _.forEach(_.keys(arg), k => this.doc.push(k, arg[k]));
-          else this.doc.set(arg);
+          if (opts.operation === 'push') {
+            _.forEach(_.keys(arg), key => {
+
+              if (this.doc.get('_isNew')) {
+                const array = this.doc.get(key) || [];
+                array.push(arg[key]);
+                this.doc.set(key, array);
+              } else {
+                this.doc.get(key)
+                ? this.doc.push(key, arg[key])
+                : this.doc.set(key, [arg[key]]);
+              };
+
+            });
+          } else if (opts.operation === 'pull') {
+            _.forEach(_.keys(arg), key => {
+              const array = this.doc.get(key) || [];
+              array.splice(arg[key], 1);
+              this.doc.set(key, array);
+            });
+          } else this.doc.set(arg);
         }
 
         if (opts.query)

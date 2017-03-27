@@ -49,13 +49,29 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
   Subject({ subjectId }={}) {
     return {
       find() {
-        return Fetch.Public().subjects(subjectId);
+        return Fetch.General.subjects(subjectId);
       },
 
       children: [
         {
           find(subject) {
             return subject.findTags();
+          },
+        },
+      ],
+    };
+  },
+
+  Tag({ tagId, subjectId }={}) {
+    return {
+      find() {
+        return Fetch.General.tags({ _id: tagId, subject: subjectId });
+      },
+
+      children: [
+        {
+          find(tag) {
+            return tag.findSubject();
           },
         },
       ],

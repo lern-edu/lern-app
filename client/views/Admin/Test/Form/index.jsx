@@ -24,17 +24,23 @@ const AdminTestForm = React.createClass({
 
   // Handlers
 
+  handleSubmit() {
+    this.setState({ waitingCallback: true });
+    this.defaultSubmit();
+  },
+
   handleSubmitSuccess({ _id: testId }) {
-    console.log(`Test created: ${testId}`);
+    this.setState({ waitingCallback: false });
+    console.log(`Test updated: ${testId}`);
     snack('Teste atualizado');
-    FlowRouter.go('AdminTest', { testId });
+    FlowRouter.go('AdminTests');
   },
 
   /* Lifecycle
   */
 
   getInitialState() {
-    return { index: 0, allTags: false, noCourse: false, scored: false };
+    return { index: 0, allTags: false, noCourse: false, scored: false, waitingCallback: false };
   },
 
   componentDidMount() {
@@ -58,7 +64,7 @@ const AdminTestForm = React.createClass({
   */
 
   render() {
-    const { state: { index, valid } } = this;
+    const { state: { index, valid, waitingCallback } } = this;
 
     const done = {
       basic: !_.some(['name', 'info'],
@@ -152,7 +158,7 @@ const AdminTestForm = React.createClass({
 
         <div {...this.styles.floatingButton} >
           <FloatingActionButton
-            disabled={!valid}
+            disabled={!valid || waitingCallback}
             onTouchTap={this.defaultSubmit}
             children={<FontIcon className='material-icons' >check</FontIcon>} />
         </div>

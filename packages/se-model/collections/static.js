@@ -114,7 +114,6 @@ PostTypes = StaticCollection('PostTypes', [
 
 ContentTypes = StaticCollection('ContentTypes', [
   ['text', 'Texto'],
-  ['title', 'Título'],
   ['image', 'Imagem'],
   ['audio', 'Áudio'],
   ['video', 'Video'],
@@ -129,7 +128,6 @@ QuestionOptionsContentTypes = StaticCollection('QuestionOptionsContentTypes', [
 
 PageContentTypes = StaticCollection('PageContentTypes', [
   ['text', 'Texto'],
-  ['title', 'Título'],
   ['image', 'Imagem'],
   ['audio', 'Áudio'],
   ['video', 'Video'],
