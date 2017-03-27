@@ -3,7 +3,7 @@ import React from 'react';
 import { LinearProgress } from 'material-ui';
 
 // Views
-// import AdminSubjectsForm from './Form/index.jsx';
+import AdminTagForm from './Form/index.jsx';
 
 const AdminTagView = React.createClass({
 
@@ -27,6 +27,12 @@ const AdminTagView = React.createClass({
             ]
           }
         />
+
+        {
+          !_.every(ready)
+          ? <LinearProgress />
+          : <AdminTagForm {...this.props} doc={tag} />
+        }
 
       </div>
     );
