@@ -50,23 +50,24 @@ const PublicContentShowQuestionView = React.createClass({
         <div className='row'>
           {_.map(question.content, (c, i) =>
             <div key={'content' + i} >
-              {_.get({
-                image:
-                  [console.log('image', c.type),
+              {
+                c.type === 'image' ?
                   <PublicContentShowImage
                     imageId={c.image}
-                  />],
-                text:
-                  [console.log('text', c.type),
+                  />
+                : c.type === 'text' ?
                   <Editor
                     readOnly={true}
                     editorState={EditorState.createWithContent(
                       convertFromRaw(c.text)
                     )}
-                  />],
-                link: <a>{c.link}</a>,
-                title: <h5>{c.title}</h5>,
-              }, c.type)}
+                  />
+                : c.type === 'link' ?
+                  <a>{c.link}</a>
+                : c.type === 'title' ?
+                  <h5>{c.title}</h5>
+                : undefined
+              }
             </div>
           )}
         </div>
