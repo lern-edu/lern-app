@@ -56,7 +56,7 @@ Layout.Bar = React.createClass({
         title={this.getTitle({ title, crumbs })}
         showMenuIconButton={true}
         onLeftIconButtonTouchTap={disableActions ? () => false : window.nav}
-        style={{ position: 'fixed', top: 0, left: 0 }}
+        style={{ position: 'fixed', top: 0, left: 0, zIndex: 0 }}
       />
     );
   },
