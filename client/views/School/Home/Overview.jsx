@@ -23,6 +23,15 @@ const SchoolHomeOverview = React.createClass({
                 label='Ir'/>
             </CardActions>
           </Card>
+          <Card className='six wide computer sixteen wide mobile column'style={{ margin: '20px' }}>
+            <CardTitle title="Gerenciar cursos"/>
+            <CardActions>
+              <FlatButton
+                secondary={true}
+                href={FlowRouter.path('SchoolCourses')}
+                label='Ir'/>
+            </CardActions>
+          </Card>
         </div>
       </div>
     );
