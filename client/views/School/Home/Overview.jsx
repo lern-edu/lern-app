@@ -1,4 +1,5 @@
 import React from 'react';
+import { Card, CardTitle, CardActions, FlatButton} from 'material-ui';
 import { blue700 } from 'material-ui/styles/colors';
 
 const SchoolHomeOverview = React.createClass({
@@ -13,9 +14,15 @@ const SchoolHomeOverview = React.createClass({
           </img>
         </div>
         <div className='ui centered grid'>
-          <div className='ten wide computer sixteen wide tablet column'>
-            Oi overview
-          </div>
+          <Card className='six wide computer sixteen wide mobile column'style={{ margin: '20px' }}>
+            <CardTitle title="Gerenciar alunos"/>
+            <CardActions>
+              <FlatButton
+                secondary={true}
+                href={FlowRouter.path('SchoolUsers')}
+                label='Ir'/>
+            </CardActions>
+          </Card>
         </div>
       </div>
     );
