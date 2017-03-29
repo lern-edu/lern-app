@@ -7,10 +7,10 @@ const schoolRoutes = FlowRouter.group({
 });
 
 schoolRoutes.route('/', {
-  name: 'SchoolHomeView',
+  name: 'SchoolHome',
   action() {
     render({
-      main: <SchoolHomeView />,
+      main: <SchoolHome />,
     });
   },
 });
