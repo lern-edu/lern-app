@@ -1,6 +1,7 @@
 // Libs
 import React from 'react';
 import LinearProgress from 'material-ui';
+import { blue700 } from 'material-ui/styles/colors';
 
 // Views
 import SchoolHomeToolbar from './Toolbar.jsx';
@@ -41,13 +42,14 @@ SchoolHomeView = React.createClass({
     const { data: { ready, user: { profile: { tutorial } } } } = this;
 
     return (
-      <div>
+      <div style={{ backgroundColor: blue700, height: '90vh' }}>
         <Layout.Bar title='Início' />
         <div>
-        {!_.every(ready) ? <LinearProgress /> : _.get({
+        {/*{!_.every(ready) ? <LinearProgress /> : _.get({
           true: <SchoolHomeTutorial {...this.text} key='tutorial'/>,
           false: <SchoolHomeOverview {...this.data} key='overview'/>,
-        }, tutorial)}
+        }, tutorial)}*/}
+          <SchoolHomeOverview />
         </div>
       </div>
     );

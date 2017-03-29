@@ -6,9 +6,8 @@ const SchoolHomeOverview = React.createClass({
   render() {
 
     return (
-      <div
-        className='ui container fluid'
-        style={{ backgroundColor: blue700, height: '90vh' }}>
+      <div className='ui container fluid'>
+        {/*style={{ backgroundColor: blue700, height: '90vh' }}>*/}
         <div>
           <img src="/images/steps-students/seta.svg" style={{ width: '300px', padding: '10px' }}>
           </img>
