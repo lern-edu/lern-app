@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardTitle, CardActions, FlatButton} from 'material-ui';
+import { Card, CardTitle, CardActions, FlatButton } from 'material-ui';
 import { blue700 } from 'material-ui/styles/colors';
 
 const SchoolHomeOverview = React.createClass({
