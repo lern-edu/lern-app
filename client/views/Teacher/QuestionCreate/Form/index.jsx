@@ -1,6 +1,6 @@
 import React from 'react';
 
-TeacherQuestionCreateForm = React.createClass({
+const TeacherQuestionCreateForm = React.createClass({
   mixins: [AstroForm(Questions.Schema, 'TeacherQuestionSave')],
 
   /* Lifecycle
@@ -58,14 +58,14 @@ TeacherQuestionCreateForm = React.createClass({
 
         <TeacherQuestionCreateFormSteps index={index}/>
 
-        <React.addons.TransitionGroup>
+        <div>
           {[
             <TeacherQuestionCreateFormMeta {...this.props} {...this.state} form={this} />,
             <TeacherQuestionCreateFormText {...this.props} {...this.state} form={this} />,
             <TeacherQuestionCreateFormAnswer {...this.props} {...this.state} form={this} />,
             <TeacherQuestionCreateFormDone {...this.props} {...this.state} form={this} />,
           ][index]}
-        </React.addons.TransitionGroup>
+        </div>
 
         {/*<div>{_.values(errors)}</div>*/}
 
@@ -73,7 +73,7 @@ TeacherQuestionCreateForm = React.createClass({
     );
   },
 });
-
+export default TeacherQuestionCreateForm;
 // (type)(subject/tags)
 // (text/image/video)
 // (options/answer)
