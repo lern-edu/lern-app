@@ -12,7 +12,7 @@ Tags.Schema = Astro.Class({
     },
     info: {
       type: 'array',
-      nested: 'SubjectContent',
+      nested: 'TagContent',
       validator: Validators.minLength(0),
       optional: true,
     },

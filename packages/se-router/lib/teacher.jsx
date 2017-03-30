@@ -78,7 +78,7 @@ teacherRoutes.route('/questoes/criar', {
   name: 'TeacherQuestionCreate',
   action(params, query) {
     render({
-      main: <TeacherQuestionCreateView query={query} />,
+      main: <TeacherQuestionCreate query={query} />,
     });
   },
 });

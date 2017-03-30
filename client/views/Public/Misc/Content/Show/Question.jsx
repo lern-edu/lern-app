@@ -48,18 +48,28 @@ const PublicContentShowQuestionView = React.createClass({
         </div>
 
         <div className='row'>
-          {_.map(question.content, (c, i) => [
-            <div key={i} >
-              {_.get({
-                text: <Editor
+          {_.map(question.content, (c, i) =>
+            <div key={'content' + i} >
+              {
+                c.type === 'image' ?
+                  <PublicContentShowImage
+                    imageId={c.image}
+                  />
+                : c.type === 'text' ?
+                  <Editor
                     readOnly={true}
                     editorState={EditorState.createWithContent(
-                      convertFromRaw(c.text))} />,
-                link: <a>{c.link}</a>,
-                title: <h5>{c.title}</h5>,
-              }, c.type)}
-            </div>, <br/>,
-          ])}
+                      convertFromRaw(c.text)
+                    )}
+                  />
+                : c.type === 'link' ?
+                  <a>{c.link}</a>
+                : c.type === 'title' ?
+                  <h5>{c.title}</h5>
+                : undefined
+              }
+            </div>
+          )}
         </div>
 
         <div className='row'>
@@ -94,9 +104,7 @@ const PublicContentShowQuestionView = React.createClass({
                   {i == question.answer ? this.answer : this.notAnswer}
                   <span style={{ display: 'inline-block', verticalAlign: 'middle' }}>
                     <PublicContentShowImage
-                      form={this}
                       imageId={op.image}
-                      width={'320px'}
                     />
                 </span>
                 </div>,
