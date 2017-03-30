@@ -88,12 +88,12 @@ const PublicLoginEnter = React.createClass({
             <Divider />
           </div>
 
-          <div {...styles.column}>
+          {/* <div {...styles.column}>
             <h5>{texts.noAccount}
               <a href={FlowRouter.path('PublicLogin', {}, { tab: 'register' })}> {texts.register}
               </a>
             </h5>
-          </div>
+          </div> */}
           <div {...styles.column} style={{ marginBottom: '15px' }} >
             <div style={{ cursor: 'pointer',
               color: 'blue',
