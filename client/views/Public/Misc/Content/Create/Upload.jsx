@@ -35,7 +35,7 @@ const PublicContentCreateUpload = React.createClass({
   handleFilePath(event) {
     const { value, files } = event.target;
     const file = _.first(files);
-    if (/png|jpg|jpeg/g.test(file.type))
+    if (/png|jpg|jpeg/i.test(file.type))
       this.setState({ upload: true, file, fileName: file.name });
     else
       this.setState({ open: true });
@@ -57,6 +57,11 @@ const PublicContentCreateUpload = React.createClass({
         else {
           _this.props.form.defaultHandler({ image: fileObj._id }, { doc: true });
           _this.setState({ upload: false, remove: true });
+          _this.props.form.handleSubmit();
+          _this.setState({ upload: false,
+            remove: false,
+            file: null,
+            fileName: null, });
         };
       },
     });
@@ -117,15 +122,15 @@ const PublicContentCreateUpload = React.createClass({
         </CardText>
         <CardActions expandable={true}>
           <FlatButton
-            label='Upload'
+            label='Adicionar'
             primary={true}
             disabled={!upload}
             onTouchTap={this.handleUpload} />
-          <FlatButton
+          {/*<FlatButton
             label='Remover'
             secondary={true}
             disabled={!remove}
-            onTouchTap={this.handleRemove} />
+            onTouchTap={this.handleRemove} />*/}
         </CardActions>
         <Dialog
           title='Desculpe!'
