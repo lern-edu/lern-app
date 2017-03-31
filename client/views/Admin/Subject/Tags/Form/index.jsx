@@ -50,7 +50,6 @@ const AdminSubjectsTagsForm = React.createClass({
 
   render() {
     const { errors, valid, waitingCallback } = this.state;
-    console.log(errors);
     return (
       <Dialog
         title='Criar Tag'
