@@ -1,4 +1,4 @@
-![Lern Logo](http://ec2-52-67-98-219.sa-east-1.compute.amazonaws.com/wp-content/uploads/2016/10/icone-logo-1.png)
+![Lern Logo](public/images/icons/mipmap-xxxhdpi/ic_launcher.png)
 
 # Lern - Soluções Educacionais
 
