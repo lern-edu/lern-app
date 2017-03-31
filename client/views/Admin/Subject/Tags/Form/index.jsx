@@ -40,9 +40,9 @@ const AdminSubjectsTagsForm = React.createClass({
   },
 
   handleClose() {
-    const { parent } = this.props;
+    const { parent, subject } = this.props;
     parent.setState({ createTag: false });
-    this.doc = new Tags.Schema();
+    this.doc = new Tags.Schema({ subject: subject._id });
   },
 
   /* Render
@@ -50,7 +50,7 @@ const AdminSubjectsTagsForm = React.createClass({
 
   render() {
     const { errors, valid, waitingCallback } = this.state;
-
+    console.log(errors);
     return (
       <Dialog
         title='Criar Tag'
