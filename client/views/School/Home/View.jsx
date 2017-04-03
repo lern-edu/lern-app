@@ -2,6 +2,7 @@
 import React from 'react';
 import LinearProgress from 'material-ui';
 import { blue700 } from 'material-ui/styles/colors';
+import { Screen } from 'meteor/lsunsi:se-layouts';
 
 // Views
 import SchoolHomeToolbar from './Toolbar.jsx';
@@ -9,7 +10,7 @@ import SchoolHomeTutorial from './Tutorial.jsx';
 import SchoolHomeOverview from './Overview.jsx';
 
 const SchoolHomeView = React.createClass({
-
+  mixins: [ Screen ],
   text: {
     welcome: 'Bem vindo à lern!',
     tutorial: 'Faça o tutorial para começar',
@@ -81,8 +82,10 @@ const SchoolHomeView = React.createClass({
 
   render() {
 
+    const {innerHeight} = this.state
+
     return (
-      <div style={{ backgroundColor: blue700, height: '90vh' }}>
+      <div style={{ backgroundColor: blue700, height: innerHeight -64 }}>
         <Layout.Bar title='Início' />
         <div>
         {/*{!_.every(ready) ? <LinearProgress /> : _.get({
