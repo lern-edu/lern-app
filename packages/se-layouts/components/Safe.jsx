@@ -36,8 +36,6 @@ const Safe = React.createClass({
   componentWillUpdate({ user }, { access }) {
     if (access === null) {
       this.redir = FlowRouter.current().path;
-      snack('Você deve entrar primeiro');
-      console.info({ redirReady: this.redir });
       FlowRouter.go('PublicLogin');
     }
 
@@ -45,7 +43,6 @@ const Safe = React.createClass({
       if (!_.get(user, 'profile.tutorial'))
         FlowRouter.go(this.redir);
       snack('Bem-vindo!');
-      console.info({ redirDone: this.redir });
       this.redir = undefined;
     }
   },
