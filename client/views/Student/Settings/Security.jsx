@@ -37,7 +37,7 @@ StudentSettingsSecurity = React.createClass({
     const { target, current } = this.state;
 
     return (
-      <Paper className='ui basic center aligned segment'>
+      <Paper className='ui basic center aligned segment' style={{ margin: '0px' }}>
         <div className='ui header'>Senha</div>
         <div>
           <TextField

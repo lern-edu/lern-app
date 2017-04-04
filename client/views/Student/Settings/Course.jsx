@@ -32,7 +32,7 @@ StudentSettingsCourse = React.createClass({
     const { state: { course }, props: { user } } = this;
 
     return (
-      <Paper className='ui basic center aligned segment'>
+      <Paper className='ui basic center aligned segment' style={{ margin: '0px' }}>
         <div className='ui header'>Entrar em um curso</div>
         {_.get(user, 'profile.tutorial') ? <p><strong>
           Percebemos que você é novo por aqui... adicione a chave para entrar em um curso

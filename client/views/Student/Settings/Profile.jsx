@@ -42,7 +42,7 @@ StudentSettingsProfile = React.createClass({
       props: { schools },
       state: { name }, } = this;
     return (
-      <Paper className='ui basic segment'>
+      <Paper className='ui basic segment' style={{ margin: '0px' }}>
 
         {!schools || _.isEqual(_.get(schools, 'length'), 1) ? undefined :
           <div className='ui vertical basic segment'>
