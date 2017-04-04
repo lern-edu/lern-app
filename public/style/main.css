@@ -1,4 +1,4 @@
-body, html {
+  body, html {
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-touch-callout: none;
