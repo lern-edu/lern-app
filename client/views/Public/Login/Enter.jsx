@@ -64,6 +64,7 @@ const PublicLoginEnter = React.createClass({
             <TextField
               floatingLabelText='E-mail'
               value={email}
+              type='email'
               name='email'
               onInput={this.handleInput}
               onKeyDown={this.handlePressEnter} />
