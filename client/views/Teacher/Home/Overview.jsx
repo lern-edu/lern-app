@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardMedia, CardTitle, Paper, Styles } from 'material-ui';
-import { blue700 } from 'material-ui/styles/colors';
 
 TeacherHomeOverview = React.createClass({
 
@@ -10,8 +9,7 @@ TeacherHomeOverview = React.createClass({
 
     return (
       <div
-        className='ui container fluid'
-        style={{ backgroundColor: blue700, height: '90vh' }}>
+        className='ui container fluid'>
         <div>
           <img src="/images/steps-students/seta.svg" style={{ width: '300px', padding: '10px' }}>
           </img>

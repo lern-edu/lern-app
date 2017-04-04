@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardMedia, CardTitle, Paper } from 'material-ui';
-import { blue700 } from 'material-ui/styles/colors';
 
 TeacherHomeTutorial = React.createClass({
   mixins: [Semantic.Transition('scale')],
@@ -28,8 +27,7 @@ TeacherHomeTutorial = React.createClass({
     return (
       <div
         ref='animate'
-        className='ui container fluid'
-        style={{ backgroundColor: blue700, height: '90vh' }}>
+        className='ui container fluid'>
 
         <div className='ui center aligned huge header'
           style={{ marginTop: '0px', paddingTop: '30px', color: 'white' }}>{welcome}</div>

@@ -101,7 +101,7 @@ StudentHomeView = React.createClass({
     const { data: { ready, user } } = this;
 
     return (
-      <div style={{ backgroundColor: blue700, height: innerHeight -64 }}>
+      <div style={{ backgroundColor: blue700, height: innerHeight - 64 }}>
         <Layout.Bar title='Início' />
         <div>
           {!_.every(ready) ? <LinearProgress /> :
