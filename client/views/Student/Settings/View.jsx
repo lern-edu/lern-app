@@ -1,6 +1,13 @@
 import React from 'react';
 import { LinearProgress } from 'material-ui';
 
+//Views
+import StudentSettingsTabs from './Tabs.jsx';
+import StudentSettingsCourse from './Course.jsx';
+import StudentSettingsSecurity from './Security.jsx';
+import StudentSettingsProfile from './Profile.jsx';
+import StudentSettingsStudy from './Study.jsx';
+
 StudentSettingsView = React.createClass({
   mixins: [ReactMeteorData],
 

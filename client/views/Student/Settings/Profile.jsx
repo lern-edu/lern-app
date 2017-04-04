@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, SelectField, MenuItem, TextField, FlatButton } from 'material-ui';
 
-StudentSettingsProfile = React.createClass({
+const StudentSettingsProfile = React.createClass({
 
   /* Get Context
   */
@@ -74,3 +74,4 @@ StudentSettingsProfile = React.createClass({
     );
   },
 });
+export default StudentSettingsProfile;

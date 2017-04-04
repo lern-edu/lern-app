@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, TextField, RaisedButton } from 'material-ui';
 
-StudentSettingsSecurity = React.createClass({
+const StudentSettingsSecurity = React.createClass({
   /* Lifecycle
   */
 
@@ -69,3 +69,4 @@ StudentSettingsSecurity = React.createClass({
     );
   },
 });
+export default StudentSettingsSecurity;

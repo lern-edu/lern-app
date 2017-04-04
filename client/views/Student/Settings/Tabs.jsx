@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs, Tab } from 'material-ui';
 
-StudentSettingsTabs = React.createClass({
+const StudentSettingsTabs = React.createClass({
   tabs: {
     //profile: 'Perfil',
     study: 'Estudos',
@@ -30,3 +30,4 @@ StudentSettingsTabs = React.createClass({
     );
   },
 });
+export default StudentSettingsTabs;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, SelectField, MenuItem, RaisedButton, Toggle } from 'material-ui';
 
-StudentSettingsStudy = React.createClass({
+const StudentSettingsStudy = React.createClass({
 
   /* Handlers
   */
@@ -93,3 +93,4 @@ StudentSettingsStudy = React.createClass({
     );
   },
 });
+export default StudentSettingsStudy;

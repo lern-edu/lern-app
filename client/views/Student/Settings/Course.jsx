@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, TextField, RaisedButton } from 'material-ui';
 
-StudentSettingsCourse = React.createClass({
+const StudentSettingsCourse = React.createClass({
   /* Lifecycle
   */
 
@@ -63,3 +63,4 @@ StudentSettingsCourse = React.createClass({
     );
   },
 });
+export default StudentSettingsCourse;
