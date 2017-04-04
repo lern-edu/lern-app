@@ -18,9 +18,11 @@ PublicContactView = React.createClass({
           <Layout.Bar
             title='Contato'
           />
-
-          <PublicContactForm {...this.props}/>
-
+          <div className='ui centered grid'>
+            <div className='ten wide computer sixteen wide mobile column'>
+              <PublicContactForm {...this.props}/>
+            </div>
+          </div>
         </div>
       </div>
     );

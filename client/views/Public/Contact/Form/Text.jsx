@@ -8,10 +8,10 @@ PublicContactFormText = React.createClass({
     return (
       <TextField
         fullWidth={true}
-        hintText='Conte-nos'
+        floatingLabelText='Mensagem'
         value={value}
         multiLine={true}
-        rowsMax={8}
+        rows={2}
         onChange={form.handleTextChange}
       />
     );
