@@ -5,11 +5,10 @@ import { blue700 } from 'material-ui/styles/colors';
 import { Screen } from 'meteor/lsunsi:se-layouts';
 
 // Views
-import SchoolHomeToolbar from './Toolbar.jsx';
 import SchoolHomeTutorial from './Tutorial.jsx';
 import SchoolHomeOverview from './Overview.jsx';
 
-const SchoolHomeView = React.createClass({
+SchoolHomeView = React.createClass({
   mixins: [ Screen ],
   text: {
     welcome: 'Bem vindo à lern!',
@@ -98,4 +97,3 @@ const SchoolHomeView = React.createClass({
     );
   },
 });
-export default SchoolHomeView;

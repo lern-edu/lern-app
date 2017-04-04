@@ -10,7 +10,7 @@ schoolRoutes.route('/', {
   name: 'SchoolHome',
   action() {
     render({
-      main: <SchoolHome />,
+      main: <SchoolHomeView />,
     });
   },
 });
