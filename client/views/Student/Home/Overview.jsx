@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, CardMedia, CardTitle, CardActions, FlatButton, Paper, Styles } from 'material-ui';
-import { blue700 } from 'material-ui/styles/colors';
 
 StudentHomeOverview = React.createClass({
   // Render
@@ -9,13 +8,12 @@ StudentHomeOverview = React.createClass({
     const { ready, courses } = this.props;
     return (
       <div
-       className='ui container fluid'
-       style={{ backgroundColor: blue700, height: '100%', margin: '0 !important', paddingBottom: '10px', minHeight: '90vh' }}>
+       className='ui container fluid'>
           <div>
            <img src='/images/steps-students/seta.svg'
             style={{ width: '300px', padding: '10px' }} className='left floated cloumn'></img>
           </div>
-          <div className='ui centered grid' style={{margin: '0 !important'}}>
+          <div className='ui centered grid' style={{ margin: '0' }}>
              {_.map(courses, course =>
                <Card className='fourteen wide mobile six wide tablet four wide computer column'
                   key={course._id} style={{ margin: '20px' }}>
@@ -23,7 +21,7 @@ StudentHomeOverview = React.createClass({
                    title={course.name} />
                  <CardActions>
                    <FlatButton
-                     
+
                      primary={true}
                      href={FlowRouter.path('StudentCourseShow', { courseId: course._id })}
                      label='Entrar' />

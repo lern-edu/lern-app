@@ -1,8 +1,10 @@
 import React from 'react';
 import { LinearProgress } from 'material-ui';
+import { blue700 } from 'material-ui/styles/colors';
+import { Screen } from 'meteor/lsunsi:se-layouts';
 
 StudentHomeView = React.createClass({
-  mixins: [ReactMeteorData],
+  mixins: [ReactMeteorData, Screen],
 
   // Static data
 
@@ -99,7 +101,7 @@ StudentHomeView = React.createClass({
     const { data: { ready, user } } = this;
 
     return (
-      <div>
+      <div style={{ backgroundColor: blue700, height: innerHeight -64 }}>
         <Layout.Bar title='Início' />
         <div>
           {!_.every(ready) ? <LinearProgress /> :
