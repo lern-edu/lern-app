@@ -1,7 +1,7 @@
 import React from 'react';
 import { LinearProgress } from 'material-ui';
 
-TeacherSettingsClasses = React.createClass({
+const TeacherSettingsClasses = React.createClass({
   /* Render
   */
 
@@ -9,7 +9,7 @@ TeacherSettingsClasses = React.createClass({
     const { ready, courses } = this.props;
 
     return (
-      <div className='ui basic segment'>
+      <div className='ui basic segment' style={{ marginTop: '0' }}>
         {!ready.courses ? <LinearProgress /> : !courses.length ? (
           <Layout.NotFound path={FlowRouter.path('TeacherHome')}
             message='Você não está em nenhum curso'
@@ -23,3 +23,4 @@ TeacherSettingsClasses = React.createClass({
       </div>
   )},
 });
+export default TeacherSettingsClasses;

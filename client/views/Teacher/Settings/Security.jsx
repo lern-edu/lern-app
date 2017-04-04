@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, TextField, RaisedButton } from 'material-ui';
 
-TeacherSettingsSecurity = React.createClass({
+const TeacherSettingsSecurity = React.createClass({
   /* Lifecycle
   */
 
@@ -37,7 +37,7 @@ TeacherSettingsSecurity = React.createClass({
     const { target, current } = this.state;
 
     return (
-      <Paper className='ui basic center aligned segment'>
+      <Paper className='ui basic center aligned segment' style={{ marginTop: '0' }}>
         <div className='ui header'>Senha</div>
         <div>
           <TextField
@@ -69,3 +69,4 @@ TeacherSettingsSecurity = React.createClass({
     );
   },
 });
+export default TeacherSettingsSecurity;

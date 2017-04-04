@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, SelectField, MenuItem } from 'material-ui';
 
-TeacherSettingsProfile = React.createClass({
+const TeacherSettingsProfile = React.createClass({
 
   /* Get Context
   */
@@ -20,7 +20,7 @@ TeacherSettingsProfile = React.createClass({
   render() {
     const { context: { user: { profile: { school } } }, props: { schools } } = this;
     return (
-      <Paper className='ui basic segment'>
+      <Paper className='ui basic segment' style={{ marginTop: '0' }}>
         <SelectField
           value={school}
           onChange={this.handleChange}
@@ -32,3 +32,4 @@ TeacherSettingsProfile = React.createClass({
     );
   },
 });
+export default TeacherSettingsProfile;

@@ -1,30 +1,13 @@
 import React from 'react';
 import { LinearProgress } from 'material-ui';
 
-TeacherSettingsView = React.createClass({
-  mixins: [ReactMeteorData],
+//Views
+import TeacherSettingsTabs from './Tabs.jsx';
+import TeacherSettingsClasses from './Classes.jsx';
+import TeacherSettingsProfile from './Profile.jsx';
+import TeacherSettingsSecurity from './Security.jsx';
 
-  /* Reactive Data Fetching
-  */
-
-  getMeteorData() {
-    const handles = {
-      schools: Meteor.subscribe('UserSchools'),
-      courses: Meteor.subscribe('TeacherCourses', {},
-        { subjects: true, tags: true }),
-    };
-
-    const userId = Meteor.userId();
-
-    return {
-      ready: _.mapValues(handles, h => h.ready()),
-      schools: Fetch.General.users({ roles: 'school' }).fetch(),
-      ready: _.mapValues(handles, h => h.ready()),
-      subjects: Fetch.Public().subjects().fetch(),
-      tags: Fetch.Public().tags().fetch(),
-      courses: Fetch.Teacher(userId).courses().fetch(),
-    };
-  },
+const TeacherSettingsView = React.createClass({
 
   /* Get Context
   */
@@ -37,7 +20,7 @@ TeacherSettingsView = React.createClass({
   */
 
   render() {
-    const { ready } = this.data;
+    const ready = this.data;
     const { tab='profile' } = this.props;
     const { user } = this.context;
     return (
@@ -62,3 +45,4 @@ TeacherSettingsView = React.createClass({
   },
 
 });
+export default TeacherSettingsView;

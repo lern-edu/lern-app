@@ -1,11 +1,11 @@
 import React from 'react';
 import { Tabs, Tab } from 'material-ui';
 
-TeacherSettingsTabs = React.createClass({
+const TeacherSettingsTabs = React.createClass({
   tabs: {
     profile: 'Perfil',
     security: 'Segurança',
-    classes: 'Turmas'
+    classes: 'Turmas',
   },
 
   /* Handlers
@@ -29,3 +29,4 @@ TeacherSettingsTabs = React.createClass({
     );
   },
 });
+export default TeacherSettingsTabs;

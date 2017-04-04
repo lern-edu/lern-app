@@ -19,7 +19,7 @@ teacherRoutes.route('/ajustes', {
   name: 'TeacherSettings',
   action(params, query) {
     render({
-      main: <TeacherSettingsView {...query}/>,
+      main: <TeacherSettings {...query}/>,
     });
   },
 });
