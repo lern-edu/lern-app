@@ -43,10 +43,10 @@ TeacherSettingsView = React.createClass({
     return (
       <div>
 
-        <Layout.Bar title='Ajustes' />
+        <Layout.Bar title='Ajustes' zDepth= {0} />
 
         <div className='ui centered grid'>
-          <div className='ten wide computer sixteen wide tablet column'>
+          <div className='sixteen wide column'>
             <TeacherSettingsTabs tab={tab}/>
 
             {!_.every(ready) ? <LinearProgress /> : {
