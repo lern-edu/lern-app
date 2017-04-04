@@ -32,7 +32,7 @@ const StudentCourseShowView = React.createClass({
 
         <Layout.Bar
           title={_.get(course, 'name')}
-          crumbs={[{ label: 'Disciplinas', path: 'StudentCourses' }]} />
+          crumbs={[{ label: 'Disciplinas', path: 'StudentCourses' }]} zDepth= {0}/>
 
         <StudentCourseShowMenu active={active} {...this.props} />
 
