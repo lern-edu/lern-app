@@ -1,4 +1,8 @@
-  body, html {
+.ui.grid {
+  margin-left: 0;
+  margin-right: 0;
+}
+body, html {
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-touch-callout: none;
