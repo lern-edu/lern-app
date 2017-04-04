@@ -15,7 +15,7 @@ const TeacherCoursesGalleryCard = React.createClass({
           <CardTitle
             title={course.name} />
           <CardText>
-            <List subheader='Matérias'>
+            <List>
               {_.map(course.subjects, s =>
                 <ListItem
                   key={s}
@@ -23,7 +23,7 @@ const TeacherCoursesGalleryCard = React.createClass({
                   primaryText={_.get(_.find(subjects, { _id: s }), 'name')} />)}
             </List>
             <Divider />
-            <List subheader='Grade de horários'>
+            <List>
               {_.map(course.schedule, ({ day, endDate, startDate }, i) =>
                 <ListItem
                   key={`${day}-${i}`}
@@ -33,8 +33,7 @@ const TeacherCoursesGalleryCard = React.createClass({
                     moment(startDate).format('LT')} até ${
                     moment(endDate).format('LT')}`} />)}
             </List>
-            <Divider />
-            <List subheader={`${course.students.length} alunos`} />
+            <List/>
           </CardText>
           <CardActions>
             <FlatButton
