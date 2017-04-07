@@ -10,7 +10,16 @@ const SchoolTestHeader = React.createClass({
           <div className='content'>
             {test.name}
             <div className='sub header'>
-              {`${_.map(subjects, 'name').join(' - ')}`}
+              <b>Matérias: </b>
+              {
+                _.map(
+                  test.get('subjects'),
+                  _id => _.get(
+                    _.find(subjects, { _id }),
+                    'name'
+                  ),
+                ).join(' - ')
+              }
             </div>
           </div>
         </div>
