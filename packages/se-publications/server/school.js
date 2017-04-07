@@ -17,3 +17,59 @@ Helpers.Publications({ type: 'plain', prefix, protect }, {
     return Fetch.School(userId).courses(selector);
   },
 });
+
+Helpers.Publications({ type: 'composite', prefix, protect }, {
+  Tests({ testId=null }, { questions, subjects, tags, course }={}) {
+    return {
+      find() {
+        const { userId } = this;
+        const selector = testId || {
+          author: userId,
+        };
+
+        return Fetch.General.tests(selector);
+      },
+
+      children: [
+        {
+          find(tests) {
+            return questions && tests.findQuestions();
+          },
+
+          children: [
+            {
+              find(question) {
+                return question.findAllImages();
+              },
+            },
+          ],
+        },
+
+        {
+          find(tests) {
+            return subjects && tests.findSubjects();
+          },
+        },
+
+        {
+          find(tests) {
+            return tags && tests.findTags();
+          },
+        },
+
+        {
+          find(tests) {
+            return course && tests.findCourse();
+          },
+        },
+
+        {
+          find(tests) {
+            return tests.findDocuments();
+          },
+        },
+      ],
+
+    };
+  },
+});
