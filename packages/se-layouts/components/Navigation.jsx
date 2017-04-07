@@ -48,6 +48,10 @@ const Navigation = React.createClass({
             label: 'Alunos',
             icon: 'school',
           },
+          SchoolTests: {
+            label: 'Testes',
+            icon: 'import_contacts',
+          },
         },
         teacher: {
           TeacherHome: {
@@ -208,11 +212,11 @@ const Navigation = React.createClass({
                 href={FlowRouter.path(_route)}
               />
             )}
-            {roles.length <= 1 ? undefined : <ListItem
+            {roles && roles.length <= 1 ? undefined : <ListItem
               primaryText='Ver como'
               disabled={true}
               leftIcon={<FontIcon className='material-icons' >remove_red_eye</FontIcon>}
-              nestedItems={_.map(roles, r => <ListItem
+              nestedItems={_.map(_.uniq(roles), r => <ListItem
                 key={r}
                 primaryText={i18n.__(`UserRoles.${r}`)}
                 onClick={() => this.handleRoleChange(r)} />)
