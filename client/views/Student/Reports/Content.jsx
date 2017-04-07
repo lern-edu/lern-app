@@ -39,7 +39,7 @@ StudentReportsContent = React.createClass({
         _.reduce(truth, (mem, ans) => {
           const oldAcc = _.last(mem) * _.get(mem, 'length') || 0;
           const newAcc = oldAcc + ans.grade * 100;
-          console.log({ new: newAcc / (_.get(mem, 'length') || 0 + 1) });
+          // console.log({ new: newAcc / (_.get(mem, 'length') || 0 + 1) });
           mem.push(newAcc / (_.get(mem, 'length') || 0 + 1));
           return mem;
         }, []),

@@ -1,7 +1,7 @@
 import React from 'react';
 import { List, ListItem, Paper } from 'material-ui';
 
-const AdminTestsList = React.createClass({
+const SchoolTestsList = React.createClass({
   render() {
     const { tests } = this.props;
 
@@ -9,7 +9,7 @@ const AdminTestsList = React.createClass({
       <Paper>
         <List>
          {_.map(tests, test =>
-           <ListItem key={test._id} href={FlowRouter.path('AdminTest', { testId: test._id })}>
+           <ListItem key={test._id} href={FlowRouter.path('SchoolTest', { testId: test._id })}>
             {test.name}
            </ListItem>
          )}
@@ -19,4 +19,4 @@ const AdminTestsList = React.createClass({
   },
 });
 
-export default AdminTestsList;
+export default SchoolTestsList;

@@ -3,6 +3,7 @@ const [prefix, protect] = ['School', 'school'];
 
 Helpers.Methods({ prefix, protect }, {
   CourseSave: Helpers.DefaultSave,
+  TestSave: Helpers.DefaultSave,
 
   CourseCreate(doc) {
     doc.generateAlias();
