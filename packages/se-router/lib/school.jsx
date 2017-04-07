@@ -50,3 +50,30 @@ schoolRoutes.route('/cursos/:courseId', {
     });
   },
 });
+
+schoolRoutes.route('/provas', {
+  name: 'SchoolTests',
+  action() {
+    render({
+      main: <SchoolTestsView />,
+    });
+  },
+});
+
+schoolRoutes.route('/provas/novo', {
+  name: 'SchoolTestCreate',
+  action(params, query) {
+    render({
+      main: <SchoolTestCreateView {...query} />,
+    });
+  },
+});
+
+schoolRoutes.route('/provas/:testId', {
+  name: 'SchoolTest',
+  action(params) {
+    render({
+      main: <SchoolTestView {...params} />,
+    });
+  },
+});
