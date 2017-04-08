@@ -161,7 +161,7 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
   },
 
   Tests(
-      { subjectsIds, tagsIds, type, onlyMine, course=null, testsIds }={},
+      { subjectsIds, tagsIds, type, onlyMine, course, testsIds }={},
       { limit=1, skip=0 },
       { tags, subjects }={}
   ) {
@@ -173,7 +173,7 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
 
         return Fetch.General.tests({
             type,
-            course,
+            $or: [{ course: null }, { course }],
             tags: tagsIds,
             subjects: subjectsIds,
             author: onlyMine ? _.get(this, 'userId') : undefined,
