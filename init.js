@@ -109,5 +109,34 @@ Meteor.startup(() => {
       Meteor.users.update(userId, { $set: { roles: ['admin'] } });
       Meteor.users.update(userId, { $set: { profile: { name: 'admin' } } });
     };
+
+    if (!Subjects.findOne('J6XyZxJMwyXo8Sw2E')) {
+      const subject = new Subjects.Schema({
+        _id: 'J6XyZxJMwyXo8Sw2E',
+        name: 'Sem matéria',
+      });
+      subject.save();
+      const tag = new Tags.Schema({
+        _id: 'mHPjPqjnnr9Npqupf',
+        text: 'Sem tag',
+        subject: 'J6XyZxJMwyXo8Sw2E',
+      });
+      tag.save();
+    };
+
+    if (!Subjects.findOne('jZbgy4bBSjTbKFZK9')) {
+      const subject = new Subjects.Schema({
+        _id: 'jZbgy4bBSjTbKFZK9',
+        name: 'Validação',
+      });
+      subject.save();
+      const tag = new Tags.Schema({
+        _id: 'CQntsMn2uJ35qtCmD',
+        text: 'Validação nível 1',
+        subject: 'jZbgy4bBSjTbKFZK9',
+      });
+      tag.save();
+    };
+
   };
 });
