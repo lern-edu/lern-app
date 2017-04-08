@@ -19,7 +19,7 @@ const Navigation = React.createClass({
             icon: null,
           },
           AdminTests: {
-            label: 'Provas',
+            label: 'Testes',
             icon: null,
           },
           AdminSubjects: {

@@ -6,38 +6,30 @@ import { LinearProgress } from 'material-ui';
 import AdminTestsList from './List.jsx';
 import AdminTestsToolbar from './Toolbar.jsx';
 
-AdminTestsView = React.createClass({
-  mixins: [ReactMeteorData],
-
-  getMeteorData() {
-    const userId = Meteor.userId();
-
-    const handles = {
-      tests: Meteor.subscribe('AdminTests', userId),
-    };
-
-    return {
-      ready: _.mapValues(handles, h => h.ready()),
-      tests: Fetch.General.tests().fetch(),
-    };
-  },
+const AdminTestsView = React.createClass({
 
   // render
 
   render() {
-    const { ready } = this.data;
+    const { ready } = this.props;
 
     return (
       <div className='ui container' >
 
-        <Layout.Bar title='Provas' />
+        <Layout.Bar title='Testes' />
 
-        {!_.every(ready) ? <LinearProgress/> : [
-          <AdminTestsToolbar key='toolbar' {...this.data} />,
-          <AdminTestsList key='list' {...this.data} />,
-        ]}
+        {
+          !_.every(ready)
+          ? <LinearProgress/>
+          : [
+            <AdminTestsToolbar key='toolbar' {...this.props} />,
+            <AdminTestsList key='list' {...this.props} />,
+          ]
+        }
 
       </div>
     );
   },
 });
+
+export default AdminTestsView;

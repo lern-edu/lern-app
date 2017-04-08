@@ -55,7 +55,16 @@ schoolRoutes.route('/provas', {
   name: 'SchoolTests',
   action() {
     render({
-      main: <SchoolTestsView />,
+      main: <SchoolTests />,
+    });
+  },
+});
+
+schoolRoutes.route('/provas/novo/:testId', {
+  name: 'SchoolTestCreateWithBase',
+  action(params, query) {
+    render({
+      main: <SchoolTestCreate {...params} {...query} />,
     });
   },
 });
@@ -64,7 +73,7 @@ schoolRoutes.route('/provas/novo', {
   name: 'SchoolTestCreate',
   action(params, query) {
     render({
-      main: <SchoolTestCreateView {...query} />,
+      main: <SchoolTestCreate {...query} />,
     });
   },
 });

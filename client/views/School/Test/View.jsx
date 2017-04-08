@@ -53,8 +53,9 @@ SchoolTestView = React.createClass({
             <SchoolTestHeader key='header' {...this.data} />,
             <Divider key='d0'/>,
             <SchoolTestForm key='question' doc={test} subjects={subjects} />,
-            <Divider key='d1'/>,
-            <SchoolTestActions key='actions' {...this.data} />,
+
+            // <Divider key='d1'/>,
+            // <SchoolTestActions key='actions' {...this.data} />,
           ]}
         </Paper>
 
