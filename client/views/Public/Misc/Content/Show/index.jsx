@@ -5,6 +5,7 @@ import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 // Views
 import PublicContentShowQuestion from './QuestionContainer.jsx';
+import PublicContentShowTest from './TestContainer.jsx';
 import PublicContentShowImage from './ImageContainer.jsx';
 import PublicContentRichText from './../RichText.jsx';
 
@@ -43,15 +44,20 @@ PublicContentShow = React.createClass({
             readOnly={true}
           />,
           link: <a>{this.doc.get('link')}</a>,
-          title: <h4>{this.doc.get('title')}</h4>,
           image: <PublicContentShowImage
             form={this}
-            imageId={this.doc.get('image')} />,
+            imageId={this.doc.get('image')}
+          />,
           question: <PublicContentShowQuestion
             score={this.doc.get('score')}
             form={this}
             questionId={this.doc.get('question')}
-            scored={scored} />,
+            scored={scored}
+          />,
+          test: <PublicContentShowTest
+            form={this}
+            testId={this.doc.get('test')}
+          />,
         }, this.doc.get('type'))}
 
         <br/>

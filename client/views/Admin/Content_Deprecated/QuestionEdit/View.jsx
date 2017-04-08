@@ -61,7 +61,6 @@ AdminQuestionEditView = React.createClass({
 
   add() {
     const { query: { skip=0 } } = this.props;
-    console.log(skip);
     FlowRouter.setQueryParams({ skip: skip + 1 });
   },
 

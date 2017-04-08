@@ -37,7 +37,9 @@ const SchoolCourseForm = React.createClass({
                 field='info'
                 schema={Courses.ContentSchema}
                 contentTypes={ContentTypes}
-                form={form} />
+                form={form}
+                course={form.doc.get('_id')}
+              />
             </div>
           </div>
 
@@ -49,7 +51,8 @@ const SchoolCourseForm = React.createClass({
                   field='info'
                   form={form}
                   index={i}
-                  doc={s} />
+                  doc={s}
+                />
             </div>)}
           </div>
 

@@ -24,7 +24,6 @@ TeacherTestGradeOverview = React.createClass({
     const { attempt, test } = this.props;
     const score = this.getAttemptScore();
     const grade = test.scores ? score / _.sum(test.scores) : this.getAttemptGrade();
-    console.log(grade);
     Meteor.call('TeacherAttemptGrade', attempt._id, grade, err => {
       if (err) console.log(err);
       else {

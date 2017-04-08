@@ -120,7 +120,7 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
 
   Questions({ subjectId, text, tagsIds, type, onlyMine, questionsIds, notQuestions }={},
       { limit=1, skip=0 },
-      { tags, subject }) {
+      { tags, subject }={}) {
     return {
       find() {
         const selector = {};
@@ -150,6 +150,40 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
         }, {
           find(question) {
             return subject && question && question.findSubject();
+          },
+        }, {
+          find(question) {
+            return tags && question && question.findTags();
+          },
+        },
+      ],
+    };
+  },
+
+  Tests(
+      { subjectsIds, tagsIds, type, onlyMine, course, testsIds }={},
+      { limit=1, skip=0 },
+      { tags, subjects }={}
+  ) {
+    return {
+      find() {
+        const options = { limit, skip, sort: { createdAt: 1 } };
+
+        if (testsIds) return Fetch.General.tests(testsIds);
+
+        return Fetch.General.tests({
+            type,
+            $or: [{ course: null }, { course }],
+            tags: tagsIds,
+            subjects: subjectsIds,
+            author: onlyMine ? _.get(this, 'userId') : undefined,
+          }, options);
+      },
+
+      children: [
+        {
+          find(question) {
+            return subjects && question && question.findSubjects();
           },
         }, {
           find(question) {

@@ -14,12 +14,6 @@ const AdminTestFormApplicationView = React.createClass({
     this.props.form.setState({ noCourse: false });
   },
 
-  handleNoCourse(event, noCourse) {
-    const { form } = this.props;
-    form.setState({ noCourse });
-    form.defaultHandler({ course: null }, { doc: true });
-  },
-
   handleScores(event, scored) {
     const { form } = this.props;
     form.setState({ scored });
@@ -46,7 +40,7 @@ const AdminTestFormApplicationView = React.createClass({
   render() {
     const { form, done, errors, courses } = this.props;
     const { noCourse, scored } = form.state;
-    const { endDate, startDate } = form.doc;
+    const { endDate, startDate, course } = form.doc;
 
     const endDateMin = _.clone(startDate) || new Date();
     if (startDate) endDateMin.setHours(startDate.getHours() + 1);
@@ -56,30 +50,32 @@ const AdminTestFormApplicationView = React.createClass({
         <div className='ui grid'>
 
           <div className='row'>
-            <AutoComplete
-              onNewRequest={this.handleCourse}
-              floatingLabelText='Curso'
-              filter={AutoComplete.fuzzyFilter}
-              menuStyle={{ width: '500px' }}
-              targetOrigin={{ vertical: 'top', horizontal: 'left' }}
-              dataSource={_.map(courses, ({ _id, name, alias }) =>
-                  _.zipObject(['text', 'value'], [
-                    name,
-                    <MenuItem
-                      key={_id}
-                      primaryText={name}
-                      secondaryText={alias}
-                      innerDivStyle={{ width: '500px' }} />,
-                  ])
-                )} />
+            {
+              course
+              ? <p><b>Curso selecionado: </b>{_.get(_.find(courses, { _id: course }), 'name')}</p>
+              : undefined
+            }
           </div>
 
           <div className='row'>
-            <Toggle
-              toggled={noCourse}
-              label='Decidir mais tarde?'
-              onToggle={this.handleNoCourse}
-              style={{ marginBottom: 16 }} />
+            <AutoComplete
+                onNewRequest={this.handleCourse}
+                floatingLabelText='Curso'
+                filter={AutoComplete.fuzzyFilter}
+                menuStyle={{ width: '500px' }}
+                targetOrigin={{ vertical: 'top', horizontal: 'left' }}
+                dataSource={_.map(courses, ({ _id, name, alias }) =>
+                    _.zipObject(['text', 'value'], [
+                      name,
+                      <MenuItem
+                        key={_id}
+                        primaryText={name}
+                        secondaryText={alias}
+                        innerDivStyle={{ width: '500px' }} />,
+                    ])
+                  )
+                }
+              />
           </div>
 
           <div className='row'>

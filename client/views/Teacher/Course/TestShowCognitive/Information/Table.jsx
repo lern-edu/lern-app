@@ -41,7 +41,6 @@ TeacherTestShowCognitiveInfoTable = React.createClass({
 
       // calc performance
       const groupedQuestions = _.groupBy(questions, ({ tags }) => _.head(tags));
-      console.log(groupedQuestions);
       const avaregeQuestions = _.map(tagsIds, t =>
         _.mean(
           _.map(
@@ -56,7 +55,6 @@ TeacherTestShowCognitiveInfoTable = React.createClass({
         )
       );
       const mean = _.round(_.mean(avaregeQuestions), 2);
-      console.log(avaregeQuestions);
       options = {
         grade: [_.isEmpty(attempt) ? 'Sem nota' : !_.isNaN(mean) ? mean : 'Incompleto'],
         questions: _.map(test.questions, (question, index) => {
@@ -76,7 +74,6 @@ TeacherTestShowCognitiveInfoTable = React.createClass({
 
   render() {
     const table = this.createTable();
-    console.log(table);
     return (
       <Table>
         <TableHeader>

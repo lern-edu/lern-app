@@ -45,4 +45,17 @@ Helpers.Methods({ prefix, protect }, {
 
     return Questions.find(_.isEmpty(selector) ? null : selector).count();
   },
+
+  TestsCount({ subjectsIds, tagsIds, type, onlyMine, course }={}) {
+
+    this.unblock();
+
+    return Fetch.General.tests({
+        type,
+        $or: [{ course: null }, { course }],
+        tags: tagsIds,
+        subjects: subjectsIds,
+        author: onlyMine ? _.get(this, 'userId') : undefined,
+      }).count();
+  },
 });

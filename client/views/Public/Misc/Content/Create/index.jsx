@@ -3,6 +3,7 @@ import { FlatButton, SelectField, MenuItem, TextField, Paper } from 'material-ui
 import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 
 import PublicContentCreateQuestion from './Question.jsx';
+import PublicContentCreateTest from './Test/Container.jsx';
 import PublicContentCreateUpload from './Upload.jsx';
 import PublicContentRichText from './../RichText.jsx';
 
@@ -85,14 +86,6 @@ PublicContentCreate = React.createClass({
                   editorState={editorState}
                 />
               </Paper>,
-            title:
-              <TextField
-                name='title'
-                value={title}
-                floatingLabelText='Título'
-                onChange={this.handleTextChange}
-                errorText={_.get(errors, 'title')}
-              />,
             image:
               <PublicContentCreateUpload
                 form={this}
@@ -111,6 +104,11 @@ PublicContentCreate = React.createClass({
                 scored={this.props.scored}
                 questionsSelected={this.props.questionsSelected}
                 subjects={this.props.subjects}
+              />,
+            test:
+              <PublicContentCreateTest
+                form={this}
+                course={this.props.course}
               />,
           }, type)}
         </div>
