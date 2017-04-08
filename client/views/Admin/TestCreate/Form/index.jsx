@@ -16,7 +16,7 @@ const AdminTestCreateForm = React.createClass({
 
   handleSubmit() {
     this.setState({ waitingCallback: true });
-    form.defaultSubmit();
+    this.defaultSubmit();
   },
 
   handleSubmitError() {
