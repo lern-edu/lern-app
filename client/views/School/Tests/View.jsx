@@ -6,38 +6,30 @@ import { LinearProgress } from 'material-ui';
 import SchoolTestsList from './List.jsx';
 import SchoolTestsToolbar from './Toolbar.jsx';
 
-SchoolTestsView = React.createClass({
-  mixins: [ReactMeteorData],
-
-  getMeteorData() {
-    const userId = Meteor.userId();
-
-    const handles = {
-      tests: Meteor.subscribe('SchoolTests', userId),
-    };
-
-    return {
-      ready: _.mapValues(handles, h => h.ready()),
-      tests: Fetch.General.tests().fetch(),
-    };
-  },
+const SchoolTestsView = React.createClass({
 
   // render
 
   render() {
-    const { ready } = this.data;
+    const { ready } = this.props;
 
     return (
       <div className='ui container' >
 
-        <Layout.Bar title='Provas' />
+        <Layout.Bar title='Testes' />
 
-        {!_.every(ready) ? <LinearProgress/> : [
-          <SchoolTestsToolbar key='toolbar' {...this.data} />,
-          <SchoolTestsList key='list' {...this.data} />,
-        ]}
+        {
+          !_.every(ready)
+          ? <LinearProgress/>
+          : [
+            <SchoolTestsToolbar key='toolbar' {...this.props} />,
+            <SchoolTestsList key='list' {...this.props} />,
+          ]
+        }
 
       </div>
     );
   },
 });
+
+export default SchoolTestsView;

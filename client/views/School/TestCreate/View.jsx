@@ -1,27 +1,46 @@
 // Lib
 import React from 'react';
+import { LinearProgress } from 'material-ui';
 
 // View
 import SchoolTestCreateForm from './Form/index.jsx';
 
-const View = React.createClass({
+const SchoolTestCreateView = React.createClass({
 
   /* Render
   */
 
   render() {
+    const { test, ready } = this.props;
+
     return (
       <div className='ui container'>
 
         <Layout.Bar
           title='Nova Prova'
-          crumbs={[{ label: 'Provas', path: 'SchoolTests' }]} />
+          crumbs={
+            [{ label: 'Provas', path: 'SchoolTests' }]
+          }
+        />
 
-        <SchoolTestCreateForm {...this.props} />
+        {
+          !_.every(ready)
+          ? <LinearProgress />
+          : <SchoolTestCreateForm
+            {..._.omit(this.props, ['test'])}
+            doc={
+              test
+              ? new Tests.Schema(
+                _.omit(test, ['_id', 'createdAt', 'updatedAt', 'author'])
+              )
+              : false
+            }
+          />
+        }
 
       </div>
     );
   },
 });
 
-export default View;
+export default SchoolTestCreateView;
