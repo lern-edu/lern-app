@@ -92,6 +92,7 @@
     contentTypes={PageContentTypes}
     updateQuestionsSelected={this.props.updateQuestionsSelected}
     scored={scored}
+    course={courseId}
     questionsSelected={actualQuestionsSelected}
     form={this}
     subjects={subjects} />
@@ -137,6 +138,9 @@
 - `form`
   - **Type**: `View`
   - **Description**: Parent view who is controlling Document data
+- `form`
+  - **Type**: `String`
+  - **Description**: search tests from this course
 - `subjects`
   - **Type**: `[Documents]`
   - **Description**: Fetched subjects to display on query to find questions

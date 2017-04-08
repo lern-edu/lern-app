@@ -108,6 +108,7 @@ PublicContentCreate = React.createClass({
             test:
               <PublicContentCreateTest
                 form={this}
+                course={this.props.course}
               />,
           }, type)}
         </div>

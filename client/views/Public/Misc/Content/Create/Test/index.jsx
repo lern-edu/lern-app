@@ -26,8 +26,13 @@ const PublicContentCreateTestView = React.createClass({
     };
   },
 
+  componentWillMount() {
+    this.handleSearch();
+  },
+
   getTestsCount(query) {
-    Meteor.call('PublicTestsCount', _.assign(query), (err, testsCount) => {
+    const { course } = this.props;
+    Meteor.call('PublicTestsCount', _.assign(query, { course }), (err, testsCount) => {
       err ? snack('Erro ao buscar testes') : this.setState({ testsCount });
     });
   },
@@ -38,7 +43,7 @@ const PublicContentCreateTestView = React.createClass({
     this.setState({
       subjectsIds,
       subjectText,
-      tagsIds: null,
+      tagsIds: undefined,
       tagText: '',
     });
   },
@@ -60,6 +65,7 @@ const PublicContentCreateTestView = React.createClass({
       testsCount: 0,
       query: {},
     });
+    this.handleSearch();
   },
 
   handleTypeChange(event, index, type) {
@@ -87,7 +93,7 @@ const PublicContentCreateTestView = React.createClass({
   // render
 
   render() {
-    const { form, subjects, open, tags, handleClose } = this.props;
+    const { form, subjects, open, tags, handleClose, course } = this.props;
     const { subjectsIds, tagsIds, type, onlyMine, tagText, subjectText, skip, } = this.state;
     return (
       <Paper>
@@ -169,7 +175,7 @@ const PublicContentCreateTestView = React.createClass({
                   parent={this}
                   skip={skip}
                   subjects={subjects}
-                  query={this.state.query}
+                  query={_.assign(this.state.query, { course })}
                 />
               </div>
             </div>

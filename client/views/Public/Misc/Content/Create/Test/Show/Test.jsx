@@ -53,14 +53,6 @@ const PublicContentCreateTestShowQuestion = React.createClass({
             showExpandableButton={true}
           />
 
-          <CardActions>
-            <FlatButton
-              primary={true}
-              label='Adicionar'
-              onTouchTap={this.handleTestAdd}
-            />
-          </CardActions>
-
           <CardText expandable={true}>
             {_.map(test.info, (c, i) => [
               <div key={i} >
@@ -75,6 +67,14 @@ const PublicContentCreateTestShowQuestion = React.createClass({
               </div>, <br/>,
             ])}
           </CardText>
+
+          <CardActions>
+            <FlatButton
+              primary={true}
+              label='Adicionar'
+              onTouchTap={this.handleTestAdd}
+            />
+          </CardActions>
 
         </Card>
       </div>
