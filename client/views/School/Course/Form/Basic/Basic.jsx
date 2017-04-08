@@ -51,7 +51,8 @@ const SchoolCourseForm = React.createClass({
                   field='info'
                   form={form}
                   index={i}
-                  doc={s} />
+                  doc={s}
+                />
             </div>)}
           </div>
 
