@@ -131,7 +131,16 @@ adminRoutes.route('/provas', {
   name: 'AdminTests',
   action() {
     render({
-      main: <AdminTestsView />,
+      main: <AdminTests />,
+    });
+  },
+});
+
+adminRoutes.route('/provas/novo/:testId', {
+  name: 'AdminTestCreateWithBase',
+  action(params, query) {
+    render({
+      main: <AdminTestCreate {...params} {...query} />,
     });
   },
 });
@@ -140,7 +149,7 @@ adminRoutes.route('/provas/novo', {
   name: 'AdminTestCreate',
   action(params, query) {
     render({
-      main: <AdminTestCreateView {...query} />,
+      main: <AdminTestCreate {...query} />,
     });
   },
 });
