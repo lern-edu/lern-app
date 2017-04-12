@@ -27,9 +27,9 @@ const StudentTestAttemptGlobalContentQuestion = React.createClass({
 
   handleNumberAnswer(event, value) {
     const { question: { range } } = this.props;
-    const answer = parseInt(value);
+    const answer = _.toNumber(value);
     if (!value || _.inRange(answer, range.min, range.max) || value == range.max) {
-      this.setState({ answer: !value ? null : answer });
+      this.setState({ answer: value });
       this.handleUpdateAnswer(!value ? null : _.toNumber(answer));
     } else return;
   },
@@ -43,7 +43,7 @@ const StudentTestAttemptGlobalContentQuestion = React.createClass({
     const { answer } = this.props;
     Meteor.call('StudentAnswerUpdate', answer._id, value, err => {
       if (err) {
-        console.log(err);
+        console.error(err);
         snack(':(');
 
         // FlowRouter.go('StudentHome');
