@@ -36,7 +36,7 @@ const SchoolTestCreateForm = React.createClass({
   */
 
   getInitialState() {
-    return { index: 0, allTags: false, noCourse: false, scored: false, waitingCallback: false };
+    return { index: 4, allTags: false, noCourse: false, scored: false, waitingCallback: false };
   },
 
   componentDidMount() {
