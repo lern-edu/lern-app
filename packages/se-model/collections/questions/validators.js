@@ -9,7 +9,8 @@ Astro.createValidator({
         _.inRange(value.length, 4, 1024)
       );
     else if (type === 'number')
-      return range.min <= value && value <= range.max && range.min < range.max;
+      return !(_.isNull(range.min) || _.isNull(range.max))
+        && range.min <= value && value <= range.max && range.min < range.max;
     else if (type === 'closed')
       return (
         !_.isNull(value) &&
@@ -41,7 +42,9 @@ Astro.createValidator({
   validate(range) {
     const { type } = this;
     if (type === 'number')
-      return range && (!range.max || range.min < range.max);
+      return range
+        && !(_.isNull(range.min) || _.isNull(range.max))
+        && (!range.max || range.min < range.max);
     else return true;
   },
 });

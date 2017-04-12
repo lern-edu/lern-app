@@ -19,7 +19,8 @@ const SchoolHomeOverview = React.createClass({
               <FlatButton
                 secondary={true}
                 href={FlowRouter.path('SchoolUsers')}
-                label='Ir'/>
+                label='Entrar'
+              />
             </CardActions>
           </Card>
           <Card className='six wide computer sixteen wide mobile column'style={{ margin: '20px' }}>
@@ -28,9 +29,20 @@ const SchoolHomeOverview = React.createClass({
               <FlatButton
                 secondary={true}
                 href={FlowRouter.path('SchoolCourses')}
-                label='Ir'/>
+                label='Entrar'
+              />
             </CardActions>
           </Card>
+          <Card className='six wide computer sixteen wide mobile column'style={{ margin: '20px' }}>
+            <CardTitle title="Gerenciar Testes"/>
+            <CardActions>
+              <FlatButton
+                secondary={true}
+                href={FlowRouter.path('SchoolTests')}
+                label='Entrar'
+              />
+            </CardActions>
+        </Card>
         </div>
       </div>
     );

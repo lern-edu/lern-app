@@ -17,9 +17,9 @@ const SchoolTestCreateView = React.createClass({
       <div className='ui container'>
 
         <Layout.Bar
-          title='Nova Prova'
+          title='Novo Teste'
           crumbs={
-            [{ label: 'Provas', path: 'SchoolTests' }]
+            [{ label: 'Testes', path: 'SchoolTests' }]
           }
         />
 

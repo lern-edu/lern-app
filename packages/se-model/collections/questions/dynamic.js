@@ -35,6 +35,11 @@ Questions.Schema.extend({
       ' ') || '';
 
       this.set('text', _.join([contentText, optionsText], ' '));
+
+      if (this.get('range.min'))
+        this.set('range.min', _.toNumber(this.get('range.min')));
+      if (this.get('range.max'))
+        this.set('range.max', _.toNumber(this.get('range.max')));
     },
   },
 });

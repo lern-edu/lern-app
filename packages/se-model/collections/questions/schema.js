@@ -43,12 +43,12 @@ Questions.RangeSchema = Astro.Class({
   name: 'QuestionRange',
   fields: {
     min: {
-      type: 'number',
+      validator: Validators.decimal(),
       immutable: true,
       optional: true,
     },
     max: {
-      type: 'number',
+      validator: Validators.decimal(),
       immutable: true,
       optional: true,
     },

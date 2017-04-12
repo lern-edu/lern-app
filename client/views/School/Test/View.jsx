@@ -46,7 +46,7 @@ SchoolTestView = React.createClass({
 
         <Layout.Bar
           title={_.get(test, 'name')}
-          crumbs={[{ label: 'Provas', path: 'SchoolTests' }]} />
+          crumbs={[{ label: 'Testes', path: 'SchoolTests' }]} />
 
         <Paper>
           {!_.every(ready) ? <LinearProgress/> : [

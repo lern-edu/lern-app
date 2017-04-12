@@ -46,7 +46,7 @@ AdminTestView = React.createClass({
 
         <Layout.Bar
           title={_.get(test, 'name')}
-          crumbs={[{ label: 'Provas', path: 'AdminTests' }]} />
+          crumbs={[{ label: 'Testes', path: 'AdminTests' }]} />
 
         <Paper>
           {!_.every(ready) ? <LinearProgress/> : [

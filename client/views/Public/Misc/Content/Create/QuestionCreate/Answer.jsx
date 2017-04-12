@@ -38,9 +38,8 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
 
   handleRangeChange({ currentTarget }, value) {
     const field = currentTarget.getAttribute('name');
-    const range = parseInt(value);
-    if (!_.isNaN(range) || value == '')
-      this.props.form.defaultHandler({ [field]: value == '' ? value : range }, { doc: true });
+    if (Match.Regex(value).decimal() || value == '')
+      this.props.form.defaultHandler({ [field]: value }, { doc: true });
     else return;
   },
 
