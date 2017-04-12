@@ -5,6 +5,12 @@ import SchoolUsersToolbar from './Toolbar.jsx';
 
 SchoolUsers = React.createClass({
 
+  // Lifecicle
+
+  getInitialState() {
+    return { name: '' };
+  },
+
   /* Render
   */
 
@@ -14,8 +20,8 @@ SchoolUsers = React.createClass({
     return (
       <div className='ui container'>
         <Layout.Bar title='Alunos' />
-        <SchoolUsersToolbar key='toolbar'/>
-        <SchoolUsersList key='list'/>
+        <SchoolUsersToolbar parent={this} />
+        <SchoolUsersList filter={this.state} />
       </div>
     );
   },
