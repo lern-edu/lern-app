@@ -71,7 +71,9 @@ Helpers.Methods({ prefix, protect }, {
   SetTeacher(userId) {
     const user = _.first(Fetch.General.users(userId).fetch());
 
-    user.push('roles', 'teacher');
+    const roles = user.get('roles');
+    roles.push('teacher');
+    user.set('roles', _.uniq(roles));
     Check.Astro(user).valid();
     user.save();
 
