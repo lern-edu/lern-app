@@ -69,7 +69,10 @@ const SchoolCourseFormPeopleView = React.createClass({
                       key={_id}
                       primaryText={name}
                       secondaryText={
-                        _.join(_.map(roles, r => i18n.__(`UserRoles.${r}`)), ', ')
+                        _.join(
+                          _.map(roles, r => i18n.__(`UserRoles.${r}`)),
+                          ', '
+                        )
                       }
                       innerDivStyle={{ width: '500px' }} />,
                   ])
