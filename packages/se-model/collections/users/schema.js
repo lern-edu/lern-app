@@ -162,7 +162,7 @@ Meteor.users.Schema = Astro.Class({
       type: 'array',
       validator: Validators.and([
         Validators.SomeOf(UserRoles.all('keys')),
-        Validators.length(1),
+        Validators.maxLength(4),
       ]),
     },
 
