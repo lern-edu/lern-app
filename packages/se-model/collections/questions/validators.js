@@ -2,21 +2,15 @@ Astro.createValidator({
   name: 'QuestionAnswer',
   validate(value) {
     const { type, options, range } = this;
-    console.log(type);
     if (type === 'open')
       return (
         !_.isNull(value) &&
         _.isString(value) &&
         _.inRange(value.length, 4, 1024)
       );
-    else if (type === 'number') {
-      console.log(range.min);
-      console.log(range.max);
-      console.log(value);
-
+    else if (type === 'number')
       return !(_.isNull(range.min) || _.isNull(range.max))
         && range.min <= value && value <= range.max && range.min < range.max;
-    }
     else if (type === 'closed')
       return (
         !_.isNull(value) &&
