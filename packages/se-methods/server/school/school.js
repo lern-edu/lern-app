@@ -61,8 +61,18 @@ Helpers.Methods({ prefix, protect }, {
     // tira schoolId do schools do user
 
     _.pull(schools, schoolId);
-    console.log(schools);
-    user.set("profile.schools", schools);
+    user.set('profile.schools', schools);
+    Check.Astro(user).valid();
+    user.save();
+
+    return user;
+  },
+
+  SetTeacher(userId) {
+    const user = _.first(Fetch.General.users(userId).fetch());
+
+    user.push('roles', 'teacher');
+    Check.Astro(user).valid();
     user.save();
 
     return user;
