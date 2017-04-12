@@ -4,6 +4,7 @@ const patterns = {
   cnpj: /^[0-9]{14}$/,
   cpf: /^[0-9]{11}$/,
   mail:  /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i,
+  decimal: /^\d+\.?\d{0,}$/i,
 };
 
 Check.Regex = function (...args) {
