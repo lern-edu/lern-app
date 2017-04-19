@@ -10,7 +10,7 @@ teacherRoutes.route('/', {
   name: 'TeacherHome',
   action() {
     render({
-      main: <TeacherHomeView />,
+      main: <TeacherHome />,
     });
   },
 });
