@@ -4,9 +4,7 @@ import { Meteor } from 'meteor/meteor';
 //Views
 import TeacherCourseShowView from './View.jsx';
 
-TeacherCourseShow = createContainer(({ params }) => {
-
-    const { courseId } = this.props;
+TeacherCourseShow = createContainer(({ courseId }) => {
 
     const handles = {
       subjects: Meteor.subscribe('PublicSubjects'),
