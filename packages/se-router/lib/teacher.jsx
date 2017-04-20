@@ -173,7 +173,7 @@ teacherRoutes.route('/disciplinas/:courseId/aulas/criar', {
   name: 'TeacherLectureCreate',
   action(params) {
     render({
-      main: <TeacherLectureCreateView {...params} />,
+      main: <TeacherLectureCreate {...params} />,
     });
   },
 });
