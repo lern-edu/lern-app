@@ -5,7 +5,7 @@ Subjects.Schema.extend({
         _.map(
           _.flatten(
             _.compact(
-              _.map(this.get('content'), 'text.blocks')
+              _.map(this.get('info'), 'text.blocks')
             )
           ),
         'text'),
