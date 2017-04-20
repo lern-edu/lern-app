@@ -92,7 +92,7 @@ const PublicContentCreateQuestionCreate = React.createClass({
             <PublicContentCreate
               field='content'
               schema={Questions.ContentSchema}
-              contentTypes={ContentTypes}
+              contentTypes={NoReferenceContentTypes}
               form={this} />
           </div>
 
