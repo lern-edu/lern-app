@@ -6,6 +6,7 @@ import TeacherCourseShowMenu from './Menu.jsx';
 import TeacherCourseShowTests from './Tests/index.jsx';
 import TeacherCourseShowReports from './Reports/index.jsx';
 import TeacherCourseShowLectures from './Lectures/index.jsx';
+import TeacherCourseShowHome from './Home/index.jsx';
 
 const TeacherCourseShowView = React.createClass({
 
@@ -20,7 +21,7 @@ const TeacherCourseShowView = React.createClass({
   */
 
   render() {
-    const { active='lectures' } = this.props;
+    const { active='home' } = this.props;
     const { ready, course } = this.props;
     const { tabs } = this;
 
@@ -50,6 +51,7 @@ const TeacherCourseShowView = React.createClass({
                 diary: <TeacherCourseShowDiary {...this.props} key='diary' />,
                 reports: <TeacherCourseShowReports {...this.props} key='reports' />,
                 posts: <TeacherCourseShowPosts {...this.props} key='posts' />,
+                home: <TeacherCourseShowHome {...this.props} key='home' />,
               }, active)
             }
           </div>

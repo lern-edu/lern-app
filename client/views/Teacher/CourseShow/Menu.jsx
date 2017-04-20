@@ -5,8 +5,10 @@ const TeacherCourseShowMenu = React.createClass({
   //  static data
 
   tabs: {
+    home: 'Home',
     lectures: 'Aulas',
     tests: 'Atividades',
+
     // grades: 'Notas',
     // diary: 'Diário',
     reports: 'Relatório',
@@ -24,7 +26,7 @@ const TeacherCourseShowMenu = React.createClass({
   */
 
   render() {
-    let { active='lectures' } = this.props;
+    let { active='home' } = this.props;
 
     return (
       <Tabs value={active} onChange={this.handleTabChange}>
