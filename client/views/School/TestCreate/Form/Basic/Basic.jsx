@@ -1,6 +1,7 @@
 // Libs
 import React from 'react';
 import { RaisedButton, TextField, MenuItem, SelectField } from 'material-ui';
+import { Card, CardHeader, CardText } from 'material-ui';
 
 const SchoolTestCreateFormBasic = React.createClass({
 
@@ -47,25 +48,79 @@ const SchoolTestCreateFormBasic = React.createClass({
           </div>
 
           <div className='row'>
-            <div className='sixteen wide column'>
-              <PublicContentCreate
-                field='info'
-                schema={Tests.ContentSchema}
-                contentTypes={NoReferenceContentTypes}
-                form={form} />
-            </div>
+            <Card className='sixteen wide column'>
+              <CardHeader
+                title='Informações'
+                subtitle={`${form.doc.get('info').length} itens`}
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              <CardText expandable={true}>
+
+                <div className='ui grid'>
+
+                  <div className='sixteen wide column'>
+                    <PublicContentCreate
+                      field='info'
+                      schema={Tests.ContentSchema}
+                      contentTypes={NoReferenceContentTypes}
+                      form={form}
+                    />
+                  </div>
+
+                  <div className='sixteen wide column'>
+                    {_.map(form.doc.get('info'), (s, i) =>
+                      <div style={{ width: '100%' }} key={i} >
+                        <PublicContentShow
+                          schema={Tests.ContentSchema}
+                          field='info'
+                          form={form}
+                          index={i}
+                          doc={s} />
+                    </div>)}
+                  </div>
+
+                </div>
+              </CardText>
+            </Card>
           </div>
 
           <div className='row'>
-            {_.map(form.doc.get('info'), (s, i) =>
-              <div className='sixteen wide column' key={i} >
-                <PublicContentShow
-                  schema={Tests.ContentSchema}
-                  field='info'
-                  form={form}
-                  index={i}
-                  doc={s} />
-            </div>)}
+            <Card className='sixteen wide column'>
+              <CardHeader
+                title='Ajuda'
+                subtitle={`${form.doc.get('help').length} itens`}
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              <CardText expandable={true}>
+
+                <div className='ui grid'>
+
+                  <div className='sixteen wide column'>
+                    <PublicContentCreate
+                      field='help'
+                      schema={Tests.ContentSchema}
+                      contentTypes={NoReferenceContentTypes}
+                      form={form}
+                    />
+                  </div>
+
+                  <div className='sixteen wide column'>
+                    {_.map(form.doc.get('help'), (s, i) =>
+                      <div style={{ width: '100%' }} key={i} >
+                        <PublicContentShow
+                          schema={Tests.ContentSchema}
+                          field='help'
+                          form={form}
+                          index={i}
+                          doc={s} />
+                    </div>)}
+                  </div>
+
+                </div>
+              </CardText>
+            </Card>
           </div>
 
           <div className='row'>
