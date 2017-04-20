@@ -115,10 +115,6 @@ PostTypes = StaticCollection('PostTypes', [
 ContentTypes = StaticCollection('ContentTypes', [
   ['text', 'Texto'],
   ['image', 'Imagem'],
-
-  // ['audio', 'Áudio'],
-  // ['video', 'Video'],
-  // ['document', 'Documento'],
   ['link', 'Link'],
   ['test', 'Teste'],
 ]);
@@ -128,12 +124,15 @@ QuestionOptionsContentTypes = StaticCollection('QuestionOptionsContentTypes', [
   ['image', 'Imagem'],
 ]);
 
+NoReferenceContentTypes = StaticCollection('NoReferenceContentTypes', [
+  ['text', 'Texto'],
+  ['image', 'Imagem'],
+  ['link', 'Link'],
+]);
+
 PageContentTypes = StaticCollection('PageContentTypes', [
   ['text', 'Texto'],
   ['image', 'Imagem'],
-  ['audio', 'Áudio'],
-  ['video', 'Video'],
-  ['document', 'Documento'],
   ['link', 'Link'],
   ['question', 'Questão'],
 ]);

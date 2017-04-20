@@ -7,13 +7,6 @@ ContentSchema = (name) => Astro.Class({
       immutable: true,
       default: 'text',
     },
-    text: {
-      validator: Validators.or([
-        Validators.Content(),
-        Validators.and([Validators.required(), Validators.object()]),
-      ]),
-      optional: true,
-    },
     title: {
       type: 'string',
       validator: Validators.or([
