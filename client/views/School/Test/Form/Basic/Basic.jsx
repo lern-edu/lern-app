@@ -51,7 +51,7 @@ const SchoolTestFormBasic = React.createClass({
               <PublicContentCreate
                 field='info'
                 schema={Tests.ContentSchema}
-                contentTypes={ContentTypes}
+                contentTypes={NoReferenceContentTypes}
                 form={form} />
             </div>
           </div>
