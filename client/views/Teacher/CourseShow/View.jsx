@@ -57,17 +57,26 @@ const TeacherCourseShowView = React.createClass({
           </div>
         }
 
-        {!_.includes(['tests', 'posts', 'lectures'], active) ? undefined :
-          <div {...this.styles.floatingButton}>
-            <FloatingActionButton
-            href={FlowRouter.path(`Teacher${_.get({
-              posts: 'Post',
-              lectures: 'Lecture',
-              tests: 'Test',
-            }, active)}Create`, { courseId: _.get(course, '_id') },
-            { course: _.get(course, '_id') })}
-            children={<FontIcon className='material-icons'>add</FontIcon>} />
-          </div>}
+        {
+          !_.includes(['tests', 'posts', 'lectures'], active) ? undefined :
+            <div {...this.styles.floatingButton}>
+              <FloatingActionButton
+                children={<FontIcon className='material-icons'>add</FontIcon>}
+                href={
+                  FlowRouter.path(
+                    `Teacher${
+                      _.get({
+                        posts: 'Post',
+                        lectures: 'Lecture',
+                        tests: 'Test',
+                      }, active)
+                    }Create`,
+                    { courseId: _.get(course, '_id') },
+                  )
+                }
+              />
+            </div>
+          }
 
       </div>
     );
