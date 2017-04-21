@@ -179,10 +179,10 @@ teacherRoutes.route('/disciplinas/:courseId/aulas/criar', {
 });
 
 teacherRoutes.route('/disciplinas/:courseId/aulas/:lectureId/chamada', {
-  name: 'TeacherLectureAttendance',
+  name: 'TeacherLecture',
   action(params) {
     render({
-      main: <TeacherLectureAttendanceView {...params} />,
+      main: <TeacherLecture {...params} />,
     });
   },
 });
