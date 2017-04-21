@@ -1,8 +1,16 @@
 // Libs
 import React from 'react';
-import { RaisedButton, Card, CardHeader, CardText } from 'material-ui';
+import { RaisedButton, Card, CardHeader, CardText, TextField } from 'material-ui';
 
 const TeacherLectureCreateFormBasic = React.createClass({
+
+  // Handlers
+
+  handleInput({ currentTarget, target: { value } }) {
+    this.props.form.defaultHandler({
+      [currentTarget.getAttribute('name')]: value,
+    }, { doc: true });
+  },
 
   /* Render
   */
@@ -13,6 +21,15 @@ const TeacherLectureCreateFormBasic = React.createClass({
     return (
       <div className='ui basic segment' style={{ marginLeft: '5px' }} >
         <div className='ui grid'>
+
+          <div className='row'>
+            <TextField
+              value={form.doc.get('name') || ''}
+              floatingLabelText='Nome'
+              name='name'
+              errorText={_.get(form.state.errors, 'name')}
+              onInput={this.handleInput}  />
+          </div>
 
           <div className='row'>
             <Card className='sixteen wide column'>

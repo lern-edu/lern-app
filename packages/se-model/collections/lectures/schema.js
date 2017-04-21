@@ -6,6 +6,10 @@ Lectures.Schema = Astro.Class({
   name: 'Lecture',
   collection: Lectures,
   fields: {
+    name: {
+      type: 'string',
+      validator: Validators.String({ min: 1, max: 1024 }),
+    },
     course: {
       type: 'string',
       validator: Validators.Reference(),
