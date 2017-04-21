@@ -159,7 +159,7 @@ const SchoolTestForm = React.createClass({
         <div {...this.styles.floatingButton} >
           <FloatingActionButton
             disabled={!valid || waitingCallback}
-            onTouchTap={this.defaultSubmit}
+            onTouchTap={this.handleSubmit}
             children={<FontIcon className='material-icons' >check</FontIcon>} />
         </div>
 
