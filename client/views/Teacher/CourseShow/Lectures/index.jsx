@@ -9,10 +9,20 @@ const TeacherCourseShowLectures = React.createClass({
     const { lectures } = this.props;
 
     return (
-      <div>
+      <div style={{ marginTop: 10 }}>
         {
           _.map(_.sortBy(lectures, 'startDate'), lecture =>
-            <TeacherCourseShowLecturesCard lecture={lecture} {...this.props} key={lecture._id} />
+            <div className='ui grid container' key={lecture._id}>
+              <div className='row'>
+
+                <TeacherCourseShowLecturesCard
+                  lecture={lecture}
+                  {...this.props}
+                  key={lecture._id}
+                />
+
+              </div>
+            </div>
           )
         }
       </div>
