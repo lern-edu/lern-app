@@ -1,47 +1,37 @@
+// Libs
 import React from 'react';
+import { LinearProgress } from 'material-ui';
 
-TeacherLectureCreateView = React.createClass({
-  mixins: [ReactMeteorData],
+// Views
+import TeacherLectureCreateForm from './Form/index.jsx';
 
-  /* Reactive Data Fetching
-  */
-
-  getMeteorData() {
-    const { courseId } = this.props;
-
-    const handles = {
-      course: Meteor.subscribe('TeacherCourses', { courseId }),
-      tags: Meteor.subscribe('PublicTags'),
-      subjects: Meteor.subscribe('PublicSubjects'),
-    };
-
-    return {
-      ready: _.mapValues(handles, h => h.ready()),
-      course: _.first(Fetch.General.courses(courseId).fetch()),
-      tags: Fetch.Public().tags().fetch(),
-      subjects: Fetch.Public().subjects().fetch(),
-    };
-  },
+const TeacherLectureCreateView = React.createClass({
 
   render() {
-    const { ready, course } = this.data;
+    const { ready, course } = this.props;
     return (
       <div className='ui container'>
 
         <Layout.Bar
           title='Nova Aula'
-          crumbs={[
-            { label: 'Disciplinas', path: 'TeacherCourses' },
-            { label: _.get(course, 'name'), path: FlowRouter.path('TeacherCourseShow', { courseId: _.get(course, '_id') }) },
-          ]}
+          crumbs={
+            [
+              {
+                label: _.get(course, 'name'),
+                path: FlowRouter.path('TeacherCourseShow', { courseId: _.get(course, '_id') }),
+              },
+            ]
+          }
         />
 
         {_.every(ready)
-          ? <TeacherLectureCreateForm {...this.data} />
-          : <div className='ui active loader' />
+          ? <TeacherLectureCreateForm {...this.props} />
+          : <LinearProgress />
         }
 
       </div>
     );
   },
 });
+
+export default TeacherLectureCreateView;

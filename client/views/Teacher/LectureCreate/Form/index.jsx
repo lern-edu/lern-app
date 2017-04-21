@@ -1,110 +1,128 @@
+// Libs
 import React from 'react';
+import { StepContent, Stepper, Step, StepButton } from 'material-ui';
 
-TeacherLectureCreateForm = React.createClass({
-  mixins: [AstroForm(Lectures.Schema)],
+// Views
+import TeacherLectureCreateFormTheme from './Theme/Container.jsx';
+import TeacherLectureCreateFormBasic from './Basic/index.jsx';
+import TeacherLectureCreateFormDate from './Date/index.jsx';
+
+const TeacherLectureCreateForm = React.createClass({
+  mixins: [AstroForm(Lectures.Schema, 'TeacherLectureSave')],
+
+  /* Methods
+  */
+
+  nextStep() {
+    const { index } = this.state;
+    this.setState({ index: index + 1 });
+  },
+
+  prevStep() {
+    const { index } = this.state;
+    this.setState({ index: index - 1 });
+  },
 
   /* Licecycle
   */
 
-  getInitialState() {
-    return { dates: [] };
-  },
-
   componentDidMount() {
-    const courseId = FlowRouter.getParam('courseId');
-    this.defaultHandler({ course: courseId }, { doc: true });
-  },
-
-  /* Handlers
-  */
-
-  handleSubmitSuccess({ _id }) {
     const { course } = this.props;
-    console.log(`Lecture created: ${_id}`);
-    FlowRouter.go('TeacherCourseShow', { courseId: course._id }, { active: 'lectures' });
+    this.defaultHandler({ course: course._id }, { doc: true });
   },
 
-  handleTagsChange(str) {
-    const ids = str ? str.split(',') : [];
-    this.defaultHandler({ tags: ids }, { doc: true });
+  getInitialState() {
+    return { index: 0, waitingCallback: false };
   },
 
-  handleDateClick({ date }, event) {
-    event.preventDefault();
-    const { dates } = this.state;
-    const indexes = _.map(dates, 'index');
-    if (_.includes(indexes, date.index)) _.remove(dates, { index: date.index });
-    else dates.push(date);
-    this.setState({ dates });
-  },
+  // Handlers
 
   handleSubmit() {
+    this.setState({ waitingCallback: true });
+    this.defaultSubmit();
+  },
+
+  handleSubmitError(error) {
+    console.error(error);
+    this.setState({ waitingCallback: false });
+    snack('Problemas ao criar aula');
+  },
+
+  handleSubmitSuccess({ _id: lectureId }) {
+    this.setState({ waitingCallback: false });
     const { course } = this.props;
-    const { dates } = this.state;
-    _.forEach(dates, date => {
-      const doc = this.doc.copy();
-      const startDate = moment({ y: date.day.year(), M: date.day.month(), d: date.day.date(), h: date.sched.startDate.getHours(), m: date.sched.startDate.getMinutes() });
-      const endDate = moment({ y: date.day.year(), M: date.day.month(), d: date.day.date(), h: date.sched.endDate.getHours(), m: date.sched.endDate.getMinutes() });
-      doc.set({ startDate, endDate });
-      Meteor.call('TeacherLectureSave', doc, err => err ? console.log(err) : undefined);
-    }); FlowRouter.go('TeacherCourseShow', { courseId: course._id });
+    console.log(`Lecture created: ${lectureId}`);
+    snack('Aula criado');
+    FlowRouter.go('TeacherCourseShow', { courseId: course._id }, { active: 'lectures' });
   },
 
   /* Render
   */
 
   render() {
-    const { errors, dates } = this.state;
-    const { subjects, tags, course } = this.props;
+    const { index, valid, waitingCallback } = this.state;
 
-    const submitable = _.isEmpty(_.omit(errors, ['startDate', 'endDate'])) && dates.length;
+    const done = {
+      basic: !_.some(['info'],
+        k => _.get(this, `state.errors[${k}]`)),
+      theme: !_.some(['tags', 'subjects'],
+        k => _.get(this, `state.errors[${k}]`)),
+      date: !_.some(['endDate', 'startDate'],
+        k => _.get(this, `state.errors[${k}]`)),
+    };
 
     return (
-      <div className='ui centered form basic segment grid'>
+      <div className='ui basic segment'>
 
-        <div className='ten wide center aligned column'>
-          <Semantic.Dropdown classes='search multiple selection fluid' onChange={this.handleTagsChange}>
-            <input type='hidden' name='tags' />
-            <i className='dropdown icon' />
-            <div className='default text'>Tema da Aula</div>
-            <div className='menu'>
-              {_.map(_.map(course.tags, t => _.find(tags, { _id: t })), tag =>
-                <div className='item' data-value={tag._id} data-text={tag.text} key={tag._id}>
-                  <div className='description'>{_.get(_.find(subjects, { _id: tag.subject }), 'name')}</div>
-                  <div className='text'>{tag.text}</div>
-                </div>
-              )}
-            </div>
-          </Semantic.Dropdown>
-        </div>
+        <Stepper linear={false} activeStep={index} orientation='vertical' >
 
-        <div className='ten wide center aligned column'>
-          <div className='field'>
-            <Semantic.Input
-              tag='textarea'
-              rows={3}
-              placeholder='Informações sobre a aula'
-              onInput={this.defaultHandler('info', { doc: true })}
-            />
-          </div>
-        </div>
+          <Step completed={done.basic}>
+            <StepButton onClick={() => this.setState({ index: 0 })}>
+              Informações
+            </StepButton>
+            <StepContent>
+              <TeacherLectureCreateFormBasic
+                errors={this.state.errors}
+                done={done.basic}
+                {...this.props}
+                form={this}
+                key='basic' />
+            </StepContent>
+          </Step>
 
-        <div className='ten wide center aligned column'>
-          <TeacherLectureCreateFormDays
-            {...this.props}
-            indexes={_.map(dates, 'index')}
-            onClick={this.handleDateClick}
-          />
-        </div>
+          <Step completed={done.theme}>
+            <StepButton onClick={() => this.setState({ index: 1 })}>
+              Temas
+            </StepButton>
+            <StepContent>
+              <TeacherLectureCreateFormTheme
+                errors={this.state.errors}
+                done={done.theme}
+                {...this.props}
+                form={this}
+                key='theme' />
+            </StepContent>
+          </Step>
 
-        <div className='ten wide center aligned column'>
-          <Semantic.Button
-            classes={submitable ? 'blue' : 'disabled'}
-            onClick={this.handleSubmit}
-          >Salvar</Semantic.Button>
-        </div>
+          <Step completed={done.application}>
+            <StepButton onClick={() => this.setState({ index: 2 })}>
+              Data
+            </StepButton>
+            <StepContent>
+              <TeacherLectureCreateFormDate
+                errors={this.state.errors}
+                done={done.date}
+                key='date'
+                {...this.props}
+                form={this} />
+            </StepContent>
+          </Step>
+
+        </Stepper>
 
       </div>
     );
   },
 });
+
+export default TeacherLectureCreateForm;
