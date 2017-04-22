@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, TextField, RaisedButton } from 'material-ui';
+import { Card, CardTitle, CardText, TextField, FlatButton, CardActions } from 'material-ui';
 
 TeacherSettingsSecurity = React.createClass({
   /* Lifecycle
@@ -37,35 +37,42 @@ TeacherSettingsSecurity = React.createClass({
     const { target, current } = this.state;
 
     return (
-      <Paper className='ui basic center aligned segment'>
-        <div className='ui header'>Senha</div>
-        <div>
-          <TextField
-            value={current}
-            hintText='Senha atual'
-            type='password'
-            onChange={this.handleInputChange}
-            name='current'
-          />
-        </div>
-        <div>
-          <TextField
-            value={target}
-            hintText='Nova senha'
-            type='password'
-            onChange={this.handleInputChange}
-            name='target'
-          />
-        </div>
-        <div>
-          <RaisedButton
+      <Card>
+        <CardTitle title='Trocar senha' />
+        <CardText>
+
+          <div className='row' >
+            <TextField
+              value={current}
+              hintText='Senha atual'
+              type='password'
+              onChange={this.handleInputChange}
+              name='current'
+            />
+          </div>
+
+          <div className='row' >
+            <TextField
+              value={target}
+              hintText='Nova senha'
+              type='password'
+              onChange={this.handleInputChange}
+              name='target'
+            />
+          </div>
+
+        </CardText>
+
+        <CardActions>
+          <FlatButton
             disabled={!(target && current)}
             label='Trocar'
             primary={true}
             onClick={this.handleSubmit}
           />
-        </div>
-      </Paper>
+        </CardActions>
+
+      </Card>
     );
   },
 });

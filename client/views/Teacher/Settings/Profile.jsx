@@ -1,5 +1,5 @@
 import React from 'react';
-import { Paper, SelectField, MenuItem } from 'material-ui';
+import { Card, CardTitle, CardText, SelectField, MenuItem } from 'material-ui';
 
 TeacherSettingsProfile = React.createClass({
 
@@ -20,15 +20,21 @@ TeacherSettingsProfile = React.createClass({
   render() {
     const { context: { user: { profile: { school } } }, props: { schools } } = this;
     return (
-      <Paper className='ui basic segment'>
-        <SelectField
-          value={school}
-          onChange={this.handleChange}
-          floatingLabelText='Em qual escola estou?' >
-          {_.map(schools, ({ _id, profile: { name } }) =>
-            <MenuItem key={_id} value={_id} primaryText={name} />)}
-        </SelectField>
-      </Paper>
+      <Card>
+        <CardTitle title='Escola' />
+        <CardText>
+          <SelectField
+            value={school}
+            onChange={this.handleChange}
+            floatingLabelText='Em qual escola estou?' >
+            {
+              _.map(schools, ({ _id, profile: { name } }) =>
+                <MenuItem key={_id} value={_id} primaryText={name} />
+              )
+            }
+          </SelectField>
+        </CardText>
+      </Card>
     );
   },
 });
