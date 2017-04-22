@@ -6,6 +6,8 @@ const teacherRoutes = FlowRouter.group({
   name: 'Teacher',
 });
 
+// Home
+
 teacherRoutes.route('/', {
   name: 'TeacherHome',
   action() {
@@ -14,6 +16,8 @@ teacherRoutes.route('/', {
     });
   },
 });
+
+// Settings
 
 teacherRoutes.route('/ajustes', {
   name: 'TeacherSettings',
@@ -24,7 +28,7 @@ teacherRoutes.route('/ajustes', {
   },
 });
 
-// posts
+// Posts
 
 teacherRoutes.route('/posts', {
   name: 'TeacherPosts',
@@ -87,39 +91,36 @@ teacherRoutes.route('/questoes/criar', {
 
 teacherRoutes.route('/testes', {
   name: 'TeacherTests',
+  action(params) {
+    render({
+      main: <TeacherTests {...params} />,
+    });
+  },
+});
+
+teacherRoutes.route('/provas/novo/:testId', {
+  name: 'TeacherTestCreateWithBase',
   action(params, query) {
     render({
-      main: <TeacherTestsView {...params} {...query}/>,
+      main: <TeacherTestCreate {...params} {...query} />,
     });
   },
 });
 
-/* Courses
-*/
-
-teacherRoutes.route('/disciplinas', {
-  name: 'TeacherCourses',
-  action() {
-    render({
-      main: <TeacherCourses />,
-    });
-  },
-});
-
-teacherRoutes.route('/disciplinas/:courseId', {
-  name: 'TeacherCourseShow',
-  action(params, query) {
-    render({
-      main: <TeacherCourseShow {...params} {...query} />,
-    });
-  },
-});
-
-teacherRoutes.route('/disciplinas/:courseId/atividade/criar', {
+teacherRoutes.route('/provas/novo', {
   name: 'TeacherTestCreate',
   action(params, query) {
     render({
-      main: <TeacherTestCreateView {...params} query={query} />,
+      main: <TeacherTestCreate {...params} />,
+    });
+  },
+});
+
+teacherRoutes.route('/atividade/:testId', {
+  name: 'TeacherTest',
+  action(params, query) {
+    render({
+      main: <TeacherTest {...params} />,
     });
   },
 });
@@ -150,6 +151,29 @@ teacherRoutes.route('/disciplinas/:courseId/cognitivo/:testId', {
     });
   },
 });
+
+/* Courses
+*/
+
+teacherRoutes.route('/disciplinas', {
+  name: 'TeacherCourses',
+  action() {
+    render({
+      main: <TeacherCourses />,
+    });
+  },
+});
+
+teacherRoutes.route('/disciplinas/:courseId', {
+  name: 'TeacherCourseShow',
+  action(params, query) {
+    render({
+      main: <TeacherCourseShow {...params} {...query} />,
+    });
+  },
+});
+
+// Grades
 
 teacherRoutes.route('/disciplinas/:courseId/notas/editar', {
   name: 'TeacherGradesEdit',
