@@ -1,47 +1,103 @@
 import React from 'react';
-import { Card, CardHeader, CardText, FlatButton, CardActions } from 'material-ui';
+import { Card, CardActions, CardHeader } from 'material-ui';
+import { List, Subheader, ListItem, Avatar, CardText } from 'material-ui';
+import { FlatButton, FontIcon } from 'material-ui';
+import { blue500 } from 'material-ui/styles/colors';
 
 const TeacherCourseShowTestsCard = React.createClass({
-  mixins: [Semantic.Transition('scale')],
-
-  // Static data
-
-  data: {
-    stateName: { past: 'Finalizada', present: 'Em Andamento', future: 'Agendada' },
-  },
 
   /* Render
   */
 
   render() {
-    const { data: { stateName }, props: { test, subjects, course, tags, styles,
-    styles: { cardContainer, cardContent }, }, } = this;
-    const now = _.now();
-    const state = now > 0 ? 'past' : now < test.startDate ? 'future' : 'present';
+    const { test, subjects, course, tags } = this.props;
 
     return (
-      <div {...cardContainer}>
-        <Card {...cardContent}>
+      <div className='sixteen wide mobile eight wide tablet five wide computer column' >
+        <Card>
           <CardHeader
-            title={_.get(test, 'name')}
-            subtitle={_.get(stateName, state)} />
+            title={test.name}
+            subtitle={
+              `${moment(test.startDate).format('DD/MM')} -
+               ${moment(test.endDate).format('DD/MM')}`
+            }
+          />
           <CardText>
-            <p>{_.map(test.subjects, t =>
-                _.get(_.find(subjects, { _id: t }), 'name')).join(', ')}</p>
-            <p>{`Término: ${moment(_.get(test, 'endDate')).format('LL')}`}</p>
-            <p>{`${test.questions.length} questões`}</p>
-            <p>{test.scores ? `Valor: ${_.sum(test.scores)} pontos` : 'Simulado'}</p>
+            <List>
+              <ListItem
+                disabled={true}
+                leftAvatar={
+                  <Avatar backgroundColor={blue500}>
+                    {test.questions.length}
+                  </Avatar>
+                }
+                primaryText='questões'
+              />
+              <ListItem
+                disabled={true}
+                leftAvatar={
+                  <Avatar
+                    backgroundColor={blue500}
+                    icon={
+                      <FontIcon className='material-icons' color='#FFF' >
+                        {test.scores ? 'star_border' : 'star'}
+                      </FontIcon>
+                    }
+                  />
+                }
+                primaryText={test.scores ? `Valor: ${_.sum(test.scores)} pontos` : 'Sem pontuação'}
+              />
+              <ListItem
+                disabled={true}
+                leftAvatar={
+                  <Avatar
+                    backgroundColor={blue500}
+                    icon={
+                      <Avatar backgroundColor={blue500}>
+                        {
+                          TestTimeoutTypes.getName(test.timeoutType) === 'Nenhum'
+                          ? <FontIcon className='material-icons' color='#FFF' >
+                              hourglass_empty
+                            </FontIcon>
+                          : moment.duration(test.timeout, 'seconds').humanize().match('[0-9]')
+                          ? _.head(moment.duration(test.timeout, 'seconds').humanize().match('[0-9]'))
+                          : <FontIcon className='material-icons' color='#FFF' >
+                              hourglass_full
+                            </FontIcon>
+                        }
+                      </Avatar>
+                    }
+                  />
+                }
+                primaryText={
+                  TestTimeoutTypes.getName(test.timeoutType)  === 'Nenhum'
+                  ? TestTimeoutTypes.getName(test.timeoutType)
+                  : `${
+                    moment.duration(test.timeout, 'seconds').humanize().match('[0-9]')
+                  ? _.head(moment.duration(test.timeout, 'seconds').humanize().match('[a-z]'))
+                  : moment.duration(test.timeout, 'seconds').humanize()} ${
+                    TestTimeoutTypes.getName(test.timeoutType)}`
+                }
+              />
+            </List>
           </CardText>
-          {_.isEmpty(test) ? undefined :
-            <CardActions>
-              <FlatButton
-              href={_.get(test, 'type') === 'cognitive' ?
-            FlowRouter.path('TeacherTestShowCognitive', { courseId: course._id, testId: test._id })
-            : FlowRouter.path('TeacherTestShow', { courseId: course._id, testId: test._id })}
-
+          <CardActions>
+            <FlatButton
+              primary={true}
               label='Ver'
-              secondary={true} />
-            </CardActions>}
+              href={
+                FlowRouter.path(
+                  `TeacherTestShow${test.get('resolution')}`,
+                  { testId: test._id, courseId: course._id }
+                )
+              }
+            />
+            {/* <FlatButton
+              secondary={true}
+              label='Editar'
+              href={FlowRouter.path('TeacherTest', { testId: test._id })}
+            /> */}
+          </CardActions>
         </Card>
       </div>
     );

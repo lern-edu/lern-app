@@ -1,23 +1,28 @@
+// libs
 import React from 'react';
+
+// Views
 import TeacherCourseShowTestsCard from './Card.jsx';
 
 const TeacherCourseShowTests = React.createClass({
-  mixins: [Semantic.Transition('scale')],
 
   /* Render
   */
 
   render() {
-    const { tests, styles: { cardsGrid } } = this.props;
-    const sorted = _.sortBy(tests, test => _.sum(test.scores)).reverse();
+    const { tests } = this.props;
+
+    const sorted = _.sortBy(tests, 'startDate');
 
     return (
-      <div ref='animate'>
-        <Semantic.Transitions {...cardsGrid}>
-          {_.map(sorted, test =>
+      <div className='ui grid container' style={{ marginTop: 10 }}>
+
+        {
+          _.map(sorted, test =>
             <TeacherCourseShowTestsCard test={test} {...this.props} key={test._id} />
-          )}
-        </Semantic.Transitions>
+          )
+        }
+
       </div>
     );
   },
