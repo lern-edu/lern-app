@@ -62,14 +62,10 @@ const Navigation = React.createClass({
             label: 'Disciplinas',
             icon: 'dashboard',
           },
-          TeacherQuestions: {
-            label: 'Questões',
-            icon: 'speaker_notes',
+          TeacherTests: {
+            label: 'Testes',
+            icon: 'description',
           },
-          // TeacherTests: {
-          //   label: 'Testes',
-          //   icon: 'description',
-          // },
           TeacherPosts: {
             label: 'Comunidade acadêmica',
             icon: 'forum',
