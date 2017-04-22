@@ -10,11 +10,15 @@ const TeacherCoursesView = React.createClass({
     const { ready } = this.props;
     return (
       <div className='ui container'>
+
         <Layout.Bar title='Turmas' />
-        {!_.every(ready) ? <LinearProgress /> :
-        <div className='ui basic segment'>
-          <TeacherCoursesGallery {...this.props} />
-        </div>}
+        {
+          !_.every(ready)
+          ? <LinearProgress />
+          : <div className='ui basic segment'>
+            <TeacherCoursesGallery {...this.props} />
+          </div>
+        }
 
       </div>
     );

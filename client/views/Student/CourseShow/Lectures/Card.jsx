@@ -25,9 +25,15 @@ const StudentCourseShowLecturesCard = React.createClass({
       <div className='sixteen wide mobile eight wide tablet five wide computer column'>
         <Card>
           <CardHeader
-            title={moment(lecture.startDate).format('L')}
-            subtitle={`${moment(lecture.startDate).format('LT')} - ${
-                moment(lecture.endDate).format('LT')}`} />
+            title={lecture.get('name')}
+            actAsExpander={true}
+            showExpandableButton={true}
+            subtitle={
+              `Aula ${moment(lecture.startDate).format('DD/MM')
+              }: ${moment(lecture.startDate).format('LT')
+              } - ${moment(lecture.endDate).format('LT')}`
+            }
+          />
           <CardText>
             {_.map(lecture.tags, t =>
               <div className='item' key={t}>

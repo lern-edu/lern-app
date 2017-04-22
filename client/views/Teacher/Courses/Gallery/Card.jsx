@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardActions, CardTitle, Divider, FlatButton, CardText, FontIcon,
-  List, ListItem } from 'material-ui';
+import { Card, CardActions, CardTitle, Divider, FlatButton } from 'material-ui';
+import { CardText, FontIcon, List, ListItem, Subheader } from 'material-ui';
 
 const TeacherCoursesGalleryCard = React.createClass({
   /* Render
@@ -13,34 +13,49 @@ const TeacherCoursesGalleryCard = React.createClass({
       <div className='sixteen wide mobile eight wide tablet four wide computer column'>
         <Card>
           <CardTitle
-            title={course.name} />
+            title={course.name}
+          />
           <CardText>
-            <List subheader='Matérias'>
-              {_.map(course.subjects, s =>
-                <ListItem
-                  key={s}
-                  disabled={true}
-                  primaryText={_.get(_.find(subjects, { _id: s }), 'name')} />)}
+            <List>
+              <Subheader>Matérias</Subheader>
+              {
+                _.map(course.subjects, s =>
+                  <ListItem
+                    key={s}
+                    disabled={true}
+                    primaryText={_.get(_.find(subjects, { _id: s }), 'name')}
+                  />
+                )
+              }
             </List>
             <Divider />
-            <List subheader='Grade de horários'>
-              {_.map(course.schedule, ({ day, endDate, startDate }, i) =>
-                <ListItem
-                  key={`${day}-${i}`}
-                  disabled={true}
-                  primaryText={WeekDays.getName(day)}
-                  secondaryText={`de ${
-                    moment(startDate).format('LT')} até ${
-                    moment(endDate).format('LT')}`} />)}
+            <List>
+              <Subheader>Grade de horários</Subheader>
+              {
+                _.map(course.schedule, ({ day, endDate, startDate }, i) =>
+                  <ListItem
+                    key={`${day}-${i}`}
+                    disabled={true}
+                    primaryText={WeekDays.getName(day)}
+                    secondaryText={`de ${
+                      moment(startDate).format('LT')} até ${
+                      moment(endDate).format('LT')}`
+                    }
+                  />
+                )
+              }
             </List>
             <Divider />
-            <List subheader={`${course.students.length} alunos`} />
+            <List>
+              <Subheader>{course.students.length} alunos</Subheader>
+            </List>
           </CardText>
           <CardActions>
             <FlatButton
               primary={true}
               href={FlowRouter.path('TeacherCourseShow', { courseId: course._id })}
-              label='Entrar' />
+              label='Entrar'
+            />
           </CardActions>
         </Card>
       </div>

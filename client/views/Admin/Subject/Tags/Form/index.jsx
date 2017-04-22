@@ -89,7 +89,7 @@ const AdminSubjectsTagsForm = React.createClass({
               <PublicContentCreate
                 field='info'
                 schema={Tags.ContentSchema}
-                contentTypes={ContentTypes}
+                contentTypes={NoReferenceContentTypes}
                 form={this}
               />
             </div>

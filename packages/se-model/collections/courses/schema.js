@@ -29,6 +29,10 @@ Courses.Schema = Astro.Class({
       validator: Validators.minLength(1),
       default: () => [],
     },
+    text: {
+      type: 'string',
+      optional: true,
+    },
     teachers: {
       type: 'array',
       validator: Validators.and([

@@ -25,7 +25,7 @@ FlowRouter.route('/contato', {
   action(params, query) {
     render({
       bar: true, nav: true,
-      main: <PublicContactView {...query}/>,
+      main: <PublicContact {...query}/>,
     });
   },
 });

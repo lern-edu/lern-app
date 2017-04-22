@@ -1,27 +1,23 @@
+// Libs
 import React from 'react';
 
-PublicContactView = React.createClass({
-  contextTypes: {
-    screen: React.PropTypes.string,
-  },
+// Views
+import PublicContactForm from './Form/index.jsx';
+
+PublicContact = React.createClass({
 
   /* Render
   */
 
   render() {
-    const { screen } = this.context;
 
     return (
-      <div className='ui centered grid'>
-        <div className={`${screen === 'computer' ? 'six' : 'sixteen'} wide column`}>
+      <div className='ui container'>
 
-          <Layout.Bar
-            title='Contato'
-          />
+          <Layout.Bar title='Contato' />
 
           <PublicContactForm {...this.props}/>
 
-        </div>
       </div>
     );
   },

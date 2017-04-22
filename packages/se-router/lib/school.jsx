@@ -82,7 +82,7 @@ schoolRoutes.route('/provas/:testId', {
   name: 'SchoolTest',
   action(params) {
     render({
-      main: <SchoolTestView {...params} />,
+      main: <SchoolTest {...params} />,
     });
   },
 });
