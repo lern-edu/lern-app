@@ -5,6 +5,7 @@ import { LinearProgress } from 'material-ui';
 // Views
 import TeacherTestShowByTagsTable from './Table.jsx';
 import TeacherTestShowByTagsTitle from './Title.jsx';
+import TeacherTestShowByTagsTags from './Tags.jsx';
 
 const TeacherTestShowByTagsView = React.createClass({
 
@@ -39,8 +40,8 @@ const TeacherTestShowByTagsView = React.createClass({
             ? <LinearProgress />
             : [
               <TeacherTestShowByTagsTitle {...this.props} key='title' />,
-              // <TeacherTestShowByTagsToolbar key='toolbar' />,
               <TeacherTestShowByTagsTable {...this.props} key='table' />,
+              <TeacherTestShowByTagsTags {...this.props} key='tags' />,
             ]
           }
 
