@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 //Views
 import TeacherCoursesView from './View.jsx';
 
-TeacherCourses = createContainer(({ params }) => {
+TeacherCourses = createContainer(() => {
 
   const userId = Meteor.userId();
 
