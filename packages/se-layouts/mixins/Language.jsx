@@ -29,7 +29,7 @@ const Language = {
         navigator.language ||
         navigator.browserLanguage ||
         navigator.userLanguage ||
-        'en-US'
+        'pt-BR'
     );
   },
 

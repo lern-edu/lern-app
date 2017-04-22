@@ -56,15 +56,15 @@ const AdminSubjectsTagsForm = React.createClass({
         actions={
           [
             <FlatButton
+              label='Cancelar'
+              secondary={true}
+              onTouchTap={this.handleClose}
+            />,
+            <FlatButton
               label='Terminar'
               disabled={!valid || waitingCallback}
               primary={true}
               onTouchTap={this.handleSubmit}
-            />,
-            <FlatButton
-              label='Cancelar'
-              secondary={true}
-              onTouchTap={this.handleClose}
             />,
           ]
         }
@@ -89,7 +89,7 @@ const AdminSubjectsTagsForm = React.createClass({
               <PublicContentCreate
                 field='info'
                 schema={Tags.ContentSchema}
-                contentTypes={ContentTypes}
+                contentTypes={NoReferenceContentTypes}
                 form={this}
               />
             </div>

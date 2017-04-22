@@ -6,6 +6,10 @@ Lectures.Schema = Astro.Class({
   name: 'Lecture',
   collection: Lectures,
   fields: {
+    name: {
+      type: 'string',
+      validator: Validators.String({ min: 1, max: 1024 }),
+    },
     course: {
       type: 'string',
       validator: Validators.Reference(),
@@ -15,6 +19,7 @@ Lectures.Schema = Astro.Class({
       nested: 'LectureContent',
       validator: Validators.minLength(1),
       optional: true,
+      default: () => [],
     },
     attendants: {
       type: 'array',
@@ -31,13 +36,10 @@ Lectures.Schema = Astro.Class({
       validator: Validators.Reference(),
       optional: true,
     },
-    tags: {
-      type: 'array',
-      validator: Validators.References(),
-      optional: true,
-    },
   },
   behaviors: [
+    'multiSubject',
+    'tagable',
     'creatable',
     'timeBounds',
   ],

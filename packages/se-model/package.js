@@ -48,6 +48,7 @@ Package.onUse((api) => {
 
     'collections/courses/validators.js',
     'collections/courses/schema.js',
+    'collections/courses/dynamic.js',
     'collections/courses/methods.js',
 
     'collections/grades/schema.js',
@@ -70,6 +71,7 @@ Package.onUse((api) => {
     'collections/questions/methods.js',
 
     'collections/subjects/schema.js',
+    'collections/subjects/dynamic.js',
     'collections/subjects/methods.js',
 
     'collections/tags/schema.js',
@@ -116,6 +118,7 @@ Package.onUse((api) => {
     'PostTypes',
     'ContentTypes',
     'PageContentTypes',
+    'NoReferenceContentTypes',
     'QuestionOptionsContentTypes',
   ]);
 

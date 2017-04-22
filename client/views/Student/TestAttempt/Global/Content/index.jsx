@@ -12,7 +12,16 @@ const StudentTestAttemptGlobalContent = React.createClass({
   render() {
     const { test, pages, index } = this.props;
     return (
-      <Paper className='ui container' style={{ marginTop: 75, marginBottom: 85 }} >
+      <Paper
+        className='ui container'
+        style={
+          {
+            marginTop: 75,
+            marginBottom: 85,
+            position: 'relative',
+          }
+        }
+      >
 
         <div className='ui grid container segment' style={{ paddingLeft: 15 }} >
 

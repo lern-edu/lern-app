@@ -5,7 +5,6 @@ TeacherSettingsTabs = React.createClass({
   tabs: {
     profile: 'Perfil',
     security: 'Segurança',
-    classes: 'Turmas'
   },
 
   /* Handlers

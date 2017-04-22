@@ -63,6 +63,8 @@ const StudentAttemptByTagsData = React.createClass({
         scale: {
           ticks: {
             beginAtZero: true,
+            min: _.get(_.find(questions, { type: 'number' }), 'range.min'),
+            max: _.get(_.find(questions, { type: 'number' }), 'range.max'),
           },
         },
       },

@@ -14,14 +14,6 @@ ContentSchema = (name) => Astro.Class({
       ]),
       optional: true,
     },
-    title: {
-      type: 'string',
-      validator: Validators.or([
-        Validators.String({ min: 1, max: 8192 }),
-        Validators.Content(),
-      ]),
-      optional: true,
-    },
     image: {
       type: 'string',
       validator: Validators.or([Validators.Reference(), Validators.Content()]),

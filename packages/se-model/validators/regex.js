@@ -4,7 +4,6 @@ _.forEach(Regex, (v, k) => {
     validate(value) {
       return (
         !_.isNull(value) &&
-        _.isString(value) &&
         v.test(value)
       );
     },

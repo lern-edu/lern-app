@@ -6,25 +6,29 @@ const teacherRoutes = FlowRouter.group({
   name: 'Teacher',
 });
 
+// Home
+
 teacherRoutes.route('/', {
   name: 'TeacherHome',
   action() {
     render({
-      main: <TeacherHomeView />,
+      main: <TeacherHome />,
     });
   },
 });
+
+// Settings
 
 teacherRoutes.route('/ajustes', {
   name: 'TeacherSettings',
   action(params, query) {
     render({
-      main: <TeacherSettingsView {...query}/>,
+      main: <TeacherSettings {...query}/>,
     });
   },
 });
 
-// posts
+// Posts
 
 teacherRoutes.route('/posts', {
   name: 'TeacherPosts',
@@ -87,9 +91,63 @@ teacherRoutes.route('/questoes/criar', {
 
 teacherRoutes.route('/testes', {
   name: 'TeacherTests',
+  action(params) {
+    render({
+      main: <TeacherTests {...params} />,
+    });
+  },
+});
+
+teacherRoutes.route('/provas/novo/:testId', {
+  name: 'TeacherTestCreateWithBase',
   action(params, query) {
     render({
-      main: <TeacherTestsView {...params} {...query}/>,
+      main: <TeacherTestCreate {...params} {...query} />,
+    });
+  },
+});
+
+teacherRoutes.route('/provas/novo', {
+  name: 'TeacherTestCreate',
+  action(params, query) {
+    render({
+      main: <TeacherTestCreate {...params} />,
+    });
+  },
+});
+
+teacherRoutes.route('/atividade/:testId', {
+  name: 'TeacherTest',
+  action(params, query) {
+    render({
+      main: <TeacherTest {...params} />,
+    });
+  },
+});
+
+teacherRoutes.route('/disciplinas/:courseId/atividade-padrao/:testId', {
+  name: 'TeacherTestShowDefault',
+  action(params, query) {
+    render({
+      main: <TeacherTestShowDefault {...params} {...query}/>,
+    });
+  },
+});
+
+teacherRoutes.route('/disciplinas/:courseId/atividade-por-tag/:testId', {
+  name: 'TeacherTestShowByTags',
+  action(params, query) {
+    render({
+      main: <TeacherTestShowByTags {...params} {...query}/>,
+    });
+  },
+});
+
+teacherRoutes.route('/disciplinas/:courseId/cognitivo/:testId', {
+  name: 'TeacherTestShowCognitive',
+  action(params, query) {
+    render({
+      main: <TeacherTestShowCognitiveView {...params} {...query}/>,
     });
   },
 });
@@ -115,32 +173,7 @@ teacherRoutes.route('/disciplinas/:courseId', {
   },
 });
 
-teacherRoutes.route('/disciplinas/:courseId/atividade/criar', {
-  name: 'TeacherTestCreate',
-  action(params, query) {
-    render({
-      main: <TeacherTestCreateView {...params} query={query} />,
-    });
-  },
-});
-
-teacherRoutes.route('/disciplinas/:courseId/atividade/:testId', {
-  name: 'TeacherTestShow',
-  action(params, query) {
-    render({
-      main: <TeacherTestShowView {...params} {...query}/>,
-    });
-  },
-});
-
-teacherRoutes.route('/disciplinas/:courseId/cognitivo/:testId', {
-  name: 'TeacherTestShowCognitive',
-  action(params, query) {
-    render({
-      main: <TeacherTestShowCognitiveView {...params} {...query}/>,
-    });
-  },
-});
+// Grades
 
 teacherRoutes.route('/disciplinas/:courseId/notas/editar', {
   name: 'TeacherGradesEdit',
@@ -173,16 +206,16 @@ teacherRoutes.route('/disciplinas/:courseId/aulas/criar', {
   name: 'TeacherLectureCreate',
   action(params) {
     render({
-      main: <TeacherLectureCreateView {...params} />,
+      main: <TeacherLectureCreate {...params} />,
     });
   },
 });
 
 teacherRoutes.route('/disciplinas/:courseId/aulas/:lectureId/chamada', {
-  name: 'TeacherLectureAttendance',
+  name: 'TeacherLecture',
   action(params) {
     render({
-      main: <TeacherLectureAttendanceView {...params} />,
+      main: <TeacherLecture {...params} />,
     });
   },
 });

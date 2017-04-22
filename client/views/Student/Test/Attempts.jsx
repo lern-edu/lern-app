@@ -25,7 +25,7 @@ const StudentTestAttempts = React.createClass({
                 secondaryText={moment(attempt.finishedAt).fromNow()}
                 href={
                   FlowRouter.path(
-                    `Student${test.get('resolution')}`,
+                    `StudentAttempt${test.get('resolution')}`,
                     {
                       testId: test._id,
                       attemptId: attempt._id,

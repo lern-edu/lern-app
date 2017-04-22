@@ -1,6 +1,6 @@
 import React from 'react';
-import { Drawer, CardMedia, ListItem } from 'material-ui';
-import { RaisedButton, IconButton, Avatar } from 'material-ui';
+import { Drawer, CardMedia, ListItem, DropDownMenu } from 'material-ui';
+import { RaisedButton, IconButton, Avatar, MenuItem } from 'material-ui';
 import { Divider, LinearProgress, FontIcon, Styles } from 'material-ui';
 import { grey300, grey400 } from 'material-ui/styles/colors';
 
@@ -62,14 +62,10 @@ const Navigation = React.createClass({
             label: 'Disciplinas',
             icon: 'dashboard',
           },
-          TeacherQuestions: {
-            label: 'Questões',
-            icon: 'speaker_notes',
+          TeacherTests: {
+            label: 'Testes',
+            icon: 'description',
           },
-          // TeacherTests: {
-          //   label: 'Testes',
-          //   icon: 'description',
-          // },
           TeacherPosts: {
             label: 'Comunidade acadêmica',
             icon: 'forum',
@@ -152,7 +148,7 @@ const Navigation = React.createClass({
 
   },
 
-  handleRoleChange(role) {
+  handleRoleChange(event, index, role) {
     Meteor.call('UserChangeRole', role, (err, user) => {
       if (err) snack('Erro');
       else FlowRouter.go(user.getHomeRoute());
@@ -197,10 +193,60 @@ const Navigation = React.createClass({
           </div>
         ) : (
           <div>
-            <IconButton>{profilePic ? <Avatar src={profilePic} /> :
-              <Avatar size={32}>{_.first(name)}</Avatar>}</IconButton>
-              <ListItem primaryText={name} disabled={true}/>
-          <Divider />
+
+            <div style={
+              {
+                background:
+                  '#ffffff url("/images/layout/material-background.png") no-repeat right top'
+              }
+            } >
+              <ListItem
+                children={
+                  profilePic
+                  ? <Avatar key='image' size={60} src={profilePic} />
+                  : <Avatar key='image' size={60} size={52}>
+                    {_.first(name)}
+                  </Avatar>
+                }
+                disabled={true}
+              />
+
+              <ListItem
+                children={
+                  <h5
+                    key='name'
+                    style={{ textShadow: '0 0 10px rgba(0,0,0,.85)' }}
+                    className="ui white inverted header"
+                  >
+                    {name}
+                  </h5>
+                }
+                disabled={true}
+              />
+
+              {
+                roles && roles.length <= 1
+                ? undefined
+                : <DropDownMenu
+                  labelStyle={{
+                    color: 'white',
+                    textShadow: '0 0 4px rgba(0,0,0,.85)'
+                  }}
+                  value={_.get(user, 'profile.role')}
+                  onChange={this.handleRoleChange}
+                >
+                  {
+                    _.map(_.uniq(roles), r =>
+                      <MenuItem key={r} value={r} primaryText={i18n.__(`UserRoles.${r}`)} />
+                    )
+                  }
+                </DropDownMenu>
+              }
+
+            </div>
+
+            <Divider />
+
             {_.map(routes[user.getRole()], ({ label, icon }, _route) =>
               <ListItem
                 leftIcon={_.isNull(icon) ? undefined :
@@ -212,16 +258,6 @@ const Navigation = React.createClass({
                 href={FlowRouter.path(_route)}
               />
             )}
-            {roles && roles.length <= 1 ? undefined : <ListItem
-              primaryText='Ver como'
-              disabled={true}
-              leftIcon={<FontIcon className='material-icons' >remove_red_eye</FontIcon>}
-              nestedItems={_.map(_.uniq(roles), r => <ListItem
-                key={r}
-                primaryText={i18n.__(`UserRoles.${r}`)}
-                onClick={() => this.handleRoleChange(r)} />)
-              } />
-            }
             <Divider/>
             <div>
               <ListItem

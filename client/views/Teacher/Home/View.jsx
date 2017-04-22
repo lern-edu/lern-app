@@ -1,8 +1,9 @@
 import React from 'react';
-import LinearProgress from 'material-ui';
+import { LinearProgress } from 'material-ui';
 
-TeacherHomeView = React.createClass({
-  mixins: [ReactMeteorData],
+import TeacherHomeOverview from './Overview.jsx';
+
+const TeacherHomeView = React.createClass({
 
   // Static data
 
@@ -77,48 +78,23 @@ TeacherHomeView = React.createClass({
     },
   },
 
-  /* Reactive Data Fetching
-  */
-
-  getMeteorData() {
-    const user = Meteor.user();
-
-    const handles = !_.get(user, 'profile.profile') ? {} : {
-        tests: Meteor.subscribe('StudentTests', {}, { attempts: true }),
-        plans: Meteor.subscribe('PublicPlans'),
-        courses: Meteor.subscribe('StudentCourses'),
-        posts: Meteor.subscribe('PublicPosts',
-          { author: user._id }, { limit: 10, sort: { updatedAt: -1 } }, {}),
-      };
-
-    const data = {
-      ready: _.mapValues(handles, h => h.ready()),
-      posts: Fetch.General.posts().fetch(),
-      plans: Fetch.General.plans().fetch(),
-      courses: Fetch.General.courses().fetch(),
-      tests: Fetch.General.tests().fetch(),
-      user,
-    };
-
-    return data;
-  },
-
   /* Render
   */
 
   render() {
-    const { data: { ready, user: { profile: { tutorial } } } } = this;
+    const { ready } = this.props;
 
     return (
       <div>
         <Layout.Bar title='Início' />
-        <div>
-          {!_.every(ready) ? <LinearProgress /> : _.get({
-            true: <TeacherHomeTutorial {...this.text} key='tutorial'/>,
-            false: <TeacherHomeOverview {...this.data} key='overview'/>,
-          }, tutorial)}
-        </div>
+        {
+          !_.every(ready)
+          ? <LinearProgress />
+          : <TeacherHomeOverview {...this.props} key='overview'/>
+        }
       </div>
     );
   },
 });
+
+export default TeacherHomeView;

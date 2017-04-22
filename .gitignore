@@ -4,3 +4,4 @@ node_modules
 private
 *.log
 mup*.*
+package.tar.gz

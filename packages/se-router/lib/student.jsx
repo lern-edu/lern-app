@@ -83,7 +83,7 @@ studentRoutes.route('/provas/:testId', {
   },
 });
 
-studentRoutes.route('/provas/:testId/tentativas/:attemptId/padrao', {
+studentRoutes.route('/provas/:testId/tentativas-padrao/:attemptId', {
   name: 'StudentAttemptDefault',
   action(params) {
     render({
@@ -92,7 +92,7 @@ studentRoutes.route('/provas/:testId/tentativas/:attemptId/padrao', {
   },
 });
 
-studentRoutes.route('/provas/:testId/tentativas/:attemptId/por-tags', {
+studentRoutes.route('/provas/:testId/tentativas-por-tags/:attemptId', {
   name: 'StudentAttemptByTags',
   action(params) {
     render({

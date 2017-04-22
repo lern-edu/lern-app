@@ -56,7 +56,7 @@ const StudentTestAttemptGlobal = React.createClass({
         snack(':(');
       } else
         FlowRouter.go(
-          `Student${test.get('resolution')}`,
+          `StudentAttempt${test.get('resolution')}`,
           {
             testId: test._id,
             attemptId: attempt._id,
@@ -77,15 +77,17 @@ const StudentTestAttemptGlobal = React.createClass({
   handleBack() {
     const { index } = this.state;
     this.setState({ index: index - 1 });
+    window.scrollTo(0, 0);
   },
 
   handleForward() {
     const { index } = this.state;
     const { pages, test } = this.props;
 
-    if (index < pages.questions.length - 1)
+    if (index < pages.questions.length - 1) {
       this.setState({ index: index + 1 });
-    else this.finishAnswers();
+      window.scrollTo(0, 0);
+    } else this.finishAnswers();
   },
 
   /* Render

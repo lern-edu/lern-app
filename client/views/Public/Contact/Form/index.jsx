@@ -1,7 +1,13 @@
+// Libs
 import React from 'react';
-import { Paper, RaisedButton, FontIcon } from 'material-ui';
+import { Card, FlatButton, CardText } from 'material-ui';
+import { Divider, CardActions } from 'material-ui';
 
-PublicContactForm = React.createClass({
+// Views
+import PublicContactFormRadio from './Radio.jsx';
+import PublicContactFormText from './Text.jsx';
+
+const PublicContactForm = React.createClass({
 
   /* Lifecycle
   */
@@ -22,7 +28,7 @@ PublicContactForm = React.createClass({
     Meteor.call('UserContact', { type: this.props.type, text: this.state.text }, (err, res) => {
       if (err) {
         console.log(err);
-        snack(':(');
+        snack('Problemas no envio da mensagem');
       } else {
         snack('Mensagem enviada');
         FlowRouter.go(Meteor.user().getHomeRoute());
@@ -38,23 +44,33 @@ PublicContactForm = React.createClass({
     const { text } = this.state;
 
     return (
-      <Paper className='ui basic segment'>
-        <div className='ui vertical basic segment'>
-          <PublicContactFormRadio value={type} />
-        </div>
-        <div className='ui vertical basic segment'>
-          <PublicContactFormText value={text} form={this}/>
-        </div>
-        <div className='ui center aligned  vertical basic segment'>
-          <RaisedButton
+      <Card style={{ marginTop: 10 }}>
+        <CardText>
+
+          <div className='row' >
+            <PublicContactFormRadio value={type} />
+          </div>
+
+          <Divider style={{ marginTop: 10 }} />
+
+          <div className='row' style={{ marginTop: 15 }} >
+            <PublicContactFormText value={text} form={this}/>
+          </div>
+
+        </CardText>
+
+        <CardActions>
+          <FlatButton
             primary={true}
             label='Enviar'
-            icon={<FontIcon className='material-icons'>send</FontIcon>}
             onClick={this.handleSubmit}
             disabled={!(type && text && text.length > 16)}
           />
-        </div>
-      </Paper>
+        </CardActions>
+
+      </Card>
     );
   },
 });
+
+export default PublicContactForm;
