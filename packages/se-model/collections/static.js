@@ -81,8 +81,8 @@ TestTimeoutTypes = StaticCollection('TestTimeoutTypes', [
 ]);
 
 TestResolutionTypes = StaticCollection('TestTypes', [
-  ['AttemptDefault', 'Padrão'],
-  ['AttemptByTags', 'Por tags'],
+  ['Default', 'Padrão'],
+  ['ByTags', 'Por tags'],
 ]);
 
 AccessAllowedTypes = StaticCollection('AccessAllowedTypes', [
