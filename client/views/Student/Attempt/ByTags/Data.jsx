@@ -84,11 +84,13 @@ const StudentAttemptByTagsData = React.createClass({
         <Card className='sixteen wide tablet seven wide computer column' >
           <CardText>
             <List>
-                <Subheader>Média</Subheader>
+                <Subheader>
+                  Média geral: {numeral(_.mean(avaregeQuestions) || 0).format('0.00')}
+                </Subheader>
                 <ListItem
                   disabled={true}
                   children={
-                    <div key={'avarege'} style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    <div key='avarege' style={{ display: 'flex', flexWrap: 'wrap' }}>
                       {
                         _.map(tagsIds, (id, index) =>
                           <Chip key={id} style={{ margin: 4 }} >
@@ -97,7 +99,7 @@ const StudentAttemptByTagsData = React.createClass({
                             }: {
                               _.isNaN(_.get(avaregeQuestions, index))
                               ? 'Sem valor'
-                              : _.get(avaregeQuestions, index)
+                              : numeral(_.get(avaregeQuestions, index)).format('0.00')
                             }
                           </Chip>
                         )
