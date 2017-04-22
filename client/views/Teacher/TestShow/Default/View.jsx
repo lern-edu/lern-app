@@ -34,12 +34,14 @@ const TeacherTestShowDefaultView = React.createClass({
           ]}
         />
 
-        <div className='ui centered grid' style={{ paddingTop: '2em' }}>
-          <div className='ten wide computer sixteen wide tablet column'>
-            <TeacherTestShowDefaultTabs tab={tab} tabChange={this.handleTabChange}/>
-          </div>
-          <div className='ten wide computer sixteen wide tablet column'>
-            {!_.every(ready) ? <LinearProgress /> : _.get({
+        <TeacherTestShowDefaultTabs tab={tab} tabChange={this.handleTabChange}/>
+
+        <div className='ui container' >
+
+          {
+            !_.every(ready)
+            ? <LinearProgress />
+            : _.get({
               attempts: [
                 <TeacherTestShowDefaultToolbar key='toolbar' value={filter} parent={this}/>,
                 <TeacherTestShowDefaultList key='list' filter={filter} {...this.props} />,
@@ -48,11 +50,10 @@ const TeacherTestShowDefaultView = React.createClass({
                 <TeacherTestShowDefaultInfo key='info' {...this.props} />,
                 <TeacherTestShowDefaultMetrics key='metric' {...this.props}/>,
               ],
-            }, tab)}
-          </div>
-        </div>
+            }, tab)
+          }
 
-        <TeacherTestShowDefaultToPDF open={open} parent={this} {...this.props} />
+        </div>
 
       </div>
     );

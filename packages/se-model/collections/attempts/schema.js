@@ -45,7 +45,7 @@ Attempts.Schema = Astro.Class({
       validator: Validators.minLength(1),
       optional: true,
     },
-    score: {
+    grade: {
       type: 'number',
       validator: Validators.Float({ min: 0, max: 100 }),
       optional: true,

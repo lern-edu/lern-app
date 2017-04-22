@@ -1,4 +1,6 @@
+// Libs
 import React from 'react';
+import { LinearProgress } from 'material-ui';
 
 TeacherTestGradeView = React.createClass({
   mixins: [ReactMeteorData],
@@ -51,7 +53,7 @@ TeacherTestGradeView = React.createClass({
               { courseId: _.get(course, '_id'), testId: _.get(test, '_id') }), },
           ]} />
 
-        {!_.every(ready) ? <MUI.LinearProgress /> :
+        {!_.every(ready) ? <LinearProgress /> :
           <div className='ui grid'>
 
             <Semantic.Transitions className='twelve wide column'>
