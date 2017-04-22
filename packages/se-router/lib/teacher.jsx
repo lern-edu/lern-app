@@ -124,11 +124,20 @@ teacherRoutes.route('/disciplinas/:courseId/atividade/criar', {
   },
 });
 
-teacherRoutes.route('/disciplinas/:courseId/atividade/:testId', {
-  name: 'TeacherTestShow',
+teacherRoutes.route('/disciplinas/:courseId/atividade-padrao/:testId', {
+  name: 'TeacherTestShowDefault',
   action(params, query) {
     render({
-      main: <TeacherTestShowView {...params} {...query}/>,
+      main: <TeacherTestShowDefault {...params} {...query}/>,
+    });
+  },
+});
+
+teacherRoutes.route('/disciplinas/:courseId/atividade-por-tag/:testId', {
+  name: 'TeacherTestShowByTags',
+  action(params, query) {
+    render({
+      main: <TeacherTestShowByTags {...params} {...query}/>,
     });
   },
 });
