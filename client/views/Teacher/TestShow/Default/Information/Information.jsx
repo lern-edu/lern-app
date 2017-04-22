@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper } from 'material-ui';
 
-TeacherTestShowInfo = React.createClass({
+TeacherTestShowDefaultInfo = React.createClass({
 
   // Render
 

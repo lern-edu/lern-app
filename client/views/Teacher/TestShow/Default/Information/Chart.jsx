@@ -1,6 +1,6 @@
 import React from 'react';
 
-TeacherTestShowInfoChart = React.createClass({
+TeacherTestShowDefaultInfoChart = React.createClass({
 
   // Lifecycle
 

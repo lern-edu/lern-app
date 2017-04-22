@@ -1,7 +1,7 @@
 import React from 'react';
 import { Toolbar, ToolbarSeparator, ToolbarTitle, ToolbarGroup, DropDownMenu, MenuItem, Checkbox, FontIcon, } from 'material-ui';
 
-TeacherTestShowMetricsToolbar = React.createClass({
+TeacherTestShowDefaultMetricsToolbar = React.createClass({
 
   // Handlers
 

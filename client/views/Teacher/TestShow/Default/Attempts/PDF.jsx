@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatButton, Dialog, Toggle, LinearProgress } from 'material-ui';
 
-TeacherTestShowToPDF = React.createClass({
+TeacherTestShowDefaultToPDF = React.createClass({
 
   // initial state
 

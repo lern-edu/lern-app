@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, SelectField, MenuItem } from 'material-ui';
 
-TeacherTestShowMetrics = React.createClass({
+TeacherTestShowDefaultMetrics = React.createClass({
 
   // Initial state
 
@@ -76,7 +76,7 @@ TeacherTestShowMetrics = React.createClass({
 
     return (
       <div style={{ marginTop: '1.5em' }}>
-        <TeacherTestShowMetricsToolbar {...this.props} options={options}/>
+        <TeacherTestShowDefaultMetricsToolbar {...this.props} options={options}/>
 
         <Paper>
           <div style={{ padding: '1em' }}>
@@ -89,8 +89,8 @@ TeacherTestShowMetrics = React.createClass({
 
             <div className='row'>
               {JSON.parse(chart)
-                ? <TeacherTestShowInfoChart {...this.props} />
-                : <TeacherTestShowInfoTable {...this.props} options={options} />}
+                ? <TeacherTestShowDefaultInfoChart {...this.props} />
+                : <TeacherTestShowDefaultInfoTable {...this.props} options={options} />}
             </div>
 
           </div>

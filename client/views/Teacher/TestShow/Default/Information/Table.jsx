@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, TableHeader, TableRow, TableRowColumn, TableHeaderColumn, TableBody, } from 'material-ui';
 
-TeacherTestShowInfoTable = React.createClass({
+TeacherTestShowDefaultInfoTable = React.createClass({
 
   // functions
 

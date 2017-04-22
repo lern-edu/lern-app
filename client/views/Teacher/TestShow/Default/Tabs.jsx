@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs, Tab } from 'material-ui';
 
-TeacherTestShowTabs = React.createClass({
+TeacherTestShowDefaultTabs = React.createClass({
 
   tabs: {
     attempts: 'Tentativas',

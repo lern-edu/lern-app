@@ -1,7 +1,7 @@
 import React from 'react';
 import { ListItem, List, FontIcon, Divider } from 'material-ui';
 
-TeacherTestShowList = React.createClass({
+TeacherTestShowDefaultList = React.createClass({
 
   // handlers
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Toolbar, ToolbarSeparator, ToolbarTitle, ToolbarGroup, DropDownMenu, MenuItem, IconButton, FontIcon, } from 'material-ui';
 
-TeacherTestShowToolbar = React.createClass({
+TeacherTestShowDefaultToolbar = React.createClass({
 
   // Static data
 
