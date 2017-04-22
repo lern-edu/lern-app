@@ -1,14 +1,14 @@
 import React from 'react';
 import { TextField } from 'material-ui';
 
-PublicContactFormText = React.createClass({
+const PublicContactFormText = React.createClass({
   render() {
     const { value, form } = this.props;
 
     return (
       <TextField
         fullWidth={true}
-        hintText='Conte-nos'
+        hintText='Texto'
         value={value}
         multiLine={true}
         rowsMax={8}
@@ -17,3 +17,5 @@ PublicContactFormText = React.createClass({
     );
   },
 });
+
+export default PublicContactFormText;

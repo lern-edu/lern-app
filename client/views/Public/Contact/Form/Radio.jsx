@@ -1,7 +1,7 @@
 import React from 'react';
 import { RadioButtonGroup, RadioButton } from 'material-ui';
 
-PublicContactFormRadio = React.createClass({
+const PublicContactFormRadio = React.createClass({
 
   /* Handlers
   */
@@ -17,7 +17,11 @@ PublicContactFormRadio = React.createClass({
     const { value } = this.props;
 
     return (
-      <RadioButtonGroup name='contact-type' defaultSelected={value} onChange={this.handleRadioChange}>
+      <RadioButtonGroup
+        name='contact-type'
+        defaultSelected={value}
+        onChange={this.handleRadioChange}
+      >
         <RadioButton value='question' label='Fazer uma pergunta'/>
         <RadioButton value='report' label='Reportar um erro'/>
         <RadioButton value='other' label='Outro'/>
@@ -25,3 +29,5 @@ PublicContactFormRadio = React.createClass({
     );
   },
 });
+
+export default PublicContactFormRadio;
