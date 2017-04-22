@@ -8,10 +8,6 @@ const TeacherCourseShowMenu = React.createClass({
     home: 'Home',
     lectures: 'Aulas',
     tests: 'Atividades',
-
-    // grades: 'Notas',
-    // diary: 'Diário',
-    reports: 'Relatório',
     posts: 'Blog',
   },
 
