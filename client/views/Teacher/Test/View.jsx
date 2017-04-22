@@ -15,7 +15,6 @@ const TeacherTestView = React.createClass({
   render() {
     const { ready, test, subjects } = this.props;
 
-    console.log(ready);
     return (
       <div className='ui container'>
 
