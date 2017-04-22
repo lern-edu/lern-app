@@ -12,16 +12,20 @@ const TeacherCourseShowHome = React.createClass({
   */
 
   render() {
-    const { course } = this.props;
+    const { course, ready } = this.props;
 
     return (
       <div className='ui basic segment'>
 
-        <TeacherCourseShowHomeTitle {...this.props} />
-
-        <TeacherCourseShowHomeContent {...this.props} />
-
-        <TeacherCourseShowHomeTags {...this.props} />
+        {
+          !_.every(ready)
+          ? <LinearProgress />
+          : [
+            <TeacherCourseShowHomeTitle {...this.props} key='title' />,
+            <TeacherCourseShowHomeContent {...this.props} key='content' />,
+            <TeacherCourseShowHomeTags {...this.props} key='tags' />,
+          ]
+        }
 
       </div>
     );
