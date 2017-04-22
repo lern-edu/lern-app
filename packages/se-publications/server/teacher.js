@@ -128,7 +128,10 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
-  Test(testId, { questions, attempts, course, documents, subjects, tags, answers, images }={}) {
+  Test(
+    testId,
+    { questions, attempts, course, documents, subjects, tags, answers, images, users }={}
+  ) {
     const { userId } = this;
     return {
       find() {
@@ -156,6 +159,14 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
           find(test) {
             return course && test.findCourse();
           },
+
+          children: [
+            {
+              find(course) {
+                return users && course.findUsers();
+              },
+            },
+          ],
         }, {
           find(test) {
             return documents && test.findDocuments();
