@@ -4,7 +4,7 @@ import React from 'react';
 // Views
 import PublicContactForm from './Form/index.jsx';
 
-PublicContactView = React.createClass({
+PublicContact = React.createClass({
 
   /* Render
   */
