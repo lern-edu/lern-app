@@ -1,6 +1,6 @@
 import React from 'react';
 
-TeacherTestGradeOverview = React.createClass({
+TeacherAttemptGradeOverview = React.createClass({
   mixins: [Semantic.Transition({ appear: 'scale', enter: 'scale' })],
 
   getAttemptScore() {

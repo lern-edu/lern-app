@@ -1,6 +1,6 @@
 import React from 'react';
 
-TeacherTestGradeQuestionGrade = React.createClass({
+TeacherAttemptGradeQuestionGrade = React.createClass({
   /* Handlers
   */
 
