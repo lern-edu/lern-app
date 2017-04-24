@@ -1,11 +1,15 @@
 Posts = new Mongo.Collection('posts');
 
+Posts.ContentSchema = ContentSchema('PostContent');
+
 Posts.Comment = Astro.Class({
   name: 'Comment',
   fields: {
-    text: {
-      type: 'string',
-      validator: Validators.String(),
+    content: {
+      type: 'array',
+      nested: 'PostContent',
+      validator: Validators.minLength(1),
+      default: () => [],
     },
     answer: {
       type: 'boolean',
@@ -27,28 +31,11 @@ Posts.Schema = Astro.Class({
       optional: true,
       default: null,
     },
-    title: {
-      type: 'string',
-      validator: Validators.String(),
-    },
-    text: {
-      type: 'string',
-      validator: Validators.String({ min: 4, max: 32000 }),
-    },
-    images: {
+    content: {
       type: 'array',
-      validator: Validators.References(),
-      optional: true,
-    },
-    documents: {
-      type: 'array',
-      validator: Validators.References(),
-      optional: true,
-    },
-    questions: {
-      type: 'array',
-      validator: Validators.References(),
-      optional: true,
+      nested: 'PostContent',
+      validator: Validators.minLength(1),
+      default: () => [],
     },
     type: {
       type: 'string',
