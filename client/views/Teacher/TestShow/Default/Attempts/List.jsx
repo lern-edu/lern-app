@@ -9,7 +9,7 @@ TeacherTestShowDefaultList = React.createClass({
     const { props: { attempts, course: { _id: courseId }, test: { _id: testId } } } = this;
     const attempt = _.find(attempts, { _id: currentTarget.getAttribute('data-key') });
     if (attempt.finished)
-      FlowRouter.go('TeacherTestGrade', { courseId, testId, attemptId: attempt._id });
+      FlowRouter.go('TeacherAttemptGrade', { courseId, testId, attemptId: attempt._id });
   },
 
   // Render
