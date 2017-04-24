@@ -9,21 +9,35 @@ TeacherTestShowDefaultList = React.createClass({
     const { props: { attempts, course: { _id: courseId }, test: { _id: testId } } } = this;
     const attempt = _.find(attempts, { _id: currentTarget.getAttribute('data-key') });
     if (attempt.finished)
-      FlowRouter.go('TeacherTestGrade', { courseId, testId, attemptId: attempt._id });
+      FlowRouter.go('TeacherAttemptGrade', { courseId, testId, attemptId: attempt._id });
   },
 
   // Render
 
   render() {
-    const { props: { students, attempts, filter } } = this;
+    const { students, attempts, filter, test } = this.props;
 
-    const groupAttempts = _.groupBy(_.filter(attempts, ({ finished, grade }) =>
-      _.get({
-        all: true,
-        running: !finished,
-        finished: finished && _.isNull(grade),
-        corrected: !_.isNull(grade),
-      }, filter)), 'author');
+    const groupAttempts = _.groupBy(
+      _.filter(attempts, ({ finished, grade }) =>
+        _.get({
+            all: true,
+            running: !finished,
+            finished: finished && _.isNull(grade),
+            corrected: !_.isNull(grade),
+          },
+          filter
+        )
+      ), 'author'
+    );
+
+    const countScore = _.sum(
+      _.flatten(
+        _.map(test.get('pages'), ({ content }) =>
+          _.map(content, c => _.get(c, 'score') || 0)
+        )
+      )
+    );
+
     return (
       <List>
        {_.map(students, ({ _id, profile: { name } }) => [
@@ -41,18 +55,29 @@ TeacherTestShowDefaultList = React.createClass({
               primaryText={`Tentativa ${index + 1}`}
               secondaryText={
                   <p>
-                    {!finished ? 'Em andamento'
-                    : finished && _.isNull(grade) ? 'Terminada'
-                    : `Corrigido -- Pontuação: ${Math.round(score * grade)} de ${score}`}
+                    {
+                      !finished ? 'Em andamento'
+                      : finished && _.isNull(grade) ? 'Terminada'
+                      : `Corrigido -- Pontuação: ${
+                        Math.round(countScore * grade)
+                      } de ${countScore}`
+                    }
                     <br/>
-                    {`Gastou ${moment.duration(moment(startedAt).diff(moment(finishedAt))).humanize()}`}
+                      {
+                        `Gastou ${
+                          moment.duration(moment(startedAt).diff(moment(finishedAt))).humanize()
+                        }`
+                      }
                   </p>
               }
               secondaryTextLines={2}
-              leftIcon={<FontIcon className='material-icons'>
-                {!finished ? 'access_time'
-                : finished && _.isNull(grade) ? 'done'
-                : 'done_all'}
+              leftIcon={
+                <FontIcon className='material-icons'>
+                {
+                  !finished ? 'access_time'
+                  : finished && _.isNull(grade) ? 'done'
+                  : 'done_all'
+                }
               </FontIcon>}
             disabled={!finished}
             onTouchTap={this.handleGo}

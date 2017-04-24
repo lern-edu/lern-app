@@ -32,6 +32,14 @@ const StudentCourseShowTestsCard = React.createClass({
     const { test, subjects, course, tags, attempts } = this.props;
     const atts = _.filter(attempts, { test: test._id });
 
+    const countScore = _.sum(
+      _.flatten(
+        _.map(test.get('pages'), ({ content }) =>
+          _.map(content, c => _.get(c, 'score') || 0)
+        )
+      )
+    );
+
     return (
       <Card className='sixteen wide mobile eight wide tablet four wide computer column' >
         <CardHeader
@@ -56,12 +64,12 @@ const StudentCourseShowTestsCard = React.createClass({
                   backgroundColor={blue500}
                   icon={
                     <FontIcon className='material-icons' color='#FFF' >
-                      {test.scores ? 'star_border' : 'star'}
+                      {countScore ? 'star_border' : 'star'}
                     </FontIcon>
                   }
                 />
               }
-              primaryText={test.scores ? `Valor: ${_.sum(test.scores)} pontos` : 'Sem pontuação'}
+              primaryText={countScore ? `Valor: ${countScore} pontos` : 'Sem pontuação'}
             />
             <ListItem
               disabled={true}

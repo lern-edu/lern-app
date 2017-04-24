@@ -10,7 +10,7 @@ import TeacherTestCreateFormTiming from './Timing/Timing.jsx';
 import TeacherTestCreateFormPage from './Page/Page.jsx';
 
 const TeacherTestCreateForm = React.createClass({
-  mixins: [AstroForm(Tests.Schema, 'TeacherTestsSave')],
+  mixins: [AstroForm(Tests.Schema, 'TeacherTestSave')],
 
   // Handlers
 

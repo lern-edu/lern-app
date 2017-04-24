@@ -24,13 +24,14 @@ const Language = {
   // set language
 
   getLanguage() {
-    return (
-        navigator.languages && navigator.languages[0] ||
-        navigator.language ||
-        navigator.browserLanguage ||
-        navigator.userLanguage ||
-        'pt-BR'
-    );
+    return 'pt-BR';
+    // return (
+    //     navigator.languages && navigator.languages[0] ||
+    //     navigator.language ||
+    //     navigator.browserLanguage ||
+    //     navigator.userLanguage ||
+    //     'pt-BR'
+    // );
   },
 
 };

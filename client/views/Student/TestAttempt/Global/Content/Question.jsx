@@ -3,7 +3,6 @@ import React from 'react';
 import { green500 } from 'material-ui/styles/colors';
 import { FontIcon, TextField } from 'material-ui';
 import { RadioButtonGroup, RadioButton } from 'material-ui';
-import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 const StudentTestAttemptGlobalContentQuestion = React.createClass({
 

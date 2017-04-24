@@ -7,7 +7,7 @@ import TeacherTestCreateFormApplicationView from './Application.jsx';
 export default TeacherTestCreateFormApplication = createContainer((props) => {
 
   const handles = {
-    courses: Meteor.subscribe('SchoolCourses'),
+    courses: Meteor.subscribe('TeacherCourses'),
   };
 
   const data = {

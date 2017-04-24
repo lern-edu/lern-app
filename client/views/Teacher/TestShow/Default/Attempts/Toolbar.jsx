@@ -1,5 +1,6 @@
 import React from 'react';
-import { Toolbar, ToolbarSeparator, ToolbarTitle, ToolbarGroup, DropDownMenu, MenuItem, IconButton, FontIcon, } from 'material-ui';
+import { Toolbar, ToolbarSeparator, ToolbarTitle, ToolbarGroup, } from 'material-ui';
+import { DropDownMenu, MenuItem, IconButton, FontIcon, } from 'material-ui';
 
 TeacherTestShowDefaultToolbar = React.createClass({
 
@@ -28,23 +29,23 @@ TeacherTestShowDefaultToolbar = React.createClass({
     const { options, props: { value } } = this;
     return (
       <Toolbar>
-        <ToolbarGroup float='left'>
+        <ToolbarGroup>
           <ToolbarTitle text='Tentativas'/>
         </ToolbarGroup>
-        <ToolbarGroup float='right'>
+        <ToolbarGroup lastChild={true} >
           <ToolbarTitle text='Filtrar'/>
           <ToolbarSeparator/>
           <DropDownMenu
             value={value}
             style={{ marginLeft: '1em' }}
-            onChange={this.handleFilterChange}>
-            {_.map(options, (label, key) =>
-              <MenuItem key={key} value={key} primaryText={label}/>)}
+            onChange={this.handleFilterChange}
+          >
+            {
+              _.map(options, (label, key) =>
+                <MenuItem key={key} value={key} primaryText={label}/>
+              )
+            }
           </DropDownMenu>
-          <IconButton
-            onTouchTap={this.handleExport}
-            children={<FontIcon className='material-icons'>picture_as_pdf</FontIcon>}
-            tooltip='Exportar para pdf' />
         </ToolbarGroup>
       </Toolbar>
     );
