@@ -3,7 +3,8 @@ import React from 'react';
 import { green500, red500 } from 'material-ui/styles/colors';
 import { TextField, ListItem, Divider } from 'material-ui';
 import { FlatButton } from 'material-ui';
-import { FontIcon, CircularProgress } from 'material-ui';
+import { FontIcon, CircularProgress, Chip } from 'material-ui';
+import { Toolbar, ToolbarGroup, ToolbarTitle, ToolbarSeparator } from 'material-ui';
 import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 const PublicContentShowQuestionView = React.createClass({
@@ -28,26 +29,66 @@ const PublicContentShowQuestionView = React.createClass({
     const { question, subject, tags, scored, ready, score } = this.props;
 
     return (
-      !_.every(ready) ? <CircularProgress size={60} thickness={7} /> :
-      <div>
+      !_.every(ready)
+      ? <CircularProgress size={60} thickness={7} />
+      : <div>
+
         <div className='row'>
-          <ListItem
-            disabled={true}
-            primaryText={_.get(subject, 'name')}
-            secondaryText={_.map(question.tags, _id =>
-              _.get(_.find(tags, { _id }), 'text')
-            ).join(', ')} />
+          <Toolbar>
+            <ToolbarGroup firstChild={true}>
+              <ToolbarTitle text="Questão" />
+            </ToolbarGroup>
+            <ToolbarGroup>
+              {
+                !(scored && _.includes(['open', 'closed'], question.type))
+                ? undefined
+                : [
+                  <ToolbarTitle key='point' text="Pontuação" />,
+                  <ToolbarSeparator key='separator' />,
+                  <TextField
+                    style={{ marginLeft: 5, marginBottom: 15 }}
+                    key='score'
+                    value={score || ''}
+                    floatingLabelText='Pontuação'
+                    onChange={this.handleScoreChange}
+                  />,
+                ]
+              }
+            </ToolbarGroup>
+          </Toolbar>
         </div>
 
         <div className='row'>
-          {!(scored && _.includes(['open', 'closed'], question.type)) ?
-            undefined : <TextField
-              value={score || ''}
-              floatingLabelText='Pontuação'
-              onChange={this.handleScoreChange} />}
+
+          <div className='sub header' style={{ display: 'flex', flexWrap: 'wrap' }} >
+            <span style={{ marginTop: 11 }} >
+              Matéria:
+            </span>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              <Chip style={{ margin: 5 }} >
+                {_.get(subject, 'name')}
+              </Chip>
+            </div>
+          </div>
+
+          <div className='sub header' style={{ display: 'flex', flexWrap: 'wrap' }} >
+            <span style={{ marginTop: 11 }} >
+              Tags:
+            </span>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {
+                _.map(question.tags, tagId =>
+                  <Chip key={tagId} style={{ margin: 5 }} >
+                    {_.get(_.find(tags, { _id: tagId }), 'text')}
+                  </Chip>
+                )
+              }
+            </div>
+          </div>
+
         </div>
 
-        <div className='row'>
+        <div className='row' style={{ marginTop: 10 }}>
           {_.map(question.content, (c, i) =>
             <div key={'content' + i} >
               {
@@ -74,10 +115,6 @@ const PublicContentShowQuestionView = React.createClass({
 
         <div className='row'>
           <Divider />
-        </div>
-
-        <div className='row'>
-          <h4>Resposta</h4>
         </div>
 
         <div className='row'>

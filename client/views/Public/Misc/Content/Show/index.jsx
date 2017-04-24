@@ -62,10 +62,15 @@ PublicContentShow = React.createClass({
 
         <br/>
 
-        {!canRemove ? undefined : <FlatButton
-          onTouchTap={this.handleRemove}
-          secondary={true}
-          label='Remover' />}
+        {
+          !canRemove
+          ? undefined
+          : <FlatButton
+            onTouchTap={this.handleRemove}
+            secondary={true}
+            label='Remover'
+          />
+        }
       </div>
     );
   },
