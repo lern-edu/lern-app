@@ -38,7 +38,7 @@ TeacherPostsView = React.createClass({
     const { query } = this.props;
     return (
       <div>
-        <Layout.Bar title='Comunidade acadêmica' />
+        <Layout.Bar title='Posts' />
 
         <div className='ui centered grid'>
           <div className='ten wide computer sixteen wide tablet column'>
