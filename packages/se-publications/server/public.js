@@ -78,10 +78,22 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
-  Posts(query={}, options={}, { author, subjects, tags, images, documents }={}) {
+  Posts(query={}, options={}, { author, subjects, tags, courses }={}) {
     return {
       find() {
-        return Fetch.General.posts(query, options);
+        const selector = _.omit(query, ['text']);
+        if (query.text) {
+          _.assign(selector, { $text: { $search: query.text } });
+          _.assign(
+            options,
+            {
+              sort: { score: { $meta: 'textScore' } },
+              fields: { score: { $meta: 'textScore' } },
+            }
+          );
+        };
+
+        return Fetch.General.posts(selector, options);
       },
 
       children: [
@@ -100,18 +112,6 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
         {
           find(post) {
             return subjects && post.findSubjects();
-          },
-        },
-
-        {
-          find(post) {
-            return images && post.findImages();
-          },
-        },
-
-        {
-          find(post) {
-            return documents && post.findDocuments();
           },
         },
       ],
