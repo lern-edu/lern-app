@@ -117,6 +117,7 @@ ContentTypes = StaticCollection('ContentTypes', [
   ['image', 'Imagem'],
   ['link', 'Link'],
   ['test', 'Teste'],
+  ['question', 'Questão'],
 ]);
 
 QuestionOptionsContentTypes = StaticCollection('QuestionOptionsContentTypes', [

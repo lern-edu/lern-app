@@ -29,5 +29,10 @@ Posts.Schema.extend({
       const comments = _.map(this.get('comments'), 'author');
       return Fetch.General.users(_.concat(comments, this.get('author')));
     },
+
+    findCourse() {
+      const id = this.get('course');
+      return Fetch.General.courses(id);
+    },
   },
 });
