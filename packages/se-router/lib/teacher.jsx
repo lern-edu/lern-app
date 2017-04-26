@@ -34,7 +34,7 @@ teacherRoutes.route('/posts', {
   name: 'TeacherPosts',
   action(params, query) {
     render({
-      main: <TeacherPostsView {...params} {...query}/>,
+      main: <TeacherPosts {...params} {...query}/>,
     });
   },
 });
