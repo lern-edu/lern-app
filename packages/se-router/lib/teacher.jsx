@@ -43,25 +43,16 @@ teacherRoutes.route('/posts/novo', {
   name: 'TeacherPostCreate',
   action(params, query) {
     render({
-      main: <TeacherPostCreateView {...query}/>,
-    });
-  },
-});
-
-teacherRoutes.route('/posts/editar/:postId', {
-  name: 'TeacherPostEdit',
-  action(params, query) {
-    render({
-      main: <TeacherPostEditView {...params} {...query}/>,
+      main: <TeacherPostCreate {...query}/>,
     });
   },
 });
 
 teacherRoutes.route('/posts/:postId', {
   name: 'TeacherPost',
-  action(params) {
+  action(params, query) {
     render({
-      main: <TeacherPostView {...params}/>,
+      main: <TeacherPost {...params} {...query} />,
     });
   },
 });
@@ -171,15 +162,6 @@ teacherRoutes.route('/disciplinas/:courseId/notas/editar', {
   action(params, query) {
     render({
       main: <TeacherGradesEditView {...params} query={query}/>,
-    });
-  },
-});
-
-teacherRoutes.route('/blogs/novo', {
-  name: 'TeacherPostCreate',
-  action(params, query) {
-    render({
-      main: <TeacherPostCreateView {...params} {...query} />,
     });
   },
 });
