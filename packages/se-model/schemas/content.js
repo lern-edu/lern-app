@@ -44,6 +44,12 @@ ContentSchema = (name) => Astro.Class({
       immutable: true,
       optional: true,
     },
+    question: {
+      type: 'string',
+      validator: Validators.or([Validators.Reference(), Validators.Content()]),
+      immutable: true,
+      optional: true,
+    },
     link: {
       type: 'string',
       validator: Validators.or([Validators.url(), Validators.Content()]),
