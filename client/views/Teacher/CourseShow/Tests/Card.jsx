@@ -100,11 +100,11 @@ const TeacherCourseShowTestsCard = React.createClass({
                 )
               }
             />
-            {/* <FlatButton
+            <FlatButton
               secondary={true}
               label='Editar'
               href={FlowRouter.path('TeacherTest', { testId: test._id })}
-            /> */}
+            />
           </CardActions>
         </Card>
       </div>
