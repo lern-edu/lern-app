@@ -2,59 +2,32 @@ import React from 'react';
 import { AutoComplete, MenuItem, FloatingActionButton,
 LinearProgress, FontIcon } from 'material-ui';
 
-TeacherPostsView = React.createClass({
-  mixins: [ReactMeteorData],
+import TeacherPostsCards from './Cards.jsx';
+import TeacherPostsToolbar from './Toolbar.jsx';
 
-  /* Reactive Data Fetching
-  */
-
-  getMeteorData() {
-    const userId = Meteor.user();
-    const { query } = this.props;
-
-    const handles = {
-      subjects: Meteor.subscribe('PublicSubjects'),
-      tags: Meteor.subscribe('PublicTags'),
-      courses: Meteor.subscribe('TeacherCourses'),
-      posts: Meteor.subscribe('PublicPosts', query, { limit: 50 }, { author: true }),
-    };
-
-    const data = {
-      ready: _.mapValues(handles, h => h.ready()),
-      courses: Fetch.General.courses().fetch(),
-      posts: Fetch.General.posts().fetch(),
-      subjects: Fetch.General.subjects().fetch(),
-      tags: Fetch.General.tags().fetch(),
-      authors: Meteor.users.find().fetch(),
-    };
-
-    return data;
-  },
+const TeacherPostsView = React.createClass({
 
   // Render
 
   render() {
-    const { ready, courses, tags, subjects } = this.data;
-    const { query } = this.props;
+    const { ready, courses, tags, subjects, query } = this.props;
+
     return (
-      <div>
+      <div className='ui container' >
+
         <Layout.Bar title='Posts' />
 
-        <div className='ui centered grid'>
-          <div className='ten wide computer sixteen wide tablet column'>
-            <TeacherPostsToolbar {...this.data} {...this.props}/>
-            {!_.every(ready) ? <LinearProgress /> :
-            <TeacherPostsList {...this.data} />}
-          </div>
-        </div>
+        <TeacherPostsToolbar {...this.props} />
 
-        <div
-          className='ui right aligned basic segment'
-          style={{ position: 'fixed', bottom: '1em', right: '1em' }}>
-          <FloatingActionButton
-            href={FlowRouter.path('TeacherPostCreate')}
-            children={<FontIcon className='material-icons'>add</FontIcon>} />
-        </div>
-      </div>);
+        {
+          !_.every(ready)
+          ? <LinearProgress/>
+          : <TeacherPostsCards {...this.props} />
+        }
+
+      </div>
+    );
   },
 });
+
+export default TeacherPostsView;
