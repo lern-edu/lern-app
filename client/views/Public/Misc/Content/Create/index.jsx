@@ -78,44 +78,49 @@ PublicContentCreate = React.createClass({
           </SelectField>
         </div>
         <div className='row'>
-          {_.get({
-            text:
-              <Paper zDepth={1}>
-                <PublicContentRichText
-                  parent={this}
-                  editorState={editorState}
-                />
-              </Paper>,
-            image:
-              <PublicContentCreateUpload
-                form={this}
-              />,
-            link:
-              <TextField
-                name='link'
-                value={link}
-                floatingLabelText='Link'
-                onChange={this.handleTextChange}
-                errorText={_.get(errors, 'link')}
-              />,
-            question:
-              <PublicContentCreateQuestion
-                form={this}
-                scored={this.props.scored}
-                questionsSelected={this.props.questionsSelected}
-                subjects={this.props.subjects}
-              />,
-            test:
-              <PublicContentCreateTest
-                form={this}
-                course={this.props.course}
-              />,
-          }, type)}
+          {
+            _.get({
+              text:
+                <Paper zDepth={1}>
+                  <PublicContentRichText
+                    parent={this}
+                    editorState={editorState}
+                  />
+                </Paper>,
+              image:
+                <PublicContentCreateUpload
+                  form={this}
+                />,
+              link:
+                <TextField
+                  name='link'
+                  value={link}
+                  floatingLabelText='Link'
+                  onChange={this.handleTextChange}
+                  errorText={_.get(errors, 'link')}
+                />,
+              question:
+                <PublicContentCreateQuestion
+                  form={this}
+                  scored={this.props.scored}
+                  questionsSelected={this.props.questionsSelected || []}
+                  disableCreateQuestion={this.props.disableCreateQuestion}
+                  subjects={this.props.subjects}
+                />,
+              test:
+                <PublicContentCreateTest
+                  form={this}
+                  course={this.props.course}
+                />,
+            },
+            type)
+          }
         </div>
 
-        {type === 'image' ?
-          undefined :
-          <FlatButton
+        {
+          type === 'image'
+          ? undefined
+          : <FlatButton
             style={{ marginTop: 15 }}
             onTouchTap={this.handleSubmit}
             disabled={!valid}
