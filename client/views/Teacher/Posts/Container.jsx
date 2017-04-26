@@ -10,7 +10,12 @@ TeacherPosts = createContainer((query) => {
     subjects: Meteor.subscribe('PublicSubjects'),
     tags: Meteor.subscribe('PublicTags'),
     courses: Meteor.subscribe('TeacherCourses'),
-    posts: Meteor.subscribe('PublicPosts', query || {}, { limit: 50 }, { author: true }),
+    posts: Meteor.subscribe(
+      'PublicPosts',
+      _.pick(query, ['text', 'subjects', 'tags', 'course']) || {},
+      { limit: 50, skip: _.get(query, 'skip') || 0 },
+      { author: true }
+    ),
   };
 
   const data = {

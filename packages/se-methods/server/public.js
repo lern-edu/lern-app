@@ -46,6 +46,22 @@ Helpers.Methods({ prefix, protect }, {
     return Questions.find(_.isEmpty(selector) ? null : selector).count();
   },
 
+  PostsCount(query={}) {
+    const selector = _.omit(query, ['text']);
+    if (query.text) {
+      _.assign(selector, { $text: { $search: query.text } });
+      _.assign(
+        options,
+        {
+          sort: { score: { $meta: 'textScore' } },
+          fields: { score: { $meta: 'textScore' } },
+        }
+      );
+    };
+
+    return Fetch.General.posts(selector).count();
+  },
+
   TestsCount({ subjectsIds, tagsIds, type, onlyMine, course }={}) {
 
     this.unblock();
