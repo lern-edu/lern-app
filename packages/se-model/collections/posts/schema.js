@@ -2,7 +2,7 @@ Posts = new Mongo.Collection('posts');
 
 Posts.ContentSchema = ContentSchema('PostContent');
 
-Posts.Comment = Astro.Class({
+Posts.CommentSchema = Astro.Class({
   name: 'PostComment',
   fields: {
     content: {
@@ -54,6 +54,7 @@ Posts.Schema = Astro.Class({
     comments: {
       type: 'array',
       nested: 'PostComment',
+      default: () => [],
       optional: true,
     },
   },
