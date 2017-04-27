@@ -34,27 +34,28 @@ StudentSettingsView = React.createClass({
 
   render() {
     const { ready, schools } = this.data;
-    const { tab='study' } = this.props;
+    const { tab='course' } = this.props;
     const { user } = this.context;
     return (
       <div>
 
-        <Layout.Bar title='Ajustes' zDepth={0} />
+        <Layout.Bar title='Configurações' />
 
-        <div className='ui centered grid'>
-          <div className='sixteen wide column'>
-            <StudentSettingsTabs tab={tab}/>
+        <StudentSettingsTabs tab={tab}/>
 
-            {!_.every(ready) ? <LinearProgress /> :
-              {
-                profile: <StudentSettingsProfile key='profile' {...this.data} schools={schools}/>,
-                study: <StudentSettingsStudy key='study' {...this.data} user={user}/>,
-                security: <StudentSettingsSecurity key='security'/>,
-                course: <StudentSettingsCourse user={user} key='course'/>,
-              }[tab]
-            }
-          </div>
+        <div className='ui container' style={{ marginTop: 10 }} >
+          {
+            !_.every(ready)
+            ? <LinearProgress />
+            : {
+              profile: <StudentSettingsProfile key='profile' {...this.data} schools={schools}/>,
+              study: <StudentSettingsStudy key='study' {...this.data} user={user}/>,
+              security: <StudentSettingsSecurity key='security'/>,
+              course: <StudentSettingsCourse user={user} key='course'/>,
+            }[tab]
+          }
         </div>
+
       </div>
     );
   },

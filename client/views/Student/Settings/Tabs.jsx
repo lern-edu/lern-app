@@ -4,9 +4,9 @@ import { Tabs, Tab } from 'material-ui';
 StudentSettingsTabs = React.createClass({
   tabs: {
     //profile: 'Perfil',
-    study: 'Estudos',
-    security: 'Segurança',
+    // study: 'Estudos',
     course: 'Curso',
+    security: 'Segurança',
   },
 
   /* Handlers

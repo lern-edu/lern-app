@@ -19,7 +19,7 @@ const TeacherSettingsView = React.createClass({
     return (
       <div>
 
-        <Layout.Bar title='Ajustes' />
+        <Layout.Bar title='Configurações' />
 
         <TeacherSettingsTabs tab={tab}/>
 

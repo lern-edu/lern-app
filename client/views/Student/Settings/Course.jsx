@@ -9,7 +9,7 @@ StudentSettingsCourse = React.createClass({
     return { course: undefined };
   },
 
-  /* Handlers YNqzCg2MfnnZjN7zs
+  /* Handlers
   */
 
   handleInputChange({ target }) {
@@ -19,10 +19,13 @@ StudentSettingsCourse = React.createClass({
 
   handleSubmit() {
     const { state: { course }, props: { user } } = this;
-    Meteor.call('StudentCourseIngress', course.trim(), (err, c) => {
-      if (err) snack('O curso não foi encontrado');
-      else FlowRouter.go('StudentCourseShow', { courseId: c._id });
-    });
+
+    FlowRouter.go('StudentCourseIngress', {}, { alias: course });
+
+    // Meteor.call('StudentCourseIngress', course.trim(), (err, c) => {
+    //   if (err) snack('O curso não foi encontrado');
+    //   else FlowRouter.go('StudentCourseShow', { courseId: c._id });
+    // });
   },
 
   /* Render
@@ -32,7 +35,7 @@ StudentSettingsCourse = React.createClass({
     const { state: { course }, props: { user } } = this;
 
     return (
-      <Paper className='ui basic center aligned segment'>
+      <Paper className='ui basic segment'>
         <div className='ui header'>Entrar em um curso</div>
         {_.get(user, 'profile.tutorial') ? <p><strong>
           Percebemos que você é novo por aqui... adicione a chave para entrar em um curso
@@ -42,7 +45,8 @@ StudentSettingsCourse = React.createClass({
             value={course}
             hintText='Chave de acesso'
             onChange={this.handleInputChange}
-            name='course' />
+            name='course'
+          />
         </div>
         <div>
         {_.get(user, 'profile.tutorial') ?
