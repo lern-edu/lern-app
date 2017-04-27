@@ -27,7 +27,6 @@ const StudentCourseShowView = React.createClass({
     const { ready, course, active='home' } = this.props;
     const { user } = this.context;
 
-    console.log(this.props);
     return (
       <div>
 

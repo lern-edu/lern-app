@@ -14,7 +14,7 @@ const StudentCourseShowPostsCard = React.createClass({
   // Render
 
   render() {
-    const { post, tags, subjects } = this.props;
+    const { post, tags, subjects, user } = this.props;
 
     return (
       <div className='sixteen wide mobile eight wide tablet five wide computer column' >
@@ -65,11 +65,15 @@ const StudentCourseShowPostsCard = React.createClass({
               primary={true}
               href={FlowRouter.path('StudentPostShow', { postId: post._id })}
             />
-            <FlatButton
-              href={FlowRouter.path('StudentPost', { postId: post._id })}
-              label='Editar'
-              secondary={true}
-            />
+            {
+              user._id !== post.author
+              ? undefined
+              : <FlatButton
+                href={FlowRouter.path('StudentPost', { postId: post._id })}
+                label='Editar'
+                secondary={true}
+              />
+            }
           </CardActions>
         </Card>
       </div>
