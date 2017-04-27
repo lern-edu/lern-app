@@ -5,6 +5,7 @@ import { Editor, EditorState, RichUtils, convertToRaw } from 'draft-js';
 import PublicContentCreateQuestion from './Question.jsx';
 import PublicContentCreateTest from './Test/Container.jsx';
 import PublicContentCreateUpload from './Upload.jsx';
+import PublicContentCreateVideo from './Video.jsx';
 import PublicContentRichText from './../RichText.jsx';
 
 PublicContentCreate = React.createClass({
@@ -112,13 +113,17 @@ PublicContentCreate = React.createClass({
                   form={this}
                   course={this.props.course}
                 />,
+              video:
+                <PublicContentCreateVideo
+                  form={this}
+                />,
             },
             type)
           }
         </div>
 
         {
-          type === 'image'
+          type === 'image' || type === 'video'
           ? undefined
           : <FlatButton
             style={{ marginTop: 15 }}
