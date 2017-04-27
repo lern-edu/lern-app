@@ -7,6 +7,15 @@ import TeacherPostsToolbar from './Toolbar.jsx';
 
 const TeacherPostsView = React.createClass({
 
+  // Styles
+
+  styles: {
+    floatingButton: {
+      className: 'ui right aligned basic segment',
+      style: { position: 'fixed', bottom: '1em', right: '1em', zIndex: '1000' },
+    },
+  },
+
   // Lifecycle
 
   getInitialState() {
@@ -67,6 +76,13 @@ const TeacherPostsView = React.createClass({
           add={this.handleSkipAdd}
           length={_.get(posts, 'length')}
         />
+
+        <div {...this.styles.floatingButton}>
+          <FloatingActionButton
+            children={<FontIcon className='material-icons'>add</FontIcon>}
+            href={FlowRouter.path('TeacherPostCreate')}
+          />
+        </div>
 
       </div>
     );
