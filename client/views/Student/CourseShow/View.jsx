@@ -27,6 +27,7 @@ const StudentCourseShowView = React.createClass({
     const { ready, course, active='home' } = this.props;
     const { user } = this.context;
 
+    console.log(this.props);
     return (
       <div>
 
@@ -51,10 +52,6 @@ const StudentCourseShowView = React.createClass({
               }
             </div>
           }
-
-        {!_.every(ready) ? undefined :
-        <StudentCourseShowInitial open={_.get(user, 'profile.tutorial') || false}
-          {...this.props} user={user} />}
 
       </div>
     );

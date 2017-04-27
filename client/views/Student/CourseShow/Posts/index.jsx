@@ -6,28 +6,50 @@ import StudentCourseShowPostsCard from './Card.jsx';
 
 const StudentCourseShowPosts = React.createClass({
 
-  // render
+  // Initial state
+
+  getInitialState() {
+    return { onlyMy: false };
+  },
+
+  // Handlers
+
+  handleChange(event) {
+    this.setState({
+      onlyMy: event.target.checked,
+    });
+  },
+
+  // Render
 
   render() {
-    const { posts, images, documents, teachers, tags, subjects } = this.props;
+    const { posts, course, userId } = this.props;
+    const { onlyMy } = this.state;
+
+    const postsToShow = !onlyMy
+    ? posts
+    : _.sortBy(
+      _.filter(posts, { author: userId }),
+      p => moment(p.createdAt).format('L')
+    );
+
+    console.log(postsToShow);
 
     return (
-      <div className='ui centered grid'>
-        {_.map(_.clone(posts).reverse(), post =>
-          <div
-            key={post._id}
-            className='sixteen wide mobile sixteen wide tablet eight wide computer column'
-          >
-            <StudentCourseShowPostsCard
-            post={post}
-            images={images}
-            documents={documents}
-            tags={tags}
-            subjects={subjects}
-            teacher={_.first(_.filter(teachers, t => t._id === post.author))}
-            />
-          </div>
-        )}
+      <div className='ui grid container' style={{ marginTop: 10 }}>
+
+        {
+          _.map(
+            _.reverse(postsToShow),
+            post =>
+              <StudentCourseShowPostsCard
+                key={post._id}
+                post={post}
+                {...this.props}
+              />
+          )
+        }
+
       </div>
     );
   },

@@ -1,70 +1,78 @@
 import React from 'react';
-import { RaisedButton, FlatButton, CardText, FontIcon, } from 'material-ui';
-import { Card, CardActions, CardHeader, CardMedia, CardTitle } from 'material-ui';
+import { Card, CardActions, CardHeader, CardMedia, Divider } from 'material-ui';
+import { FlatButton, CardText, Chip } from 'material-ui';
 
 const StudentCourseShowPostsCard = React.createClass({
 
   // Handles
 
   handleClick() {
-    console.log('hey');
+    const { post, courseId } = this.props;
+    FlowRouter.go('StudentPostEdit', { courseId, postId: post._id });
   },
 
   // Render
 
   render() {
-    const { post, images, documents, tags, subjects } = this.props;
-
-    const filteredTags = _.map(post.tags, pt =>
-      _.first(_.filter(tags, t => t._id === pt)));
-
-    const filteredSubjects = _.map(filteredTags, ft =>
-      _.first(_.filter(subjects, s => s._id === ft.subject)));
+    const { post, tags, subjects } = this.props;
 
     return (
-      <Card>
-        <CardHeader
-          title={post.title}
-          subtitle={moment(post.createdAt).format('L')}
-        />
-        {post.images ? _.map(post.images, imageId => {
-          const image = _.first(_.filter(images, img => img._id === imageId));
-          return (
-            <CardMedia key={imageId}>
-              <img src={image.url()} />
-            </CardMedia>
-          );
-        }) : undefined}
-        <CardTitle
-          title={_.uniq(_.map(filteredSubjects, 'name')).join(' ,')}
-          subtitle={_.map(filteredTags, 'text').join(', ')} />
-        <CardText>
-          <p>{post.text}</p>
-          {post.documents ? _.map(post.documents, docId => {
-            const document = _.first(_.filter(documents, doc => doc._id === docId));
-            return (
-              <p key={docId}>
-                <a href={document.url()} target='_blank'>
-                  <FlatButton
-                  label={document.original.name}
-                  labelPosition='before'
-                  secondary={true}
-                  icon={<FontIcon className='material-icons' >cloud_download</FontIcon>}
-                  />
-                </a>
-              </p>
-            );
-          }) : undefined}
-        </CardText>
+      <div className='sixteen wide mobile eight wide tablet five wide computer column' >
+        <Card>
+          <CardHeader
+            title={post.get('name')}
+            actAsExpander={true}
+            showExpandableButton={true}
+            subtitle={moment(post.get('createdAt')).format('DD/MM')}
+          />
+          <CardText expandable={true}>
 
+            {
+              _.map(post.get('content'), (info, index) =>
+                <PublicContentShow
+                  key={index}
+                  canRemove={false}
+                  index={index}
+                  schema={Posts.ContentSchema}
+                  doc={info}
+                />
+              )
+            }
 
-          {Meteor.userId() === post.author ? (
-            <CardActions>
-              <RaisedButton label='Editar' primary={true} onClick={this.handleClick} />
-            </CardActions>
-          ) : undefined}
+            <div className='row'>
+              <div className='sixteen wide column'>
+                <Divider />
+              </div>
+            </div>
 
-      </Card>
+            <div className='row'>
+              <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                {
+                  _.map(post.get('tags'), t =>
+                    <Chip key={t} style={{ margin: 4 }} >
+                      {_.get(_.find(tags, { _id: t }), 'text')}
+                    </Chip>
+                  )
+                }
+              </div>
+            </div>
+
+          </CardText>
+
+          <CardActions>
+            <FlatButton
+              label='Ver'
+              primary={true}
+              href={FlowRouter.path('StudentPostShow', { postId: post._id })}
+            />
+            <FlatButton
+              href={FlowRouter.path('StudentPost', { postId: post._id })}
+              label='Editar'
+              secondary={true}
+            />
+          </CardActions>
+        </Card>
+      </div>
     );
   },
 
