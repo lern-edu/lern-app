@@ -24,38 +24,43 @@ const TeacherPostShowComments = React.createClass({
         </Card>
 
         {
-          _.map(post.comments, (c, i) =>
-            <Card className='ui basic segment' key={`${c.get('author')}-${i}`}>
-              <CardHeader
-                title={
-                  _.get(
-                    _.find(users, { _id: c.get('author') }),
-                    'profile.name'
-                  )
-                }
-                subtitle={moment(c.get('createdAt')).fromNow()}
-              />
-              <CardText>
+          _.map(post.comments, (c, i) => {
+              const user = _.find(users, { _id: c.get('author') });
+              const profilePic = _.get(user, 'profile.profilePic');
+              return (
+                <Card className='ui basic segment' key={`${c.get('author')}-${i}`}>
+                  <CardHeader
+                    title={
+                      _.get(
+                        _.find(users, { _id: c.get('author') }),
+                        'profile.name'
+                      )
+                    }
+                    subtitle={moment(c.get('createdAt')).fromNow()}
+                  />
+                  <CardText>
 
-                <div className='sixteen wide column'>
-                  {
-                    _.map(c.get('content'), (s, i) =>
-                      <div style={{ width: '100%' }} key={i} >
-                        <PublicContentShow
-                          schema={Posts.ContentSchema}
-                          canRemove={false}
-                          field='content'
-                          form={this}
-                          index={i}
-                          doc={s}
-                        />
-                      </div>
-                    )
-                  }
-                </div>
+                    <div className='sixteen wide column'>
+                      {
+                        _.map(c.get('content'), (s, i) =>
+                          <div style={{ width: '100%' }} key={i} >
+                            <PublicContentShow
+                              schema={Posts.ContentSchema}
+                              canRemove={false}
+                              field='content'
+                              form={this}
+                              index={i}
+                              doc={s}
+                            />
+                          </div>
+                        )
+                      }
+                    </div>
 
-              </CardText>
-            </Card>
+                  </CardText>
+                </Card>
+              );
+            }
           )
         }
       </div>

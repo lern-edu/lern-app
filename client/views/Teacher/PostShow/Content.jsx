@@ -1,6 +1,6 @@
 import React from 'react';
-import { FontIcon, IconButton, Chip, Divider, FlatButton, CardText } from 'material-ui';
-import { Card, Badge, CardActions, CardHeader, CardMedia, CardTitle } from 'material-ui';
+import { FontIcon, IconButton, Chip, Divider, CardText } from 'material-ui';
+import { Card, Badge, CardActions, CardHeader, Avatar } from 'material-ui';
 
 const TeacherPostShowContent = React.createClass({
 
@@ -66,9 +66,18 @@ const TeacherPostShowContent = React.createClass({
     const { actions } = this.state;
     const { user } = this.context;
 
+    const profilePic = _.get(author, 'profile.profilePic');
+
     return (
       <Card className='ui basic segment'>
-        <CardTitle
+        <CardHeader
+          avatar={
+            profilePic
+            ? <Avatar size={40} src={profilePic} />
+            : <Avatar size={40} size={32}>
+              {_.first(_.get(author, 'profile.name'))}
+            </Avatar>
+          }
           title={author.get('profile.name')}
           subtitle={moment(post.get('createdAt')).fromNow()}
         />
