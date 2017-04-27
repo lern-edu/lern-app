@@ -48,16 +48,8 @@ Helpers.Methods({ prefix, protect }, {
 
   PostsCount(query={}) {
     const selector = _.omit(query, ['text']);
-    if (query.text) {
+    if (query.text)
       _.assign(selector, { $text: { $search: query.text } });
-      _.assign(
-        options,
-        {
-          sort: { score: { $meta: 'textScore' } },
-          fields: { score: { $meta: 'textScore' } },
-        }
-      );
-    };
 
     return Fetch.General.posts(selector).count();
   },
