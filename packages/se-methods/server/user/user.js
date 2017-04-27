@@ -1,4 +1,5 @@
 const [prefix, protect] = ['User'];
+Future = Npm.require('fibers/future');
 
 Helpers.Methods({ prefix, protect }, {
   PostSave: Helpers.DefaultSave,
@@ -95,5 +96,17 @@ Helpers.Methods({ prefix, protect }, {
     Check.Astro(post).valid();
     post.save();
     return post;
+  },
+
+  SearchVideo(videoId) {
+    const future = new Future();
+    YoutubeApi.videos.list({
+      part: 'id, contentDetails, player, status, snippet',
+      id: videoId,
+    }, (err, res) => {
+      if (err) future.throw(err);
+      else future.return(res);
+    });
+    return future.wait();
   },
 });

@@ -9,6 +9,7 @@ Package.onUse(function (api) {
   api.use([
     'ecmascript',
     'erasaur:meteor-lodash',
+    'renaldo:youtube-api',
 
     'lsunsi:se-fetch',
     'lsunsi:se-check',
