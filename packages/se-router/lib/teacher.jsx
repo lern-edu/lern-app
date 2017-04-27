@@ -57,6 +57,15 @@ teacherRoutes.route('/posts/:postId', {
   },
 });
 
+teacherRoutes.route('/posts/show/:postId', {
+  name: 'TeacherPostShow',
+  action(params, query) {
+    render({
+      main: <TeacherPostShow {...params} />,
+    });
+  },
+});
+
 /* Questions
 */
 
