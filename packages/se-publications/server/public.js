@@ -78,7 +78,7 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
-  Posts(query={}, options={}, { author, subjects, tags, courses }={}) {
+  Posts(query={}, options={}, { author, subjects, tags, course, users }={}) {
     return {
       find() {
         const selector = _.omit(query, ['text']);
@@ -105,6 +105,12 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
 
         {
           find(post) {
+            return course && post.findCourse();
+          },
+        },
+
+        {
+          find(post) {
             return tags && post.findTags();
           },
         },
@@ -114,6 +120,13 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
             return subjects && post.findSubjects();
           },
         },
+
+        {
+          find(post) {
+            return users && post.findUsers();
+          },
+        },
+
       ],
     };
   },
