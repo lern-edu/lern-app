@@ -1,15 +1,5 @@
 Posts.Schema.extend({
   methods: {
-    findImages() {
-      const ids = this.get('images');
-      return ids && Fetch.General.images(ids);
-    },
-
-    findDocuments() {
-      const ids = this.get('documents');
-      return ids && Fetch.General.documents(ids);
-    },
-
     findAuthor() {
       const id = this.get('author');
       return id && Fetch.General.users(id);
@@ -26,8 +16,13 @@ Posts.Schema.extend({
     },
 
     findUsers() {
-      const comments = _.map(this.get('comments'), 'author');
-      return Fetch.General.users(_.concat(comments, this.get('author')));
+      const commenters = _.map(this.get('commenters'), 'author');
+      return Fetch.General.users(_.concat(commenters, this.get('author')));
+    },
+
+    findCourse() {
+      const id = this.get('course');
+      return Fetch.General.courses(id);
     },
   },
 });

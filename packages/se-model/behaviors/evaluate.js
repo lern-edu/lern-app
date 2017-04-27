@@ -7,11 +7,13 @@ Astro.createBehavior({
           type: 'array',
           validator: Validators.References(),
           optional: true,
+          default: () => [],
         },
         useless: {
           type: 'array',
           validator: Validators.References(),
           optional: true,
+          default: () => [],
         },
       },
       events: {

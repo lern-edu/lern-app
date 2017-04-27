@@ -174,6 +174,10 @@ Tests.Schema = Astro.Class({
       type: 'string',
       validator: Validators.String(),
     },
+    text: {
+      type: 'string',
+      optional: true,
+    },
     info: {
       type: 'array',
       nested: 'TestContent',

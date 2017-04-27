@@ -12,7 +12,7 @@ Courses.Schema.extend({
       ' ')
       || '';
 
-      this.set('text', _.join([contentText], ' '));
+      this.set('text', _.join([contentText, this.get('name')], ' '));
     },
   },
 });

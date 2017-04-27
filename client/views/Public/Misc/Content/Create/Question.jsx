@@ -25,7 +25,7 @@ const PublicContentCreateQuestion = React.createClass({
   // render
 
   render() {
-    const { form, subjects, scored } = this.props;
+    const { form, subjects, scored, disableCreateQuestion } = this.props;
     const { create, search } = this.state;
 
     return (
@@ -35,20 +35,26 @@ const PublicContentCreateQuestion = React.createClass({
           <div className='row' >
 
             <div className='column' >
-               <RaisedButton
-                 onTouchTap={this.handleCreate}
-                 label='Criar questão'
-                 secondary={true}
-                 fullWidth={true} />
+              <RaisedButton
+                onTouchTap={this.handleSearch}
+                label='Buscar questão'
+                primary={true}
+                fullWidth={true}
+              />
              </div>
 
-             <div className='column' >
-               <RaisedButton
-                 onTouchTap={this.handleSearch}
-                 label='Buscar questão'
-                 primary={true}
-                 fullWidth={true} />
-             </div>
+             {
+               disableCreateQuestion
+               ? undefined
+               : <div className='column' >
+                 <RaisedButton
+                   onTouchTap={this.handleCreate}
+                   label='Criar questão'
+                   secondary={true}
+                   fullWidth={true}
+                 />
+               </div>
+             }
 
            </div>
 
@@ -57,12 +63,14 @@ const PublicContentCreateQuestion = React.createClass({
                scored={scored}
                handleClose={this.handleSearch}
                {...this.props}
-               open={search} />
+               open={search}
+             />
              <PublicContentCreateQuestionCreate
                scored={scored}
                handleClose={this.handleCreate}
                {...this.props}
-               open={create} />
+               open={create}
+             />
            </div>
 
         </div>

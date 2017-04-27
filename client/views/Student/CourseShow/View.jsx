@@ -52,10 +52,6 @@ const StudentCourseShowView = React.createClass({
             </div>
           }
 
-        {!_.every(ready) ? undefined :
-        <StudentCourseShowInitial open={_.get(user, 'profile.tutorial') || false}
-          {...this.props} user={user} />}
-
       </div>
     );
   },

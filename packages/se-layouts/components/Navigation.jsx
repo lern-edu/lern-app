@@ -67,7 +67,7 @@ const Navigation = React.createClass({
             icon: 'description',
           },
           TeacherPosts: {
-            label: 'Comunidade acadêmica',
+            label: 'Posts',
             icon: 'forum',
           },
         },
@@ -90,7 +90,7 @@ const Navigation = React.createClass({
           //   icon: 'timeline',
           // },
           StudentPosts: {
-            label: 'Comunidade acadêmica',
+            label: 'Posts',
             icon: 'forum',
           },
         },

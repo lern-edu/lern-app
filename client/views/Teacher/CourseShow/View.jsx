@@ -7,6 +7,7 @@ import TeacherCourseShowTests from './Tests/index.jsx';
 import TeacherCourseShowReports from './Reports/index.jsx';
 import TeacherCourseShowLectures from './Lectures/index.jsx';
 import TeacherCourseShowHome from './Home/index.jsx';
+import TeacherCourseShowPosts from './Posts/index.jsx';
 
 const TeacherCourseShowView = React.createClass({
 
