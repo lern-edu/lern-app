@@ -63,6 +63,7 @@ const TeacherCourseShowPostsCard = React.createClass({
             <FlatButton
               label='Ver'
               primary={true}
+              href={FlowRouter.path('TeacherPostShow', { postId: post._id })}
             />
             <FlatButton
               href={FlowRouter.path('TeacherPost', { postId: post._id })}
