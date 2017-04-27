@@ -12,13 +12,22 @@ const StudentCourseShowHomeTitle = React.createClass({
         <h1 className='ui header' style={{ marginTop: 0 }}>
 
           <div>
-            {course.name}
+            {course.get('name')}
             <div className='sub header'>
               {
                 `Matéria${
-                  subjects.length === 1 ? '' : 's'
+                  course.get('subjects').length === 1 ? '' : 's'
                 }: ${
-                  _.join(_.map(subjects, 'name'), ',')
+                  _.join(
+                    _.map(
+                      course.get('subjects'), subjectId =>
+                        _.get(
+                          _.find(subjects, { _id: subjectId }),
+                          'name'
+                        )
+                    ),
+                    ', '
+                  )
                 }`
               }
             </div>
