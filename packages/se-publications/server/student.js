@@ -63,19 +63,6 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
           find(course) {
             return posts && course.findPosts();
           },
-
-          children: [
-            {
-              find(post) {
-                return post.findImages();
-              },
-            },
-            {
-              find(post) {
-                return post.findDocuments();
-              },
-            },
-          ],
         },
         {
           find(course) {
