@@ -149,7 +149,7 @@ studentRoutes.route('/posts', {
   name: 'StudentPosts',
   action(params, query) {
     render({
-      main: <StudentPostsView {...query}/>,
+      main: <StudentPosts {...params} {...query}/>,
     });
   },
 });
@@ -158,25 +158,25 @@ studentRoutes.route('/posts/novo', {
   name: 'StudentPostCreate',
   action(params, query) {
     render({
-      main: <StudentPostCreateView {...query}/>,
-    });
-  },
-});
-
-studentRoutes.route('/posts/editar/:postId', {
-  name: 'StudentPostEdit',
-  action(params, query) {
-    render({
-      main: <StudentPostEditView {...params} {...query}/>,
+      main: <StudentPostCreate {...query}/>,
     });
   },
 });
 
 studentRoutes.route('/posts/:postId', {
   name: 'StudentPost',
-  action(params) {
+  action(params, query) {
     render({
-      main: <StudentPostView {...params}/>,
+      main: <StudentPost {...params} {...query} />,
+    });
+  },
+});
+
+studentRoutes.route('/posts/show/:postId', {
+  name: 'StudentPostShow',
+  action(params, query) {
+    render({
+      main: <StudentPostShow {...params} />,
     });
   },
 });
