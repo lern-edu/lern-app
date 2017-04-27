@@ -33,8 +33,6 @@ const StudentCourseShowPosts = React.createClass({
       p => moment(p.createdAt).format('L')
     );
 
-    console.log(postsToShow);
-
     return (
       <div className='ui grid container' style={{ marginTop: 10 }}>
 
