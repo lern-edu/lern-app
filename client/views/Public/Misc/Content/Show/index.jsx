@@ -8,6 +8,7 @@ import PublicContentShowQuestion from './QuestionContainer.jsx';
 import PublicContentShowTest from './TestContainer.jsx';
 import PublicContentShowImage from './ImageContainer.jsx';
 import PublicContentRichText from './../RichText.jsx';
+import PublicContentShowVideo from './Video.jsx';
 
 PublicContentShow = React.createClass({
   mixins: [AstroForm()],
@@ -57,6 +58,10 @@ PublicContentShow = React.createClass({
           test: <PublicContentShowTest
             form={this}
             testId={this.doc.get('test')}
+          />,
+          video: <PublicContentShowVideo
+            form={this}
+            videoId={this.doc.get('video')}
           />,
         }, this.doc.get('type'))}
 

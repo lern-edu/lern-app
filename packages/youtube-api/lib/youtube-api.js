@@ -1,7 +1,7 @@
 Youtube = {
   video: {
     list(id, cb) {
-      Meteor.call('searchVideo', id, cb);
+      Meteor.call('UserSearchVideo', id, cb);
     },
   },
 

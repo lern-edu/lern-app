@@ -1,6 +1,6 @@
 if (Meteor.isServer) {
   Meteor.methods({
-    searchVideo(videoId) {
+    SearchVideo(videoId) {
       const future = new Future();
       YoutubeApi.videos.list({
         part: 'id, contentDetails, player, status, snippet',
