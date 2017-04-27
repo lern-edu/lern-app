@@ -5,8 +5,8 @@ const Language = {
   // lifecycle
 
   getInitialState() {
-    i18n.setLocale(this.getLanguage());
-    return { locale: this.getLanguage() };
+    i18n.setLocale('pt-BR');
+    return { locale: 'pt-BR' };
   },
 
   onLocale(locale) {

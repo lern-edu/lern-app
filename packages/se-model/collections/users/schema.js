@@ -45,6 +45,7 @@ Meteor.users.ProfileSchema = Astro.Class({
       type: 'array',
       validator: Validators.References(),
       optional: true,
+      default: () => [],
     },
     setup: {
       type: 'boolean',
