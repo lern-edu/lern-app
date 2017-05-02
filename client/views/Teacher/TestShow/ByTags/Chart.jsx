@@ -20,10 +20,6 @@ const TeacherTestShowByTagsTableChart = React.createClass({
     this.callFunction();
   },
 
-  componentWillReceiveProps(nextProps) {
-    this.callFunction(nextProps);
-  },
-
   // Functions
 
   callFunction(props, state) {
