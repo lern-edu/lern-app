@@ -59,7 +59,7 @@ const TeacherCourseShowView = React.createClass({
           crumbs={[
             { label: 'Disciplinas', path: 'TeacherCourses' },
           ]}
-          zDepth="0"
+          zDepth={0}
         />
 
         <div className='ui centered grid'>
