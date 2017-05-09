@@ -10,7 +10,7 @@ StudentHomeOverview = React.createClass({
     return (
       <div
        className='ui container fluid'
-       style={{ backgroundColor: blue700, height: '100%', margin: '0 !important', paddingBottom: '10px', minHeight: '90vh' }}>
+       style={{ backgroundColor: blue700, height: 'calc(100vh - 64px)', margin: '0 !important' }}>
           <div>
            <img src='/images/steps-students/seta.svg'
             style={{ width: '300px', padding: '10px' }} className='left floated cloumn'></img>
@@ -23,7 +23,7 @@ StudentHomeOverview = React.createClass({
                    title={course.name} />
                  <CardActions>
                    <FlatButton
-                     
+
                      primary={true}
                      href={FlowRouter.path('StudentCourseShow', { courseId: course._id })}
                      label='Entrar' />

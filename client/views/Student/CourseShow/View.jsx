@@ -31,6 +31,7 @@ const StudentCourseShowView = React.createClass({
       <div>
 
         <Layout.Bar
+          zDepth={0}
           title={_.get(course, 'name')}
           crumbs={[{ label: 'Disciplinas', path: 'StudentCourses' }]} />
 

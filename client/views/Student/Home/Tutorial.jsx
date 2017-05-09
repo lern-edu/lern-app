@@ -27,7 +27,7 @@ StudentHomeTutorial = React.createClass({
     return (
       <div
         className='ui container fluid'
-        style={{ backgroundColor: blue700, height: '90vh' }}>
+        style={{ backgroundColor: blue700, height: 'calc(100vh - 64px)' }}>
 
         <div className='ui center aligned huge header'
           style={{ marginTop: '0px', paddingTop: '30px', color: 'white' }}>{welcome}</div>
