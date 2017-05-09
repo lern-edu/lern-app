@@ -1,5 +1,7 @@
+import i18n from 'meteor/universe:i18n';
 _ = lodash;
 moment.locale('pt-br');
+i18n.setLocale('pt-BR');
 
 // Material events
 import injectTapEventPlugin from 'react-tap-event-plugin';

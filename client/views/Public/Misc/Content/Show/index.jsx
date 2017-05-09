@@ -8,6 +8,7 @@ import PublicContentShowQuestion from './QuestionContainer.jsx';
 import PublicContentShowTest from './TestContainer.jsx';
 import PublicContentShowImage from './ImageContainer.jsx';
 import PublicContentRichText from './../RichText.jsx';
+import PublicContentShowVideo from './Video.jsx';
 
 PublicContentShow = React.createClass({
   mixins: [AstroForm()],
@@ -58,14 +59,23 @@ PublicContentShow = React.createClass({
             form={this}
             testId={this.doc.get('test')}
           />,
+          video: <PublicContentShowVideo
+            form={this}
+            videoId={this.doc.get('video')}
+          />,
         }, this.doc.get('type'))}
 
         <br/>
 
-        {!canRemove ? undefined : <FlatButton
-          onTouchTap={this.handleRemove}
-          secondary={true}
-          label='Remover' />}
+        {
+          !canRemove
+          ? undefined
+          : <FlatButton
+            onTouchTap={this.handleRemove}
+            secondary={true}
+            label='Remover'
+          />
+        }
       </div>
     );
   },

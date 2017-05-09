@@ -5,8 +5,8 @@ const Language = {
   // lifecycle
 
   getInitialState() {
-    i18n.setLocale(this.getLanguage());
-    return { locale: this.getLanguage() };
+    i18n.setLocale('pt-BR');
+    return { locale: 'pt-BR' };
   },
 
   onLocale(locale) {
@@ -24,13 +24,14 @@ const Language = {
   // set language
 
   getLanguage() {
-    return (
-        navigator.languages && navigator.languages[0] ||
-        navigator.language ||
-        navigator.browserLanguage ||
-        navigator.userLanguage ||
-        'pt-BR'
-    );
+    return 'pt-BR';
+    // return (
+    //     navigator.languages && navigator.languages[0] ||
+    //     navigator.language ||
+    //     navigator.browserLanguage ||
+    //     navigator.userLanguage ||
+    //     'pt-BR'
+    // );
   },
 
 };

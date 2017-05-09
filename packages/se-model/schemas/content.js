@@ -28,7 +28,7 @@ ContentSchema = (name) => Astro.Class({
     },
     video: {
       type: 'string',
-      validator: Validators.or([Validators.Reference(), Validators.Content()]),
+      validator: Validators.or([Validators.string({ min: 10, max: 20 }), Validators.Content()]),
       immutable: true,
       optional: true,
     },
@@ -39,6 +39,12 @@ ContentSchema = (name) => Astro.Class({
       optional: true,
     },
     test: {
+      type: 'string',
+      validator: Validators.or([Validators.Reference(), Validators.Content()]),
+      immutable: true,
+      optional: true,
+    },
+    question: {
       type: 'string',
       validator: Validators.or([Validators.Reference(), Validators.Content()]),
       immutable: true,

@@ -67,13 +67,12 @@ const StudentCourseShowTests = React.createClass({
     const { tests } = this.props;
     const { category } = this.state;
 
-    const cat = this.categories[category];
-    const groups = _.groupBy(_.sortBy(tests, cat.sortBy), _.bind(cat.groupBy, this));
+    const sorted = _.sortBy(tests, 'startDate');
 
     return (
       <div>
 
-        <Toolbar>
+        {/* <Toolbar>
           <ToolbarGroup >
             <ToolbarTitle text='Testes' />
           </ToolbarGroup>
@@ -88,24 +87,17 @@ const StudentCourseShowTests = React.createClass({
               }
             </DropDownMenu>
           </ToolbarGroup>
-        </Toolbar>
+        </Toolbar> */}
 
-        {
-          _.map(groups, (v, k) => [
-            <div className='ui header'>
-              {cat.groupNames.call(this, k)}
-            </div>,
-            <div className='ui grid container' key={k}>
-              <div className='row'>
-                {
-                  _.map(v, test =>
-                    <StudentCourseShowTestsCard test={test} {...this.props} key={test._id} />
-                  )
-                }
-              </div>
-            </div>,
-          ])
-        }
+        <div className='ui grid container' style={{ marginTop: 10 }}>
+
+          {
+            _.map(sorted, test =>
+              <StudentCourseShowTestsCard test={test} {...this.props} key={test._id} />
+            )
+          }
+
+        </div>
 
       </div>
     );

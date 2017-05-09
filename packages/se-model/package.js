@@ -63,6 +63,7 @@ Package.onUse((api) => {
 
     'collections/posts/validators.js',
     'collections/posts/schema.js',
+    'collections/posts/dynamic.js',
     'collections/posts/methods.js',
 
     'collections/questions/validators.js',

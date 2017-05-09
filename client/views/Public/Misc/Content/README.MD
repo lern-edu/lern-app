@@ -81,6 +81,7 @@
     contentTypes={Static Collection}
     updateQuestionsSelected={Function to update questions}
     scored={Test is scored?}
+    disableCreateQuestion={Remove create question option?}
     questionsSelected={Selected questions}
     subjects={Subjects fetched} />
 ~~~
@@ -93,6 +94,7 @@
     updateQuestionsSelected={this.props.updateQuestionsSelected}
     scored={scored}
     course={courseId}
+    disableCreateQuestion={false}
     questionsSelected={actualQuestionsSelected}
     form={this}
     subjects={subjects} />
@@ -141,6 +143,9 @@
 - `form`
   - **Type**: `String`
   - **Description**: search tests from this course
+- `disableCreateQuestion`
+  - **Type**: `Boolean`
+  - **Description**: Disable create question option
 - `subjects`
   - **Type**: `[Documents]`
   - **Description**: Fetched subjects to display on query to find questions

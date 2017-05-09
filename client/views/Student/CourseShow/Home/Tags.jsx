@@ -16,11 +16,16 @@ const StudentCourseShowHomeTags = React.createClass({
   // Render
 
   render() {
-    const { tags } = this.props;
+    const { tags, course } = this.props;
+    const selectedTags = _.filter(
+      tags,
+      ({ _id }) =>
+        _.includes(course.get('tags'), _id)
+    );
     return (
       <Paper className='ui basic segment'>
         {
-          _.map(tags, tag =>
+          _.map(selectedTags, tag =>
             <FlatButton
               key={tag._id}
               label={tag.text}

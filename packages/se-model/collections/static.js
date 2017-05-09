@@ -117,6 +117,8 @@ ContentTypes = StaticCollection('ContentTypes', [
   ['image', 'Imagem'],
   ['link', 'Link'],
   ['test', 'Teste'],
+  ['question', 'Questão'],
+  ['video', 'Vídeo'],
 ]);
 
 QuestionOptionsContentTypes = StaticCollection('QuestionOptionsContentTypes', [
@@ -127,12 +129,14 @@ QuestionOptionsContentTypes = StaticCollection('QuestionOptionsContentTypes', [
 NoReferenceContentTypes = StaticCollection('NoReferenceContentTypes', [
   ['text', 'Texto'],
   ['image', 'Imagem'],
+  ['video', 'Vídeo'],
   ['link', 'Link'],
 ]);
 
 PageContentTypes = StaticCollection('PageContentTypes', [
   ['text', 'Texto'],
   ['image', 'Imagem'],
+  ['video', 'Vídeo'],
   ['link', 'Link'],
   ['question', 'Questão'],
 ]);

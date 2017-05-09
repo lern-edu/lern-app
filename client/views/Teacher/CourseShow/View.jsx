@@ -7,6 +7,7 @@ import TeacherCourseShowTests from './Tests/index.jsx';
 import TeacherCourseShowReports from './Reports/index.jsx';
 import TeacherCourseShowLectures from './Lectures/index.jsx';
 import TeacherCourseShowHome from './Home/index.jsx';
+import TeacherCourseShowPosts from './Posts/index.jsx';
 
 const TeacherCourseShowView = React.createClass({
 
@@ -29,6 +30,7 @@ const TeacherCourseShowView = React.createClass({
       <div>
 
         <Layout.Bar
+          zDepth={0}
           title={_.get(course, 'name')}
           crumbs={
             [

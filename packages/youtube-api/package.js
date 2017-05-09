@@ -9,13 +9,15 @@ Package.onUse(function (api) {
   api.use([
     'ecmascript',
     'renaldo:youtube-api',
+
+    'lsunsi:se-methods',
   ]);
 
   api.addFiles([
     'init.js',
-    'lib/youtube-api.js',
-    'lib/methods.js',
     'lib/regex.js',
+    'lib/methods.js',
+    'lib/youtube-api.js',
   ]);
 
   api.export('Youtube', 'client');

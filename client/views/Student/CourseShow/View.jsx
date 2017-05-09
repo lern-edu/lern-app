@@ -31,6 +31,7 @@ const StudentCourseShowView = React.createClass({
       <div>
 
         <Layout.Bar
+          zDepth={0}
           title={_.get(course, 'name')}
           crumbs={[{ label: 'Disciplinas', path: 'StudentCourses' }]} />
 
@@ -51,10 +52,6 @@ const StudentCourseShowView = React.createClass({
               }
             </div>
           }
-
-        {!_.every(ready) ? undefined :
-        <StudentCourseShowInitial open={_.get(user, 'profile.tutorial') || false}
-          {...this.props} user={user} />}
 
       </div>
     );

@@ -1,4 +1,5 @@
 const [prefix, protect] = ['User'];
+Future = Npm.require('fibers/future');
 
 Helpers.Methods({ prefix, protect }, {
   PostSave: Helpers.DefaultSave,
@@ -49,26 +50,63 @@ Helpers.Methods({ prefix, protect }, {
   // TODO Verification of like or useless should made on astronomy, but I did this here...
 
   LikePost({ userId, postId }) {
-    const post = Posts.findOne(postId);
-    const useless = post.get('useless') || [];
-    if (_.includes(useless, userId))
+    let post = Fetch.General.posts(postId);
+    Check.Cursor(post).some();
+    post = _.head(post.fetch());
+
+    if (_.includes(post.get('useless'), userId))
       return 'You already useless this post';
-    const like = post.get('like') || [];
+
+    const like = post.get('like');
     _.includes(like, userId) ? _.pull(like, userId) : like.push(userId);
     post.set('like', like);
+
+    Check.Astro(post).valid();
     post.save();
-    return 'Like';
+    return 'Useless';
   },
 
   UselessPost({ userId, postId }) {
-    const post = Posts.findOne(postId);
-    const like = post.get('like') || [];
-    if (_.includes(like, userId))
+    let post = Fetch.General.posts(postId);
+    Check.Cursor(post).some();
+    post = _.head(post.fetch());
+
+    if (_.includes(post.get('like'), userId))
       return 'You already like this post';
-    const useless = post.get('useless') || [];
+
+    const useless = post.get('useless');
     _.includes(useless, userId) ? _.pull(useless, userId) : useless.push(userId);
     post.set('useless', useless);
+
+    Check.Astro(post).valid();
     post.save();
     return 'Useless';
+  },
+
+  CommentPost({ postId, userId }, comment) {
+    comment.set('author', userId);
+    Check.Astro(comment).valid();
+
+    let post = Fetch.General.posts(postId);
+    Check.Cursor(post).some();
+    post = _.head(post.fetch());
+
+    post.push('comments', comment);
+
+    Check.Astro(post).valid();
+    post.save();
+    return post;
+  },
+
+  SearchVideo(videoId) {
+    const future = new Future();
+    YoutubeApi.videos.list({
+      part: 'id, contentDetails, player, status, snippet',
+      id: videoId,
+    }, (err, res) => {
+      if (err) future.throw(err);
+      else future.return(res);
+    });
+    return future.wait();
   },
 });

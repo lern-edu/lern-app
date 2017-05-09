@@ -2,8 +2,7 @@
 import React from 'react';
 import MenuItem from 'material-ui/MenuItem';
 import DropDownMenu from 'material-ui/DropDownMenu';
-
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
+import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle, RaisedButton } from 'material-ui';
 
 const TeacherTestShowByTagsTableChartToolbar = React.createClass({
 
@@ -15,6 +14,11 @@ const TeacherTestShowByTagsTableChartToolbar = React.createClass({
     parent.callFunction(null, dataType);
   },
 
+  handleUpdate() {
+    const { parent } = this.props;
+    parent.callFunction();
+  },
+
   /* Render
   */
 
@@ -24,6 +28,12 @@ const TeacherTestShowByTagsTableChartToolbar = React.createClass({
     return (
       <Toolbar>
         <ToolbarGroup firstChild={true}>
+          <RaisedButton
+            label='Atualizar'
+            secondary={true}
+            onTouchTap={this.handleUpdate}
+          />
+          <ToolbarSeparator />
           <DropDownMenu value={dataType} onChange={this.handleDataType}>
             <MenuItem value='overall' primaryText='Geral' />
             <MenuItem value='compare' primaryText='Comparar' />

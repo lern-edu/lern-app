@@ -1,5 +1,7 @@
 // Libs
 import React from 'react';
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui';
+import { ToolbarSeparator, DropDownMenu, MenuItem } from 'material-ui';
 
 // Views
 import StudentCourseShowLecturesCard from './Card.jsx';
@@ -45,8 +47,7 @@ const StudentCourseShowLectures = React.createClass({
   /* Handlers
   */
 
-  handleMenuClick({ value: order }, event) {
-    event.preventDefault();
+  handleMenuClick(event, index, order) {
     this.setState({ order });
   },
 
@@ -62,27 +63,41 @@ const StudentCourseShowLectures = React.createClass({
     return (
       <div>
 
-        <div className='ui blue text menu'>
-          <div className='header item'>Ordenar</div>
-          {_.map(this.orders, (v, k) =>
-            <Semantic.Button tag='a' href='#' className={`item ${k === order ? 'active' : ''}`} key={k} onClick={this.handleMenuClick} value={k}>
-              <div className='content'>
-                <div className='header'>{v.name}</div>
-              </div>
-            </Semantic.Button>
-          )}
-        </div>
+        <Toolbar>
+          <ToolbarGroup >
+            <ToolbarTitle text='Aulas' />
+          </ToolbarGroup>
+          <ToolbarGroup>
+            <ToolbarTitle text='Ordenar' />
+            <ToolbarSeparator />
+            <DropDownMenu value={order} onChange={this.handleMenuClick}>
+              {
+                _.map(this.orders, (v, k) =>
+                  <MenuItem  key={k} value={k} primaryText={v.name} />
+                )
+              }
+            </DropDownMenu>
+          </ToolbarGroup>
+        </Toolbar>
 
-        {_.map(groups, (v, k) => [
-          <div className='ui header'>
-            {this.orders[order].groupNames.call(this, k)}
-          </div>,
-          <div className='ui centered grid' key={k}>
-            {_.map(v, lecture =>
-              <StudentCourseShowLecturesCard lecture={lecture} {...this.props} key={lecture._id} />
-            )}
-          </div>,
-        ])}
+        {
+          _.map(groups, (v, k) => [
+            <div className='ui header'>
+              {this.orders[order].groupNames.call(this, k)}
+            </div>,
+            <div className='ui centered grid' key={k}>
+              {
+                _.map(v, lecture =>
+                  <StudentCourseShowLecturesCard
+                    lecture={lecture}
+                    {...this.props}
+                    key={lecture._id}
+                  />
+                )
+              }
+            </div>,
+          ])
+        }
 
       </div>
     );

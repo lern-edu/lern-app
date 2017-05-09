@@ -34,7 +34,7 @@ teacherRoutes.route('/posts', {
   name: 'TeacherPosts',
   action(params, query) {
     render({
-      main: <TeacherPostsView {...params} {...query}/>,
+      main: <TeacherPosts {...params} {...query}/>,
     });
   },
 });
@@ -43,25 +43,25 @@ teacherRoutes.route('/posts/novo', {
   name: 'TeacherPostCreate',
   action(params, query) {
     render({
-      main: <TeacherPostCreateView {...query}/>,
-    });
-  },
-});
-
-teacherRoutes.route('/posts/editar/:postId', {
-  name: 'TeacherPostEdit',
-  action(params, query) {
-    render({
-      main: <TeacherPostEditView {...params} {...query}/>,
+      main: <TeacherPostCreate {...query}/>,
     });
   },
 });
 
 teacherRoutes.route('/posts/:postId', {
   name: 'TeacherPost',
-  action(params) {
+  action(params, query) {
     render({
-      main: <TeacherPostView {...params}/>,
+      main: <TeacherPost {...params} {...query} />,
+    });
+  },
+});
+
+teacherRoutes.route('/posts/show/:postId', {
+  name: 'TeacherPostShow',
+  action(params, query) {
+    render({
+      main: <TeacherPostShow {...params} />,
     });
   },
 });
@@ -98,7 +98,7 @@ teacherRoutes.route('/testes', {
   },
 });
 
-teacherRoutes.route('/provas/novo/:testId', {
+teacherRoutes.route('/testes/novo/:testId', {
   name: 'TeacherTestCreateWithBase',
   action(params, query) {
     render({
@@ -107,7 +107,7 @@ teacherRoutes.route('/provas/novo/:testId', {
   },
 });
 
-teacherRoutes.route('/provas/novo', {
+teacherRoutes.route('/testes/novo', {
   name: 'TeacherTestCreate',
   action(params, query) {
     render({
@@ -116,7 +116,7 @@ teacherRoutes.route('/provas/novo', {
   },
 });
 
-teacherRoutes.route('/atividade/:testId', {
+teacherRoutes.route('/testes/:testId', {
   name: 'TeacherTest',
   action(params, query) {
     render({
@@ -139,15 +139,6 @@ teacherRoutes.route('/disciplinas/:courseId/atividade-por-tag/:testId', {
   action(params, query) {
     render({
       main: <TeacherTestShowByTags {...params} {...query}/>,
-    });
-  },
-});
-
-teacherRoutes.route('/disciplinas/:courseId/cognitivo/:testId', {
-  name: 'TeacherTestShowCognitive',
-  action(params, query) {
-    render({
-      main: <TeacherTestShowCognitiveView {...params} {...query}/>,
     });
   },
 });
@@ -184,24 +175,6 @@ teacherRoutes.route('/disciplinas/:courseId/notas/editar', {
   },
 });
 
-teacherRoutes.route('/disciplinas/:courseId/atividade/:testId/:attemptId/:questionId?', {
-  name: 'TeacherTestGrade',
-  action(params) {
-    render({
-      main: <TeacherTestGradeView {...params} />,
-    });
-  },
-});
-
-teacherRoutes.route('/blogs/novo', {
-  name: 'TeacherPostCreate',
-  action(params, query) {
-    render({
-      main: <TeacherPostCreateView {...params} {...query} />,
-    });
-  },
-});
-
 teacherRoutes.route('/disciplinas/:courseId/aulas/criar', {
   name: 'TeacherLectureCreate',
   action(params) {
@@ -216,6 +189,17 @@ teacherRoutes.route('/disciplinas/:courseId/aulas/:lectureId/chamada', {
   action(params) {
     render({
       main: <TeacherLecture {...params} />,
+    });
+  },
+});
+
+// Attempts
+
+teacherRoutes.route('/testes/:testId/avaliar/:attemptId', {
+  name: 'TeacherAttemptGrade',
+  action(params, query) {
+    render({
+      main: <TeacherAttemptGrade {...params} query={query} />,
     });
   },
 });

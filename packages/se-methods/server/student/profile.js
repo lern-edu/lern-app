@@ -12,11 +12,12 @@ Helpers.Methods({ prefix, protect }, {
     return user;
   },
 
-  CourseIngress(courseId) {
-    const userId = Meteor.userId();
+  CourseIngress({ courseId, userId }) {
 
     // Find course to update
-    const course = _.head(Fetch.General.courses(courseId).fetch());
+    let course = Fetch.General.courses(courseId);
+    Check.Cursor(course).some();
+    course = _.head(course.fetch());
 
     // Ingress current student on course
     course.push('students', userId);
@@ -24,17 +25,27 @@ Helpers.Methods({ prefix, protect }, {
     course.save();
 
     // Find school document
-    const school = _.head(Fetch.General.users(course.get('author')).fetch());
+    let author = Fetch.General.users(course.get('author'));
+    Check.Cursor(author).some();
+    author = _.head(author.fetch());
 
     // Remind! Not always course author is a user school
-    if (school) {
+    if (_.includes(author.get('roles'), 'school')) {
+
       // Ingress student on school
-      const student = _.head(Fetch.General.users(userId).fetch());
-      student.set('profile.school', school.get('_id'));
-      const studentSchools = student.get('profile.schools') || [];
-      studentSchools.push(school.get('_id'));
-      _.uniq(studentSchools);
-      student.set('profile.schools', studentSchools);
+      let student = Fetch.General.users(userId);
+      Check.Cursor(student).some();
+      student = _.head(student.fetch());
+
+      student.set('profile.school', author.get('_id'));
+      const studentSchools = student.get('profile.schools');
+      student.set(
+        'profile.schools',
+        studentSchools
+        ? _.join(studentSchools, [author._id])
+        : [author._id]
+      );
+
       Check.Astro(student).valid();
       student.save();
     };

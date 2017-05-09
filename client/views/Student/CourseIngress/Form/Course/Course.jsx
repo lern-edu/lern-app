@@ -6,19 +6,30 @@ import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'm
 
 const StudentCourseIngressFormCourseView = React.createClass({
 
+  // Context
+
+  contextTypes: {
+    user: React.PropTypes.object,
+  },
+
   // Handlers
 
   handleSubmit() {
     const { alias, course, form } = this.props;
-    Meteor.call('StudentCourseIngress', course._id, (err, c) => {
-      if (err) {
-        console.error(err);
-        snack('O curso não foi encontrado');
-      } else {
-        snack(`Ingressado no curso ${_.get(course, 'name')} !`);
-        FlowRouter.go('StudentCourseShow', { courseId: course._id });
-      };
-    });
+    const { user } = this.context;
+    Meteor.call(
+      'StudentCourseIngress',
+      { courseId: course._id, userId: user._id },
+      (err, c) => {
+        if (err) {
+          console.error(err);
+          snack('O curso não foi encontrado');
+        } else {
+          snack(`Ingressado no curso ${_.get(course, 'name')} !`);
+          FlowRouter.go('StudentCourseShow', { courseId: course._id });
+        };
+      }
+    );
   },
 
   /* Render

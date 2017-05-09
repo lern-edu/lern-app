@@ -30,29 +30,24 @@ Helpers.Methods({ prefix, protect }, {
   UserCreate(doc) {
     Check.Astro(doc).valid();
 
-    if (doc.school) doc.schools = [doc.school];
-    const profileFields = ['name', 'schoolType', 'cpf', 'cnpj', 'school', 'schools'];
+    doc.school ? doc.schools = [doc.school] : doc.schools = [];
 
     const { email, role } = doc;
-    const profile = _.pick(doc, profileFields);
+    const profile = _.pick(
+      doc,
+      ['name', 'schoolType', 'cpf', 'cnpj', 'school', 'schools', 'role']
+    );
 
     const userId = Accounts.createUser({ email });
-    const user = _.first(Fetch.General.users(userId).fetch());
+    let user = Fetch.General.users(userId);
+    Check.Cursor(user).some();
+    user = _.head(user.fetch());
 
     user.set('profile', new Meteor.users.ProfileSchema(profile));
     user.set('roles', [role]);
 
     Check.Astro(user).valid();
     user.save();
-
-    if (_.get(user, 'profile.school') && _.includes(_.get(user, 'roles'), 'student')) {
-      const school = _.get(Meteor.users.findOne(
-        { _id: _.get(user, 'profile.school') },
-        { fields: { profile: 1 } }), 'profile.name');
-
-      Courses.update({ name: school },
-        { $push: { students: _.get(user, '_id') } });
-    };
 
     Accounts.sendEnrollmentEmail(userId);
 

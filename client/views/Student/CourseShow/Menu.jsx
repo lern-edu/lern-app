@@ -4,11 +4,6 @@ import { Tabs, Tab } from 'material-ui';
 const StudentCourseShowMenu = React.createClass({
   //  static data
 
-  tabs: {
-    home: 'Inicio',
-    posts: 'Blog',
-  },
-
   /* Handlers
   */
 
@@ -33,7 +28,7 @@ const StudentCourseShowMenu = React.createClass({
           _.isEmpty(lectures) ? undefined
           : <Tab key='lectures' value='lectures' label='Aulas' />
         }
-        <Tab key='blog' value='blog' label='Blog' />
+        <Tab key='blog' value='posts' label='Posts' />
       </Tabs>
     );
   },

@@ -1,11 +1,15 @@
 Posts = new Mongo.Collection('posts');
 
-Posts.Comment = Astro.Class({
-  name: 'Comment',
+Posts.ContentSchema = ContentSchema('PostContent');
+
+Posts.CommentSchema = Astro.Class({
+  name: 'PostComment',
   fields: {
-    text: {
-      type: 'string',
-      validator: Validators.String(),
+    content: {
+      type: 'array',
+      nested: 'PostContent',
+      validator: Validators.minLength(1),
+      default: () => [],
     },
     answer: {
       type: 'boolean',
@@ -21,34 +25,25 @@ Posts.Schema = Astro.Class({
   name: 'Post',
   collection: Posts,
   fields: {
+    name: {
+      type: 'string',
+      validator: Validators.String(),
+    },
+    text: {
+      type: 'string',
+      optional: true,
+    },
     course: {
       type: 'string',
       validator: Validators.Reference(),
       optional: true,
       default: null,
     },
-    title: {
-      type: 'string',
-      validator: Validators.String(),
-    },
-    text: {
-      type: 'string',
-      validator: Validators.String({ min: 4, max: 32000 }),
-    },
-    images: {
+    content: {
       type: 'array',
-      validator: Validators.References(),
-      optional: true,
-    },
-    documents: {
-      type: 'array',
-      validator: Validators.References(),
-      optional: true,
-    },
-    questions: {
-      type: 'array',
-      validator: Validators.References(),
-      optional: true,
+      nested: 'PostContent',
+      validator: Validators.minLength(1),
+      default: () => [],
     },
     type: {
       type: 'string',
@@ -58,7 +53,8 @@ Posts.Schema = Astro.Class({
     },
     comments: {
       type: 'array',
-      nested: 'Comment',
+      nested: 'PostComment',
+      default: () => [],
       optional: true,
     },
   },
