@@ -30,6 +30,7 @@ const TeacherCourseShowView = React.createClass({
       <div>
 
         <Layout.Bar
+          zDepth={0}
           title={_.get(course, 'name')}
           crumbs={
             [
