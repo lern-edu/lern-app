@@ -82,7 +82,7 @@ const SchoolHomeView = React.createClass({
   render() {
 
     return (
-      <div style={{ backgroundColor: blue700, height: '90vh' }}>
+      <div style={{ backgroundColor: blue700, height: 'calc(100vh - 64px)' }}>
         <Layout.Bar title='Início' />
         <div>
         {/*{!_.every(ready) ? <LinearProgress /> : _.get({
