@@ -39,12 +39,9 @@ Helpers.Methods({ prefix, protect }, {
 
       student.set('profile.school', author.get('_id'));
       const studentSchools = student.get('profile.schools');
-      student.set(
-        'profile.schools',
-        studentSchools
-        ? _.join(studentSchools, [author._id])
-        : [author._id]
-      );
+
+      studentSchools.push(author._id);
+      student.set('profile.schools', _.uniq(studentSchools));
 
       Check.Astro(student).valid();
       student.save();
