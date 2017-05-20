@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import { LinearProgress } from 'material-ui';
+import { LinearProgress, FloatingActionButton, FontIcon } from 'material-ui';
 
 // Views
 import StudentCourseShowMenu from './Menu.jsx';
@@ -12,6 +12,13 @@ import StudentCourseShowReports from './Reports/index.jsx';
 import StudentCourseShowPosts from './Posts/index.jsx';
 
 const StudentCourseShowView = React.createClass({
+
+  styles: {
+    floatingButton: {
+      className: 'ui right aligned basic segment',
+      style: { position: 'fixed', bottom: '1em', right: '1em', zIndex: '1000' },
+    },
+  },
 
   /* Get Context
   */
@@ -52,6 +59,28 @@ const StudentCourseShowView = React.createClass({
               }
             </div>
           }
+
+          {
+            !_.includes(['posts'], active) ? undefined :
+              <div {...this.styles.floatingButton}>
+                <FloatingActionButton
+                  children={<FontIcon className='material-icons'>add</FontIcon>}
+                  href={
+                    FlowRouter.path(
+                      `Student${
+                        _.get({
+                          posts: 'Post',
+                          lectures: 'Lecture',
+                          tests: 'Test',
+                        }, active)
+                      }Create`,
+                      { courseId: _.get(course, '_id') },
+                      { course: _.get(course, '_id') },
+                    )
+                  }
+                />
+              </div>
+            }
 
       </div>
     );

@@ -154,7 +154,7 @@ studentRoutes.route('/posts', {
   },
 });
 
-studentRoutes.route('/posts/novo', {
+studentRoutes.route('/posts/novo/:course?', {
   name: 'StudentPostCreate',
   action(params, query) {
     render({
