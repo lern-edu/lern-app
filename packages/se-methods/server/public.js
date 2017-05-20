@@ -66,4 +66,31 @@ Helpers.Methods({ prefix, protect }, {
         author: onlyMine ? _.get(this, 'userId') : undefined,
       }).count();
   },
+
+  UserCreate(doc) {
+    Check.Astro(doc).valid();
+
+    doc.school ? doc.schools = [doc.school] : doc.schools = [];
+
+    const { email, role } = doc;
+    const profile = _.pick(
+      doc,
+      ['name', 'schoolType', 'cpf', 'cnpj', 'school', 'schools', 'role']
+    );
+
+    const userId = Accounts.createUser({ email });
+    let user = Fetch.General.users(userId);
+    Check.Cursor(user).some();
+    user = _.head(user.fetch());
+
+    user.set('profile', new Meteor.users.ProfileSchema(profile));
+    user.set('roles', [role]);
+
+    Check.Astro(user).valid();
+    user.save();
+
+    Accounts.sendEnrollmentEmail(userId);
+
+    return user;
+  },
 });
