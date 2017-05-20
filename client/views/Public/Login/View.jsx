@@ -1,9 +1,11 @@
 // Libs
 import React from 'react';
-import { Tabs, Tab, Paper } from 'material-ui';
+import { Tabs, Tab, Paper, Divider } from 'material-ui';
 
 // Views
 import PublicLoginEnter from './Enter.jsx';
+import PublicLoginSocial from './Social.jsx';
+import PublicLoginHeader from './Header.jsx';
 
 PublicLoginView = React.createClass({
 
@@ -53,12 +55,28 @@ PublicLoginView = React.createClass({
     const { background, form } = this.styles;
 
     return (
-      <div className='ui middle aligned center aligned grid'
-        style= {{ marginTop: '0px' }}>
+      <div className='ui middle aligned center aligned grid' style= {{ marginTop: '0px' }}>
+
         <div {...background} />
 
         <Paper {...form}>
+
+          <div className='row' style={{ marginTop: '15px' }}>
+            <div className='ui center aligned grid'>
+
+              <PublicLoginHeader />
+                <div className='sixteen wide column'>
+                  <Divider />
+                </div>
+              <PublicLoginSocial {...this.props} />
+                <div className='sixteen wide column'>
+                  <Divider />
+                </div>
               <PublicLoginEnter {...this.props} />
+
+            </div>
+          </div>
+
         </Paper>
 
       </div>
