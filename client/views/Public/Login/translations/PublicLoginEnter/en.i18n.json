@@ -2,9 +2,9 @@
   "_locale": "en-US",
   "_namespace": "PublicLoginEnter",
   "title": "English",
-  "socialMessage": "Login with social account",
-  "emailMessage" : "or use your email",
-  "noAccount": "Don't have an account?",
-  "register": "Sign in",
-  "forgotPassword": "Forgot your password?"
+  "socialMessage": "Entre através de redes sociais",
+  "emailMessage" : "Ou use seu email",
+  "noAccount": "Não possui uma conta?",
+  "register": "Cadastre-se",
+  "forgotPassword": "Esqueceu sua senha?"
 }
