@@ -181,6 +181,17 @@ studentRoutes.route('/posts/show/:postId', {
   },
 });
 
+// Lectures
+
+studentRoutes.route('/disciplinas/:courseId/aulas/:lectureId', {
+  name: 'StudentLectureShow',
+  action(params, query) {
+    render({
+      main: <StudentLectureShow {...params} />,
+    });
+  },
+});
+
 /* Test Taking
 */
 
