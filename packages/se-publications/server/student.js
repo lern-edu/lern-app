@@ -41,6 +41,37 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
+  Lectures({ lectureId }={}, { subjects, tags, course, author }) {
+    const { userId } = this;
+    return {
+      find() {
+        const lecture = Fetch.General.lectures(lectureId);
+        if (lectureId) Check.Cursor(lecture).some();
+        return lecture;
+      },
+
+      children: [
+        {
+          find(lecture) {
+            return course && lecture.findCourse();
+          },
+        }, {
+          find(lecture) {
+            return author && lecture.findAuthor();
+          },
+        }, {
+          find(lecture) {
+            return subjects && lecture.findSubjects();
+          },
+        }, {
+          find(lecture) {
+            return tags && lecture.findTags();
+          },
+        },
+      ],
+    };
+  },
+
   Courses({ courseId }={}, { posts,
     users,
     tests,
