@@ -4,11 +4,11 @@ import { FontIcon, FloatingActionButton } from 'material-ui';
 import { StepContent, Stepper, Step, StepButton } from 'material-ui';
 
 // Views
-import TeacherLectureFormTheme from './Theme/Container.jsx';
-import TeacherLectureFormBasic from './Basic/index.jsx';
-import TeacherLectureFormDate from './Date/index.jsx';
+import TeacherLectureEditFormTheme from './Theme/Container.jsx';
+import TeacherLectureEditFormBasic from './Basic/index.jsx';
+import TeacherLectureEditFormDate from './Date/index.jsx';
 
-const TeacherLectureForm = React.createClass({
+const TeacherLectureEditForm = React.createClass({
   mixins: [AstroForm(Lectures.Schema, 'TeacherLectureSave')],
 
   // Styles
@@ -91,7 +91,7 @@ const TeacherLectureForm = React.createClass({
               Informações
             </StepButton>
             <StepContent>
-              <TeacherLectureFormBasic
+              <TeacherLectureEditFormBasic
                 errors={this.state.errors}
                 done={done.basic}
                 {...this.props}
@@ -105,7 +105,7 @@ const TeacherLectureForm = React.createClass({
               Temas
             </StepButton>
             <StepContent>
-              <TeacherLectureFormTheme
+              <TeacherLectureEditFormTheme
                 errors={this.state.errors}
                 done={done.theme}
                 {...this.props}
@@ -119,7 +119,7 @@ const TeacherLectureForm = React.createClass({
               Data
             </StepButton>
             <StepContent>
-              <TeacherLectureFormDate
+              <TeacherLectureEditFormDate
                 errors={this.state.errors}
                 done={done.date}
                 key='date'
@@ -142,4 +142,4 @@ const TeacherLectureForm = React.createClass({
   },
 });
 
-export default TeacherLectureForm;
+export default TeacherLectureEditForm;

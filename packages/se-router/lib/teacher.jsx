@@ -184,11 +184,20 @@ teacherRoutes.route('/disciplinas/:courseId/aulas/criar', {
   },
 });
 
-teacherRoutes.route('/disciplinas/:courseId/aulas/:lectureId/chamada', {
-  name: 'TeacherLecture',
+teacherRoutes.route('/disciplinas/:courseId/aulas/:lectureId', {
+  name: 'TeacherLectureEdit',
   action(params) {
     render({
-      main: <TeacherLecture {...params} />,
+      main: <TeacherLectureEdit {...params} />,
+    });
+  },
+});
+
+teacherRoutes.route('/disciplinas/:courseId/aulas/:lectureId/chamada', {
+  name: 'TeacherLectureAttendance',
+  action(params) {
+    render({
+      main: <TeacherLectureAttendance {...params} />,
     });
   },
 });

@@ -3,10 +3,10 @@ import React from 'react';
 import { RaisedButton, TextField, MenuItem } from 'material-ui';
 
 // View
-import TeacherLectureFormThemeSubjects from './Subjects.jsx';
-import TeacherLectureFormThemeTags from './Tags.jsx';
+import TeacherLectureEditFormThemeSubjects from './Subjects.jsx';
+import TeacherLectureEditFormThemeTags from './Tags.jsx';
 
-const TeacherLectureFormThemeView = React.createClass({
+const TeacherLectureEditFormThemeView = React.createClass({
 
   /* Render
   */
@@ -19,11 +19,11 @@ const TeacherLectureFormThemeView = React.createClass({
         <div className='ui grid'>
 
           <div className='row'>
-            <TeacherLectureFormThemeSubjects {...this.props} />
+            <TeacherLectureEditFormThemeSubjects {...this.props} />
           </div>
 
           <div className='row'>
-            <TeacherLectureFormThemeTags {...this.props} />
+            <TeacherLectureEditFormThemeTags {...this.props} />
           </div>
 
           <div className='row'>
@@ -45,4 +45,4 @@ const TeacherLectureFormThemeView = React.createClass({
   },
 });
 
-export default TeacherLectureFormThemeView;
+export default TeacherLectureEditFormThemeView;

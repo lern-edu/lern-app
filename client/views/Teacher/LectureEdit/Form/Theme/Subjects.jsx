@@ -4,7 +4,7 @@ import { AutoComplete, Chip } from 'material-ui';
 
 // View
 
-const TeacherLectureFormThemeSubjects = React.createClass({
+const TeacherLectureEditFormThemeSubjects = React.createClass({
 
   // Handlers
 
@@ -68,4 +68,4 @@ const TeacherLectureFormThemeSubjects = React.createClass({
   },
 });
 
-export default TeacherLectureFormThemeSubjects;
+export default TeacherLectureEditFormThemeSubjects;

@@ -2,7 +2,7 @@
 import React from 'react';
 import { RaisedButton, DatePicker, TimePicker } from 'material-ui';
 
-const TeacherLectureFormDate = React.createClass({
+const TeacherLectureEditFormDate = React.createClass({
 
   // Handlers
 
@@ -95,4 +95,4 @@ const TeacherLectureFormDate = React.createClass({
   },
 });
 
-export default TeacherLectureFormDate;
+export default TeacherLectureEditFormDate;

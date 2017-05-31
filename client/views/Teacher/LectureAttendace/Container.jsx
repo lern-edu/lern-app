@@ -3,9 +3,9 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
 // Views
-import TeacherLectureView from './View.jsx';
+import TeacherLectureAttendanceView from './View.jsx';
 
-TeacherLecture = createContainer(({ courseId, lectureId }) => {
+TeacherLectureAttendance = createContainer(({ courseId, lectureId }) => {
 
   const handles = {
     course: Meteor.subscribe(
@@ -28,4 +28,4 @@ TeacherLecture = createContainer(({ courseId, lectureId }) => {
   data.students = data.course && data.course.findStudents().fetch();
 
   return data;
-}, TeacherLectureView);
+}, TeacherLectureAttendanceView);
