@@ -59,16 +59,18 @@ const StudentCourseShowLecturesCard = React.createClass({
           </CardText>
 
           <CardActions>
-            {/* <FlatButton
-            href={
-              FlowRouter.path(
-                'StudentLecture',
-                { lectureId: lecture._id, courseId: course._id }
-              )
-            }
-            label='Ver'
-            secondary={true}
-          /> */}
+
+            <FlatButton
+              href={
+                FlowRouter.path(
+                  'StudentLectureShow',
+                  { lectureId: lecture._id, courseId: course._id }
+                )
+              }
+              label='Ver'
+              primary={true}
+            />
+
           </CardActions>
         </Card>
       </div>
