@@ -2,11 +2,11 @@
   "_locale": "en-US",
   "_namespace": "WeekDays",
   "title": "English",
-  "mon": "Monday",
-  "tue": "Tuesday",
-  "wed": "Wednesday",
-  "thu": "Thursday",
-  "fri": "Friday",
-  "sat": "Saturday",
-  "dom": "Sunday"
+  "mon": "Segunda",
+  "tue": "Terça",
+  "wed": "Quarta",
+  "thu": "Quinta",
+  "fri": "Sexta",
+  "sat": "Sábado",
+  "dom": "Domingo"
 }

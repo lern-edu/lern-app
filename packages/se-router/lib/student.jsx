@@ -154,7 +154,7 @@ studentRoutes.route('/posts', {
   },
 });
 
-studentRoutes.route('/posts/novo', {
+studentRoutes.route('/posts/novo/:course?', {
   name: 'StudentPostCreate',
   action(params, query) {
     render({
@@ -177,6 +177,17 @@ studentRoutes.route('/posts/show/:postId', {
   action(params, query) {
     render({
       main: <StudentPostShow {...params} />,
+    });
+  },
+});
+
+// Lectures
+
+studentRoutes.route('/disciplinas/:courseId/aulas/:lectureId', {
+  name: 'StudentLectureShow',
+  action(params, query) {
+    render({
+      main: <StudentLectureShow {...params} />,
     });
   },
 });

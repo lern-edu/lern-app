@@ -1,6 +1,6 @@
 import React from 'react';
 
-TeacherLectureAttendanceFormStudent = React.createClass({
+TeacherLectureEditAttendanceFormStudent = React.createClass({
   mixins: [Semantic.Transition('scale')],
 
   /* Render

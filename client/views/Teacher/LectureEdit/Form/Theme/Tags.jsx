@@ -4,7 +4,7 @@ import { AutoComplete, Chip, MenuItem, Toggle } from 'material-ui';
 
 // View
 
-const TeacherLectureFormThemeTags = React.createClass({
+const TeacherLectureEditFormThemeTags = React.createClass({
 
   // Handlers
 
@@ -91,4 +91,4 @@ const TeacherLectureFormThemeTags = React.createClass({
   },
 });
 
-export default TeacherLectureFormThemeTags;
+export default TeacherLectureEditFormThemeTags;

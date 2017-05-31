@@ -22,8 +22,8 @@ Meteor.users.Schema.extend({
     },
 
     hasRole(r) {
-      const role = this.getRole();
-      return r === role;
+      const role = this.getRoles();
+      return _.includes(role, r);
     },
 
     getSettingsRoute() {

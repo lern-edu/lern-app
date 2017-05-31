@@ -18,8 +18,8 @@ const StudentPostCreateFormBasic = React.createClass({
   },
 
   handleCourse({ value }, index) {
-    const course = _.get(value, 'key') || null;
-    this.props.form.defaultHandler({ course }, { doc: true });
+    const course = index > -1 ? _.get(value, 'key') : null;
+    this.props.form.defaultHandler({ course }, { query: true, doc: true });
   },
 
   /* Render
@@ -100,7 +100,17 @@ const StudentPostCreateFormBasic = React.createClass({
           </div>
 
           <div className='row'>
+            {
+              form.doc.get('course')
+              ? <p><b>Curso selecionado: </b>
+                {_.get(_.find(courses, { _id: form.doc.get('course') }), 'name')}</p>
+              : undefined
+            }
+          </div>
+
+          <div className='row'>
             <AutoComplete
+              value={this.props.course}
               onNewRequest={this.handleCourse}
               floatingLabelText='Curso'
               filter={AutoComplete.fuzzyFilter}

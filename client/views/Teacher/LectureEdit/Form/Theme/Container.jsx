@@ -2,9 +2,9 @@
 import { createContainer } from 'meteor/react-meteor-data';
 
 // View
-import TeacherLectureFormThemeView from './index.jsx';
+import TeacherLectureEditFormThemeView from './index.jsx';
 
-export default TeacherLectureFormTheme = createContainer(({ form }) => {
+export default TeacherLectureEditFormTheme = createContainer(({ form }) => {
   const subjectIds = form.doc.get('subjects');
 
   const handles = {
@@ -17,4 +17,4 @@ export default TeacherLectureFormTheme = createContainer(({ form }) => {
   };
 
   return data;
-}, TeacherLectureFormThemeView);
+}, TeacherLectureEditFormThemeView);

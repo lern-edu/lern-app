@@ -2,7 +2,7 @@
 import React from 'react';
 import { RaisedButton, Card, CardHeader, CardText, TextField } from 'material-ui';
 
-const TeacherLectureFormBasic = React.createClass({
+const TeacherLectureEditFormBasic = React.createClass({
 
   // Handlers
 
@@ -85,4 +85,4 @@ const TeacherLectureFormBasic = React.createClass({
   },
 });
 
-export default TeacherLectureFormBasic;
+export default TeacherLectureEditFormBasic;

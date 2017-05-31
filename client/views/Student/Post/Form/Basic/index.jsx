@@ -19,7 +19,7 @@ const StudentPostFormBasic = React.createClass({
 
   handleCourse({ value }, index) {
     const course = _.get(value, 'key') || null;
-    this.props.form.defaultHandler({ course }, { doc: true });
+    this.props.form.defaultHandler({ course }, { query: true, doc: true });
   },
 
   /* Render
@@ -97,6 +97,15 @@ const StudentPostFormBasic = React.createClass({
                 </div>
               </CardText>
             </Card>
+          </div>
+
+          <div className='row'>
+            {
+              form.doc.get('course')
+              ? <p><b>Curso selecionado: </b>
+                {_.get(_.find(courses, { _id: form.doc.get('course') }), 'name')}</p>
+              : undefined
+            }
           </div>
 
           <div className='row'>

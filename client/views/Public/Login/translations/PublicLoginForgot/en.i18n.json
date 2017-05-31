@@ -2,13 +2,13 @@
   "_locale": "en-US",
   "_namespace": "PublicLoginForgot",
   "title": "English",
-  "forgotPasswordSuccess": "Message sent",
-  "forgotPasswordEmailNotFound" : "Lern didn't find the email",
-  "forgotPasswordEmailError": "Bad email",
-  "DialogTitle": "Recover Password",
-  "DialogText": "Tell us your email to send recovery link.",
-  "SendButton": "Send",
-  "CancelButton": "Cancel",
+  "forgotPasswordSuccess": "Mensagem enviada",
+  "forgotPasswordEmailNotFound" : "A Lern não encontrou o email",
+  "forgotPasswordEmailError": "Email inválido",
+  "DialogTitle": "Recuperar senha",
+  "DialogText": "Nos diga seu email para enviar o link de recuperação.",
+  "SendButton": "Enviar",
+  "CancelButton": "Cancelar",
   "TextFieldEmailLabel": "Email",
-  "TextFieldEmailError": "Email invalid"
+  "TextFieldEmailError": "Email inválido"
 }
