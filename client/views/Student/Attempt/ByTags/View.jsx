@@ -27,12 +27,6 @@ const StudentAttemptByTagsView = React.createClass({
             crumbs={
               [
                 {
-                  label: _.get(course, 'name'),
-                  path: FlowRouter.path(
-                    'StudentCourseShow',
-                    { courseId: _.get(test, 'course') }
-                  ),
-                }, {
                   label: test.name,
                   path: FlowRouter.path(
                     'StudentTest',

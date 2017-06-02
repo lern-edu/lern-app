@@ -3,8 +3,10 @@ import React from 'react';
 import Chart from 'chart.js';
 import { Card, CardMedia, CardText, List } from 'material-ui';
 import { ListItem, Avatar, Chip, Subheader } from 'material-ui';
+import { Screen } from 'meteor/lsunsi:se-layouts';
 
 const StudentAttemptByTagsData = React.createClass({
+  mixins: [Screen],
 
   // Lifecycle
 
@@ -13,7 +15,9 @@ const StudentAttemptByTagsData = React.createClass({
   },
 
   componentDidMount() {
-    const { refs: { chart }, props: { answers, questions, tags, user } } = this;
+    const { chart } = this.refs;
+    const { answers, questions, tags, user } = this.props;
+    const { innerWidth } = this.state;
 
     // define label
     const orderedTags = _.orderBy(tags, ['text']);
@@ -58,11 +62,19 @@ const StudentAttemptByTagsData = React.createClass({
       },
       options: {
         legend: {
-          display: false,
+          display: true,
+          labels: {
+            fontSize: innerWidth < 769 ? 10 : 20,
+          },
         },
         scale: {
+          pointLabels: {
+            fontSize: innerWidth < 769 ? 10 : 20,
+            fontColor: 'ff0000',
+          },
           ticks: {
             beginAtZero: true,
+            fontSize: innerWidth < 769 ? 10 : 20,
             min: _.get(_.find(questions, { type: 'number' }), 'range.min'),
             max: _.get(_.find(questions, { type: 'number' }), 'range.max'),
           },

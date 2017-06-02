@@ -24,6 +24,7 @@ const TeacherTestShowByTagsTableChartToolbar = React.createClass({
 
   render() {
     const { dataType, avaregeTags } = this.props;
+    const { parent: { state: { innerWidth } } } = this.props;
 
     return (
       <Toolbar>
@@ -39,16 +40,20 @@ const TeacherTestShowByTagsTableChartToolbar = React.createClass({
             <MenuItem value='compare' primaryText='Comparar' />
           </DropDownMenu>
         </ToolbarGroup>
-        <ToolbarGroup>
-          <ToolbarTitle text='Média' />
-          <ToolbarSeparator />
-          <ToolbarTitle style={{ marginLeft: 5 }} text={
-            numeral(
-              _.mean(avaregeTags)
-              || 0
-            ).format('0.0')
-          } />
-        </ToolbarGroup>
+        {
+          innerWidth < 769
+          ? undefined
+          : <ToolbarGroup>
+            <ToolbarTitle text='Média' />
+            <ToolbarSeparator />
+            <ToolbarTitle style={{ marginLeft: 5 }} text={
+              numeral(
+                _.mean(avaregeTags)
+                || 0
+              ).format('0.0')
+            } />
+          </ToolbarGroup>
+        }
       </Toolbar>
     );
   },

@@ -4,11 +4,13 @@ import React from 'react';
 import Chart from 'chart.js';
 import { Card, CardMedia, CardText, List, Paper } from 'material-ui';
 import { ListItem, Avatar, Chip, Subheader } from 'material-ui';
+import { Screen } from 'meteor/lsunsi:se-layouts';
 
 // Views
 import TeacherTestShowByTagsTableChartToolbar from './Toolbar.jsx';
 
 const TeacherTestShowByTagsTableChart = React.createClass({
+  mixins: [Screen],
 
   // Lifecycle
 
@@ -50,6 +52,7 @@ const TeacherTestShowByTagsTableChart = React.createClass({
     const { answers, questions, tags, students, course } = this.props;
     const { chart } = this.refs;
     const { selectedStudents } = query;
+    const { innerWidth } = this.state;
 
     // define label
     const validAttempts = _.values(_.omit(query, 'selectedStudents'));
@@ -101,8 +104,15 @@ const TeacherTestShowByTagsTableChart = React.createClass({
       options: {
         legend: {
           display: true,
+          labels: {
+            fontSize: innerWidth < 769 ? 10 : 20,
+          },
         },
         scale: {
+          pointLabels: {
+            fontSize: innerWidth < 769 ? 10 : 20,
+            fontColor: 'ff0000',
+          },
           ticks: {
             beginAtZero: true,
             min: _.get(_.find(questions, { type: 'number' }), 'range.min'),
@@ -202,8 +212,15 @@ const TeacherTestShowByTagsTableChart = React.createClass({
       options: {
         legend: {
           display: true,
+          labels: {
+            fontSize: innerWidth < 769 ? 10 : 20,
+          },
         },
         scale: {
+          pointLabels: {
+            fontSize: innerWidth < 769 ? 10 : 20,
+            fontColor: 'ff0000',
+          },
           ticks: {
             beginAtZero: true,
             min: _.get(_.find(questions, { type: 'number' }), 'range.min'),
