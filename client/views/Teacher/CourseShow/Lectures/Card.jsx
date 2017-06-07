@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardHeader, CardText, FlatButton, CardActions, Chip, Divider } from 'material-ui';
 
-TeacherCourseShowLecturesCard = React.createClass({
+export default class TeacherCourseShowLecturesCard extends React.Component {
 
   /* Render
   */
@@ -37,9 +37,6 @@ TeacherCourseShowLecturesCard = React.createClass({
                 />
               )
             }
-
-            {/* <p>{lecture.attendants ? `${lecture.attendants.length} presentes`
-            : 'Sem dados de presença'}</p> */}
 
             <div className='row'>
               <div className='sixteen wide column'>
@@ -87,5 +84,6 @@ TeacherCourseShowLecturesCard = React.createClass({
         </Card>
       </div>
     );
-  },
-});
+  }
+
+};
