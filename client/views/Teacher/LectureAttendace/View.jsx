@@ -22,7 +22,11 @@ const TeacherLectureAttendanceView = React.createClass({
           crumbs={[
             {
               label: _.get(course, 'name'),
-              path: FlowRouter.path('TeacherCourseShow', { courseId: _.get(course, '_id') }),
+              path: FlowRouter.path(
+                'TeacherCourseShow',
+                { courseId: _.get(course, '_id') },
+                { active: 'lectures' },
+              ),
             },
           ]}
         />
