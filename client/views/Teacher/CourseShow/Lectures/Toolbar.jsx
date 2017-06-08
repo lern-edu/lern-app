@@ -45,7 +45,15 @@ export default class TeacherCourseShowLecturesToolbar extends React.Component {
               </IconButton>
             }
           >
-            <MenuItem primaryText='Criar série de aulas' />
+            <MenuItem
+              href={
+                FlowRouter.path(
+                  `TeacherLectureSeries`,
+                  { courseId: _.get(course, '_id') },
+                )
+              }
+              primaryText='Criar série de aulas'
+            />
             <MenuItem
               href={
                 FlowRouter.path(

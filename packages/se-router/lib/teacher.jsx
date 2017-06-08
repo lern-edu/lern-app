@@ -197,6 +197,15 @@ teacherRoutes.route('/disciplinas/:courseId/aulas/criar', {
   },
 });
 
+teacherRoutes.route('/disciplinas/:courseId/aulas/series', {
+  name: 'TeacherLectureSeries',
+  action(params) {
+    render({
+      main: <TeacherLectureSeries {...params} />,
+    });
+  },
+});
+
 teacherRoutes.route('/disciplinas/:courseId/aulas/:lectureId', {
   name: 'TeacherLectureEdit',
   action(params) {

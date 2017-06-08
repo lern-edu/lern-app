@@ -17,7 +17,6 @@ Lectures.Schema = Astro.Class({
     info: {
       type: 'array',
       nested: 'LectureContent',
-      validator: Validators.minLength(1),
       optional: true,
       default: () => [],
     },
