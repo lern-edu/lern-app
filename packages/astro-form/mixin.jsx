@@ -25,7 +25,8 @@ AstroForm = function (AstroClass, submitMethod) {
         this.setState({ valid: true });
         if (_.isFunction(this.handleSubmitSuccess))
           this.handleSubmitSuccess(...args);
-        else console.info(args);
+
+        // else console.info(args);
       } else if (key === 'error') {
         this.updateValidation();
         if (_.isFunction(this.handleSubmitError))
