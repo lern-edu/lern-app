@@ -95,6 +95,45 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
+  Lectures({ lectureId }={}, { subjects, tags, course, author, students }) {
+    const { userId } = this;
+    return {
+      find() {
+        const lecture = Fetch.General.lectures(lectureId);
+        if (lectureId) Check.Cursor(lecture).some();
+        return lecture;
+      },
+
+      children: [
+        {
+          find(lecture) {
+            return course && lecture.findCourse();
+          },
+
+          children: [
+            {
+              find(course) {
+                return students && course.findStudents();
+              },
+            },
+          ],
+        }, {
+          find(lecture) {
+            return author && lecture.findAuthor();
+          },
+        }, {
+          find(lecture) {
+            return subjects && lecture.findSubjects();
+          },
+        }, {
+          find(lecture) {
+            return tags && lecture.findTags();
+          },
+        },
+      ],
+    };
+  },
+
   Post({ postId }={}, { images, documents }={}) {
     const { userId } = this;
     return {

@@ -5,6 +5,7 @@ import { LinearProgress } from 'material-ui';
 // Views
 import TeacherLectureAttendanceTitle from './Title.jsx';
 import TeacherLectureAttendanceTable from './Table.jsx';
+import TeacherLectureAttendanceContent from './Content.jsx';
 
 const TeacherLectureAttendanceView = React.createClass({
   /* Render
@@ -17,7 +18,7 @@ const TeacherLectureAttendanceView = React.createClass({
       <div className='ui container'>
 
         <Layout.Bar
-          title='Presença'
+          title={_.get(lecture, 'name')}
           crumbs={[
             {
               label: _.get(course, 'name'),
@@ -30,6 +31,7 @@ const TeacherLectureAttendanceView = React.createClass({
           !_.every(ready)
           ? <LinearProgress />
           : [
+            <TeacherLectureAttendanceContent {...this.props} key='content' />,
             <TeacherLectureAttendanceTitle {...this.props} key='title' />,
             <TeacherLectureAttendanceTable {...this.props} doc={lecture} key='table' />,
           ]
