@@ -44,7 +44,6 @@ const TeacherLectureEditFormDate = React.createClass({
               formatDate={this.formatDate}
               floatingLabelText='Data de início'
               onChange={this.handleStartDateChange}
-              minDate={new Date()}
             />
           </div>
 

@@ -42,7 +42,7 @@ const SchoolCourseCreateFormTimeBounds = React.createClass({
               formatDate={this.formatDate}
               floatingLabelText='Data de início'
               onChange={this.handleStartDateChange}
-              minDate={new Date()} />
+            />
           </div>
 
           <div className='row'>
@@ -51,7 +51,8 @@ const SchoolCourseCreateFormTimeBounds = React.createClass({
               value={startDate}
               errorText={errors.startDate}
               floatingLabelText='Hora de início'
-              onChange={this.handleStartDateChange} />
+              onChange={this.handleStartDateChange}
+            />
           </div>
 
           <div className='row'>
@@ -62,7 +63,8 @@ const SchoolCourseCreateFormTimeBounds = React.createClass({
               formatDate={this.formatDate}
               floatingLabelText='Data de término'
               onChange={this.handleEndDateChange}
-              minDate={endDateMin} />
+              minDate={endDateMin}
+            />
           </div>
 
           <div className='row'>
@@ -71,7 +73,8 @@ const SchoolCourseCreateFormTimeBounds = React.createClass({
               value={endDate}
               errorText={errors.endDate}
               floatingLabelText='Hora de término'
-              onChange={this.handleEndDateChange} />
+              onChange={this.handleEndDateChange}
+            />
           </div>
 
           <div className='row'>
@@ -79,12 +82,14 @@ const SchoolCourseCreateFormTimeBounds = React.createClass({
               label='Voltar'
               secondary={true}
               style={{ marginRight: 5 }}
-              onTouchTap={form.prevStep} />
+              onTouchTap={form.prevStep}
+            />
             <RaisedButton
               label='Próximo'
               disabled={!done}
               primary={true}
-              onTouchTap={form.nextStep} />
+              onTouchTap={form.nextStep}
+            />
           </div>
 
         </div>
