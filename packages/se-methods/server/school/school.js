@@ -7,6 +7,9 @@ Helpers.Methods({ prefix, protect }, {
 
   CourseCreate(doc) {
     doc.generateAlias();
+    const schoolId = Meteor.userId();
+
+    doc.set('school', schoolId);
 
     Helpers.DefaultSave(doc);
 
@@ -20,7 +23,7 @@ Helpers.Methods({ prefix, protect }, {
     });
 
     const teachers = doc.get('teachers');
-    const schoolId = Meteor.userId();
+
     if (_.includes(doc.get('teachers'), schoolId)) {
       const school = _.head(Fetch.General.users(schoolId).fetch());
       school.push('roles', 'teacher');

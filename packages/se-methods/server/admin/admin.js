@@ -388,4 +388,54 @@ Helpers.Methods({ prefix, protect }, {
     return 'success';
   },
 
+  CreateCafolUsers(names, courseId, defaulPassword) {
+    let course = Fetch.General.courses(courseId);
+    Check.Cursor(course).some();
+    course = _.head(course.fetch());
+
+    const replaceAll = (str) => {
+      let newStr = str;
+      while (newStr.search(' ') != -1)
+       newStr = newStr.replace(' ', '');
+      return newStr;
+    };
+
+    const emails = [];
+
+    _.forEach(names, (name) => {
+
+      console.log(name);
+
+      const email = replaceAll(_.deburr(_.lowerCase(replaceAll(name))) + '@lern.com.br');
+      const userId = Accounts.createUser({ email: replaceAll(email) });
+
+      let user = Fetch.General.users(userId);
+      Check.Cursor(user).some();
+      user = _.head(user.fetch());
+
+      user.set('profile', {
+        name,
+        firstName: name.split(' ')[0],
+        lastName: name.substring(name.search(' ') + 1, name.length),
+        school: course.author,
+        schools: [course.author],
+        role: 'student',
+      });
+      user.set('roles', ['student']);
+
+      Check.Astro(user).valid();
+      user.save();
+
+      course.push('students', userId);
+      Check.Astro(course).valid();
+      course.save();
+
+      Accounts.setPassword(user._id, defaulPassword, { logout: true });
+
+      emails.push(email);
+    });
+
+    return emails;
+  },
+
 });
