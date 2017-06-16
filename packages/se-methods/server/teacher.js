@@ -40,6 +40,43 @@ Helpers.Methods({ prefix, protect }, {
     return lecture;
   },
 
+  LecturesSeriesCreate({ schedule, startDate, endDate, courseId }) {
+
+    console.log(schedule, startDate, endDate, courseId);
+
+    const lecturesCreated = [];
+
+    _.forEach(schedule, s => {
+      const lectureStartDate = moment(s.startDate);
+      const lectureEndDate = moment(s.endDate);
+      let lectureDays = moment().day(_.get(WeekDays.all('both'), s.day));
+      if (lectureDays.isBefore(startDate))
+        lectureDays.add(7, 'd');
+
+      while (lectureDays.isSameOrBefore(endDate)) {
+        const lecture = new Lectures.Schema({
+          course: courseId,
+          name: `Aula ${moment(lectureDays).format('DD/MM')}`,
+          subjects: ['J6XyZxJMwyXo8Sw2E'],
+          tags: ['mHPjPqjnnr9Npqupf'],
+          startDate: new Date(lectureDays.hour(lectureStartDate.hour())
+          .minute(lectureStartDate.minute())
+            .second(lectureStartDate.second()).toDate()),
+          endDate: new Date(lectureDays.hour(lectureEndDate.hour())
+          .minute(lectureEndDate.minute())
+            .second(lectureEndDate.second()).toDate()),
+        });
+
+        Check.Astro(lecture);
+        Helpers.DefaultSave(lecture);
+        lecturesCreated.push(lecture);
+        lectureDays.add(7, 'd');
+      };
+    });
+
+    return lecturesCreated;
+  },
+
   // Save attempt on grade
   // gradesToSave @ object like { gradeId: attemptId }
   GradesAttemptSave(gradesToSave) {

@@ -21,7 +21,7 @@ PublicLoginView = React.createClass({
     form: {
       className: 'eight wide computer ten wide tablet thirteen wide mobile column',
       style: {
-        marginTop: '7%',
+        marginTop: '3%',
         padding: '0px',
       },
       zDepth: 4,

@@ -175,11 +175,33 @@ teacherRoutes.route('/disciplinas/:courseId/notas/editar', {
   },
 });
 
+// Attempts
+
+teacherRoutes.route('/testes/:testId/avaliar/:attemptId', {
+  name: 'TeacherAttemptGrade',
+  action(params, query) {
+    render({
+      main: <TeacherAttemptGrade {...params} query={query} />,
+    });
+  },
+});
+
+// Lectures
+
 teacherRoutes.route('/disciplinas/:courseId/aulas/criar', {
   name: 'TeacherLectureCreate',
   action(params) {
     render({
       main: <TeacherLectureCreate {...params} />,
+    });
+  },
+});
+
+teacherRoutes.route('/disciplinas/:courseId/aulas/series', {
+  name: 'TeacherLectureSeries',
+  action(params) {
+    render({
+      main: <TeacherLectureSeries {...params} />,
     });
   },
 });
@@ -198,17 +220,6 @@ teacherRoutes.route('/disciplinas/:courseId/aulas/:lectureId/chamada', {
   action(params) {
     render({
       main: <TeacherLectureAttendance {...params} />,
-    });
-  },
-});
-
-// Attempts
-
-teacherRoutes.route('/testes/:testId/avaliar/:attemptId', {
-  name: 'TeacherAttemptGrade',
-  action(params, query) {
-    render({
-      main: <TeacherAttemptGrade {...params} query={query} />,
     });
   },
 });

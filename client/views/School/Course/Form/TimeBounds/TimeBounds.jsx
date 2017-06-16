@@ -42,7 +42,7 @@ const SchoolCourseFormTimeBounds = React.createClass({
               formatDate={this.formatDate}
               floatingLabelText='Data de início'
               onChange={this.handleStartDateChange}
-              minDate={new Date()} />
+            />
           </div>
 
           <div className='row'>
@@ -51,7 +51,8 @@ const SchoolCourseFormTimeBounds = React.createClass({
               value={startDate}
               errorText={errors.startDate}
               floatingLabelText='Hora de início'
-              onChange={this.handleStartDateChange} />
+              onChange={this.handleStartDateChange}
+            />
           </div>
 
           <div className='row'>
@@ -62,7 +63,8 @@ const SchoolCourseFormTimeBounds = React.createClass({
               formatDate={this.formatDate}
               floatingLabelText='Data de término'
               onChange={this.handleEndDateChange}
-              minDate={endDateMin} />
+              minDate={endDateMin}
+            />
           </div>
 
           <div className='row'>
@@ -71,7 +73,8 @@ const SchoolCourseFormTimeBounds = React.createClass({
               value={endDate}
               errorText={errors.endDate}
               floatingLabelText='Hora de término'
-              onChange={this.handleEndDateChange} />
+              onChange={this.handleEndDateChange}
+            />
           </div>
 
         </div>

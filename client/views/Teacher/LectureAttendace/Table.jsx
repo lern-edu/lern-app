@@ -1,6 +1,6 @@
 // Libs
 import React from 'react';
-import { Avatar, FontIcon, Chip } from 'material-ui';
+import { Avatar, FontIcon, Chip, Paper } from 'material-ui';
 import { Table, TableBody, TableFooter, TableHeader } from 'material-ui/Table';
 import { TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 import _ from 'lodash';
@@ -31,63 +31,65 @@ const TeacherLectureAttendanceTable = React.createClass({
     const { students } = this.props;
 
     return (
-      <Table
-        selectable={true}
-        multiSelectable={true}
-        onRowSelection={this.handleRows}
-      >
-        <TableHeader
-          displaySelectAll={true}
-          adjustForCheckbox={true}
-          enableSelectAll={true}
+      <Paper>
+        <Table
+          selectable={true}
+          multiSelectable={true}
+          onRowSelection={this.handleRows}
         >
+          <TableHeader
+            displaySelectAll={true}
+            adjustForCheckbox={true}
+            enableSelectAll={true}
+          >
 
-          <TableRow>
-            <TableHeaderColumn tooltip='Nome do aluno'>Aluno</TableHeaderColumn>
-          </TableRow>
+            <TableRow>
+              <TableHeaderColumn tooltip='Nome do aluno'>Aluno</TableHeaderColumn>
+            </TableRow>
 
-        </TableHeader>
+          </TableHeader>
 
-        <TableBody
-          displayRowCheckbox={true}
-          deselectOnClickaway={false}
-          showRowHover={false}
-          stripedRows={true}
-        >
-          {
-            _.map(
-              _.orderBy(students, 'profile.name'),
-              student =>
-                <TableRow
-                  key={student._id}
-                  selected={_.includes(this.doc.attendants, student._id)}
-                >
-                  <TableRowColumn>
-                    <Chip>
-                      {
-                        _.get(student, 'profile.profilePic')
-                        ? <Avatar src={_.get(student, 'profile.profilePic')} />
-                        : <Avatar size={32}>
-                          {
-                            _.first(
-                              _.get(student, 'profile.name')
-                            )
-                          }
-                        </Avatar>
-                      }
-                      {
-                        _.get(student, 'profile.name')
-                      }
-                    </Chip>
-                  </TableRowColumn>
+          <TableBody
+            displayRowCheckbox={true}
+            deselectOnClickaway={false}
+            showRowHover={false}
+            stripedRows={true}
+          >
+            {
+              _.map(
+                _.orderBy(students, 'profile.name'),
+                student =>
+                  <TableRow
+                    key={student._id}
+                    selected={_.includes(this.doc.attendants, student._id)}
+                  >
+                    <TableRowColumn>
+                      <Chip>
+                        {
+                          _.get(student, 'profile.profilePic')
+                          ? <Avatar src={_.get(student, 'profile.profilePic')} />
+                          : <Avatar size={32}>
+                            {
+                              _.first(
+                                _.get(student, 'profile.name')
+                              )
+                            }
+                          </Avatar>
+                        }
+                        {
+                          _.get(student, 'profile.name')
+                        }
+                      </Chip>
+                    </TableRowColumn>
 
-                </TableRow>
-            )
-          }
+                  </TableRow>
+              )
+            }
 
-        </TableBody>
+          </TableBody>
 
-      </Table>
+        </Table>
+      </Paper>
     );
   },
 });
