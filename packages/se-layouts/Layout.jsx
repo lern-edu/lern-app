@@ -1,5 +1,6 @@
 // Libs
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { createContainer } from 'meteor/react-meteor-data';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -65,18 +66,18 @@ Layout = React.createClass({
 });
 
 Layout.childContextTypes = {
-  route: React.PropTypes.string.isRequired,
-  logging: React.PropTypes.bool.isRequired,
-  user: React.PropTypes.object,
+  route: PropTypes.string.isRequired,
+  logging: PropTypes.bool.isRequired,
+  user: PropTypes.object,
 };
 
 Layout.propTypes = {
-  route: React.PropTypes.string.isRequired,
-  logging: React.PropTypes.bool.isRequired,
-  protect: React.PropTypes.string,
-  user: React.PropTypes.object,
-  nav: React.PropTypes.bool,
-  bar: React.PropTypes.bool,
+  route: PropTypes.string.isRequired,
+  logging: PropTypes.bool.isRequired,
+  protect: PropTypes.string,
+  user: PropTypes.object,
+  nav: PropTypes.bool,
+  bar: PropTypes.bool,
 };
 
 LayoutContainer = createContainer(({ params }) => {

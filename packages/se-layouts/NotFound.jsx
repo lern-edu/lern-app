@@ -1,8 +1,7 @@
 import React from 'react';
 import { FontIcon, RaisedButton } from 'material-ui';
 
-Layout.NotFound = React.createClass({
-
+class NotFound extends React.Component {
   /* Render
   */
 
@@ -30,5 +29,7 @@ Layout.NotFound = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+};
+
+Layout.NotFound = NotFound;

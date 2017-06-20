@@ -1,15 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AppBar, FlatButton, IconButton, FontIcon } from 'material-ui';
 import { Avatar, MenuItem, IconMenu, Divider } from 'material-ui';
 
-Layout.Bar = React.createClass({
-  propTypes: {
-    crumbs: React.PropTypes.arrayOf(
-      React.PropTypes.shape({
-        label: React.PropTypes.string,
-        path: React.PropTypes.string,
-      })),
-  },
+class Bar extends React.Component {
 
   /* Methods
   */
@@ -42,7 +36,7 @@ Layout.Bar = React.createClass({
         <span>{title}</span>
       </div>
     );
-  },
+  }
 
   /* Render
   */
@@ -59,5 +53,16 @@ Layout.Bar = React.createClass({
         style={{ position: 'fixed', top: 0, left: 0 }}
       />
     );
-  },
-});
+  }
+};
+
+Bar.propTypes = {
+  crumbs: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string,
+      path: PropTypes.string,
+    })
+  ),
+};
+
+Layout.Bar = Bar;
