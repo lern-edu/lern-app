@@ -1,20 +1,21 @@
 import React from 'react';
 
-AdminHomeSubjectsCard = React.createClass({
+export default class AdminHomeSubjectsCard extends React.Component {
 
   /* Lifecycle
   */
 
-  getInitialState() {
-    return { newTag: '' };
-  },
+  constructor(props) {
+    super(props);
+    this.state = { newTag: '' };
+  }
 
   /* Handlers
   */
 
   handleInput(newTag) {
     this.setState({ newTag });
-  },
+  }
 
   handleKeyDown(event) {
     if (event.keyCode === 13) {
@@ -26,7 +27,7 @@ AdminHomeSubjectsCard = React.createClass({
         else this.setState({ newTag: '' });
       });
     }
-  },
+  }
 
   /* Render
   */
@@ -41,11 +42,13 @@ AdminHomeSubjectsCard = React.createClass({
           <div className='header'>{subject.name}</div>
           <div className='description'>
             <div className='ui bulleted list'>
-              {_.map(_.filter(tags, { subject: subject._id }), tag =>
-                <div className='item' key={tag._id}>
-                  {tag.text}
-                </div>
-              )}
+              {
+                _.map(_.filter(tags, { subject: subject._id }), tag =>
+                  <div className='item' key={tag._id}>
+                    {tag.text}
+                  </div>
+                )
+              }
             </div>
           </div>
         </div>
@@ -56,12 +59,12 @@ AdminHomeSubjectsCard = React.createClass({
               type='text'
               placeholder='Nova Tag'
               value={newTag}
-              onInput={this.handleInput}
-              onKeyDown={this.handleKeyDown}
+              onInput={this.handleInput.bind(this)}
+              onKeyDown={this.handleKeyDown.bind(this)}
             />
           </div>
         </div>
       </div>
     );
-  },
-});
+  }
+};

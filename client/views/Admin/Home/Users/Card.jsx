@@ -1,6 +1,6 @@
 import React from 'react';
 
-AdminHomeUsersCard = React.createClass({
+export default class AdminHomeUsersCard extends React.Component {
 
   /* Render
   */
@@ -8,8 +8,18 @@ AdminHomeUsersCard = React.createClass({
   render() {
     const { school, users, courses } = this.props;
 
-    const students = _.filter(users, user => user.getRole() === 'student' && user.profile.school === school._id);
-    const teachers = _.filter(users, user => user.getRole() === 'teacher' && user.profile.school === school._id);
+    const students = _.filter(
+      users,
+      user =>
+        _.includes(user.getRoles(), 'student') && _.get(user, 'profile.school') === school._id
+      )
+    ;
+    const teachers = _.filter(
+      users,
+      user =>
+        _.includes(user.getRoles(), 'teacher') && _.get(user, 'profile.school') === school._id
+      )
+    ;
     const _courses = _.filter(courses, { author: school._id });
 
     return (
@@ -50,12 +60,16 @@ AdminHomeUsersCard = React.createClass({
         </div>
         <div className='extra content'>
           <div className='ui two buttons'>
-            <Semantic.Button tag='a' href={FlowRouter.path('AdminCourseCreate', { schoolId: school._id })}>
+            <Semantic.Button
+              tag='a'
+              href={FlowRouter.path('AdminCourseCreate', { schoolId: school._id })}
+            >
               Novo Curso
             </Semantic.Button>
           </div>
         </div>
       </div>
     );
-  },
-});
+  }
+
+};

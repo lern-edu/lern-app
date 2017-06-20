@@ -1,24 +1,12 @@
+// Libs
 import React from 'react';
 
-AdminHomeView = React.createClass({
-  mixins: [ReactMeteorData],
+// Views
+import AdminHomeMenu from './Menu.jsx';
+import AdminHomeSubjects from './Subjects/index.jsx';
+import AdminHomeUsers from './Users/index.jsx';
 
-  getMeteorData() {
-    const handles = {
-      subjects: Meteor.subscribe('PublicSubjects'),
-      tags: Meteor.subscribe('PublicTags'),
-      users: Meteor.subscribe('AdminUsers'),
-      courses: Meteor.subscribe('AdminCourses'),
-    };
-
-    return {
-      ready: _.mapValues(handles, h => h.ready()),
-      subjects: Fetch.Public().subjects().fetch(),
-      tags: Fetch.Public().tags().fetch(),
-      users: Fetch.General.users().fetch(),
-      courses: Fetch.General.courses().fetch(),
-    };
-  },
+export default class AdminHomeView extends React.Component {
 
   render() {
     const { active='subjects' } = this.props;
@@ -30,14 +18,16 @@ AdminHomeView = React.createClass({
 
         <AdminHomeMenu active={active} />
 
-        {_.get({
-          subjects: <AdminHomeSubjects {...this.data} key='subjects'/>,
-          users: <AdminHomeUsers {...this.data} key='users' />,
-        }, active)}
+        {
+          _.get({
+            subjects: <AdminHomeSubjects {...this.props} key='subjects'/>,
+            users: <AdminHomeUsers {...this.props} key='users' />,
+          }, active)
+        }
 
       </div>
 
     );
-  },
+  }
 
-});
+};
