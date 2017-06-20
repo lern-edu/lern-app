@@ -6,7 +6,7 @@ import { LinearProgress } from 'material-ui';
 import SchoolTestsList from './List.jsx';
 import SchoolTestsToolbar from './Toolbar.jsx';
 
-const SchoolTestsView = React.createClass({
+export default class SchoolTestsView extends React.Component {
 
   // render
 
@@ -29,7 +29,5 @@ const SchoolTestsView = React.createClass({
 
       </div>
     );
-  },
-});
-
-export default SchoolTestsView;
+  }
+};

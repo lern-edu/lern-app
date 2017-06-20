@@ -3,18 +3,18 @@ import { List, ListItem, Paper, IconButton, IconMenu, MenuItem } from 'material-
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import { grey400 } from 'material-ui/styles/colors';
 
-const SchoolTestsList = React.createClass({
+export default class SchoolTestsList extends React.Component {
 
   // Handlers
 
   handleDuplicateTest(event, testId) {
     event.stopPropagation();
     FlowRouter.go('SchoolTestCreateWithBase', { testId });
-  },
+  }
 
   handleTest(event, testId) {
     FlowRouter.go('SchoolTest', { testId });
-  },
+  }
 
   // Render
 
@@ -29,14 +29,12 @@ const SchoolTestsList = React.createClass({
              key={test._id}
              primaryText={test.name}
              secondaryText={
-               !test.get('course')
-               ? 'Sem curso'
-               : <p>
-                  <b>Curso: </b> {
-                    _.get(
-                      _.find(courses, { _id: test.get('course') }),
-                      'name'
-                    )
+               <p>
+                 <b>Curso: </b> {
+                    !test.get('course')
+                    ? 'Sem curso'
+                    : `${_.get(_.find(courses, { _id: test.get('course') }), 'name')
+                      } -- ${_.get(_.find(courses, { _id: test.get('course') }), 'alias')}`
                   }
                 </p>
              }
@@ -63,7 +61,5 @@ const SchoolTestsList = React.createClass({
         </List>
       </Paper>
     );
-  },
-});
-
-export default SchoolTestsList;
+  }
+};
