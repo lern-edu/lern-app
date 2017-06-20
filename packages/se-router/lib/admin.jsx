@@ -10,7 +10,7 @@ adminRoutes.route('/', {
   name: 'AdminHome',
   action(params, query) {
     render({
-      main: <AdminHomeView {...query} />,
+      main: <AdminHome {...query} />,
     });
   },
 });
