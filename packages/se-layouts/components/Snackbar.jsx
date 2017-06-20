@@ -1,7 +1,7 @@
 import React from 'react';
 import { Snackbar } from 'material-ui';
 
-const LayoutSnackbar = React.createClass({
+export default class LayoutSnackbar extends React.Component {
 
   /* Methods
   */
@@ -34,35 +34,34 @@ const LayoutSnackbar = React.createClass({
         template.static
       ),
     );
-  },
+  }
 
   /* Lifecycle
   */
 
-  getInitialState() {
-    return { open: false, onRequestClose: _.noop, message: '' };
-  },
+  constructor(props) {
+    super(props);
+    this.state = { open: false, onRequestClose: _.noop, message: '' };
+  }
 
   componentWillMount() {
     if (window) {
       if (window.snack) throw new Meteor.Error('Global snack already defined');
-      else window.snack = this.setSnack;
+      else window.snack = this.setSnack.bind(this);
     }
-  },
+  }
 
   componentWillUnmount() {
     if (window) {
       if (window.snack) window.snack = null;
       else throw new Meteor.Error('Global snack already removed');
     }
-  },
+  }
 
   /* Render
   */
 
   render() {
     return <Snackbar {...this.state}/>;
-  },
-});
-
-export default LayoutSnackbar;
+  }
+};

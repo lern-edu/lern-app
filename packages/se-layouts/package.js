@@ -19,11 +19,11 @@ Package.onUse(function (api) {
     'components/Safe.jsx',
     'components/Snackbar.jsx',
 
-    'mixins/Data.jsx',
-    'mixins/Render.jsx',
     'mixins/Screen.jsx',
 
     'Layout.jsx',
+    'Container.jsx',
+    'Setup.jsx',
     'NotFound.jsx',
     'Bar.jsx',
   ], 'client');

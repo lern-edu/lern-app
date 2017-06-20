@@ -6,7 +6,7 @@ import { LinearProgress } from 'material-ui';
 import AdminTestsList from './List.jsx';
 import AdminTestsToolbar from './Toolbar.jsx';
 
-const AdminTestsView = React.createClass({
+export default class AdminTestsView extends React.Component {
 
   // render
 
@@ -29,7 +29,5 @@ const AdminTestsView = React.createClass({
 
       </div>
     );
-  },
-});
-
-export default AdminTestsView;
+  }
+};

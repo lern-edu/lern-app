@@ -1,5 +1,6 @@
 // Libs
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Avatar, List, ListItem, Divider } from 'material-ui';
 import { RaisedButton, FlatButton, LinearProgress } from 'material-ui';
 import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card';
@@ -9,7 +10,7 @@ const StudentCourseIngressFormCourseView = React.createClass({
   // Context
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // Handlers

@@ -42,14 +42,10 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
-  Tests({ testId=null }, { questions, subjects, tags, course }={}) {
+  Tests({ testId=null }, { questions, subjects, tags, course, author }={}) {
     return {
       find() {
-        const selector = testId || {
-          author: { $in: _.map(Meteor.users.find(
-            { roles: 'admin' },
-            { fields: { _id: 1 } }).fetch(), '_id'), },
-        };
+        const selector = testId || {};
 
         return Fetch.General.tests(selector);
       },
@@ -59,14 +55,12 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
           find(tests) {
             return questions && tests.findQuestions();
           },
+        },
 
-          children: [
-            {
-              find(question) {
-                return question.findAllImages();
-              },
-            },
-          ],
+        {
+          find(tests) {
+            return author && tests.findAuthor();
+          },
         },
 
         {

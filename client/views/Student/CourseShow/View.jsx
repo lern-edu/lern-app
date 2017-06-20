@@ -1,5 +1,6 @@
 // Libs
 import React from 'react';
+import PropTypes from 'prop-types';
 import { LinearProgress, FloatingActionButton, FontIcon } from 'material-ui';
 
 // Views
@@ -24,7 +25,7 @@ const StudentCourseShowView = React.createClass({
   */
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   /* Render

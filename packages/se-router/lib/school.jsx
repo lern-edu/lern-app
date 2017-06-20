@@ -1,5 +1,7 @@
 import React from 'react';
-const { render } = Layout.setup({ protect: 'school', nav: true, bar: true });
+import { Setup } from 'meteor/lsunsi:se-layouts';
+
+const { render } = Setup({ protect: 'school', nav: true, bar: true });
 
 const schoolRoutes = FlowRouter.group({
   prefix: '/escola',

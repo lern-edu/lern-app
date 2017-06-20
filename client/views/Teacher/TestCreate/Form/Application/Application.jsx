@@ -10,14 +10,14 @@ const TeacherTestCreateFormApplicationView = React.createClass({
   handleCourse({ value }, index) {
     const course = _.get(value, 'key');
     if (!course) return;
-    this.props.form.defaultHandler({ course }, { doc: true });
+    this.props.form.defaultHandler({ course }, { query: true });
     this.props.form.setState({ noCourse: false });
   },
 
   handleNoCourse(event, noCourse) {
     const { form } = this.props;
     form.setState({ noCourse });
-    form.defaultHandler({ course: null }, { doc: true });
+    form.defaultHandler({ course: null }, { query: true });
   },
 
   handleScores(event, scored) {

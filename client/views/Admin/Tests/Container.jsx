@@ -8,7 +8,7 @@ AdminTests = createContainer(() => {
   const userId = Meteor.userId();
 
   const handles = {
-    tests: Meteor.subscribe('AdminTests', {}, { course: true }),
+    tests: Meteor.subscribe('AdminTests', {}, { course: true, author: true }),
   };
 
   const data = {
@@ -16,10 +16,8 @@ AdminTests = createContainer(() => {
     tests: Fetch.General.tests().fetch(),
   };
 
-  data.courses = data.tests
-    && Fetch.General.courses(
-      _.map(data.tests, 'course')
-    ).fetch();
+  data.courses = data.tests && Fetch.General.courses(_.map(data.tests, 'course')).fetch();
+  data.authors = data.tests && Fetch.General.users(_.map(data.tests, 'author')).fetch();
 
   return data;
 }, AdminTestsView);

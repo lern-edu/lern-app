@@ -4,10 +4,11 @@ import { RaisedButton, IconButton, Avatar, MenuItem } from 'material-ui';
 import { Divider, LinearProgress, FontIcon, Styles } from 'material-ui';
 import { grey300, grey400 } from 'material-ui/styles/colors';
 
-const Navigation = React.createClass({
+export default class Navigation extends React.Component {
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       routes: {
         admin: {
           AdminHome: {
@@ -96,7 +97,7 @@ const Navigation = React.createClass({
         },
       },
     };
-  },
+  }
 
   /* Methods
   */
@@ -119,22 +120,24 @@ const Navigation = React.createClass({
         backgroundColor: '#F9F9F9',
       },
     });
-  },
+  }
 
   /* Lifecycle
   */
 
   componentWillMount() {
-    this.updateState(this.props);
+    const updateState = this.updateState.bind(this);
+    updateState(this.props);
     if (window) {
       if (window.nav) throw new Meteor.Error('Nav already initialized');
       else window.nav = (open=true) => this.setState({ open });
     }
-  },
+  }
 
   componentWillReceiveProps(props) {
-    this.updateState(props);
-  },
+    const updateState = this.updateState.bind(this);
+    updateState(this.props);
+  }
 
   componentWillUnmount() {
     if (window) {
@@ -146,14 +149,15 @@ const Navigation = React.createClass({
 
     const name = _.get(user, 'profile.name');
 
-  },
+  }
 
   handleRoleChange(event, index, role) {
     Meteor.call('UserChangeRole', role, (err, user) => {
       if (err) snack('Erro');
       else FlowRouter.go(user.getHomeRoute());
     });
-  },
+  }
+
   /* Render
   */
 
@@ -166,13 +170,17 @@ const Navigation = React.createClass({
     const roles = _.get(user, 'roles');
 
     return (
-      <Drawer {..._.omit(this.state, ['open'])} open={!open ? false : true}
-        onRequestChange={open => this.setState({ open })}>
+      <Drawer
+        {..._.omit(this.state, ['open'])}
+        open={!open ? false : true}
+        onRequestChange={open => this.setState({ open })}
+      >
 
         {!user ? (
           <div className='ui center aligned basic segment'>
-            {logging ? <div/> :
-              <div>
+            {logging
+              ? <div/>
+              : <div>
                 <RaisedButton
                   href={FlowRouter.path('PublicLogin')}
                   label='Entrar'
@@ -275,7 +283,5 @@ const Navigation = React.createClass({
 
       </Drawer>
     );
-  },
-});
-
-export default Navigation;
+  }
+};

@@ -1,7 +1,7 @@
 // Libs
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
-import { createContainer } from 'meteor/react-meteor-data';
+import PropTypes from 'prop-types';
+import i18n from 'meteor/universe:i18n';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -10,12 +10,6 @@ import Navigation from './components/Navigation.jsx';
 import Snackbar from './components/Snackbar.jsx';
 import Footer from './components/Footer.jsx';
 import Safe from './components/Safe.jsx';
-
-// Mixins
-import Language from './mixins/Language.jsx';
-import Screen from './mixins/Screen.jsx';
-import Render from './mixins/Render.jsx';
-import Data from './mixins/Data.jsx';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -26,8 +20,41 @@ const muiTheme = getMuiTheme({
   },
 });
 
-Layout = React.createClass({
-  mixins: [Data, Render, Language],
+class LayoutView extends React.Component {
+
+  getChildContext() {
+    return _.pick(this.props, ['logging', 'route', 'user']);
+  }
+
+  constructor(props) {
+    super(props);
+    i18n.setLocale('pt-BR');
+    this.state = { locale: 'pt-BR' };
+  }
+
+  onLocale(locale) {
+    this.setState({ locale });
+  }
+
+  componentWillMount() {
+    i18n.onChangeLocale(this.onLocale.bind(this));
+  }
+
+  componentWillUnmount() {
+    i18n.offChangeLocale(this.onLocale.bind(this));
+  }
+
+  getLanguage() {
+    return 'pt-BR';
+
+    // return (
+    //     navigator.languages && navigator.languages[0] ||
+    //     navigator.language ||
+    //     navigator.browserLanguage ||
+    //     navigator.userLanguage ||
+    //     'pt-BR'
+    // );
+  }
 
   /* Render
   */
@@ -47,12 +74,8 @@ Layout = React.createClass({
           </nav>
 
           <main style={{ paddingTop: stuff.bar ? 64 : 0 }}>
-            <Safe {...stuff}> {this.props.main} </Safe>
+            <Safe {...this.props} > {this.props.main} </Safe>
           </main>
-
-          {/* <footer style={{ marginLeft: stuff.nav && stuff.screen === 'computer' ? 256 : 0 }}>
-            <Footer />
-          </footer> */}
 
           <aside>
             <Snackbar />
@@ -61,31 +84,21 @@ Layout = React.createClass({
         </div>
       </MuiThemeProvider>
     );
-  },
-});
-
-Layout.childContextTypes = {
-  route: React.PropTypes.string.isRequired,
-  logging: React.PropTypes.bool.isRequired,
-  user: React.PropTypes.object,
+  }
 };
 
-Layout.propTypes = {
-  route: React.PropTypes.string.isRequired,
-  logging: React.PropTypes.bool.isRequired,
-  protect: React.PropTypes.string,
-  user: React.PropTypes.object,
-  nav: React.PropTypes.bool,
-  bar: React.PropTypes.bool,
+LayoutView.childContextTypes = {
+  route: PropTypes.string.isRequired,
+  logging: PropTypes.bool.isRequired,
+  user: PropTypes.object,
 };
 
-LayoutContainer = createContainer(({ params }) => {
-  if (Meteor.userId())
-    Meteor.subscribe('UserData');
+LayoutView.propTypes = {
+  route: PropTypes.string.isRequired,
+  logging: PropTypes.bool.isRequired,
+  protect: PropTypes.string,
+  user: PropTypes.object,
+  nav: PropTypes.bool,
+};
 
-  return {
-    route: FlowRouter.getRouteName(),
-    user: Meteor.user(),
-    logging: Meteor.loggingIn(),
-  };
-}, Layout);
+export default LayoutView;

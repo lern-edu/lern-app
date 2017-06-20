@@ -1,5 +1,6 @@
 // Libs
 import React from 'react';
+import PropTypes from 'prop-types';
 import { green500, red500 } from 'material-ui/styles/colors';
 import { TextField, ListItem, Divider } from 'material-ui';
 import { FlatButton } from 'material-ui';
@@ -11,7 +12,7 @@ const PublicContentShowTestView = React.createClass({
   // Context
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // Render

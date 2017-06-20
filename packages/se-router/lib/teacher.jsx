@@ -1,5 +1,7 @@
 import React from 'react';
-const { render } = Layout.setup({ protect: 'teacher', nav: true, bar: true });
+import { Setup } from 'meteor/lsunsi:se-layouts';
+
+const { render } = Setup({ protect: 'teacher', nav: true, bar: true });
 
 const teacherRoutes = FlowRouter.group({
   prefix: '/professor',

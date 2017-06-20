@@ -1,5 +1,6 @@
 // Libs
 import React from 'react';
+import PropTypes from 'prop-types';
 import { AutoComplete, MenuItem, RaisedButton } from 'material-ui';
 import { DatePicker, TimePicker, Avatar, Chip } from 'material-ui';
 
@@ -8,7 +9,7 @@ const SchoolCourseFormPeopleView = React.createClass({
   // Lifecycle
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // Handlers

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { CardText, Avatar } from 'material-ui';
 import { Card, CardHeader, CardTitle } from 'material-ui';
 
@@ -8,7 +9,7 @@ const StudentPostShowComments = React.createClass({
   */
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // Render

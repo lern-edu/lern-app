@@ -1,6 +1,10 @@
+// Libs
 import React from 'react';
 
-AdminHomeUsers = React.createClass({
+// Views
+import AdminHomeUsersCard from './Card.jsx';
+
+export default class AdminHomeUsers extends React.Component {
 
   /* Render
   */
@@ -22,8 +26,10 @@ AdminHomeUsers = React.createClass({
 
         <div className='ui basic vertical segment'>
           <div className='ui four cards cards'>
-            {!ready.users ? <div className='ui active inline laoder' /> :
-              _.map(schools, school =>
+            {
+              !ready.users
+              ? <div className='ui active inline laoder' />
+              : _.map(schools, school =>
                 <AdminHomeUsersCard school={school} {...this.props} key={school._id} />
               )
             }
@@ -32,5 +38,6 @@ AdminHomeUsers = React.createClass({
 
       </div>
     );
-  },
-});
+  }
+
+};

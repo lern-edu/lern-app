@@ -30,7 +30,7 @@ const AdminTestCreateView = React.createClass({
             doc={
               test
               ? new Tests.Schema(
-                _.omit(test, ['_id', 'createdAt', 'updatedAt', 'author'])
+                _.omit(test, ['_id', 'createdAt', 'updatedAt', 'author', 'course'])
               )
               : false
             }

@@ -1,20 +1,25 @@
+// Libs
 import React from 'react';
 
-AdminHomeSubjects = React.createClass({
+// Views
+import AdminHomeSubjectsCard from './Card.jsx';
+
+export default class AdminHomeSubjects extends React.Component {
 
   /* Lifecycle
   */
 
-  getInitialState() {
-    return { newSubject: '' };
-  },
+  constructor(props) {
+    super(props);
+    this.state = { newSubject: '' };
+  }
 
   /* Handlers
   */
 
   handleInput(newSubject) {
     this.setState({ newSubject });
-  },
+  }
 
   handleKeyDown(event) {
     const { newSubject } = this.state;
@@ -25,7 +30,7 @@ AdminHomeSubjects = React.createClass({
         else this.setState({ newSubject: '' });
       });
     }
-  },
+  }
 
   /* Render
   */
@@ -44,16 +49,18 @@ AdminHomeSubjects = React.createClass({
               type='text'
               placeholder='Nova Matéria'
               value={newSubject}
-              onInput={this.handleInput}
-              onKeyDown={this.handleKeyDown}
+              onInput={this.handleInput.bind(this)}
+              onKeyDown={this.handleKeyDown.bind(this)}
             />
           </div>
         </div>
 
         <div className='ui basic vertical segment'>
           <div className='ui four cards cards'>
-            {!ready.subjects || !ready.tags ? <div className='ui active inline loader' /> :
-              _.map(_.sortBy(subjects, 'createdAt'), subject =>
+            {
+              !ready.subjects || !ready.tags
+              ? <div className='ui active inline loader' />
+              : _.map(_.sortBy(subjects, 'createdAt'), subject =>
                 <AdminHomeSubjectsCard subject={subject} {...this.props} key={subject._id} />
               )
             }
@@ -61,5 +68,5 @@ AdminHomeSubjects = React.createClass({
         </div>
       </div>
     );
-  },
-});
+  }
+};

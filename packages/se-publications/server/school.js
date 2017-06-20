@@ -28,11 +28,9 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     return {
       find() {
         const { userId } = this;
-        const selector = testId || {
-          author: userId,
-        };
+        const selector = testId || {};
 
-        return Fetch.General.tests(selector);
+        return Fetch.School(userId).tests(selector);
       },
 
       children: [

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Toolbar, ToolbarSeparator } from 'material-ui';
 import { ToolbarTitle, ToolbarGroup, RaisedButton } from 'material-ui';
 
@@ -7,7 +8,7 @@ const SchoolCoursesToolbar = React.createClass({
   // Lifecycle
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // Render

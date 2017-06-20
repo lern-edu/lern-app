@@ -2,12 +2,12 @@
 import { createContainer } from 'meteor/react-meteor-data';
 
 // View
-import SchoolTestView from './View.jsx';
+import AdminTestView from './View.jsx';
 
-SchoolTest = createContainer(({ testId }) => {
-  console.log(testId)
+AdminTest = createContainer(({ testId }) => {
+
   const handles = {
-    test: Meteor.subscribe('SchoolTests', { testId },
+    test: Meteor.subscribe('AdminTests', { testId },
       { subjects: true, tags: true, questions: true, course: true }),
     subjects: Meteor.subscribe('PublicSubjects'),
   };
@@ -24,4 +24,4 @@ SchoolTest = createContainer(({ testId }) => {
   data.documents = data.test && _.first(data.test.findDocuments().fetch());
 
   return data;
-}, SchoolTestView);
+}, AdminTestView);
