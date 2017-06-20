@@ -14,6 +14,7 @@ const SchoolTestView = React.createClass({
 
   render() {
     const { ready, test, subjects } = this.props;
+    console.log(ready, test);
     return (
       <div className='ui container'>
 
@@ -22,14 +23,15 @@ const SchoolTestView = React.createClass({
           crumbs={[{ label: 'Testes', path: 'SchoolTests' }]} />
 
         <Paper>
-          {!_.every(ready) ? <LinearProgress/> : [
-            <SchoolTestHeader key='header' {...this.props} />,
-            <Divider key='d0'/>,
-            <SchoolTestForm key='question' doc={test} subjects={subjects} />,
-
-            // <Divider key='d1'/>,
-            // <SchoolTestActions key='actions' {...this.props} />,
-          ]}
+          {
+            !_.every(ready)
+            ? <LinearProgress/>
+            : [
+              <SchoolTestHeader key='header' {...this.props} />,
+              <Divider key='d0'/>,
+              <SchoolTestForm key='question' doc={test} subjects={subjects} />,
+            ]
+          }
         </Paper>
 
       </div>

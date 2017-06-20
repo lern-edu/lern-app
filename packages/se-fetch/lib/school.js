@@ -32,7 +32,13 @@ Fetch.School = function (schoolId) {
           { course: { $in: courses } },
         ],
       };
-      if (query) _.assign(selector, query);
+      if (query)
+        _.assign(
+          selector,
+          _.isString(query)
+          ? { _id: query } : _.isObject(query)
+          ? query : {}
+        );
       return Fetch.General.tests(selector);
     },
   };
