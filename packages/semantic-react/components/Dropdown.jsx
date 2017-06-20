@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 Semantic.Dropdown = React.createClass({
   mixins: [
     TagWrapper({
@@ -9,9 +11,9 @@ Semantic.Dropdown = React.createClass({
   ],
 
   propTypes: {
-    initial: React.PropTypes.node,
-    settings: React.PropTypes.object,
-    onChange: React.PropTypes.func,
+    initial: PropTypes.node,
+    settings: PropTypes.object,
+    onChange: PropTypes.func,
   },
 
   componentDidMount() {
