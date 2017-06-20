@@ -45,11 +45,7 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
   Tests({ testId=null }, { questions, subjects, tags, course }={}) {
     return {
       find() {
-        const selector = testId || {
-          author: { $in: _.map(Meteor.users.find(
-            { roles: 'admin' },
-            { fields: { _id: 1 } }).fetch(), '_id'), },
-        };
+        const selector = testId || {};
 
         return Fetch.General.tests(selector);
       },
