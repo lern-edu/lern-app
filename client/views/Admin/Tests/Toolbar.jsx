@@ -1,7 +1,8 @@
 import React from 'react';
 import { Toolbar, ToolbarSeparator, ToolbarTitle, ToolbarGroup, RaisedButton } from 'material-ui';
 
-const AdminTestsToolbar = React.createClass({
+export default class AdminTestsToolbar extends React.Component {
+
   render() {
     const { tests } = this.props;
 
@@ -21,7 +22,6 @@ const AdminTestsToolbar = React.createClass({
         </ToolbarGroup>
       </Toolbar>
     );
-  },
-});
+  }
 
-export default AdminTestsToolbar;
+};
