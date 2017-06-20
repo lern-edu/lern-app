@@ -42,7 +42,7 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
     };
   },
 
-  Tests({ testId=null }, { questions, subjects, tags, course }={}) {
+  Tests({ testId=null }, { questions, subjects, tags, course, author }={}) {
     return {
       find() {
         const selector = testId || {};
@@ -55,14 +55,12 @@ Helpers.Publications({ type: 'composite', prefix, protect }, {
           find(tests) {
             return questions && tests.findQuestions();
           },
+        },
 
-          children: [
-            {
-              find(question) {
-                return question.findAllImages();
-              },
-            },
-          ],
+        {
+          find(tests) {
+            return author && tests.findAuthor();
+          },
         },
 
         {
