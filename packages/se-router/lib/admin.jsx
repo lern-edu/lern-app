@@ -160,7 +160,7 @@ adminRoutes.route('/provas/:testId', {
   name: 'AdminTest',
   action(params) {
     render({
-      main: <AdminTestView {...params} />,
+      main: <AdminTest {...params} />,
     });
   },
 });

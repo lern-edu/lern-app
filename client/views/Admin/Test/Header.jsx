@@ -8,7 +8,7 @@ const AdminTestHeader = React.createClass({
       <div className='ui basic segment'>
         <div className='ui header'>
           <div className='content'>
-            {test.name}
+            {_.get(test, 'name')}
             <div className='sub header'>
               <b>Matérias: </b>
               {
