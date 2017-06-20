@@ -1,5 +1,7 @@
 import React from 'react';
-const { render } = Layout.setup();
+import { Setup } from 'meteor/lsunsi:se-layouts';
+
+const { render } = Setup();
 
 FlowRouter.route('/', {
   name: 'PublicHome',
