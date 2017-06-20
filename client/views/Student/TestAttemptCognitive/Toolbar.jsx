@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Toolbar, ToolbarGroup, ToolbarTitle, IconButton, ToolbarSeparator, FontIcon, RaisedButton, } from 'material-ui';
 
 StudentTestAttemptCognitiveToolbar = React.createClass({
@@ -45,7 +46,7 @@ StudentTestAttemptCognitiveToolbar = React.createClass({
   */
 
   contextTypes: {
-    screen: React.PropTypes.string,
+    screen: PropTypes.string,
   },
 
   // render

@@ -1,5 +1,6 @@
 // Libs
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Views
 import StudentSetupForm from './Form/index.jsx';
@@ -9,7 +10,7 @@ StudentSetup = React.createClass({
   // Lifecycle
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   /* Render

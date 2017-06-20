@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { RaisedButton, FontIcon, AppBar, FlatButton } from 'material-ui';;
 
 const PublicHomeAction = React.createClass({
@@ -6,7 +7,7 @@ const PublicHomeAction = React.createClass({
   // Context
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   /* Handlers

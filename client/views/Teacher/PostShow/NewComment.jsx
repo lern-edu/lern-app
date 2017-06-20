@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { RaisedButton, CardText } from 'material-ui';
 import { Card, CardActions, CardTitle } from 'material-ui';
 
@@ -31,7 +32,7 @@ const TeacherPostShowNewComment = React.createClass({
   */
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // Render

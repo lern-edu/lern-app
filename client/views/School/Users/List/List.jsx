@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Paper, List, ListItem } from 'material-ui';
 import { grey400 } from 'material-ui/styles/colors';
 import { FontIcon, IconMenu, IconButton, MenuItem } from 'material-ui';
@@ -24,7 +25,7 @@ const SchoolUsersListView = React.createClass({
   // Context
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // handlers

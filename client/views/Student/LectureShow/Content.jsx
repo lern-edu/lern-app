@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FontIcon, IconButton, Chip, Divider, CardText, Avatar } from 'material-ui';
 import { Card, Badge, CardActions, CardHeader } from 'material-ui';
 
@@ -8,7 +9,7 @@ const StudentLectureShowContent = React.createClass({
   */
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // Render

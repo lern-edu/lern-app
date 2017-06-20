@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card, CardTitle, CardText, SelectField, MenuItem } from 'material-ui';
 
 TeacherSettingsProfile = React.createClass({
@@ -7,7 +8,7 @@ TeacherSettingsProfile = React.createClass({
   */
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // Handlers

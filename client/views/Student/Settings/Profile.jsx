@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Paper, SelectField, MenuItem, TextField, FlatButton } from 'material-ui';
 
 StudentSettingsProfile = React.createClass({
@@ -7,7 +8,7 @@ StudentSettingsProfile = React.createClass({
   */
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // Initial state

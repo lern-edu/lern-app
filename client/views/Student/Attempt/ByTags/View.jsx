@@ -1,5 +1,6 @@
 // Libs
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Divider } from 'material-ui';
 
 // Views
@@ -11,7 +12,7 @@ const StudentAttemptByTagsView = React.createClass({
   */
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   // Render

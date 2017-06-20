@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { LinearProgress } from 'material-ui';
 
 StudentSettingsView = React.createClass({
@@ -26,7 +27,7 @@ StudentSettingsView = React.createClass({
   */
 
   contextTypes: {
-    user: React.PropTypes.object,
+    user: PropTypes.object,
   },
 
   /* Render
