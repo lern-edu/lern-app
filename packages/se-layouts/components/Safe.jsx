@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontIcon, RaisedButton, LinearProgress } from 'material-ui';
 
-const Safe = React.createClass({
+export default class Safe extends React.Component {
 
   /* Methods
   */
@@ -16,45 +16,44 @@ const Safe = React.createClass({
         : user.hasRole(protect)
       ),
     });
-  },
+  }
 
   /* Lifecycle
   */
 
-  getInitialState() {
-    return { access: undefined };
-  },
+  constructor(props) {
+    super(props);
+    this.state = { access: undefined };
+  }
 
   componentWillMount() {
-    this.updateAccess(this.props);
-  },
+    const updateAccess = this.updateAccess.bind(this);
+    updateAccess(this.props);
+  }
 
   componentWillReceiveProps(props) {
-    this.updateAccess(props);
-  },
+    const updateAccess = this.updateAccess.bind(this);
+    updateAccess(props);
+  }
 
   componentWillUpdate({ user }, { access }) {
     if (access === null) {
-      this.redir = FlowRouter.current().path;
       snack('Você deve entrar primeiro');
-      console.info({ redirReady: this.redir });
       FlowRouter.go('PublicLogin');
     }
 
     if (!this.props.user && user && this.redir) {
       if (!_.get(user, 'profile.tutorial'))
-        FlowRouter.go(this.redir);
+        FlowRouter.go(user.getHomeRoute);
       snack('Bem-vindo!');
-      console.info({ redirDone: this.redir });
-      this.redir = undefined;
     }
-  },
+  }
 
   /* Render
   */
 
   render() {
-    const { access, user } = this.state;
+    const { access } = this.state;
 
     return (
       <div>
@@ -86,7 +85,5 @@ const Safe = React.createClass({
         </div>) : undefined}
       </div>
     );
-  },
-});
-
-export default Safe;
+  }
+};
