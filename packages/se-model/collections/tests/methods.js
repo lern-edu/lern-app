@@ -39,6 +39,10 @@ Tests.Schema.extend({
       return Answers.find({ attempt: { $in: attempts } });
     },
 
+    findAuthor() {
+      return Fetch.General.users(this.get('author'));
+    },
+
     findSubjects() {
       const subjectIds = this.get('subjects');
       return Fetch.General.subjects(subjectIds);
