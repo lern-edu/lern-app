@@ -16,6 +16,7 @@ const TeacherTestCreateForm = React.createClass({
 
   handleSubmit() {
     this.setState({ waitingCallback: true });
+    this.defaultHandler({ course: FlowRouter.getQueryParam('course') }, { doc: true });
     this.defaultSubmit();
   },
 
