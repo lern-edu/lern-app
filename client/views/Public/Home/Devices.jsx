@@ -1,58 +1,56 @@
 import React from 'react';
 import { Paper, GridList, GridTile, CardTitle } from 'material-ui';
 
-const PublicHomeDevices = React.createClass({
-
-  // Styles
-
-  styles: {
-    master: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      justifyContent: 'space-around',
-    },
-    gridList: {
-      display: 'flex',
-      flexWrap: 'nowrap',
-      overflowX: 'auto',
-    },
-    titleStyle: {
-      color: 'rgb(0, 188, 212)',
-    },
+const styles = {
+  master: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
   },
+  gridList: {
+    display: 'flex',
+    flexWrap: 'nowrap',
+    overflowX: 'auto',
+  },
+  titleStyle: {
+    color: 'rgb(0, 188, 212)',
+  },
+};
 
-  // Tiles
+// Tiles
 
-  tilesData: [
-    {
-      img: '/images/home/grid/mockDrop_MacBook_Air.jpg',
-      title: 'Breakfast',
-      author: 'jill111',
-    },
-    {
-      img: '/images/home/grid/mockDrop_iPad_desk.jpg',
-      title: 'Tasty burger',
-      author: 'pashminu',
-    },
-    {
-      img: '/images/home/grid/mockDrop_red_pants.jpg',
-      title: 'Camera',
-      author: 'Danson67',
-    },
-    {
-      img: '/images/home/grid/mockDrop_iMac_window.jpg',
-      title: 'Morning',
-      author: 'fancycrave1',
-    },
-    {
-      img: '/images/home/grid/mockDrop_iPhone_6.jpg',
-      title: 'Hats',
-      author: 'Hans',
-    },
-  ],
+const tilesData = [
+  {
+    img: '/images/home/grid/mockDrop_MacBook_Air.jpg',
+    title: 'Breakfast',
+    author: 'jill111',
+  },
+  {
+    img: '/images/home/grid/mockDrop_iPad_desk.jpg',
+    title: 'Tasty burger',
+    author: 'pashminu',
+  },
+  {
+    img: '/images/home/grid/mockDrop_red_pants.jpg',
+    title: 'Camera',
+    author: 'Danson67',
+  },
+  {
+    img: '/images/home/grid/mockDrop_iMac_window.jpg',
+    title: 'Morning',
+    author: 'fancycrave1',
+  },
+  {
+    img: '/images/home/grid/mockDrop_iPhone_6.jpg',
+    title: 'Hats',
+    author: 'Hans',
+  },
+];
+
+export default class PublicHomeDevices extends React.Component {
 
   render() {
-    const { master, gridList } = this.styles;
+    const { master, gridList } = styles;
 
     return (
       <Paper style={{ backgroundColor: '#0066cc', minHeight: '375px', color: 'white' }} >
@@ -87,7 +85,7 @@ const PublicHomeDevices = React.createClass({
 
           <div className='eight wide computer sixteen wide mobile column' style={master} >
             <GridList style={gridList} cols={2.2}>
-              {this.tilesData.map((tile) => (
+              {tilesData.map((tile) => (
                 <GridTile key={tile.img} >
                   <img src={tile.img} />
                 </GridTile>
@@ -97,7 +95,5 @@ const PublicHomeDevices = React.createClass({
         </div>
       </Paper>
     );
-  },
-});
-
-export default PublicHomeDevices;
+  }
+};

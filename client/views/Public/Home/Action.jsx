@@ -2,20 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RaisedButton, FontIcon, AppBar, FlatButton } from 'material-ui';;
 
-const PublicHomeAction = React.createClass({
-
-  // Context
-
-  contextTypes: {
-    user: PropTypes.object,
-  },
-
-  /* Handlers
-  */
-
-  handleClick() {
-
-  },
+class PublicHomeAction extends React.Component {
 
   /* Render
   */
@@ -49,7 +36,11 @@ const PublicHomeAction = React.createClass({
         />
       </div>
     );
-  },
-});
+  }
+};
+
+PublicHomeAction.contextTypes = {
+  user: PropTypes.object,
+};
 
 export default PublicHomeAction;

@@ -13,16 +13,18 @@ import PublicHomeSoluction from './Soluction.jsx';
 import PublicHomeFooter from './Footer.jsx';
 import PublicHomeDevices from './Devices.jsx';
 
-PublicHomeView = React.createClass({
+export default class PublicHomeView extends React.Component {
 
   // Initial State
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       email: '',
       valid: false,
+      text: '',
     };
-  },
+  }
 
   // Handlers
 
@@ -41,7 +43,7 @@ PublicHomeView = React.createClass({
         this.setState({ email: '' });
       };
     });
-  },
+  }
 
   // Render
 
@@ -49,7 +51,7 @@ PublicHomeView = React.createClass({
     return (
       <div>
 
-        <PublicHomeAction />
+        {/* <PublicHomeAction /> */}
 
         <PublicHomeTopTitle />
 
@@ -74,5 +76,6 @@ PublicHomeView = React.createClass({
 
       </div>
     );
-  },
-});
+  }
+
+};

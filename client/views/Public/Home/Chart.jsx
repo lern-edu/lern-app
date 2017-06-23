@@ -2,33 +2,37 @@ import React from 'react';
 import { List, Paper, ListItem, Divider } from 'material-ui';
 import Chart from 'chart.js';
 
-const PublicHomeChart = React.createClass({
+// Static data
 
-  // Static data
+const tags = {
+  Informações: '/images/home/icons/ic_info.png',
+  Persuasão: '/images/home/icons/ic_language.png',
+  Eficiência: '/images/home/icons/ic_standard_rate.png',
+  Planejamento: '/images/home/icons/ic_plan.png',
+  'Intenção de empreender': '/images/home/icons/ic_sole_propietorship.png',
+  Oportunidade: '/images/home/icons/ic_check_for_virus.png',
+  Metas: '/images/home/icons/ic_action_items_list_checkmark.png',
+  Controle: '/images/home/icons/ic_legal_issues_comment.png',
+  Persistência: '/images/home/icons/ic_physical_education.png',
+  'Rede de relações': '/images/home/icons/ic_public_chat.png',
+};
 
-  tags: {
-    Informações: '/images/home/icons/ic_info.png',
-    Persuasão: '/images/home/icons/ic_language.png',
-    Eficiência: '/images/home/icons/ic_standard_rate.png',
-    Planejamento: '/images/home/icons/ic_plan.png',
-    'Intenção de empreender': '/images/home/icons/ic_sole_propietorship.png',
-    Oportunidade: '/images/home/icons/ic_check_for_virus.png',
-    Metas: '/images/home/icons/ic_action_items_list_checkmark.png',
-    Controle: '/images/home/icons/ic_legal_issues_comment.png',
-    Persistência: '/images/home/icons/ic_physical_education.png',
-    'Rede de relações': '/images/home/icons/ic_public_chat.png',
-  },
+const average = [9.00, 8.40, 9.10, 8.20, 8.90, 8.10, 8.50, 8.30, 8.90, 8.60];
 
-  average: [9.00, 8.40, 9.10, 8.20, 8.90, 8.10, 8.50, 8.30, 8.90, 8.60],
+export default class PublicHomeChart extends React.Component {
 
   // Lifecycle
+
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
 
     const node = new Chart(this.refs.chart, {
       type: 'radar',
       data: {
-        labels: _.keys(this.tags),
+        labels: _.keys(tags),
         datasets: [
           {
             label: 'Empreendedor de sucesso',
@@ -38,7 +42,7 @@ const PublicHomeChart = React.createClass({
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgba(33,150,243,1)',
-            data: this.average,
+            data: average,
           },
         ],
       },
@@ -54,7 +58,7 @@ const PublicHomeChart = React.createClass({
         },
       },
     });
-  },
+  }
 
   // Handlers
 
@@ -64,7 +68,7 @@ const PublicHomeChart = React.createClass({
       [currentTarget.getAttribute('data-key')]: value,
       valid: Match.Regex(value).mail(),
     });
-  },
+  }
 
   // Styles
 
@@ -85,7 +89,7 @@ const PublicHomeChart = React.createClass({
                       <Paper className='tablet only computer only sixteen wide column' >
                         <List>
                           {
-                            _.map(this.tags, (img, tag) => [
+                            _.map(tags, (img, tag) => [
                                 <ListItem
                                   key={`${tag}.list`}
                                   disabled={true}
@@ -113,7 +117,5 @@ const PublicHomeChart = React.createClass({
         </div>
       </Paper>
     );
-  },
-});
-
-export default PublicHomeChart;
+  }
+};

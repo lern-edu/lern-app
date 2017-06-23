@@ -1,28 +1,24 @@
 import React from 'react';
 import { CardText, Card, CardMedia, CardTitle } from 'material-ui';
 
-const PublicHomeFooter = React.createClass({
-
-  // Styles
-
-  styles: {
-    footer: {
-      backgroundColor: 'dimgrey',
-      padding: '38px',
-      color: '#e2e2e2',
-      position: 'relative',
-      width: '100%',
-      textAlign: 'center',
-    },
+const styles = {
+  footer: {
+    backgroundColor: 'dimgrey',
+    padding: '38px',
+    color: '#e2e2e2',
+    position: 'relative',
+    width: '100%',
+    textAlign: 'center',
   },
+};
+
+export default class PublicHomeFooter extends React.Component {
 
   render() {
     return (
-      <div className='footer' style={this.styles.footer}>
+      <div className='footer' style={styles.footer}>
         Copyright © 2017 | Lern - Soluções Educacionais
       </div>
     );
-  },
-});
-
-export default PublicHomeFooter;
+  }
+};

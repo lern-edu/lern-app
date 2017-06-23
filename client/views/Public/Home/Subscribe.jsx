@@ -1,7 +1,7 @@
 import React from 'react';
 import { RaisedButton, Paper, TextField } from 'material-ui';
 
-const PublicHomeSubscribe = React.createClass({
+export default class PublicHomeSubscribe extends React.Component {
 
   // Handlers
 
@@ -11,7 +11,7 @@ const PublicHomeSubscribe = React.createClass({
       [currentTarget.getAttribute('data-key')]: value,
       valid: Match.Regex(value).mail(),
     });
-  },
+  }
 
   // Styles
 
@@ -44,7 +44,7 @@ const PublicHomeSubscribe = React.createClass({
                     <RaisedButton
                       secondary={true}
                       label='inscrever'
-                      onTouchTap={parent.handleSubmit} />
+                      onTouchTap={parent.handleSubmit.bind(parent)} />
                   </div>
                 </div>
               </div>
@@ -53,7 +53,5 @@ const PublicHomeSubscribe = React.createClass({
         </div>
       </Paper>
     );
-  },
-});
-
-export default PublicHomeSubscribe;
+  }
+};
