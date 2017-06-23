@@ -438,4 +438,15 @@ Helpers.Methods({ prefix, protect }, {
     return emails;
   },
 
+  TagUpdate() {
+    const tags = Tags.find({ info: null }).fetch();
+
+    _.forEach(tags, tag => {
+      tag.set('info', []);
+      tag.save();
+    });
+
+    return true;
+  },
+
 });
