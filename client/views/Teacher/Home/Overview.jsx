@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardTitle, CardActions, FlatButton } from 'material-ui';
 import { blue700 } from 'material-ui/styles/colors';
 
-const TeacherHomeOverview = React.createClass({
+export default class TeacherHomeOverview extends React.Component{
 
   // Render
 
@@ -35,7 +35,5 @@ const TeacherHomeOverview = React.createClass({
        </div>
      </div>
     );
-  },
-});
-
-export default TeacherHomeOverview;
+  }
+};

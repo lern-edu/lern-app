@@ -3,7 +3,7 @@ import { LinearProgress } from 'material-ui';
 
 import TeacherHomeOverview from './Overview.jsx';
 
-const TeacherHomeView = React.createClass({
+export default class TeacherHomeView extends React.Component{
 
   // Static data
 
@@ -37,8 +37,7 @@ const TeacherHomeView = React.createClass({
       },
       seven: {
         img: '/images/steps-teacher/7.png',
-        text: 'Selecione a aula desejada para adicionar conteúdo, realizar chamada e gerar dever' +
-          ' de casa',
+        text: 'Selecione a aula desejada para adicionar conteúdo, realizar chamada e gerar dever de casa',
       },
       eight: {
         img: '/images/steps-teacher/8.png',
@@ -46,8 +45,7 @@ const TeacherHomeView = React.createClass({
       },
       nine: {
         img: '/images/steps-teacher/9.png',
-        text: 'Clique em \'Nova atividade\' para criar um novo exercício. Siga os passos na ' +
-          'tela para concluir',
+        text: 'Clique em \'Nova atividade\' para criar um novo exercício. Siga os passos na tela para concluir',
       },
       ten: {
         img: '/images/steps-teacher/10.png',
@@ -63,20 +61,18 @@ const TeacherHomeView = React.createClass({
       },
       thirteen: {
         img: '/images/steps-teacher/13.png',
-        text: 'Utilize o blog para se comunicar com os alunos através da plataforma.' +
-          ' Clique em \'Novo post\' para adicionar uma postagem',
+        text: 'Utilize o blog para se comunicar com os alunos através da plataforma. Clique em \'Novo post\' para adicionar uma postagem',
       },
       fourteen: {
         img: '/images/steps-teacher/14.png',
-        text: 'A comunidade acadêmica, diferente do blog, é aberta para toda a comunidade lern.' +
-          ' Nela são postadas dúvidas, resoluções e informações',
+        text: 'A comunidade acadêmica, diferente do blog, é aberta para toda a comunidade lern. Nela são postadas dúvidas, resoluções e informações',
       },
       fifteen: {
         img: '/images/steps-teacher/15.png',
         text: 'Para publicar na comunidade acadêmica, clique no \'+\' e siga os passos na tela',
       },
     },
-  },
+  }
 
   /* Render
   */
@@ -94,7 +90,5 @@ const TeacherHomeView = React.createClass({
         }
       </div>
     );
-  },
-});
-
-export default TeacherHomeView;
+  }
+};
