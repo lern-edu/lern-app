@@ -2,15 +2,14 @@ import React from 'react';
 import TeacherCourseShowReportsInput from './Input.jsx';
 import TeacherCourseShowReportsTable from './Table.jsx';
 
-const TeacherCourseShowReports = React.createClass({
-  mixins: [Semantic.Transition('scale')],
-
+export default class TeacherCourseShowReports extends React.Component{
   /* Lifecycle
   */
 
-  getInitialState() {
+  constructor(props) {
+    super(props);
     return { activeTags: [] };
-  },
+  }
 
   /* Handlers
   */
@@ -20,12 +19,12 @@ const TeacherCourseShowReports = React.createClass({
     _.pull(activeTags, tagId);
     activeTags.push(tagId);
     this.setState({ activeTags });
-  },
+  }
 
   handleClearTags(event) {
     event.preventDefault();
     this.setState({ activeTags: [] });
-  },
+  }
 
   /* Render
   */
@@ -39,7 +38,5 @@ const TeacherCourseShowReports = React.createClass({
         <TeacherCourseShowReportsTable {...this.props} activeTags={activeTags} onClear={this.handleClearTags} />
       </div>
     );
-  },
-});
-
-export default TeacherCourseShowReports;
+  }
+};

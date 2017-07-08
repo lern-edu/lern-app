@@ -9,14 +9,14 @@ import TeacherCourseShowLectures from './Lectures/index.jsx';
 import TeacherCourseShowHome from './Home/index.jsx';
 import TeacherCourseShowPosts from './Posts/index.jsx';
 
-const TeacherCourseShowView = React.createClass({
+export default class TeacherCourseShowView extends React.Component{
 
   styles: {
     floatingButton: {
       className: 'ui right aligned basic segment',
       style: { position: 'fixed', bottom: '1em', right: '1em', zIndex: '1000' },
     },
-  },
+  }
 
   /* Render
   */
@@ -82,7 +82,5 @@ const TeacherCourseShowView = React.createClass({
 
       </div>
     );
-  },
-});
-
-export default TeacherCourseShowView;
+  }
+};

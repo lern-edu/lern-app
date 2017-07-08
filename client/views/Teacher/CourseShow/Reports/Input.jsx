@@ -1,6 +1,6 @@
 import React from 'react';
 
-TeacherCourseShowReportsInput = React.createClass({
+export default class TeacherCourseShowReportsInput extends React.Component{
   render() {
     const { course, tags, subjects, questions, onSelect } = this.props;
 
@@ -26,5 +26,5 @@ TeacherCourseShowReportsInput = React.createClass({
         </Semantic.Dropdown>
       </div>
     );
-  },
-});
+  }
+};

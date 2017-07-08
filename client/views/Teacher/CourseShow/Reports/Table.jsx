@@ -1,6 +1,6 @@
 import React from 'react';
 
-TeacherCourseShowReportsTable = React.createClass({
+export default class TeacherCourseShowReportsTable extends React.Component{
   /* Methods
   */
 
@@ -17,7 +17,7 @@ TeacherCourseShowReportsTable = React.createClass({
     const avgGrade = _.mean(_.map(gradedUserTagAnswers, 'grade'));
 
     return { mean: avgGrade, count: gradedUserTagAnswers.length };
-  },
+  }
 
   /* Render
   */
@@ -84,5 +84,5 @@ TeacherCourseShowReportsTable = React.createClass({
         </tbody>
       </table>
     );
-  },
-});
+  }
+};

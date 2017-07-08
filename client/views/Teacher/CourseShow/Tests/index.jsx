@@ -4,7 +4,7 @@ import React from 'react';
 // Views
 import TeacherCourseShowTestsCard from './Card.jsx';
 
-const TeacherCourseShowTests = React.createClass({
+export default class TeacherCourseShowTests extends React.Component{
 
   /* Render
   */
@@ -25,7 +25,5 @@ const TeacherCourseShowTests = React.createClass({
 
       </div>
     );
-  },
-});
-
-export default TeacherCourseShowTests;
+  }
+};

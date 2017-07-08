@@ -4,7 +4,7 @@ import { List, Subheader, ListItem, Avatar, CardText } from 'material-ui';
 import { FlatButton, FontIcon } from 'material-ui';
 import { blue500 } from 'material-ui/styles/colors';
 
-const TeacherCourseShowTestsCard = React.createClass({
+export default class TeacherCourseShowTestsCard extends React.Component{
 
   /* Render
   */
@@ -109,7 +109,5 @@ const TeacherCourseShowTestsCard = React.createClass({
         </Card>
       </div>
     );
-  },
-});
-
-export default TeacherCourseShowTestsCard;
+  }
+};
