@@ -21,11 +21,15 @@ StudentHomeOverview = React.createClass({
   },
 
   handleSearch() {
-    FlowRouter.go('StudentCourseIngress', {}, { alias: this.state.courseKey });
+    FlowRouter.go(
+      'StudentCourseIngress',
+      {},
+      { alias: this.state.courseKey }
+    );
   },
 
   handleKey(event, courseKey) {
-    this.setState({ courseKey });
+    this.setState({ courseKey: _.trim(_.lowerCase(_.deburr(courseKey))).replace(' ', '') });
   },
 
   // Render
