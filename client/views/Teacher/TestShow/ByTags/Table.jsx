@@ -39,7 +39,7 @@ const TeacherTestShowByTagsTable = React.createClass({
 
   // Handlers
 
-  handleRows(selectedStudents) {
+  handleRows(selectedStudents, e1, e2) {
     const { students } = this.props;
     const orderedStudents = _.sortBy(students, 'profile.name');
     this.setState({
@@ -68,7 +68,6 @@ const TeacherTestShowByTagsTable = React.createClass({
     return (
       <div>
         <Table
-          selectable={true}
           multiSelectable={true}
           allRowsSelected={true}
           onRowSelection={this.handleRows}
@@ -101,7 +100,8 @@ const TeacherTestShowByTagsTable = React.createClass({
                   return (
                     <TableRow
                       key={studentId}
-                      selected={_.includes(selectedStudents, [studentId])}
+                      selectable={true}
+                      selected={_.includes(selectedStudents, studentId)}
                     >
                       <TableRowColumn>
                         <Chip>
