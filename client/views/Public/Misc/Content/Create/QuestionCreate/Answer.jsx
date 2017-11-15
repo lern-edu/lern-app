@@ -4,6 +4,8 @@ import { FlatButton, Dialog, Divider, RadioButtonGroup, RadioButton } from 'mate
 import { TextField, RaisedButton, SelectField, MenuItem } from 'material-ui';
 import { Table, TableHeaderColumn, TableRow, TableHeader } from 'material-ui';
 import { TableRowColumn, TableBody } from 'material-ui';
+import PublicContentShowSudoku from '../../Show/Sudoku.jsx';
+import _sudoku from 'sudoku';
 
 const PublicContentCreateQuestionCreateAnswer = React.createClass({
 
@@ -106,6 +108,11 @@ const PublicContentCreateQuestionCreateAnswer = React.createClass({
                   onChange={this.handleRangeChange} />
               </div>,
             ],
+            sudoku: <div className='sixteen wide column'>
+              <PublicContentShowSudoku
+                sudoku={_sudoku.solvepuzzle(form.doc.get('sudoku'))}
+              />
+            </div>,
           }, form.doc.get('type'))}
         </div>
 

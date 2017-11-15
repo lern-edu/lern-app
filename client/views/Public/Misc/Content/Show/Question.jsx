@@ -7,6 +7,8 @@ import { FontIcon, CircularProgress, Chip } from 'material-ui';
 import { Toolbar, ToolbarGroup, ToolbarTitle, ToolbarSeparator } from 'material-ui';
 import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
+import PublicContentShowSudoku from './Sudoku.jsx';
+
 const PublicContentShowQuestionView = React.createClass({
 
   // Static
@@ -107,7 +109,12 @@ const PublicContentShowQuestionView = React.createClass({
                   <a>{c.link}</a>
                 : c.type === 'title' ?
                   <h5>{c.title}</h5>
-                : undefined
+                : /*c.type === 'sudoku' ?
+                  <PublicContentShowSudoku
+                    sudoku={c.sudoku}
+                    input={false}
+                  />
+                :*/ undefined
               }
             </div>
           )}
@@ -146,6 +153,11 @@ const PublicContentShowQuestionView = React.createClass({
                 </span>
                 </div>,
             ),
+            sudoku:
+              <PublicContentShowSudoku
+                sudoku={question.sudoku}
+                input={false}
+              />,
           }, question.type)}
         </div>
 

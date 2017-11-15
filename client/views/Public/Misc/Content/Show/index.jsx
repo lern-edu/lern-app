@@ -9,6 +9,7 @@ import PublicContentShowTest from './TestContainer.jsx';
 import PublicContentShowImage from './ImageContainer.jsx';
 import PublicContentRichText from './../RichText.jsx';
 import PublicContentShowVideo from './Video.jsx';
+import PublicContentShowSudoku from './Sudoku.jsx';
 
 PublicContentShow = React.createClass({
   mixins: [AstroForm()],
@@ -35,35 +36,57 @@ PublicContentShow = React.createClass({
     const { index, scored, canRemove=true } = this.props;
     const text = this.doc.get('text');
 
+    console.log(this);
+
     return (
       <div>
 
-        {_.get({
-          text: <PublicContentRichText
+        {this.doc.get('type') == 'text' ?
+          <PublicContentRichText
             editorState={text && EditorState.createWithContent(convertFromRaw(text))}
             parent={this}
             readOnly={true}
-          />,
-          link: <a>{this.doc.get('link')}</a>,
-          image: <PublicContentShowImage
+          />
+          :
+        this.doc.get('type') == 'link' ?
+            <a>{this.doc.get('link')}</a>
+          :
+        this.doc.get('type') == 'image' ?
+          <PublicContentShowImage
             form={this}
             imageId={this.doc.get('image')}
-          />,
-          question: <PublicContentShowQuestion
+          />
+          :
+        this.doc.get('type') == 'question' ?
+          <PublicContentShowQuestion
             score={this.doc.get('score')}
             form={this}
             questionId={this.doc.get('question')}
             scored={scored}
-          />,
-          test: <PublicContentShowTest
+          />
+          :
+        this.doc.get('type') == 'test' ?
+          <PublicContentShowTest
             form={this}
             testId={this.doc.get('test')}
-          />,
-          video: <PublicContentShowVideo
+          />
+          :
+        this.doc.get('type') == 'video' ?
+          <PublicContentShowVideo
             form={this}
             videoId={this.doc.get('video')}
-          />,
-        }, this.doc.get('type'))}
+          />
+          :
+        this.doc.get('type') == 'sudoku' ?
+          <PublicContentShowSudoku
+            form={this}
+            sudoku={this.doc.get('sudoku')}
+            answer={this.props.answer}
+            input={this.props.input}
+            handleSudokuAnswer={this.props.handleSudokuAnswer}
+          />
+          :
+        undefined}
 
         <br/>
 

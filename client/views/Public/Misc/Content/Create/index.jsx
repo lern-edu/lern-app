@@ -7,6 +7,7 @@ import PublicContentCreateTest from './Test/Container.jsx';
 import PublicContentCreateUpload from './Upload.jsx';
 import PublicContentCreateVideo from './Video.jsx';
 import PublicContentRichText from './../RichText.jsx';
+import PublicContentCreateSudoku from './Sudoku.jsx';
 
 PublicContentCreate = React.createClass({
   mixins: [AstroForm()],
@@ -65,6 +66,17 @@ PublicContentCreate = React.createClass({
       { doc: true });
   },
 
+  handleSudoku(sudoku) {
+    console.log('handleSudoku', this);
+    if (sudoku) {
+      this.props.form.defaultHandler({ sudoku: sudoku }, { doc: true });
+      this.defaultHandler({ sudoku: sudoku }, { doc: true });
+      this.handleSubmit();
+    }
+
+    //this.props.form.defaultHandler({ sudoku: sudoku }, { doc: true });
+  },
+
   // Render
 
   render() {
@@ -117,13 +129,18 @@ PublicContentCreate = React.createClass({
                 <PublicContentCreateVideo
                   form={this}
                 />,
+              sudoku:
+                <PublicContentCreateSudoku
+                  handleSudoku={this.handleSudoku}
+                  form={this}
+                />,
             },
             type)
           }
         </div>
 
         {
-          type === 'image' || type === 'video'
+          type === 'image' || type === 'video' || type === 'sudoku'
           ? undefined
           : <FlatButton
             style={{ marginTop: 15 }}
