@@ -22,7 +22,7 @@
     "draft-js": "^0.10.0",
     "gridfs-stream": "^1.1.1",
     "lodash": "^4.17.3",
-    "material-ui": "^0.18.3",
+    "material-ui": "^0.18.7",
     "meteor-node-stubs": "~0.2.0",
     "prop-types": "^15.5.10",
     "react": "^15.4.1",
@@ -30,7 +30,8 @@
     "react-dom": "^15.4.1",
     "react-mounter": "^1.2.0",
     "react-tap-event-plugin": "^2.0.0",
-    "s3": "^4.4.0"
+    "s3": "^4.4.0",
+    "sudoku": "0.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1"

@@ -38,6 +38,12 @@ const StudentTestAttemptGlobalContentQuestion = React.createClass({
     this.handleUpdateAnswer(answer);
   },
 
+  handleSudokuAnswer(answer) {
+    const { question } = this.props;
+    this.setState({ answer });
+    this.handleUpdateAnswer(answer);
+  },
+
   handleUpdateAnswer(value) {
     const { answer } = this.props;
     Meteor.call('StudentAnswerUpdate', answer._id, value, err => {
@@ -55,6 +61,9 @@ const StudentTestAttemptGlobalContentQuestion = React.createClass({
   render() {
     const { question, questionIndex, answer: a } = this.props;
     const { answer } = this.state;
+
+    console.log(question);
+
     return (
       <div>
 
@@ -66,11 +75,13 @@ const StudentTestAttemptGlobalContentQuestion = React.createClass({
 
         <div className='row'>
           {_.map(question.content, (c, i) => [
+            c.type !== 'sudoku' ?
             <PublicContentShow
               canRemove={false}
               schema={Questions.ContentSchema}
               index={i}
-              doc={c} />,
+              doc={c}
+            /> : undefined,
             <br/>,
           ])}
         </div>
@@ -116,6 +127,14 @@ const StudentTestAttemptGlobalContentQuestion = React.createClass({
                   )
                 }
               </RadioButtonGroup>,
+            sudoku:
+              <PublicContentShow
+                schema={Questions.Schema}
+                canRemove={false}
+                doc={question}
+                answer={answer}
+                handleSudokuAnswer={this.handleSudokuAnswer}
+              />,
           }, question.type)}
         </div>
 

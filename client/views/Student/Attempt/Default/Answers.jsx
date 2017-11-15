@@ -58,13 +58,14 @@ const StudentAttemptDefaultAnswers = React.createClass({
 
                   {
                     _.map(question.get('content'), (s, i) =>
+                      s.type !== 'sudoku' ?
                       <div className='sixteen wide column' key={i} >
                         <PublicContentShow
                           canRemove={false}
                           schema={Questions.ContentSchema}
                           index={i}
                           doc={s} />
-                      </div>
+                      </div> : undefined
                     )
                   }
 
@@ -108,6 +109,15 @@ const StudentAttemptDefaultAnswers = React.createClass({
                         }
                       </RadioButtonGroup>,
                     ],
+                    sudoku:
+                      <PublicContentShow
+                        schema={Questions.Schema}
+                        canRemove={false}
+                        doc={question}
+                        answer={answer.answer}
+                        input={false}
+                        /*handleSudokuAnswer={this.handleSudokuAnswer}*/
+                      />,
                   }, question.type)
                 }
               </CardText>
