@@ -2,6 +2,7 @@ Astro.createValidator({
   name: 'QuestionAnswer',
   validate(value) {
     const { type, options, range } = this;
+    console.log(value, type);
     if (type === 'open')
       return (
         !_.isNull(value) &&
@@ -16,6 +17,13 @@ Astro.createValidator({
         !_.isNull(value) &&
         _.isNumber(value) &&
         _.inRange(value, 0, options.length)
+      );
+    else if (type === 'sudoku')
+      return (
+        !_.isNull(value) &&
+        _.isArray(value) &&
+        value.length === 81 &&
+        !_.some(value, (v) => v === null || (v <= 0 || v >= 10))
       );
     else return false;
   },

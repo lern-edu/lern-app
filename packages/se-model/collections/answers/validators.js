@@ -20,6 +20,13 @@ Astro.createValidator({
         value >= 0
       );
     } else if (type === 'unanswered') return _.isNumber(value) || _.isString(value);
-    else return false;
+    else if (type === 'sudoku') {
+      return (
+        !_.isNull(value) &&
+        _.isArray(value) &&
+        value.length === 81 &&
+        !_.some(value, (v) => v === null || (v <= 0 || v >= 10))
+      );
+    } else return false;
   },
 });
