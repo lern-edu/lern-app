@@ -34,6 +34,10 @@ Questions.ContentSchema = Astro.Class({
       immutable: true,
       optional: true,
     },
+    sudoku: {
+      type: 'array',
+      optional: true,
+    },
     document: {
       type: 'string',
       validator: Validators.or([Validators.Reference(), Validators.Content()]),
@@ -137,6 +141,12 @@ Questions.Schema = Astro.Class({
       validator: Validators.QuestionRange(),
       optional: true,
       immutable: true,
+    },
+    sudoku: {
+      type: 'array',
+      validator: Validators.minLength(81),
+      immutable: true,
+      optional: true,
     },
     exams: {
       type: 'array',

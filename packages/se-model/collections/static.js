@@ -61,6 +61,7 @@ QuestionTypes = StaticCollection('QuestionTypes', [
   ['closed', 'Fechada'],
   ['number', 'Número'],
   ['unanswered', 'Sem resposta'],
+  ['sudoku', 'Sudoku'],
 ]);
 
 AccessStates = StaticCollection('AccessStates', [
@@ -119,6 +120,7 @@ ContentTypes = StaticCollection('ContentTypes', [
   ['test', 'Teste'],
   ['question', 'Questão'],
   ['video', 'Vídeo'],
+  ['sudoku', 'Sudoku'],
 ]);
 
 QuestionOptionsContentTypes = StaticCollection('QuestionOptionsContentTypes', [
@@ -131,6 +133,7 @@ NoReferenceContentTypes = StaticCollection('NoReferenceContentTypes', [
   ['image', 'Imagem'],
   ['video', 'Vídeo'],
   ['link', 'Link'],
+  ['sudoku', 'Sudoku'],
 ]);
 
 PageContentTypes = StaticCollection('PageContentTypes', [
